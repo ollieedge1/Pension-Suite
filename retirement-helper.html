@@ -417,6 +417,7 @@
         <p class="hint">How much you want to spend per year in retirement.</p>
       </div>
     </div>
+  </div>
 
 
     <div class="field-group" style="margin-bottom:0;">
@@ -890,7 +891,7 @@
     const rlsR = RLS[rlsHousehold];
     if (rlsPos) {
       const next = rlsPos.level === 'com' ? null : rlsPos.level === 'mod' ? { label: 'Comfortable', gap: rlsR.com - totalIncome } : rlsPos.level === 'min' ? { label: 'Moderate', gap: rlsR.mod - totalIncome } : { label: 'Minimum', gap: rlsR.min - totalIncome };
-      const nextMsg = next ? ` You're ${fmt(next.gap)}/year away from the <strong>${next.label}</strong> standard.` : ' You're at or above the Comfortable standard.';
+      const nextMsg = next ? ` You're ${fmt(next.gap)}/year away from the <strong>${next.label}</strong> standard.` : `You're at or above the Comfortable standard.`;
       document.getElementById('rlsPosition').innerHTML = `
         <div class="rls-position ${rlsPos.cls}">
           <div class="rls-position-title">${rlsPos.level === 'below' ? 'Below Minimum standard' : rlsPos.label + ' standard'}</div>
