@@ -103,6 +103,52 @@
   input[type="range"] { width: 100%; accent-color: var(--stone); height: 4px; cursor: pointer; }
   .range-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--slate-light); margin-top: 0.25rem; }
 
+
+  /* RLS STANDARDS */
+  .rls-section { margin: 1.5rem 0; }
+  .rls-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate-light); margin-bottom: 0.75rem; font-weight: 600; }
+  .rls-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  @media (max-width: 560px) { .rls-grid { grid-template-columns: 1fr; } }
+
+  .rls-card { border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.18s; background: white; position: relative; }
+  .rls-card:hover { border-color: var(--stone); }
+  .rls-card.selected { border-color: var(--stone); background: var(--stone-pale); }
+  .rls-card.selected::after { content: '✓'; position: absolute; top: 0.6rem; right: 0.75rem; font-size: 0.7rem; color: var(--stone); font-weight: 700; }
+
+  .rls-card-level { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.3rem; }
+  .rls-card-level.min { color: #92400e; }
+  .rls-card-level.mod { color: var(--stone); }
+  .rls-card-level.com { color: var(--green); }
+
+  .rls-card-amount { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 0.3rem; }
+  .rls-card-desc { font-size: 0.72rem; color: var(--slate-light); line-height: 1.45; }
+
+  .rls-toggle { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+  .rls-toggle-btn { font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px; border: 1px solid var(--border); background: white; cursor: pointer; color: var(--slate); transition: all 0.15s; font-weight: 500; }
+  .rls-toggle-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+
+  .rls-breakdown { background: var(--stone-pale); border-radius: 8px; padding: 0.85rem 1rem; margin-top: 0.75rem; display: none; }
+  .rls-breakdown.open { display: block; }
+  .rls-breakdown-row { display: flex; justify-content: space-between; font-size: 0.77rem; padding: 0.25rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+  .rls-breakdown-row:last-child { border-bottom: none; }
+  .rls-breakdown-row span:first-child { color: var(--slate); }
+  .rls-breakdown-row span:last-child { color: var(--navy); font-weight: 500; }
+
+  /* RLS POSITION INDICATOR on step 2 */
+  .rls-position { border-radius: 12px; padding: 1.25rem; margin: 1rem 0; border: 1.5px solid; }
+  .rls-position.below  { border-color: #fde68a; background: #fffbeb; }
+  .rls-position.min    { border-color: #fed7aa; background: #fff7ed; }
+  .rls-position.mod    { border-color: var(--stone-light); background: var(--stone-pale); }
+  .rls-position.com    { border-color: #bbf7d0; background: #f0fdf4; }
+  .rls-position.above  { border-color: #bbf7d0; background: #f0fdf4; }
+  .rls-position-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.3rem; }
+  .rls-position.below  .rls-position-title { color: #92400e; }
+  .rls-position.min    .rls-position-title { color: #9a3412; }
+  .rls-position.mod    .rls-position-title { color: var(--stone); }
+  .rls-position.com    .rls-position-title,
+  .rls-position.above  .rls-position-title { color: var(--green); }
+  .rls-position-sub { font-size: 0.82rem; color: var(--slate); line-height: 1.6; }
+
   /* RESULT BOXES */
   .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.85rem; margin: 1.5rem 0; }
   .result-box { background: var(--navy); border-radius: 12px; padding: 1.1rem; text-align: center; }
@@ -372,6 +418,50 @@
       </div>
     </div>
 
+
+    <div class="field-group" style="margin-bottom:0;">
+      <label>Retirement Living Standard — what lifestyle are you aiming for?</label>
+      <p class="hint" style="margin-bottom:0.75rem;">Based on <a href="https://www.retirementlivingstandards.org.uk" target="_blank" style="color:var(--stone);">Retirement Living Standards 2025/26</a> research by Loughborough University. Select a standard to pre-fill your spending target, or enter your own above.</p>
+
+      <div class="rls-section">
+        <div class="rls-toggle">
+          <button class="rls-toggle-btn active" id="rls_single" onclick="setRLSHousehold('single')">One person</button>
+          <button class="rls-toggle-btn" id="rls_couple" onclick="setRLSHousehold('couple')">Two person</button>
+        </div>
+        <div class="rls-grid">
+          <div class="rls-card" id="rls_min" onclick="selectRLS('min')">
+            <div class="rls-card-level min">Minimum</div>
+            <div class="rls-card-amount" id="rls_min_amt">£13,400</div>
+            <div class="rls-card-desc">Covers all basic needs with some left over for fun</div>
+          </div>
+          <div class="rls-card" id="rls_mod" onclick="selectRLS('mod')">
+            <div class="rls-card-level mod">Moderate</div>
+            <div class="rls-card-amount" id="rls_mod_amt">£31,700</div>
+            <div class="rls-card-desc">More financial security and flexibility</div>
+          </div>
+          <div class="rls-card" id="rls_com" onclick="selectRLS('com')">
+            <div class="rls-card-level com">Comfortable</div>
+            <div class="rls-card-amount" id="rls_com_amt">£43,900</div>
+            <div class="rls-card-desc">More financial freedom and some luxuries</div>
+          </div>
+        </div>
+        <div style="margin-top:0.6rem;">
+          <span style="font-size:0.72rem; color:var(--stone); cursor:pointer; text-decoration:underline;" onclick="toggleRLSBreakdown()">What's included in each standard? ▾</span>
+          <div class="rls-breakdown" id="rlsBreakdown">
+            <div style="font-size:0.75rem; font-weight:600; color:var(--navy); margin-bottom:0.5rem;">One-person household (2025/26)</div>
+            <div class="rls-breakdown-row"><span>Minimum — basic needs + some fun</span><span>£13,400/yr</span></div>
+            <div class="rls-breakdown-row"><span>Moderate — overseas holiday, car, eating out</span><span>£31,700/yr</span></div>
+            <div class="rls-breakdown-row"><span>Comfortable — 4★ holidays, more flexibility</span><span>£43,900/yr</span></div>
+            <div style="font-size:0.75rem; font-weight:600; color:var(--navy); margin:0.6rem 0 0.4rem;">Two-person household (2025/26)</div>
+            <div class="rls-breakdown-row"><span>Minimum</span><span>£21,600/yr</span></div>
+            <div class="rls-breakdown-row"><span>Moderate</span><span>£43,900/yr</span></div>
+            <div class="rls-breakdown-row"><span>Comfortable</span><span>£60,600/yr</span></div>
+            <div style="font-size:0.7rem; color:var(--slate-light); margin-top:0.5rem; line-height:1.5;">Figures assume you own your home with no mortgage. Does not include income tax on pension withdrawals. Source: Retirement Living Standards 2025/26, Loughborough University / Pensions UK.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="btn-row">
       <button class="btn-primary" onclick="goTo(2)">See my full picture →</button>
     </div>
@@ -386,6 +476,7 @@
 
     <div class="income-bar-section" id="incomeBars"></div>
 
+    <div id="rlsPosition"></div>
     <div id="pictureStatus"></div>
 
     <div class="summary-panel" id="pictureSummary"></div>
@@ -682,6 +773,48 @@
     }
   });
 
+
+  // ── RETIREMENT LIVING STANDARDS ───────────────────────────────────────────
+  const RLS = {
+    single: { min: 13400, mod: 31700, com: 43900 },
+    couple: { min: 21600, mod: 43900, com: 60600 },
+  };
+  let rlsHousehold = 'single';
+  let rlsSelected = null;
+
+  function setRLSHousehold(type) {
+    rlsHousehold = type;
+    document.getElementById('rls_single').classList.toggle('active', type === 'single');
+    document.getElementById('rls_couple').classList.toggle('active', type === 'couple');
+    const r = RLS[type];
+    document.getElementById('rls_min_amt').textContent = '\u00a3' + r.min.toLocaleString('en-GB');
+    document.getElementById('rls_mod_amt').textContent = '\u00a3' + r.mod.toLocaleString('en-GB');
+    document.getElementById('rls_com_amt').textContent = '\u00a3' + r.com.toLocaleString('en-GB');
+    if (rlsSelected) selectRLS(rlsSelected);
+  }
+
+  function selectRLS(level) {
+    rlsSelected = level;
+    ['min','mod','com'].forEach(l =>
+      document.getElementById('rls_' + l).classList.toggle('selected', l === level)
+    );
+    const amount = RLS[rlsHousehold][level];
+    document.getElementById('spending').value = amount;
+  }
+
+  function toggleRLSBreakdown() {
+    document.getElementById('rlsBreakdown').classList.toggle('open');
+  }
+
+  function getRLSPosition(totalIncome) {
+    const r = RLS[rlsHousehold];
+    if (totalIncome >= r.com) return { level: 'com', label: 'Comfortable', cls: 'com' };
+    if (totalIncome >= r.mod) return { level: 'mod', label: 'Moderate', cls: 'mod' };
+    if (totalIncome >= r.min) return { level: 'min', label: 'Minimum', cls: 'min' };
+    if (totalIncome > 0)      return { level: 'below', label: 'Below Minimum', cls: 'below' };
+    return null;
+  }
+
   // ── READ INPUTS ────────────────────────────────────────────────────────────
   function getInputs() {
     return {
@@ -752,6 +885,18 @@
       ? `<div class="alert-box"><h4>✓ Your income covers your spending target</h4><p>Based on illustrative figures, your retirement income of ${fmt(totalIncome)}/year exceeds your ${fmt(d.spending)}/year target by ${fmt(surplus)}. The pot income figure uses the 4% rule as a rough guide — actual results depend on investment returns and how long you draw down.</p></div>`
       : `<div class="alert-box warning"><h4>Your income may fall short of your target</h4><p>There's an illustrative gap of ${fmt(Math.abs(surplus))}/year between your projected income of ${fmt(totalIncome)} and your spending target of ${fmt(d.spending)}. This could be bridged by drawing more from your pot, reducing spending, or deferring retirement. See the sustainability check on step 5.</p></div>`;
 
+    // RLS position
+    const rlsPos = getRLSPosition(totalIncome);
+    const rlsR = RLS[rlsHousehold];
+    if (rlsPos) {
+      const next = rlsPos.level === 'com' ? null : rlsPos.level === 'mod' ? { label: 'Comfortable', gap: rlsR.com - totalIncome } : rlsPos.level === 'min' ? { label: 'Moderate', gap: rlsR.mod - totalIncome } : { label: 'Minimum', gap: rlsR.min - totalIncome };
+      const nextMsg = next ? ` You're ${fmt(next.gap)}/year away from the <strong>${next.label}</strong> standard.` : ' You're at or above the Comfortable standard.';
+      document.getElementById('rlsPosition').innerHTML = `
+        <div class="rls-position ${rlsPos.cls}">
+          <div class="rls-position-title">${rlsPos.level === 'below' ? 'Below Minimum standard' : rlsPos.label + ' standard'}</div>
+          <div class="rls-position-sub">Your illustrative retirement income of ${fmt(totalIncome)}/year places you at the <strong>${rlsPos.label}</strong> Retirement Living Standard (${rlsHousehold === 'couple' ? 'two-person' : 'one-person'} household).${nextMsg}</div>
+        </div>`;
+    }
     document.getElementById('pictureStatus').innerHTML = statusHtml;
 
     document.getElementById('pictureSummary').innerHTML = `
