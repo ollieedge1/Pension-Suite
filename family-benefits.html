@@ -28,92 +28,6 @@
 
 
 
-  /* PDF REPORT CTA */
-  .pdf-bar {
-    background: white;
-    border-radius: 12px;
-    padding: 1.1rem 1.5rem;
-    margin: 0.75rem 0 0;
-    border: 1.5px solid var(--border, rgba(0,0,0,0.1));
-    box-shadow: 0 2px 12px rgba(15,31,56,0.06);
-    display: none;
-    animation: fadeIn 0.4s ease;
-  }
-
-  .pdf-bar.visible { display: block; }
-
-  .pdf-bar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .pdf-bar-text { flex: 1; min-width: 180px; }
-
-  .pdf-bar-text strong {
-    display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    color: var(--navy, #0f1f38);
-    margin-bottom: 0.2rem;
-  }
-
-  .pdf-bar-text span {
-    font-size: 0.75rem;
-    color: var(--slate-light, #718096);
-    line-height: 1.4;
-  }
-
-  .pdf-bar-right {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-shrink: 0;
-    flex-wrap: wrap;
-  }
-
-  .pdf-price {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--navy, #0f1f38);
-  }
-
-  .pdf-buy-btn {
-    padding: 0.65rem 1.25rem;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.2s;
-    background: var(--navy, #0f1f38);
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-
-  .pdf-buy-btn:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
-  }
-
-  .pdf-dismiss {
-    background: none;
-    border: none;
-    color: var(--slate-light, #718096);
-    cursor: pointer;
-    font-size: 1.1rem;
-    padding: 0;
-    line-height: 1;
-  }
-
-  .pdf-dismiss:hover { color: var(--navy, #0f1f38); }
-
-
   /* PDF INLINE CTA */
   .pdf-inline-cta {
     display: none;
@@ -183,63 +97,7 @@
     background: #40916c;
   }
 
-  /* ADVISER CTA */
-  .adviser-cta {
-    background: linear-gradient(135deg, var(--navy) 0%, #162d4f 100%);
-    border-radius: 12px;
-    padding: 1.1rem 1.5rem;
-    margin: 0.75rem 0 0;
-    border: 1px solid rgba(255,255,255,0.08);
-    display: none;
-    animation: fadeIn 0.4s ease;
-  }
 
-  .adviser-cta.visible { display: block; }
-
-  .adviser-cta-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .adviser-cta-text {
-    flex: 1;
-    min-width: 180px;
-  }
-
-  .adviser-cta-text strong {
-    display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    color: white;
-    margin-bottom: 0.2rem;
-  }
-
-  .adviser-cta-text span {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.45);
-  }
-
-  .adviser-cta-btn {
-    padding: 0.65rem 1.25rem;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.2s;
-    flex-shrink: 0;
-    background: white;
-    color: var(--navy);
-  }
-
-  .adviser-cta-btn:hover {
-    background: rgba(255,255,255,0.9);
-    transform: translateY(-1px);
-  }
 
   /* CHAT PANEL */
   .chat-wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 2.5rem; }
@@ -731,35 +589,14 @@
         </div>
       </div>
     </div>
-        <div class="lead-input-row" id="leadForm">
-          <input
-            class="lead-input"
-            type="email"
-            id="leadEmail"
-            placeholder="your@email.com"
-            onkeydown="if(event.key==='Enter') submitLead()"
-          >
-          <button class="lead-submit" onclick="submitLead()">Send →</button>
-        </div>
-        <div class="lead-success" id="leadSuccess">✓ Thanks — we'll be in touch.</div>
         <button class="lead-dismiss" onclick="dismissLead()" title="Dismiss">×</button>
       </div>
     </div>
   </div>
 
 </div>
-        <div class="pdf-bar-right">
-          <div class="pdf-price" id="pdfPrice">&#163;4.99</div>
-          <a class="pdf-buy-btn" id="pdfBuyBtn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &#8594;</a>
-          <button class="pdf-download-btn" id="pdfDownloadBtn" style="display:none;" onclick="generateReport()">&#8595; Download PDF</button>
-          <button class="pdf-dismiss" onclick="document.getElementById('pdfBar').classList.remove('visible')" title="Dismiss">&#215;</button>
-        </div>
       </div>
     </div>
-        <div class="pdf-bar-right">
-          <div class="pdf-price">&#163;4.99</div>
-          <a class="pdf-buy-btn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &#8594;</a>
-          <button class="pdf-dismiss" onclick="document.getElementById('pdfBar').classList.remove('visible')" title="Dismiss">&#215;</button>
         </div>
       </div>
     </div>
@@ -1108,10 +945,6 @@
   function hasEnoughData() {
     var salary = parseFloat(document.getElementById('salary') && document.getElementById('salary').value) || 0;
     return salary > 0 && children > 0;
-  }
-  function showPdfBar() {
-    const bar = document.getElementById('pdfBar');
-    if (bar && hasEnoughData()) bar.classList.add('visible');
   }
 
   // Also wire up live input checking — show bar as soon as data is complete
