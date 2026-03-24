@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Family & Benefits Optimiser</title>
+<title>My Family & Benefits Optimiser — MyPayPicture</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -25,6 +25,103 @@
 
   /* HEADER */
   header { background: var(--navy); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+
+
+  /* LEAD CAPTURE */
+  .lead-bar {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 0;
+    display: none;
+    animation: fadeIn 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .lead-bar.visible { display: block; }
+
+  .lead-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .lead-bar-text {
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .lead-bar-text strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: white;
+    margin-bottom: 0.2rem;
+  }
+
+  .lead-bar-text span {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .lead-input-row {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .lead-input {
+    flex: 1;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.07);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .lead-input::placeholder { color: rgba(255,255,255,0.35); }
+  .lead-input:focus { border-color: rgba(255,255,255,0.4); }
+
+  .lead-submit { background: var(--rose); color: white; }
+  .lead-submit {
+    padding: 0.65rem 1.1rem;
+    border-radius: 8px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .lead-success {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    display: none;
+    padding: 0.5rem 0;
+  }
+
+  .lead-success.show { display: block; }
+  .lead-dismiss {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.25);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    flex-shrink: 0;
+    line-height: 1;
+    align-self: flex-start;
+  }
+  .lead-dismiss:hover { color: rgba(255,255,255,0.5); }
 
   /* APP SWITCHER */
   .app-switcher { position: relative; }
@@ -219,11 +316,11 @@
     <div class="switcher-dropdown">
       <div class="switcher-item" onclick="window.location.href='index.html'">
         <div class="switcher-item-icon" style="background:rgba(255,255,255,0.06);">🏠</div>
-        <div class="switcher-item-text"><div class="item-name" style="color:rgba(255,255,255,0.4); font-size:0.8rem;">← MyPay Home</div></div>
+        <div class="switcher-item-text"><div class="item-name" style="color:rgba(255,255,255,0.4); font-size:0.8rem;">← MyPayPicturePicture Home</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='pay-optimiser.html'">
         <div class="switcher-item-icon" style="background:rgba(13,148,136,0.15);">📈</div>
-        <div class="switcher-item-text"><div class="item-name">MyPayOptimiser</div><div class="item-desc">Make every pound work harder.</div></div>
+        <div class="switcher-item-text"><div class="item-name">MyPayPictureOptimiser</div><div class="item-desc">Make every pound work harder.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='pension-reclaim.html'">
         <div class="switcher-item-icon" style="background:rgba(201,168,76,0.15);">💰</div>
@@ -467,6 +564,28 @@
     <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(2)">← Back</button>
     </div>
+
+    <!-- LEAD CAPTURE -->
+    <div class="lead-bar" id="leadBar">
+      <div class="lead-bar-inner">
+        <div class="lead-bar-text">
+          <strong>Save your results</strong>
+          <span>Get a summary emailed to you — no spam, ever.</span>
+        </div>
+        <div class="lead-input-row" id="leadForm">
+          <input
+            class="lead-input"
+            type="email"
+            id="leadEmail"
+            placeholder="your@email.com"
+            onkeydown="if(event.key==='Enter') submitLead()"
+          >
+          <button class="lead-submit" onclick="submitLead()">Send →</button>
+        </div>
+        <div class="lead-success" id="leadSuccess">✓ Thanks — we'll be in touch.</div>
+        <button class="lead-dismiss" onclick="dismissLead()" title="Dismiss">×</button>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -682,9 +801,41 @@
     if (step === 2) renderStep2();
     if (step === 3) { renderStep2(); updateSlider(); }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (step >= 2) showLead();
   }
 
   renderChildAges();
+
+  // ── LEAD CAPTURE ──────────────────────────────────────────────────────────
+  function showLead() {
+    const bar = document.getElementById('leadBar');
+    if (bar && !localStorage.getItem('mpp_lead_captured')) {
+      bar.classList.add('visible');
+    }
+  }
+
+  function dismissLead() {
+    document.getElementById('leadBar').classList.remove('visible');
+  }
+
+  async function submitLead() {
+    const email = document.getElementById('leadEmail').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('leadEmail').focus();
+      return;
+    }
+    try {
+      await fetch('https://tally.so/r/0QLeJ6', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+        mode: 'no-cors',
+      });
+    } catch (e) {}
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('leadSuccess').classList.add('show');
+    localStorage.setItem('mpp_lead_captured', '1');
+  }
 </script>
 </body>
 </html>

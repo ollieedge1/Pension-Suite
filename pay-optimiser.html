@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PayOptimiser — Make every pound work harder</title>
+<title>MyPayOptimiser — MyPayPicture</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -678,6 +678,103 @@
     .btn-primary, .btn-secondary { flex: 1; text-align: center; }
   }
 
+
+  /* LEAD CAPTURE */
+  .lead-bar {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 0;
+    display: none;
+    animation: fadeIn 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .lead-bar.visible { display: block; }
+
+  .lead-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .lead-bar-text {
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .lead-bar-text strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: white;
+    margin-bottom: 0.2rem;
+  }
+
+  .lead-bar-text span {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .lead-input-row {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .lead-input {
+    flex: 1;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.07);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .lead-input::placeholder { color: rgba(255,255,255,0.35); }
+  .lead-input:focus { border-color: rgba(255,255,255,0.4); }
+
+  .lead-submit { background: var(--teal); color: white; }
+  .lead-submit {
+    padding: 0.65rem 1.1rem;
+    border-radius: 8px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .lead-success {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    display: none;
+    padding: 0.5rem 0;
+  }
+
+  .lead-success.show { display: block; }
+  .lead-dismiss {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.25);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    flex-shrink: 0;
+    line-height: 1;
+    align-self: flex-start;
+  }
+  .lead-dismiss:hover { color: rgba(255,255,255,0.5); }
+
   /* APP SWITCHER */
   .app-switcher { position: relative; }
 
@@ -759,8 +856,8 @@
   <div class="app-switcher" id="appSwitcher">
     <div class="switcher-trigger" onclick="toggleSwitcher(event)">
       <div>
-        <div class="app-name">MyPay<span>Optimiser</span></div>
-        <div class="app-suite">Part of the MyPay Suite</div>
+        <div class="app-name">MyPayPicture<span>Optimiser</span></div>
+        <div class="app-suite">Part of the MyPayPicturePicture</div>
       </div>
       <div class="chevron">▼</div>
     </div>
@@ -768,14 +865,14 @@
       <div class="switcher-item" onclick="window.location.href='index.html'">
         <div class="switcher-item-icon" style="background:rgba(255,255,255,0.06);">🏠</div>
         <div class="switcher-item-text">
-          <div class="item-name">Suite Home</div>
+          <div class="item-name">MyPayPicturePicture</div>
           <div class="item-desc">Back to all tools</div>
         </div>
       </div>
       <div class="switcher-item current">
         <div class="switcher-item-icon" style="background:rgba(13,148,136,0.15);">📈</div>
         <div class="switcher-item-text">
-          <div class="item-name" style="color:rgba(255,255,255,0.4);">MyPayOptimiser</div>
+          <div class="item-name" style="color:rgba(255,255,255,0.4);">MyPayPictureOptimiser</div>
           <div class="item-desc">Make every pound work harder.</div>
         </div>
       </div>
@@ -1010,6 +1107,28 @@
     <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(4)">← Back</button>
       <button class="btn-primary" onclick="window.open('https://www.gov.uk/tax-on-your-private-pension','_blank')">Read more on gov.uk ↗</button>
+    </div>
+
+    <!-- LEAD CAPTURE -->
+    <div class="lead-bar" id="leadBar">
+      <div class="lead-bar-inner">
+        <div class="lead-bar-text">
+          <strong>Save your results</strong>
+          <span>Get a summary emailed to you — no spam, ever.</span>
+        </div>
+        <div class="lead-input-row" id="leadForm">
+          <input
+            class="lead-input"
+            type="email"
+            id="leadEmail"
+            placeholder="your@email.com"
+            onkeydown="if(event.key==='Enter') submitLead()"
+          >
+          <button class="lead-submit" onclick="submitLead()">Send →</button>
+        </div>
+        <div class="lead-success" id="leadSuccess">✓ Thanks — we'll be in touch.</div>
+        <button class="lead-dismiss" onclick="dismissLead()" title="Dismiss">×</button>
+      </div>
     </div>
   </div>
 
@@ -1505,6 +1624,7 @@
     if (step === 5) { renderStep2(); renderStep5(); }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (step >= 2) showLead();
   }
 
 
@@ -1639,6 +1759,37 @@
   });
 
   updateYearsLabel();
+
+  // ── LEAD CAPTURE ──────────────────────────────────────────────────────────
+  function showLead() {
+    const bar = document.getElementById('leadBar');
+    if (bar && !localStorage.getItem('mpp_lead_captured')) {
+      bar.classList.add('visible');
+    }
+  }
+
+  function dismissLead() {
+    document.getElementById('leadBar').classList.remove('visible');
+  }
+
+  async function submitLead() {
+    const email = document.getElementById('leadEmail').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('leadEmail').focus();
+      return;
+    }
+    try {
+      await fetch('https://tally.so/r/0QLeJ6', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+        mode: 'no-cors',
+      });
+    } catch (e) {}
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('leadSuccess').classList.add('show');
+    localStorage.setItem('mpp_lead_captured', '1');
+  }
 </script>
 </body>
 </html>
