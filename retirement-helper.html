@@ -277,32 +277,119 @@
   }
 
 
-  /* LEAD CAPTURE */
-  .lead-bar {
-    background: var(--navy);
+
+  /* PDF REPORT CTA */
+  .pdf-bar {
+    background: white;
     border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    margin: 1.5rem 0 0;
+    padding: 1.1rem 1.5rem;
+    margin: 0.75rem 0 0;
+    border: 1.5px solid var(--border, rgba(0,0,0,0.1));
+    box-shadow: 0 2px 12px rgba(15,31,56,0.06);
     display: none;
     animation: fadeIn 0.4s ease;
-    border: 1px solid rgba(255,255,255,0.08);
   }
 
-  .lead-bar.visible { display: block; }
+  .pdf-bar.visible { display: block; }
 
-  .lead-bar-inner {
+  .pdf-bar-inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
   }
 
-  .lead-bar-text {
+  .pdf-bar-text { flex: 1; min-width: 180px; }
+
+  .pdf-bar-text strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--navy, #0f1f38);
+    margin-bottom: 0.2rem;
+  }
+
+  .pdf-bar-text span {
+    font-size: 0.75rem;
+    color: var(--slate-light, #718096);
+    line-height: 1.4;
+  }
+
+  .pdf-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .pdf-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy, #0f1f38);
+  }
+
+  .pdf-buy-btn {
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: var(--navy, #0f1f38);
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .pdf-buy-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  .pdf-dismiss {
+    background: none;
+    border: none;
+    color: var(--slate-light, #718096);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .pdf-dismiss:hover { color: var(--navy, #0f1f38); }
+
+  /* ADVISER CTA */
+  .adviser-cta {
+    background: linear-gradient(135deg, var(--navy) 0%, #162d4f 100%);
+    border-radius: 12px;
+    padding: 1.1rem 1.5rem;
+    margin: 0.75rem 0 0;
+    border: 1px solid rgba(255,255,255,0.08);
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .adviser-cta.visible { display: block; }
+
+  .adviser-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .adviser-cta-text {
     flex: 1;
     min-width: 180px;
   }
 
-  .lead-bar-text strong {
+  .adviser-cta-text strong {
     display: block;
     font-family: 'Playfair Display', serif;
     font-size: 0.95rem;
@@ -310,69 +397,29 @@
     margin-bottom: 0.2rem;
   }
 
-  .lead-bar-text span {
+  .adviser-cta-text span {
     font-size: 0.75rem;
     color: rgba(255,255,255,0.45);
   }
 
-  .lead-input-row {
-    display: flex;
-    gap: 0.5rem;
-    flex: 1;
-    min-width: 220px;
-  }
-
-  .lead-input {
-    flex: 1;
-    padding: 0.65rem 0.9rem;
-    border: 1.5px solid rgba(255,255,255,0.15);
+  .adviser-cta-btn {
+    padding: 0.65rem 1.25rem;
     border-radius: 8px;
-    background: rgba(255,255,255,0.07);
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .lead-input::placeholder { color: rgba(255,255,255,0.35); }
-  .lead-input:focus { border-color: rgba(255,255,255,0.4); }
-
-  .lead-submit { background: var(--stone); color: white; }
-  .lead-submit {
-    padding: 0.65rem 1.1rem;
-    border-radius: 8px;
-    border: none;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
-    cursor: pointer;
+    text-decoration: none;
     white-space: nowrap;
     transition: all 0.2s;
     flex-shrink: 0;
+    background: white;
+    color: var(--navy);
   }
 
-  .lead-success {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.6);
-    display: none;
-    padding: 0.5rem 0;
+  .adviser-cta-btn:hover {
+    background: rgba(255,255,255,0.9);
+    transform: translateY(-1px);
   }
-
-  .lead-success.show { display: block; }
-  .lead-dismiss {
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.25);
-    cursor: pointer;
-    font-size: 1.1rem;
-    padding: 0;
-    flex-shrink: 0;
-    line-height: 1;
-    align-self: flex-start;
-  }
-  .lead-dismiss:hover { color: rgba(255,255,255,0.5); }
-
 
   /* CHAT PANEL */
   .chat-wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 2.5rem; }
@@ -1101,14 +1148,6 @@
       <button class="btn-secondary" onclick="goTo(4)">← Back</button>
       <button class="btn-primary" onclick="window.open('https://www.moneyhelper.org.uk/en/pensions-and-retirement','_blank')">MoneyHelper guidance ↗</button>
     </div>
-
-    <!-- LEAD CAPTURE -->
-    <div class="lead-bar" id="leadBar">
-      <div class="lead-bar-inner">
-        <div class="lead-bar-text">
-          <strong>Save your results</strong>
-          <span>Get a summary emailed to you — no spam, ever.</span>
-        </div>
         <div class="lead-input-row" id="leadForm">
           <input
             class="lead-input"
@@ -1126,6 +1165,30 @@
   </div>
 
 </div>
+
+    
+    <!-- PDF REPORT CTA -->
+    <div class="pdf-bar" id="pdfBar">
+      <div class="pdf-bar-inner">
+        <div class="pdf-bar-text">
+          <strong>&#128196; Download your results as a PDF report</strong>
+          <span>A branded summary of your figures &#8212; take it to an adviser or share with a partner.</span>
+        </div>
+        <div class="pdf-bar-right">
+          <div class="pdf-price" id="pdfPrice">&#163;4.99</div>
+          <a class="pdf-buy-btn" id="pdfBuyBtn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &#8594;</a>
+          <button class="pdf-download-btn" id="pdfDownloadBtn" style="display:none;" onclick="generateReport()">&#8595; Download PDF</button>
+          <button class="pdf-dismiss" onclick="document.getElementById('pdfBar').classList.remove('visible')" title="Dismiss">&#215;</button>
+        </div>
+      </div>
+    </div>
+        <div class="pdf-bar-right">
+          <div class="pdf-price">&#163;4.99</div>
+          <a class="pdf-buy-btn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &#8594;</a>
+          <button class="pdf-dismiss" onclick="document.getElementById('pdfBar').classList.remove('visible')" title="Dismiss">&#215;</button>
+        </div>
+      </div>
+    </div>
 <div class="chat-wrap">
   <div class="chat-divider">Ask MyPayPicture Assistant</div>
   <div class="chat-box">
@@ -1844,7 +1907,7 @@
     if (step === 4) renderStep4();
     if (step === 5) renderStep5();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (step >= 2) showLead();
+    if (step >= 2) { showPdfBar(); showAdviserCta(); }
     updateChatContext();
   }
 
@@ -1852,39 +1915,8 @@
   document.getElementById('annuityRate').addEventListener('input', renderStep3);
   document.getElementById('withdrawalSlider').addEventListener('input', renderStep4);
 
-  // ── LEAD CAPTURE ──────────────────────────────────────────────────────────
-  function showLead() {
-    const bar = document.getElementById('leadBar');
-    if (bar && !localStorage.getItem('mpp_lead_captured')) {
-      bar.classList.add('visible');
-    }
-  }
-
-  function dismissLead() {
-    document.getElementById('leadBar').classList.remove('visible');
-  }
-
-  async function submitLead() {
-    const email = document.getElementById('leadEmail').value.trim();
-    if (!email || !email.includes('@')) {
-      document.getElementById('leadEmail').focus();
-      return;
-    }
-    try {
-      await fetch('https://tally.so/r/0QLeJ6', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-        mode: 'no-cors',
-      });
-    } catch (e) {}
-    document.getElementById('leadForm').style.display = 'none';
-    document.getElementById('leadSuccess').classList.add('show');
-    localStorage.setItem('mpp_lead_captured', '1');
-  }
-
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
-  const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
+  const WORKER_URL = 'WORKER_URL_HERE';
   const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in MyPayPicture\'s Retirement Helper tool. This tool helps people approaching or in retirement understand State Pension, drawdown vs annuity, tax-efficient withdrawals, and pension sustainability.\n\nKey topics: State Pension (11502 per year full 2024/25, 35 qualifying years), drawdown, annuity, flexi-access, 25 percent tax-free cash (capped at 268275), Retirement Living Standards (Minimum 13400, Moderate 31700, Comfortable 43900 for one person), Pension Wise, MoneyHelper.\n\nRules:\n- UK English, 2024/25 rates\n- General information only, major irreversible decisions need regulated advice\n- Always recommend Pension Wise and a regulated financial adviser\n- Calm, clear, reassuring tone';
   let chatHist = [];
   let chatBusy = false;
@@ -1899,10 +1931,22 @@
     if (typing) {
       bubble = '<div class="chat-typing"><span></span><span></span><span></span></div>';
     } else {
+      const toolLinks = {
+        'MyPayOptimiser': 'pay-optimiser.html',
+        'MyPensionReclaim': 'pension-reclaim.html',
+        'MyPensionTop-Up': 'pension-topup.html',
+        'MyRetirementHelper': 'retirement-helper.html',
+      };
       const formatted = text.split('\n\n').map(function(p) {
-        return p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        var line = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        Object.keys(toolLinks).forEach(function(name) {
+          line = line.split(name).join('<a href="' + toolLinks[name] + '" style="color:var(--navy,#0f1f38);font-weight:600;text-decoration:underline;">' + name + '</a>');
+        });
+        return line;
       }).join('</p><p>');
-      bubble = '<p>' + formatted + '</p>';
+      // Render markdown links [text](url)
+      const linkedFormatted = formatted.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--navy,#0f1f38);font-weight:600;text-decoration:underline;">$1</a>');
+      bubble = '<p>' + linkedFormatted + '</p>';
     }
     div.innerHTML = '<div class="msg-av">' + av + '</div><div class="msg-bub">' + bubble + '</div>';
     msgs.appendChild(div);
@@ -1934,7 +1978,14 @@
         : (data.error || 'Sorry, something went wrong. Please try again.');
       var t = document.getElementById('chatTyping');
       if (t) t.remove();
-      chatAddMsg('ai', reply);
+      if (isComplex) {
+        const ctaNote = '\n\n---\n**Want personalised advice?** A regulated financial adviser can help with your specific situation. [Speak to an adviser →](https://tally.so/r/xX2YP5)';
+        chatAddMsg('ai', reply + ctaNote);
+      } else {
+        chatAddMsg('ai', reply);
+      }
+      // Show adviser CTA after any response
+      showAdviserCta();
       chatHist.push({ role: 'assistant', content: reply });
     } catch (err) {
       var t = document.getElementById('chatTyping');
@@ -1949,6 +2000,27 @@
   function chatChip(el) {
     document.getElementById('chatInput').value = el.textContent;
     chatSend();
+  }
+
+
+  // ── ADVISER CTA ───────────────────────────────────────────────────────────
+  function showAdviserCta() {
+    const el = document.getElementById('adviserCta');
+    if (el) el.classList.add('visible');
+  }
+
+  function adviserCtaClick() {
+    // Track click if analytics available
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'adviser_cta_click', { event_category: 'engagement' });
+    }
+  }
+
+
+  // ── PDF REPORT CTA ────────────────────────────────────────────────────────
+  function showPdfBar() {
+    const bar = document.getElementById('pdfBar');
+    if (bar) bar.classList.add('visible');
   }
 
 </script>
