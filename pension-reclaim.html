@@ -1190,7 +1190,7 @@
   });
 
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
-  const WORKER_URL = 'WORKER_URL_HERE';
+  const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
   const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in MyPayPicture\'s Pension Reclaim tool. This tool helps employed people who have missed salary sacrifice on a bonus understand how to reclaim tax through a personal pension contribution and Self Assessment.\n\nKey topics: salary sacrifice, personal pension contributions, relief at source, Self Assessment registration, UTR numbers, basic vs higher rate tax relief, NI savings, annual allowance (2024/25).\n\nRules:\n- Use UK English and 2024/25 tax rates (personal allowance 12570, basic rate to 50270, higher rate to 125140)\n- General information only, not personalised financial or tax advice\n- Suggest users verify with HMRC or a qualified adviser\n- Concise, warm, plain English';
   let chatHist = [];
   let chatBusy = false;

@@ -860,7 +860,7 @@
   renderChildAges();
 
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
-  const WORKER_URL = 'WORKER_URL_HERE';
+  const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
   const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in MyPayPicture\'s Family and Benefits tool. This tool helps UK families understand Child Benefit, the High Income Child Benefit Charge, and Tax-Free Childcare, and how pension contributions can help.\n\nKey topics: Child Benefit rates (25.60 per week first child, 16.95 per week additional from April 2024), HICBC taper (60000 to 80000 from April 2024), Tax-Free Childcare (2000 per year per child under 11, lost above 100k adjusted income), salary sacrifice to reduce adjusted net income.\n\nRules:\n- UK English, 2024/25 rates\n- General information only, not personalised advice\n- Suggest users check HMRC Child Benefit Tax Calculator\n- Warm, family-friendly tone';
   let chatHist = [];
   let chatBusy = false;
