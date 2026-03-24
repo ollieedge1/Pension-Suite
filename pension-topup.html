@@ -801,7 +801,7 @@
     if (step === 3) { renderStep2(); renderStep3(); }
     if (step === 4) { renderStep2(); renderStep3(); renderStep4(); }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (step >= 2) { showPdfBar(); showAdviserCta(); }
+    if (step >= 4) { showPdfBar(); showAdviserCta(); } else if (hasEnoughData && hasEnoughData()) { showPdfBar(); showAdviserCta(); }
   }
 
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
@@ -907,9 +907,25 @@
 
 
   // ── PDF REPORT CTA ────────────────────────────────────────────────────────
+
+  function hasEnoughData() {
+    var salary = parseFloat(document.getElementById('salary') && document.getElementById('salary').value) || 0;
+    var contrib = parseFloat(document.getElementById('contribution') && document.getElementById('contribution').value) || 0;
+    return salary > 0 && contrib > 0;
+  }
   function showPdfBar() {
     const bar = document.getElementById('pdfBar');
-    if (bar) bar.classList.add('visible');
+    if (bar && hasEnoughData()) bar.classList.add('visible');
   }
+
+  // Also wire up live input checking — show bar as soon as data is complete
+  document.addEventListener('input', function() {
+    if (hasEnoughData()) {
+      var bar = document.getElementById('pdfBar');
+      if (bar) bar.classList.add('visible');
+      var adv = document.getElementById('adviserCta');
+      if (adv) adv.classList.add('visible');
+    }
+  });
 
 </script>
