@@ -123,6 +123,195 @@
   .result-box .r-amount { font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 700; color: white; line-height: 1; }
   .result-box .r-sub { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
 
+
+
+
+  /* PERIOD TOGGLE */
+  .period-toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 1.75rem 0 0;
+  }
+
+  .period-toggle {
+    display: flex;
+    background: var(--navy);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .period-btn {
+    padding: 0.55rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: all 0.18s;
+    letter-spacing: 0.02em;
+  }
+
+  .period-btn.active {
+    background: #bfdbfe;
+    color: var(--navy);
+    font-weight: 700;
+    border-radius: 8px;
+    margin: 2px;
+  }
+
+  .period-btn:hover:not(.active) { color: rgba(255,255,255,0.75); }
+
+  /* DIRECTOR EXPLAINER */
+  .director-explainer {
+    background: var(--indigo-pale, #eef2ff);
+    border: 1.5px solid rgba(79,70,229,0.15);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .explainer-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.85rem;
+  }
+
+  .explainer-body { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.85rem; }
+
+  .explainer-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  .explainer-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .salary-dot { background: var(--indigo); }
+  .div-dot    { background: var(--indigo-light, #818cf8); }
+
+  .explainer-note {
+    font-size: 0.75rem;
+    color: var(--indigo);
+    font-weight: 500;
+    border-top: 1px solid rgba(79,70,229,0.12);
+    padding-top: 0.65rem;
+    line-height: 1.5;
+  }
+
+  /* STRATEGY CARDS */
+  .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+  @media (max-width: 600px) { .strategy-grid { grid-template-columns: 1fr; } }
+
+  .strategy-card {
+    border: 1.5px solid var(--border, rgba(0,0,0,0.1));
+    border-radius: 12px;
+    padding: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+    position: relative;
+  }
+
+  .strategy-card:hover { border-color: var(--indigo); }
+
+  .strategy-card.selected {
+    border-color: var(--indigo);
+    background: var(--indigo-pale);
+  }
+
+  .strategy-card.selected::after {
+    content: '&#10003;';
+    position: absolute;
+    top: 0.65rem;
+    right: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--indigo);
+    font-weight: 700;
+  }
+
+  .strategy-card.shortfall {
+    border-color: #fca5a5;
+    background: #fef2f2;
+  }
+
+  .strategy-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--indigo);
+    margin-bottom: 0.4rem;
+  }
+
+  .strategy-salary {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.2rem;
+    line-height: 1;
+  }
+
+  .strategy-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+
+  .strategy-desc {
+    font-size: 0.73rem;
+    color: var(--slate-light);
+    line-height: 1.45;
+    margin-bottom: 0.6rem;
+  }
+
+  .strategy-metric {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    padding: 0.2rem 0;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    margin-top: 0.4rem;
+  }
+
+  .strategy-metric span:first-child { color: var(--slate-light); }
+  .strategy-metric span:last-child { font-weight: 600; color: var(--navy); }
+
+  .strategy-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 20px;
+    background: var(--indigo);
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .strategy-badge.green { background: var(--green-light, #40916c); }
+  .strategy-badge.warn  { background: #d97706; }
+  .strategy-badge.red   { background: #dc2626; }
+
+  .shortfall-flag {
+    font-size: 0.72rem;
+    color: #dc2626;
+    font-weight: 600;
+    margin-top: 0.4rem;
+  }
+
   /* SPLIT VISUAL */
   .split-bar { margin: 1.5rem 0; }
   .split-bar-track { height: 32px; border-radius: 8px; overflow: hidden; display: flex; margin-bottom: 0.6rem; }
@@ -290,6 +479,13 @@
   <p>Find the optimal salary and dividend split for your limited company — and see exactly what you take home.</p>
 </div>
 
+<div class="period-toggle-wrap">
+  <div class="period-toggle">
+    <button class="period-btn active" id="pbtn_annual" onclick="setPeriod('annual')">Annual</button>
+    <button class="period-btn" id="pbtn_monthly" onclick="setPeriod('monthly')">Monthly</button>
+  </div>
+</div>
+
 <div class="container">
   <div class="steps-nav">
     <div class="step-tab active" onclick="goTo(1)" id="tab1"><span class="step-num">1</span>Your Company</div>
@@ -373,33 +569,65 @@
 
   <!-- STEP 3 -->
   <div class="card" id="step3">
-    <div class="card-title">Optimise your salary / dividend split</div>
-    <p class="card-subtitle">Use the slider to model different salary levels and see the impact on your total take-home and tax.</p>
+    <div class="card-title">How do you want to pay yourself?</div>
+    <p class="card-subtitle">As a director, you choose when and how much to pay yourself. Pick the goal that fits your situation.</p>
 
-    <div class="field-group">
-      <label>Salary level to model</label>
-      <div class="range-wrap">
-        <input type="range" id="salarySlider" min="0" max="50000" step="100" value="12570" oninput="renderStep3()">
-        <div class="range-labels">
-          <span>£0</span>
-          <span id="salarySliderLabel" style="color:var(--indigo); font-weight:600;">£12,570</span>
-          <span>£50,000</span>
+    <!-- DIVIDEND TIMING EXPLAINER -->
+    <div class="director-explainer">
+      <div class="explainer-title">&#128161; How director pay actually works</div>
+      <div class="explainer-body">
+        <div class="explainer-row">
+          <div class="explainer-dot salary-dot"></div>
+          <div><strong>Salary</strong> — paid monthly like any employee, processed through payroll. Fixed and predictable. Small amount of NI applies above £9,100.</div>
+        </div>
+        <div class="explainer-row">
+          <div class="explainer-dot div-dot"></div>
+          <div><strong>Dividends</strong> — paid from company profits <em>whenever you choose</em>. Quarterly is common, but you can take them monthly, annually, or as needed. You must have sufficient retained profits — dividends cannot exceed what the company has earned. Taxed at lower rates than salary.</div>
         </div>
       </div>
-      <p class="hint">Common optimal points: £9,100 (no NI), £12,570 (full personal allowance), £50,270 (basic rate limit).</p>
+      <div class="explainer-note">Most directors take a low salary (paid monthly) plus dividends (taken quarterly or as needed). This is entirely legal and is standard practice for UK limited company directors.</div>
     </div>
 
-    <div class="results-grid" id="optimiseGrid"></div>
+    <hr>
 
-    <div id="optimiseComparison"></div>
+    <!-- MIN TAKE-HOME GOAL -->
+    <div class="field-group">
+      <label>What do you need to take home each month? <span style="font-weight:400; color:var(--slate-light);">(optional)</span></label>
+      <div class="input-wrap">
+        <span class="input-prefix">£</span>
+        <input type="number" id="minTakeHome" placeholder="e.g. 3500" min="0" oninput="renderStep3()" class="has-suffix">
+        <span class="input-suffix">/mo</span>
+      </div>
+      <p class="hint">We'll check if each approach covers your monthly needs — remember dividends can be taken anytime, so monthly salary doesn't need to cover everything.</p>
+    </div>
 
-    <div class="guidance-box" id="salaryAdvice"></div>
+    <div style="font-size:0.82rem; font-weight:600; color:var(--navy); margin-bottom:0.85rem; margin-top:1.5rem;">Which situation fits you best?</div>
+    <div class="strategy-grid" id="strategyGrid"></div>
+
+    <div id="strategyDetail" style="margin-top:1.5rem;"></div>
+
+    <div id="customSliderWrap" style="display:none; margin-top:1rem;">
+      <div class="field-group" style="margin-bottom:0;">
+        <label>Set your own salary</label>
+        <div class="range-wrap">
+          <input type="range" id="salarySlider" min="0" max="50000" step="100" value="12570" oninput="renderStep3()">
+          <div class="range-labels">
+            <span>£0</span>
+            <span id="salarySliderLabel" style="color:var(--indigo); font-weight:600;">£12,570</span>
+            <span>£50,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="optimiseComparison" style="margin-top:1.5rem;"></div>
 
     <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(2)">← Back</button>
-      <button class="btn-primary" onclick="goTo(4)">Add pension contributions →</button>
+      <button class="btn-secondary" onclick="goTo(2)">&#8592; Back</button>
+      <button class="btn-primary" onclick="goTo(4)">Add pension contributions &#8594;</button>
     </div>
   </div>
+
 
   <!-- STEP 4 -->
   <div class="card" id="step4">
@@ -557,6 +785,33 @@
     document.getElementById('rb_vat_no').classList.toggle('selected', !v);
   }
 
+
+  // ── PERIOD TOGGLE ─────────────────────────────────────────────────────────
+  let period = 'annual';
+
+  function setPeriod(p) {
+    period = p;
+    document.getElementById('pbtn_annual').classList.toggle('active', p === 'annual');
+    document.getElementById('pbtn_monthly').classList.toggle('active', p === 'monthly');
+    // Re-render whichever step is active
+    var activeStep = document.querySelector('.card.active');
+    if (activeStep) {
+      var id = activeStep.id;
+      if (id === 'step2') renderStep2();
+      if (id === 'step3') renderStep3();
+      if (id === 'step4') renderStep4();
+      if (id === 'step5') renderStep5();
+    }
+  }
+
+  // Period-aware formatter
+  function fmtP(annual) {
+    var val = period === 'monthly' ? annual / 12 : annual;
+    return '\u00a3' + Math.round(val).toLocaleString('en-GB');
+  }
+
+  function periodLabel() { return period === 'monthly' ? '/mo' : '/yr'; }
+
   // ── TAX CONSTANTS 2024/25 ──────────────────────────────────────────────────
   const PA        = 12570;   // Personal allowance
   const NI_ST     = 9100;    // NI Secondary threshold (employer)
@@ -648,17 +903,17 @@
     document.getElementById('taxGrid').innerHTML = `
       <div class="result-box indigo">
         <div class="r-label">Total take-home</div>
-        <div class="r-amount">${fmtK(r.takeHome)}</div>
+        <div class="r-amount">${fmtP(r.takeHome)}</div>
         <div class="r-sub">salary + dividends after tax</div>
       </div>
       <div class="result-box">
         <div class="r-label">Corporation tax</div>
-        <div class="r-amount">${fmtK(r.corpTax)}</div>
+        <div class="r-amount">${fmtP(r.corpTax)}</div>
         <div class="r-sub">${(r.corpTax/Math.max(1,d.profit)*100).toFixed(1)}% of profit</div>
       </div>
       <div class="result-box">
         <div class="r-label">Income tax + NI</div>
-        <div class="r-amount">${fmtK(r.incomeTax + r.employeeNI + r.empNI)}</div>
+        <div class="r-amount">${fmtP(r.incomeTax + r.employeeNI + r.empNI)}</div>
         <div class="r-sub">personal tax burden</div>
       </div>
       <div class="result-box ${r.effectiveRate > 40 ? 'warn' : 'good'}">
@@ -673,78 +928,140 @@
     const divNet = r.dividends - calcDividendTax(r.dividends, r.salary + d.otherIncome);
     const taxTotal = total - salaryNet - divNet;
     document.getElementById('splitTrack').innerHTML = `
-      <div class="split-salary" style="width:${Math.max(0, salaryNet/total*100).toFixed(1)}%">${salaryNet/total > 0.08 ? fmt(salaryNet) : ''}</div>
-      <div class="split-divs" style="width:${Math.max(0, divNet/total*100).toFixed(1)}%">${divNet/total > 0.08 ? fmt(divNet) : ''}</div>
-      <div class="split-tax" style="width:${Math.max(0, taxTotal/total*100).toFixed(1)}%">${taxTotal/total > 0.08 ? fmt(taxTotal) : ''}</div>`;
+      <div class="split-salary" style="width:${Math.max(0, salaryNet/total*100).toFixed(1)}%">${salaryNet/total > 0.08 ? fmtP(salaryNet) : ''}</div>
+      <div class="split-divs" style="width:${Math.max(0, divNet/total*100).toFixed(1)}%">${divNet/total > 0.08 ? fmtP(divNet) : ''}</div>
+      <div class="split-tax" style="width:${Math.max(0, taxTotal/total*100).toFixed(1)}%">${taxTotal/total > 0.08 ? fmtP(taxTotal) : ''}</div>`;
 
     document.getElementById('taxGuidance').innerHTML = `
       <div class="guidance-box">
         <h4>What this means</h4>
-        <p>On a profit of ${fmt(d.profit)}, your current arrangement (salary ${fmt(d.salary)} + dividends) gives you a take-home of ${fmtK(r.takeHome)} — an effective tax rate of ${r.effectiveRate.toFixed(1)}%. ${r.salary > 12570 ? `Your salary of ${fmt(d.salary)} is above the Personal Allowance — you may be paying unnecessary income tax and NI on the excess. ` : ''}The optimiser on the next step will show you if a different split improves your position.</p>
+        <p>On a profit of ${fmtP(d.profit)}, your current arrangement (salary ${fmtP(d.salary)} + dividends) gives you a take-home of ${fmtP(r.takeHome)} — an effective tax rate of ${r.effectiveRate.toFixed(1)}%. ${r.salary > 12570 ? `Your salary of ${fmtP(d.salary)} is above the Personal Allowance — you may be paying unnecessary income tax and NI on the excess. ` : ''}The optimiser on the next step will show you if a different split improves your position.</p>
       </div>`;
   }
 
-  // ── STEP 3 ─────────────────────────────────────────────────────────────────
+
+  // ── STEP 3 — STRATEGY OPTIMISER ───────────────────────────────────────────
+  let selectedStrategy = 'ni_threshold';
+
+const STRATEGIES = [
+    {
+      id: 'ni_threshold',
+      salary: 9100,
+      label: 'Keep it minimal',
+      name: 'Salary of £9,100 — zero NI',
+      desc: 'I want to minimise all deductions. I have other income (e.g. rental, a spouse using their allowance) or I\'m happy to draw more through dividends.',
+      badge: 'No NI at all',
+      badgeClass: 'green',
+      when: 'Best when you have income elsewhere using your Personal Allowance, or want the simplest payroll.',
+    },
+    {
+      id: 'personal_allowance',
+      salary: 12570,
+      label: 'Use my full allowance',
+      name: 'Salary of £12,570 — tax-free',
+      desc: 'I want to use my full Personal Allowance as salary, pay no income tax on it, and take the rest as dividends.',
+      badge: 'Most common',
+      badgeClass: '',
+      when: 'The most common choice for directors with no other income. Small NI applies above £9,100 but the CT deduction more than offsets it.',
+    },
+    {
+      id: 'custom',
+      salary: null,
+      label: 'I have a specific need',
+      name: 'Custom salary',
+      desc: 'I need a particular monthly salary (e.g. for a mortgage application, or I\'m used to a certain amount). Let me set my own.',
+      badge: 'You choose',
+      badgeClass: 'warn',
+      when: 'Use this if your bank or mortgage lender needs a minimum salary on your payslips, or you have a personal reason to take more as salary.',
+    },
+  ];
+
   function renderStep3() {
     const d = getInputs();
-    const sliderSalary = parseFloat(document.getElementById('salarySlider').value) || 0;
-    document.getElementById('salarySliderLabel').textContent = fmt(sliderSalary);
+    const minMonthly = parseFloat(document.getElementById('minTakeHome').value) || 0;
+    const sliderSalary = parseFloat(document.getElementById('salarySlider').value) || 12570;
 
-    const current = calcAll(d.profit, d.salary, d.otherIncome, 0, 0);
-    const modelled = calcAll(d.profit, sliderSalary, d.otherIncome, 0, 0);
-    const diff = modelled.takeHome - current.takeHome;
+    document.getElementById('salarySliderLabel').textContent = '\u00a3' + sliderSalary.toLocaleString('en-GB');
+    document.getElementById('customSliderWrap').style.display = selectedStrategy === 'custom' ? 'block' : 'none';
 
-    document.getElementById('optimiseGrid').innerHTML = `
-      <div class="result-box">
-        <div class="r-label">Take-home (current)</div>
-        <div class="r-amount">${fmtK(current.takeHome)}</div>
-        <div class="r-sub">at salary ${fmt(d.salary)}</div>
-      </div>
-      <div class="result-box indigo">
-        <div class="r-label">Take-home (modelled)</div>
-        <div class="r-amount">${fmtK(modelled.takeHome)}</div>
-        <div class="r-sub">at salary ${fmt(sliderSalary)}</div>
-      </div>
-      <div class="result-box ${diff >= 0 ? 'good' : 'warn'}">
-        <div class="r-label">Difference</div>
-        <div class="r-amount">${diff >= 0 ? '+' : ''}${fmtK(diff)}</div>
-        <div class="r-sub">per year</div>
-      </div>
-      <div class="result-box">
-        <div class="r-label">Effective rate</div>
-        <div class="r-amount">${modelled.effectiveRate.toFixed(1)}%</div>
-        <div class="r-sub">vs ${current.effectiveRate.toFixed(1)}% now</div>
-      </div>`;
+    // Calculate each strategy
+    const results = STRATEGIES.map(function(s) {
+      const sal = s.id === 'custom' ? sliderSalary : s.salary;
+      const r = calcAll(d.profit, sal, d.otherIncome, 0, 0);
+      const monthlyTH = r.takeHome / 12;
+      const shortfall = minMonthly > 0 && monthlyTH < minMonthly; // always monthly comparison
+      return { ...s, sal, r, monthlyTH, shortfall };
+    });
 
-    // Comparison table
-    document.getElementById('optimiseComparison').innerHTML = `
-      <table class="compare-table" style="margin-top:1rem;">
-        <thead><tr>
-          <th>Item</th>
-          <th>Current (${fmt(d.salary)})</th>
-          <th class="col-b">Modelled (${fmt(sliderSalary)})</th>
-        </tr></thead>
-        <tbody>
-          <tr><td>Salary</td><td>${fmt(current.salary)}</td><td>${fmt(modelled.salary)}</td></tr>
-          <tr><td>Employer NI</td><td>${fmt(current.empNI)}</td><td>${fmt(modelled.empNI)}</td></tr>
-          <tr><td>Corporation tax</td><td>${fmt(current.corpTax)}</td><td>${fmt(modelled.corpTax)}</td></tr>
-          <tr><td>Dividends available</td><td>${fmt(current.dividends)}</td><td>${fmt(modelled.dividends)}</td></tr>
-          <tr><td>Income tax + employee NI</td><td>${fmt(current.incomeTax + current.employeeNI)}</td><td>${fmt(modelled.incomeTax + modelled.employeeNI)}</td></tr>
-          <tr><td><strong>Total take-home</strong></td><td class="${current.takeHome >= modelled.takeHome ? 'win' : ''}">${fmt(current.takeHome)}</td><td class="${modelled.takeHome >= current.takeHome ? 'win' : ''}">${fmt(modelled.takeHome)}</td></tr>
-        </tbody>
-      </table>`;
+    // Find best (highest take-home)
+    const best = results.reduce(function(a, b) { return a.r.takeHome > b.r.takeHome ? a : b; });
 
-    // Advice
-    let advice = '';
-    if (sliderSalary === 9100) advice = 'A salary of £9,100 (the NI Secondary Threshold) means no employer or employee NI. The company gets a corporation tax deduction on the salary. This is a common choice for directors who have other income using their Personal Allowance.';
-    else if (sliderSalary === 12570) advice = 'A salary of £12,570 uses your full Personal Allowance — no income tax on the salary. There is a small amount of employee and employer NI above £9,100, but the company gets a deduction for the full salary. This is the most common optimal salary for directors with no other income.';
-    else if (sliderSalary > 50270) advice = 'At this salary level you are paying 40% income tax on the excess above £50,270, plus NI. For most directors this is less efficient than taking the same amount as dividends, which attract lower rates.';
-    else advice = `At ${fmt(sliderSalary)}, your effective rate is ${modelled.effectiveRate.toFixed(1)}%. Compare this to the two common optimal points: £9,100 (no NI) and £12,570 (full personal allowance).`;
+    // Render strategy cards
+    document.getElementById('strategyGrid').innerHTML = results.map(function(s) {
+      const isSel = s.id === selectedStrategy;
+      const isBest = s.id === best.id;
+      return '<div class="strategy-card' + (isSel ? ' selected' : '') + (s.shortfall ? ' shortfall' : '') + '" onclick="selectStrategy(\'' + s.id + '\')">' +
+        '<div class="strategy-label">' + s.label + '</div>' +
+        '<div class="strategy-salary">' + fmtP(s.sal) + '</div>' +
+        '<div class="strategy-name">' + s.name + '</div>' +
+        '<div style="font-size:0.75rem; color:var(--slate-light); font-style:italic; margin-bottom:0.35rem;">&ldquo;' + s.desc + '&rdquo;</div>' +
+        '<div class="strategy-desc">' + s.when + '</div>' +
+        (isBest ? '<span class="strategy-badge green">&#9650; Best take-home</span>' : '') +
+        '<div class="strategy-metric"><span>Take-home (salary + dividends)</span><span>' + fmtP(s.r.takeHome) + periodLabel() + '</span></div>' +
+        '<div class="strategy-metric"><span>Total tax paid</span><span>' + fmtP(s.r.totalTax) + '</span></div>' +
+        '<div class="strategy-metric"><span>Effective rate</span><span>' + s.r.effectiveRate.toFixed(1) + '%</span></div>' +
+        (s.shortfall ? '<div class="shortfall-flag">&#9888; Below your ' + fmt(minMonthly) + '/mo target</div>' : '') +
+        '</div>';
+    }).join('');
 
-    document.getElementById('salaryAdvice').innerHTML = `<h4>What this means</h4><p>${advice}</p>`;
+    // Render selected strategy detail
+    const sel = results.find(function(s) { return s.id === selectedStrategy; });
+    if (sel) {
+      const diff_vs_nil = sel.r.takeHome - calcAll(d.profit, 0, d.otherIncome, 0, 0).takeHome;
+      const diff_vs_pa = sel.id !== 'personal_allowance' ? sel.r.takeHome - results.find(function(s){ return s.id==='personal_allowance'; }).r.takeHome : null;
+
+      document.getElementById('strategyDetail').innerHTML =
+        '<div class="guidance-box">' +
+        '<h4>&#9654; ' + sel.name + ' — what this means</h4>' +
+        '<p>At a salary of ' + fmtP(sel.sal) + ', your company pays ' + fmtP(sel.r.empNI) + ' employer NI and gets a corporation tax deduction on the full salary cost. ' +
+        'After corporation tax on remaining profit, you take ' + fmtP(sel.r.dividends) + ' as dividends. ' +
+        'Your total take-home is ' + fmtP(sel.r.takeHome) + ' (' + fmtP(sel.r.takeHome) + '/month) at an effective rate of ' + sel.r.effectiveRate.toFixed(1) + '%.' +
+        (diff_vs_pa !== null && Math.abs(diff_vs_pa) > 100 ? ' This is ' + fmtP(Math.abs(diff_vs_pa)) + (diff_vs_pa > 0 ? ' more' : ' less') + ' per year than the Personal Allowance strategy.' : '') +
+        '</p>' +
+        (sel.shortfall ? '<p style="color:#dc2626; font-weight:600; margin-top:0.5rem;">&#9888; This strategy gives ' + fmtP(sel.r.takeHome) + '/month — below your minimum target of ' + fmt(minMonthly) + '/month. Consider whether your profit level is sufficient, or adjust your minimum.</p>' : '') +
+        '</div>';
+
+      // Comparison table
+      document.getElementById('optimiseComparison').innerHTML =
+        '<table class="compare-table">' +
+        '<thead><tr><th>Item</th>' + results.map(function(s){ return '<th' + (s.id===selectedStrategy?' class="col-b"':'') + '>' + (s.id==='custom'?'Custom':s.salary===9100?'&#163;9,100':'&#163;12,570') + '</th>'; }).join('') + '</tr></thead>' +
+        '<tbody>' +
+        [
+          ['Salary', function(r){ return fmtP(r.sal); }],
+          ['Employer NI', function(r){ return fmtP(r.r.empNI); }],
+          ['Corporation tax', function(r){ return fmtP(r.r.corpTax); }],
+          ['Dividends', function(r){ return fmtP(r.r.dividends); }],
+          ['Personal tax', function(r){ return fmtP(r.r.incomeTax + r.r.employeeNI); }],
+          ['Take-home', function(r){ return fmtP(r.r.takeHome) + periodLabel(); }],
+          ['Effective rate', function(r){ return r.r.effectiveRate.toFixed(1) + '%'; }],
+        ].map(function(row){
+          return '<tr><td>' + row[0] + '</td>' + results.map(function(s){
+            const v = row[1](s);
+            const isBestRow = row[0].includes('Take-home') && s.id === best.id;
+            return '<td class="' + (s.id===selectedStrategy?'win':'') + '">' + v + '</td>';
+          }).join('') + '</tr>';
+        }).join('') +
+        '</tbody></table>';
+    }
   }
 
-  // ── STEP 4 ─────────────────────────────────────────────────────────────────
+  function selectStrategy(id) {
+    selectedStrategy = id;
+    renderStep3();
+  }
+
+
+    // ── STEP 4 ─────────────────────────────────────────────────────────────────
   function renderStep4() {
     const d = getInputs();
     const withoutPension = calcAll(d.profit, d.salary, d.otherIncome, 0, 0);
@@ -758,17 +1075,17 @@
     document.getElementById('pensionGrid').innerHTML = `
       <div class="result-box indigo">
         <div class="r-label">Employer pension contribution</div>
-        <div class="r-amount">${fmt(d.empPension)}</div>
+        <div class="r-amount">${fmtP(d.empPension)}</div>
         <div class="r-sub">fully deductible from company</div>
       </div>
       <div class="result-box good">
         <div class="r-label">Corporation tax saving</div>
-        <div class="r-amount">${fmt(corpTaxSaving)}</div>
+        <div class="r-amount">${fmtP(corpTaxSaving)}</div>
         <div class="r-sub">immediate saving</div>
       </div>
       <div class="result-box">
         <div class="r-label">Effective cost to company</div>
-        <div class="r-amount">${fmt(d.empPension - corpTaxSaving)}</div>
+        <div class="r-amount">${fmtP(d.empPension - corpTaxSaving)}</div>
         <div class="r-sub">after CT relief</div>
       </div>
       <div class="result-box ${breached ? 'warn' : 'good'}">
@@ -780,7 +1097,7 @@
     document.getElementById('pensionGuidance').innerHTML = d.empPension > 0 ? `
       <div class="alert-box">
         <h4>✓ Employer contributions are highly tax-efficient</h4>
-        <p>Your ${fmt(d.empPension)} employer contribution saves ${fmt(corpTaxSaving)} in corporation tax immediately. The effective cost to the company is just ${fmt(d.empPension - corpTaxSaving)} — and the full ${fmt(d.empPension)} goes into your pension. This is one of the most powerful tools available to limited company directors.</p>
+        <p>Your ${fmtP(d.empPension)} employer contribution saves ${fmtP(corpTaxSaving)} in corporation tax immediately. The effective cost to the company is just ${fmtP(d.empPension - corpTaxSaving)} — and the full ${fmtP(d.empPension)} goes into your pension. This is one of the most powerful tools available to limited company directors.</p>
       </div>` : '';
   }
 
@@ -794,22 +1111,22 @@
     document.getElementById('summaryGrid').innerHTML = `
       <div class="result-box indigo">
         <div class="r-label">Annual take-home</div>
-        <div class="r-amount">${fmtK(r.takeHome)}</div>
+        <div class="r-amount">${fmtP(r.takeHome)}</div>
         <div class="r-sub">salary + dividends after tax</div>
       </div>
       <div class="result-box">
         <div class="r-label">Total tax paid</div>
-        <div class="r-amount">${fmtK(r.totalTax)}</div>
+        <div class="r-amount">${fmtP(r.totalTax)}</div>
         <div class="r-sub">${r.effectiveRate.toFixed(1)}% effective rate</div>
       </div>
       <div class="result-box good">
         <div class="r-label">Into pension</div>
-        <div class="r-amount">${fmtK(d.empPension + d.persPension)}</div>
-        <div class="r-sub">CT saving: ${fmt(corpTaxSaving)}</div>
+        <div class="r-amount">${fmtP(d.empPension + d.persPension)}</div>
+        <div class="r-sub">CT saving: ${fmtP(corpTaxSaving)}</div>
       </div>
       <div class="result-box">
         <div class="r-label">Monthly take-home</div>
-        <div class="r-amount">${fmtK(r.takeHome / 12)}</div>
+        <div class="r-amount">${fmtP(r.takeHome)}</div>
         <div class="r-sub">illustrative</div>
       </div>`;
 
@@ -823,16 +1140,16 @@
 
     document.getElementById('finalSummary').innerHTML = `
       <div class="summary-title">Your director remuneration summary</div>
-      <div class="summary-row"><span class="s-label">Company profit (before salary)</span><span class="s-val">${fmt(d.profit)}</span></div>
-      <div class="summary-row"><span class="s-label">Salary</span><span class="s-val">${fmt(d.salary)}/yr</span></div>
-      <div class="summary-row"><span class="s-label">Employer NI on salary</span><span class="s-val">${fmt(r.empNI)}</span></div>
-      <div class="summary-row"><span class="s-label">Employer pension contribution</span><span class="s-val indigo">${fmt(d.empPension)}</span></div>
-      <div class="summary-row"><span class="s-label">Corporation tax</span><span class="s-val">${fmt(r.corpTax)}</span></div>
-      <div class="summary-row"><span class="s-label">Dividends</span><span class="s-val">${fmt(r.dividends)}</span></div>
-      <div class="summary-row"><span class="s-label">Income tax + employee NI</span><span class="s-val">${fmt(r.incomeTax + r.employeeNI)}</span></div>
-      <div class="summary-row"><span class="s-label">Total tax paid</span><span class="s-val warn">${fmt(r.totalTax)} (${r.effectiveRate.toFixed(1)}%)</span></div>
-      <div class="summary-row"><span class="s-label">Annual take-home</span><span class="s-val indigo">${fmt(r.takeHome)}</span></div>
-      <div class="summary-row"><span class="s-label">Into pension</span><span class="s-val good">${fmt(d.empPension + d.persPension)}</span></div>`;
+      <div class="summary-row"><span class="s-label">Company profit (before salary)</span><span class="s-val">${fmtP(d.profit)}</span></div>
+      <div class="summary-row"><span class="s-label">Salary</span><span class="s-val">${fmtP(d.salary)}/yr</span></div>
+      <div class="summary-row"><span class="s-label">Employer NI on salary</span><span class="s-val">${fmtP(r.empNI)}</span></div>
+      <div class="summary-row"><span class="s-label">Employer pension contribution</span><span class="s-val indigo">${fmtP(d.empPension)}</span></div>
+      <div class="summary-row"><span class="s-label">Corporation tax</span><span class="s-val">${fmtP(r.corpTax)}</span></div>
+      <div class="summary-row"><span class="s-label">Dividends</span><span class="s-val">${fmtP(r.dividends)}</span></div>
+      <div class="summary-row"><span class="s-label">Income tax + employee NI</span><span class="s-val">${fmtP(r.incomeTax + r.employeeNI)}</span></div>
+      <div class="summary-row"><span class="s-label">Total tax paid</span><span class="s-val warn">${fmtP(r.totalTax)} (${r.effectiveRate.toFixed(1)}%)</span></div>
+      <div class="summary-row"><span class="s-label">Take-home</span><span class="s-val indigo">${fmtP(r.takeHome)} ${periodLabel()}</span></div>
+      <div class="summary-row"><span class="s-label">Into pension</span><span class="s-val good">${fmtP(d.empPension + d.persPension)}</span></div>`;
 
     checkAndShowPdfCta();
   }
