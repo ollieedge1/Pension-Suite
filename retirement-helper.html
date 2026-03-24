@@ -363,6 +363,76 @@
 
   .pdf-dismiss:hover { color: var(--navy, #0f1f38); }
 
+
+  /* PDF INLINE CTA */
+  .pdf-inline-cta {
+    display: none;
+    margin-top: 1.5rem;
+    background: var(--cream, #f7f3ec);
+    border: 1.5px solid var(--border, rgba(0,0,0,0.1));
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+  }
+
+  .pdf-inline-cta.visible { display: block; }
+
+  .pdf-inline-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .pdf-inline-text strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--navy, #0f1f38);
+    margin-bottom: 0.2rem;
+  }
+
+  .pdf-inline-text span {
+    font-size: 0.75rem;
+    color: var(--slate-light, #718096);
+  }
+
+  .pdf-inline-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .pdf-inline-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy, #0f1f38);
+  }
+
+  .pdf-inline-btn {
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: var(--navy, #0f1f38);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .pdf-inline-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .pdf-inline-btn.paid {
+    background: #40916c;
+  }
+
   /* ADVISER CTA */
   .adviser-cta {
     background: linear-gradient(135deg, var(--navy) 0%, #162d4f 100%);
@@ -1144,9 +1214,24 @@
 
     <div class="summary-panel" id="finalSummary"></div>
 
-    <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(4)">← Back</button>
+        <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(4)">&#8592; Back</button>
       <button class="btn-primary" onclick="window.open('https://www.moneyhelper.org.uk/en/pensions-and-retirement','_blank')">MoneyHelper guidance ↗</button>
+    </div>
+
+    <!-- PDF INLINE CTA -->
+    <div class="pdf-inline-cta" id="pdfInlineCta">
+      <div class="pdf-inline-inner">
+        <div class="pdf-inline-text">
+          <strong>&#128196; Download your personalised PDF report</strong>
+          <span>A branded summary of your results to take to an adviser or share with a partner.</span>
+        </div>
+        <div class="pdf-inline-right">
+          <div class="pdf-inline-price" id="pdfInlinePrice">&#163;4.99</div>
+          <a class="pdf-inline-btn" id="pdfInlineBuyBtn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &#8594;</a>
+          <button class="pdf-inline-btn paid" id="pdfInlineDlBtn" style="display:none;" onclick="generateReport()">&#8595; Download PDF</button>
+        </div>
+      </div>
     </div>
         <div class="lead-input-row" id="leadForm">
           <input
@@ -1165,15 +1250,6 @@
   </div>
 
 </div>
-
-    
-    <!-- PDF REPORT CTA -->
-    <div class="pdf-bar" id="pdfBar">
-      <div class="pdf-bar-inner">
-        <div class="pdf-bar-text">
-          <strong>&#128196; Download your results as a PDF report</strong>
-          <span>A branded summary of your figures &#8212; take it to an adviser or share with a partner.</span>
-        </div>
         <div class="pdf-bar-right">
           <div class="pdf-price" id="pdfPrice">&#163;4.99</div>
           <a class="pdf-buy-btn" id="pdfBuyBtn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &#8594;</a>
@@ -1907,7 +1983,7 @@
     if (step === 4) renderStep4();
     if (step === 5) renderStep5();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (step >= 5) { showPdfBar(); showAdviserCta(); } else if (hasEnoughData && hasEnoughData()) { showPdfBar(); showAdviserCta(); }
+    if (step >= 5) { checkAndShowPdfCta(); showAdviserCta(); } else if (hasEnoughData && hasEnoughData()) { showAdviserCta(); }
     updateChatContext();
   }
 
@@ -2031,12 +2107,34 @@
 
   // Also wire up live input checking — show bar as soon as data is complete
   document.addEventListener('input', function() {
-    if (hasEnoughData()) {
-      var bar = document.getElementById('pdfBar');
-      if (bar) bar.classList.add('visible');
-      var adv = document.getElementById('adviserCta');
-      if (adv) adv.classList.add('visible');
+    if (typeof hasEnoughData === 'function' && hasEnoughData()) {
+      showAdviserCta();
     }
+    if (typeof checkAndShowPdfCta === 'function') checkAndShowPdfCta();
   });
+
+
+  function checkAndShowPdfCta() {
+    var ready = (document.getElementById('potValue') && parseFloat(document.getElementById('potValue').value) > 0) || (document.getElementById('statePension') && parseFloat(document.getElementById('statePension').value) > 0);
+    var cta = document.getElementById('pdfInlineCta');
+    if (cta) cta.classList.toggle('visible', ready);
+  }
+
+
+  // Show download button if already paid
+  (function() {
+    if (window.location.search.includes('paid=true')) {
+      window.addEventListener('DOMContentLoaded', function() {
+        var buy = document.getElementById('pdfInlineBuyBtn');
+        var dl = document.getElementById('pdfInlineDlBtn');
+        var price = document.getElementById('pdfInlinePrice');
+        var cta = document.getElementById('pdfInlineCta');
+        if (cta) cta.classList.add('visible');
+        if (buy) buy.style.display = 'none';
+        if (dl) dl.style.display = 'inline-block';
+        if (price) price.textContent = '\u2713 Paid';
+      });
+    }
+  })();
 
 </script>
