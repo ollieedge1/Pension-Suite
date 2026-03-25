@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f1f38">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MyPayPicture">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
 <title>MyPayOptimiser — MyPayPicture</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -922,7 +929,7 @@
 </header>
 
 <div class="hero">
-  <h1>Make every pound<br><em>work harder</em> for retirement</h1>
+  <h1>Optimising your pension?<br><em>You can pay less tax.</em></h1>
   <p>Find your optimal pension contribution, compare your options, and see your money grow.</p>
 </div>
 
@@ -930,10 +937,10 @@
 
   <div class="steps-nav">
     <div class="step-tab active" onclick="goTo(1)" id="tab1"><span class="step-num">1</span>Your Pay</div>
-    <div class="step-tab" onclick="goTo(2)" id="tab2"><span class="step-num">2</span>Take-Home</div>
-    <div class="step-tab" onclick="goTo(3)" id="tab3"><span class="step-num">3</span>Compare</div>
-    <div class="step-tab" onclick="goTo(4)" id="tab4"><span class="step-num">4</span>Projection</div>
-    <div class="step-tab" onclick="goTo(5)" id="tab5"><span class="step-num">5</span>Allowance</div>
+    <div class="step-tab" onclick="goTo(2)" id="tab2"><span class="step-num">2</span>Recommendation</div>
+    
+    <div class="step-tab" onclick="goTo(3)" id="tab3"><span class="step-num">3</span>Projection</div>
+    <div class="step-tab" onclick="goTo(4)" id="tab4"><span class="step-num">4</span>Allowance</div>
   </div>
 
   <!-- STEP 1: YOUR PAY -->
@@ -950,12 +957,37 @@
         </div>
       </div>
       <div class="field-group">
-        <label>Current employer pension contribution</label>
+        <label>Employer pension contribution</label>
         <div class="input-wrap">
-          <input type="number" id="employerContrib" placeholder="e.g. 5" min="0" max="100" class="has-suffix no-prefix">
+          <input type="number" id="employerContrib" placeholder="e.g. 3" min="0" max="100" class="has-suffix no-prefix" oninput="toggleMatchFields()">
           <span class="input-suffix">%</span>
         </div>
-        <p class="hint">What your employer pays in (often 3–10%).</p>
+        <p class="hint">What your employer currently contributes.</p>
+        <div style="margin-top:0.65rem;">
+          <label style="font-size:0.8rem; color:var(--slate); display:flex; align-items:center; gap:0.5rem; cursor:pointer; font-weight:400;">
+            <input type="checkbox" id="hasMatch" onchange="toggleMatchFields()" style="width:auto; padding:0; border:none; accent-color:var(--teal);"> My employer matches my contributions
+          </label>
+        </div>
+        <div id="matchFields" style="display:none; margin-top:0.75rem; padding:0.85rem; background:var(--stone-pale); border-radius:8px; border:1px solid rgba(0,0,0,0.07);">
+          <div style="font-size:0.78rem; font-weight:600; color:var(--navy); margin-bottom:0.6rem;">Matching arrangement</div>
+          <div class="two-col" style="gap:0.75rem; margin-bottom:0;">
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">They match up to</label>
+              <div class="input-wrap">
+                <input type="number" id="matchUpTo" placeholder="e.g. 5" min="0" max="20" class="has-suffix no-prefix" oninput="updateMatchPreview()" style="font-size:0.88rem;">
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label style="font-size:0.78rem;">If you contribute at least</label>
+              <div class="input-wrap">
+                <input type="number" id="matchThreshold" placeholder="e.g. 5" min="0" max="20" class="has-suffix no-prefix" oninput="updateMatchPreview()" style="font-size:0.88rem;">
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+          </div>
+          <div id="matchPreview" style="margin-top:0.65rem; font-size:0.78rem; color:var(--teal); font-weight:500; line-height:1.5;"></div>
+        </div>
       </div>
     </div>
 
@@ -989,13 +1021,12 @@
     </div>
 
     <div class="field-group">
-      <label>Contribution method</label>
+      <label>Does your employer offer salary sacrifice?</label>
       <div class="radio-group">
-        <div class="radio-btn selected" id="rb_ss" onclick="selectMethod('salary_sacrifice')">Salary Sacrifice</div>
-        <div class="radio-btn" id="rb_pc" onclick="selectMethod('personal')">Personal Contribution</div>
-        <div class="radio-btn" id="rb_both" onclick="selectMethod('both')">Compare Both</div>
+        <div class="radio-btn selected" id="rb_ss" onclick="selectMethod('salary_sacrifice')">Yes — I can use salary sacrifice</div>
+        <div class="radio-btn" id="rb_pc" onclick="selectMethod('personal')">No — I'll contribute personally</div>
       </div>
-      <p class="hint" style="margin-top:0.5rem;">Not sure? Choose "Compare Both" — we'll show you the difference.</p>
+      <p class="hint" style="margin-top:0.5rem;">Salary sacrifice is more tax-efficient — you save income tax and NI. If unsure, check with your HR or payroll team.</p>
     </div>
 
     <div class="field-group">
@@ -1024,11 +1055,39 @@
     </div>
   </div>
 
-  <!-- STEP 2: TAKE-HOME IMPACT -->
+  <!-- STEP 2: RECOMMENDATION -->
   <div class="card" id="step2">
-    <div class="card-title">Take-home pay impact</div>
-    <p class="card-subtitle">Here's how your monthly take-home changes between your current and target contribution levels.</p>
+    <div class="card-title">Our recommendation</div>
+    <p class="card-subtitle">Based on what you've told us, here's what we'd suggest — and why. Adjust it below to see how different contribution levels affect your take-home.</p>
 
+    <!-- DISCLAIMER -->
+    <div class="rec-disclaimer">
+      <span class="rec-disclaimer-icon">&#9432;</span>
+      <span>This is an illustrative suggestion based on your inputs — not personalised financial advice. Always speak to a qualified financial adviser before changing your pension contributions.</span>
+    </div>
+
+    <!-- RECOMMENDATION SUMMARY -->
+    <div class="rec-summary" id="recSummary"></div>
+
+    <!-- LIVE ADJUSTER -->
+    <div class="rec-adjuster">
+      <div class="rec-adjuster-label">
+        <span>Adjust contribution to see the impact</span>
+        <span id="adjPctDisplay" class="rec-pct-display">5%</span>
+      </div>
+      <div class="rec-slider-row">
+        <button class="rec-nudge" onclick="nudgeContrib(-1)">&#8722;</button>
+        <input type="range" id="adjContribPct" min="0" max="30" step="1" value="5" oninput="renderStep2()">
+        <button class="rec-nudge" onclick="nudgeContrib(1)">+</button>
+      </div>
+      <div class="rec-slider-hints">
+        <span>0%</span>
+        <span id="adjSalaryDisplay" style="color:var(--teal); font-weight:600;"></span>
+        <span>30%</span>
+      </div>
+    </div>
+
+    <!-- LIVE IMPACT GRID -->
     <div class="results-grid" id="takeHomeGrid"></div>
 
     <hr>
@@ -1038,26 +1097,14 @@
     <div id="takeHomeGuidance"></div>
 
     <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(1)">← Back</button>
-      <button class="btn-primary" onclick="goTo(3)">Compare methods →</button>
+      <button class="btn-secondary" onclick="goTo(1)">&#8592; Back</button>
+      <button class="btn-primary" onclick="applyRecommendation()">Use this contribution &#8594;</button>
     </div>
   </div>
 
-  <!-- STEP 3: COMPARISON -->
-  <div class="card" id="step3">
-    <div class="card-title">Salary sacrifice vs personal contribution</div>
-    <p class="card-subtitle">Both get money into your pension — but they're not equal. Here's the side-by-side.</p>
-
-    <div id="comparisonContent"></div>
-
-    <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(2)">← Back</button>
-      <button class="btn-primary" onclick="goTo(4)">See my projection →</button>
-    </div>
-  </div>
 
   <!-- STEP 4: PROJECTION -->
-  <div class="card" id="step4">
+  <div class="card" id="step3">
     <div class="card-title">Pension pot projection</div>
     <p class="card-subtitle">Based on your target contribution, here's an estimate of your pot at retirement.</p>
 
@@ -1102,7 +1149,7 @@
   </div>
 
   <!-- STEP 5: ALLOWANCE -->
-  <div class="card" id="step5">
+  <div class="card" id="step4">
     <div class="card-title">Annual allowance checker</div>
     <p class="card-subtitle">Make sure your contributions stay within HMRC's limits — breaching them triggers a tax charge.</p>
 
@@ -1123,7 +1170,7 @@
     <div class="summary-panel" id="finalSummary"></div>
 
         <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(4)">&#8592; Back</button>
+      <button class="btn-secondary" onclick="goTo(3)">&#8592; Back</button>
       <button class="btn-primary" onclick="window.open('https://www.gov.uk/tax-on-your-private-pension','_blank')">Read more on gov.uk ↗</button>
     </div>
 
@@ -1270,186 +1317,237 @@
   }
 
   // ── STEP 2 ─────────────────────────────────────────────────────────────────
-  function renderStep2() {
-    const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
-    const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
-    const curPct = parseFloat(document.getElementById('employeeContrib').value) || 0;
-    const tgtPct = parseFloat(document.getElementById('targetContrib').value) || 0;
+// ── EMPLOYER MATCH ─────────────────────────────────────────────────────────
+  function toggleMatchFields() {
+    var hasMatch = document.getElementById('hasMatch').checked;
+    document.getElementById('matchFields').style.display = hasMatch ? 'block' : 'none';
+    updateMatchPreview();
+  }
 
-    const curPension = salary * curPct / 100;
-    const tgtPension = salary * tgtPct / 100;
-    const curCalc = calcTakeHome(salary, curPension);
-    const tgtCalc = calcTakeHome(salary, tgtPension);
+  function getMatchInfo() {
+    var hasMatch = document.getElementById('hasMatch') && document.getElementById('hasMatch').checked;
+    if (!hasMatch) return null;
+    var matchUpTo = parseFloat(document.getElementById('matchUpTo').value) || 0;
+    var matchThreshold = parseFloat(document.getElementById('matchThreshold').value) || 0;
+    return { matchUpTo: matchUpTo, matchThreshold: matchThreshold };
+  }
 
-    const curMonthly = curCalc.takeHome / 12;
-    const tgtMonthly = tgtCalc.takeHome / 12;
-    const diff = tgtMonthly - curMonthly;
-    const extraPension = (tgtPension - curPension) / 12;
+  function getEffectiveEmployerContrib(employeePct) {
+    var basePct = parseFloat(document.getElementById('employerContrib').value) || 0;
+    var match = getMatchInfo();
+    if (!match || match.matchUpTo === 0) return basePct;
+    // Employer contributes base + match if employee meets threshold
+    if (employeePct >= match.matchThreshold) {
+      return basePct + match.matchUpTo;
+    }
+    return basePct;
+  }
 
-    document.getElementById('takeHomeGrid').innerHTML = `
-      <div class="result-box">
-        <div class="r-label">Current Monthly Take-Home</div>
-        <div class="r-amount">${fmt(curMonthly)}</div>
-        <div class="r-sub">At ${curPct}% contribution</div>
-      </div>
-      <div class="result-box teal">
-        <div class="r-label">New Monthly Take-Home</div>
-        <div class="r-amount">${fmt(tgtMonthly)}</div>
-        <div class="r-sub">At ${tgtPct}% contribution</div>
-      </div>
-      <div class="result-box">
-        <div class="r-label">Monthly Take-Home Change</div>
-        <div class="r-amount">${diff >= 0 ? '+' : ''}${fmt(diff)}</div>
-        <div class="r-sub">${diff < 0 ? 'reduction' : 'increase'} per month</div>
-      </div>
-      <div class="result-box highlight">
-        <div class="r-label">Extra Pension Per Month</div>
-        <div class="r-amount">${fmt(extraPension)}</div>
-        <div class="r-sub">Additional going in</div>
-      </div>
-    `;
+  function updateMatchPreview() {
+    var preview = document.getElementById('matchPreview');
+    if (!preview) return;
+    var match = getMatchInfo();
+    var salary = parseFloat(document.getElementById('grossSalary').value) || 0;
+    if (!match || match.matchUpTo === 0 || match.matchThreshold === 0) {
+      preview.textContent = '';
+      return;
+    }
+    var matchValue = salary * match.matchUpTo / 100;
+    preview.innerHTML = 'If you contribute at least ' + match.matchThreshold + '%, your employer adds ' +
+      match.matchUpTo + '% (' + fmt(matchValue) + '/yr) on top of their base contribution.';
+  }
 
-    // Bar chart
-    const maxVal = salary / 12;
-    const bars = [
-      { label: 'Gross salary', cur: salary / 12, tgt: salary / 12, cls: 'salary' },
-      { label: 'Pension (you)', cur: curPension / 12, tgt: tgtPension / 12, cls: 'pension' },
-      { label: 'Income tax', cur: curCalc.tax / 12, tgt: tgtCalc.tax / 12, cls: 'tax' },
-      { label: 'NI', cur: curCalc.ni / 12, tgt: tgtCalc.ni / 12, cls: 'ni' },
-      { label: 'Take-home', cur: curMonthly, tgt: tgtMonthly, cls: 'pension' },
+  function getMatchAlertHtml(adjPct) {
+    var match = getMatchInfo();
+    if (!match || match.matchUpTo === 0 || match.matchThreshold === 0) return '';
+
+    var salary = parseFloat(document.getElementById('grossSalary').value) || 0;
+    var basePct = parseFloat(document.getElementById('employerContrib').value) || 0;
+    var matchValue = salary * match.matchUpTo / 100;
+    var isGettingMatch = adjPct >= match.matchThreshold;
+
+    if (isGettingMatch) {
+      return '<div class="match-alert">' +
+        '<div class="match-alert-icon">&#10003;</div>' +
+        '<div class="match-alert-body">' +
+          '<div class="match-alert-title">You’re getting the full employer match</div>' +
+          '<div class="match-alert-desc">At ' + adjPct + '% your employer adds their full <strong>' + match.matchUpTo + '% match (' + fmt(matchValue) + '/yr)</strong> on top of their base ' + basePct + '% contribution.</div>' +
+        '</div>' +
+      '</div>';
+    } else {
+      var shortfall = match.matchThreshold - adjPct;
+      return '<div class="match-alert warning">' +
+        '<div class="match-alert-icon">&#9888;</div>' +
+        '<div class="match-alert-body">' +
+          '<div class="match-alert-title">You’re leaving ' + fmt(matchValue) + '/yr on the table</div>' +
+          '<div class="match-alert-desc">Increase your contribution by just <strong>' + shortfall + '%</strong> (to ' + match.matchThreshold + '%) and your employer will add <strong>' + fmt(matchValue) + '/yr</strong> extra. That’s free money — the most valuable thing this tool can tell you.</div>' +
+        '</div>' +
+      '</div>';
+    }
+  }
+
+    function renderStep2() {
+    var salary = parseFloat(document.getElementById('grossSalary').value) || 0;
+    var empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
+    var curPct = parseFloat(document.getElementById('employeeContrib').value) || 0;
+    var tgtPct = parseFloat(document.getElementById('targetContrib').value) || 0;
+
+    var adjSlider = document.getElementById('adjContribPct');
+    var adjPct = adjSlider ? parseFloat(adjSlider.value) : tgtPct;
+    var isRec = adjPct === tgtPct;
+
+    var adjDisplay = document.getElementById('adjPctDisplay');
+    var adjSalary = document.getElementById('adjSalaryDisplay');
+    if (adjDisplay) adjDisplay.textContent = adjPct + '%';
+    if (adjSalary) adjSalary.textContent = fmt(salary * adjPct / 100) + '/yr into pension';
+
+    var curPension = salary * curPct / 100;
+    var adjPension = salary * adjPct / 100;
+    var empPension = salary * empPct / 100;
+
+    var curCalc = calcTakeHome(salary, curPension);
+    var adjCalc = calcTakeHome(salary, adjPension);
+
+    var curMonthly = curCalc.takeHome / 12;
+    var adjMonthly = adjCalc.takeHome / 12;
+    var diff = adjMonthly - curMonthly;
+    var totalPct = adjPct + empPct;
+    var totalPension = adjPension + empPension;
+    var isHigher = salary > 50270;
+
+    // ── Employer match alert ──────────────────────────────────────────────────
+    var matchAlertHtml = getMatchAlertHtml(adjPct);
+
+    // ── Comparison table ────────────────────────────────────────────────────
+    var newLabel = isRec ? 'New (' + adjPct + '%)' : 'Adjusted (' + adjPct + '%)';
+    var takeHomeBetter = adjMonthly >= curMonthly;
+    var pensionBetter = adjPension >= curPension;
+
+    var rows = [
+      {
+        label: 'Your pension contribution',
+        cur: fmt(curPension / 12) + '/mo',
+        adj: fmt(adjPension / 12) + '/mo',
+        adjCls: pensionBetter ? 'win' : '',
+      },
+      {
+        label: 'Employer contribution',
+        cur: fmt(empPension / 12) + '/mo',
+        adj: fmt(empPension / 12) + '/mo',
+        adjCls: '',
+      },
+      {
+        label: 'Total into pension',
+        cur: fmt((curPension + empPension) / 12) + '/mo',
+        adj: fmt((adjPension + empPension) / 12) + '/mo',
+        adjCls: pensionBetter ? 'win' : '',
+      },
+      {
+        label: 'Income tax',
+        cur: fmt(curCalc.tax / 12) + '/mo',
+        adj: fmt(adjCalc.tax / 12) + '/mo',
+        adjCls: adjCalc.tax < curCalc.tax ? 'win' : '',
+      },
+      {
+        label: 'National Insurance',
+        cur: fmt(curCalc.ni / 12) + '/mo',
+        adj: fmt(adjCalc.ni / 12) + '/mo',
+        adjCls: adjCalc.ni < curCalc.ni ? 'win' : '',
+      },
+      {
+        label: 'Monthly take-home',
+        cur: fmt(curMonthly),
+        adj: fmt(adjMonthly),
+        adjCls: adjMonthly >= curMonthly ? 'win' : 'lose',
+        bold: true,
+      },
+      {
+        label: 'Annual take-home',
+        cur: fmt(curCalc.takeHome),
+        adj: fmt(adjCalc.takeHome),
+        adjCls: adjCalc.takeHome >= curCalc.takeHome ? 'win' : 'lose',
+        bold: true,
+      },
     ];
 
-    let html = '';
-    bars.forEach(b => {
-      const curW = Math.max(0, (b.cur / maxVal) * 100);
-      const tgtW = Math.max(0, (b.tgt / maxVal) * 100);
-      html += `
-        <div class="bar-row">
-          <div class="bar-label">${b.label}</div>
-          <div style="flex:1">
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:3px;">
-              <div style="font-size:0.68rem; width:45px; color:var(--slate-light); flex-shrink:0;">Now</div>
-              <div class="bar-track" style="flex:1"><div class="bar-fill ${b.cls}" style="width:${curW}%">${b.cur > maxVal * 0.12 ? fmt(b.cur) : ''}</div></div>
-              <div class="bar-value">${fmt(b.cur)}</div>
-            </div>
-            <div style="display:flex; align-items:center; gap:0.5rem;">
-              <div style="font-size:0.68rem; width:45px; color:var(--teal); flex-shrink:0; font-weight:500;">New</div>
-              <div class="bar-track" style="flex:1"><div class="bar-fill ${b.cls}" style="width:${tgtW}%; opacity:0.75">${b.tgt > maxVal * 0.12 ? fmt(b.tgt) : ''}</div></div>
-              <div class="bar-value" style="color:var(--teal); font-weight:500;">${fmt(b.tgt)}</div>
-            </div>
-          </div>
-        </div>`;
+    var tableHtml =
+      '<table class="compare-table">' +
+        '<thead><tr>' +
+          '<th>Item</th>' +
+          '<th>Now (' + curPct + '%)</th>' +
+          '<th class="teal-col">' + newLabel + (diff < 0 ? ' <span style="font-size:0.7rem; color:var(--slate-light); font-weight:400;">' + fmt(diff) + '/mo</span>' : diff > 0 ? ' <span style="font-size:0.7rem; color:#40916c; font-weight:400;">+' + fmt(diff) + '/mo</span>' : '') + '</th>' +
+        '</tr></thead>' +
+        '<tbody>';
+
+    rows.forEach(function(row) {
+      tableHtml +=
+        '<tr>' +
+          '<td' + (row.bold ? ' style="font-weight:600; color:var(--navy);"' : '') + '>' + row.label + '</td>' +
+          '<td>' + row.cur + '</td>' +
+          '<td class="' + (row.adjCls || '') + '">' + row.adj + '</td>' +
+        '</tr>';
     });
 
-    document.getElementById('barChart').innerHTML = html;
+    tableHtml += '</tbody></table>';
 
-    const isHigher = salary > 50270;
-    const realCost = Math.abs(diff);
-    const grossExtra = tgtPension - curPension;
+    document.getElementById('takeHomeGrid').innerHTML = matchAlertHtml + tableHtml;
 
-    document.getElementById('takeHomeGuidance').innerHTML = `
-      <div class="guidance-box">
-        <h4>What this means</h4>
-        <p>To put an extra ${fmt(grossExtra / 12)} per month into your pension via salary sacrifice, your take-home reduces by just ${fmt(realCost)} per month — because you save ${isHigher ? '40%' : '20%'} income tax and 8% NI on that amount. ${isHigher ? `As a higher rate taxpayer, salary sacrifice is particularly powerful — the government is effectively subsidising ${pct((grossExtra - realCost * 12) / grossExtra * 100)} of your contribution.` : 'Every £100 extra you put in only costs you around £72 in take-home pay.'}</p>
-      </div>`;
+    // Clear bar chart - no longer needed
+    var bc = document.getElementById('barChart');
+    if (bc) bc.innerHTML = '';
+
+    // Guidance
+    var realCost = Math.abs(diff);
+    var grossExtra = adjPension - curPension;
+    var subsidyPct = grossExtra > 0 ? Math.round((grossExtra - realCost * 12) / grossExtra * 100) : 0;
+
+    var guidanceHtml = isRec
+      ? '<div class="guidance-box">' +
+          '<h4>Why we suggest ' + adjPct + '%</h4>' +
+          '<p>To put an extra ' + fmt(Math.max(0, grossExtra) / 12) + '/month into your pension via salary sacrifice, your take-home reduces by just ' + fmt(realCost) + '/month — because you save ' + (isHigher ? '40%' : '20%') + ' income tax and 8% NI on the amount sacrificed. ' +
+          (isHigher ? 'As a higher rate taxpayer, salary sacrifice is particularly powerful — the government effectively subsidises ' + subsidyPct + '% of your contribution.' : 'Every \u00a3100 extra you contribute only costs you around \u00a372 in take-home pay.') +
+          ' Use the slider above to explore different levels.</p>' +
+          '<p style="font-size:0.75rem; color:var(--slate-light); margin-top:0.5rem; font-style:italic;">This is an illustrative suggestion only \u2014 not financial advice. Speak to a qualified adviser for personalised guidance.</p>' +
+        '</div>'
+      : '<div class="guidance-box">' +
+          '<h4>At ' + adjPct + '% contribution</h4>' +
+          '<p>You\u2019d take home ' + fmt(adjMonthly) + '/month and contribute ' + fmt(adjPension) + '/year to your pension' +
+          (empPension > 0 ? ', plus ' + fmt(empPension) + '/year from your employer (total ' + fmt(totalPension) + '/year going in)' : '') +
+          '. Your take-home ' + (diff < 0 ? 'reduces by ' + fmt(realCost) + '/month compared to now' : 'is unchanged or higher') + '.</p>' +
+          '<p style="font-size:0.75rem; color:var(--slate-light); margin-top:0.5rem; font-style:italic;">Illustrative only \u2014 not financial advice. Speak to a qualified adviser for personalised guidance.</p>' +
+        '</div>';
+
+    document.getElementById('takeHomeGuidance').innerHTML = guidanceHtml;
+
+    // Summary panel
+    var recEl = document.getElementById('recSummary');
+    if (recEl) {
+      recEl.innerHTML =
+        '<div class="rec-summary-title">' + (isRec ? '&#10022; Our suggestion' : '&#9998; Your adjusted scenario') + '</div>' +
+        '<div class="rec-summary-row"><span class="rs-label">Your contribution</span><span class="rs-val teal">' + adjPct + '% &mdash; ' + fmt(adjPension) + '/yr</span></div>' +
+        '<div class="rec-summary-row"><span class="rs-label">Employer adds</span><span class="rs-val">' + empPct + '% &mdash; ' + fmt(empPension) + '/yr</span></div>' +
+        '<div class="rec-summary-row"><span class="rs-label">Total going into pension</span><span class="rs-val good">' + totalPct + '% &mdash; ' + fmt(totalPension) + '/yr</span></div>' +
+        '<div class="rec-summary-row"><span class="rs-label">Monthly take-home</span><span class="rs-val">' + fmt(adjMonthly) + '/mo</span></div>' +
+        '<div class="rec-summary-row"><span class="rs-label">Change vs current</span><span class="rs-val ' + (diff < -10 ? 'warn' : 'good') + '">' + (diff >= 0 ? '+' : '') + fmt(diff) + '/mo</span></div>';
+    }
   }
 
-  // ── STEP 3 ─────────────────────────────────────────────────────────────────
-  function renderStep3() {
-    const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
-    const tgtPct = parseFloat(document.getElementById('targetContrib').value) || 0;
-    const pensionGross = salary * tgtPct / 100;
-    const isHigher = salary > 50270;
-
-    const ss = calcTakeHome(salary, pensionGross);
-    const pc = calcPersonalContrib(salary, pensionGross);
-
-    const ssTakeHome = ss.takeHome / 12;
-    const pcTakeHome = pc.takeHome / 12;
-    const ssWins = ssTakeHome > pcTakeHome;
-    const diff = Math.abs(ssTakeHome - pcTakeHome);
-
-    const method = state.method;
-
-    let html = '';
-
-    if (method === 'personal') {
-      html = `
-        <div class="alert-box warning">
-          <h4>You selected personal contribution only</h4>
-          <p>Personal contributions recover income tax via Self Assessment but don't save NI. See how this compares to salary sacrifice below.</p>
-        </div>`;
-    }
-
-    if (method === 'salary_sacrifice') {
-      html = `
-        <div class="alert-box">
-          <h4>You selected salary sacrifice</h4>
-          <p>This is typically the most tax-efficient method for employed workers — you save both income tax and NI. See the full comparison below.</p>
-        </div>`;
-    }
-
-    html += `
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Factor</th>
-            <th class="teal-col">Salary Sacrifice ${ssWins ? '<span class="winner-tag">Better</span>' : ''}</th>
-            <th>Personal Contribution ${!ssWins ? '<span class="winner-tag" style="background:#718096">Better</span>' : ''}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Gross pension contribution</td>
-            <td>${fmt(pensionGross / 12)}/mo</td>
-            <td>${fmt(pensionGross / 12)}/mo</td>
-          </tr>
-          <tr>
-            <td>Income tax saved</td>
-            <td class="win">✓ ${fmt(pensionGross * (isHigher ? 0.4 : 0.2) / 12)}/mo</td>
-            <td class="win">✓ ${fmt(pensionGross * (isHigher ? 0.4 : 0.2) / 12)}/mo <span style="font-size:0.75rem; color:var(--slate-light)">(via Self Assessment)</span></td>
-          </tr>
-          <tr>
-            <td>NI saved</td>
-            <td class="win">✓ ${fmt(Math.min(pensionGross, Math.max(0, 50270 - salary)) * 0.08 / 12)}/mo</td>
-            <td class="lose">✗ None</td>
-          </tr>
-          <tr>
-            <td>Employer NI saved (may be passed on)</td>
-            <td class="win">✓ Up to ${fmt(Math.min(pensionGross, Math.max(0, 50270 - salary)) * 0.138 / 12)}/mo</td>
-            <td class="lose">✗ None</td>
-          </tr>
-          <tr>
-            <td>Monthly take-home</td>
-            <td class="${ssWins ? 'win' : ''}">${fmt(ssTakeHome)}</td>
-            <td class="${!ssWins ? 'win' : ''}">${fmt(pcTakeHome)}</td>
-          </tr>
-          <tr>
-            <td>Annual effective cost to you</td>
-            <td class="${ssWins ? 'win' : ''}">${fmt(calcTakeHome(salary, 0).takeHome - ss.takeHome)}</td>
-            <td>${fmt(pc.effectiveCost * 12)}</td>
-          </tr>
-          <tr>
-            <td>Affects student loan repayments?</td>
-            <td class="win">✓ Reduces threshold income</td>
-            <td class="lose">✗ No effect</td>
-          </tr>
-          <tr>
-            <td>Affects child benefit tax charge?</td>
-            <td class="win">✓ Reduces adjusted net income</td>
-            <td class="lose">✗ No effect</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="guidance-box">
-        <h4>Bottom line</h4>
-        <p>Salary sacrifice puts ${fmt(diff)}/month more in your pocket for the same pension contribution${diff > 0 ? ` — ${fmt(diff * 12)} per year better off` : ''}. Unless your employer doesn't offer it, salary sacrifice is almost always the better choice for employed workers.</p>
-      </div>`;
-
-    document.getElementById('comparisonContent').innerHTML = html;
+  function nudgeContrib(delta) {
+    var slider = document.getElementById('adjContribPct');
+    if (!slider) return;
+    slider.value = Math.min(30, Math.max(0, parseInt(slider.value) + delta));
+    renderStep2();
   }
 
-  // ── STEP 4 ─────────────────────────────────────────────────────────────────
+  function applyRecommendation() {
+    var adjPct = parseFloat(document.getElementById('adjContribPct').value) || 0;
+    var tgtField = document.getElementById('targetContrib');
+    if (tgtField) tgtField.value = adjPct;
+    goTo(3);
+  }
+
+
+  
   function renderStep4() {
     const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
     const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
@@ -1651,7 +1749,7 @@
       }
     }
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 4; i++) {
       document.getElementById('step' + i).classList.toggle('active', i === step);
       const tab = document.getElementById('tab' + i);
       tab.classList.toggle('active', i === step);
@@ -1659,7 +1757,12 @@
       else if (i > step) tab.classList.remove('completed');
     }
 
-    if (step === 2) renderStep2();
+    if (step === 2) {
+      const tgt = parseFloat(document.getElementById('targetContrib').value) || 5;
+      const slider = document.getElementById('adjContribPct');
+      if (slider) slider.value = tgt;
+      renderStep2();
+    }
     if (step === 3) { renderStep2(); renderStep3(); }
     if (step === 4) { renderStep2(); setTimeout(renderStep4, 50); }
     if (step === 5) { renderStep2(); renderStep5(); }
@@ -1712,20 +1815,38 @@
   function renderGoals() {
     const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
     const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
+    const minTH = parseFloat(document.getElementById('minTakeHomePO').value) || 0;
     const list = document.getElementById('goalsList');
 
-    list.innerHTML = GOALS.map(g => {
+    list.innerHTML = GOALS.map(function(g) {
+      const sel = selectedGoals.has(g.id);
+
+      if (g.dynamic && g.id === 'min_takehome') {
+        const hasMin = minTH > 0;
+        const desc = hasMin
+          ? 'Find the highest contribution that keeps take-home above <strong style="color:var(--navy)">\u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month</strong>.'
+          : g.desc;
+        return '<div class="goal-item' + (sel ? ' selected' : '') + (!hasMin ? ' disabled' : '') + '" '
+          + (hasMin ? 'onclick="toggleGoal(\'' + g.id + '\')"' : '')
+          + ' style="' + (!hasMin ? 'opacity:0.45;cursor:not-allowed;' : '') + '">'
+          + '<div class="goal-check">' + (sel ? '\u2713' : '') + '</div>'
+          + '<div class="goal-text">'
+          + '<div class="g-title">' + g.title + '</div>'
+          + '<div class="g-desc">' + desc + (!hasMin ? ' <span style="color:#94a3b8">Enter a minimum above to use this goal.</span>' : '') + '</div>'
+          + '</div></div>';
+      }
+
       const needed = salary > 0 ? g.calc(salary, empPct) : null;
       const pctNeeded = salary > 0 ? Math.ceil((needed / salary) * 100) : null;
       const relevant = salary > 0 && needed > 0;
-      const sel = selectedGoals.has(g.id);
-      return `<div class="goal-item${sel ? ' selected' : ''}${!relevant && salary > 0 ? ' disabled' : ''}" onclick="toggleGoal('${g.id}')" style="${!relevant && salary > 0 ? 'opacity:0.45;cursor:not-allowed;' : ''}">
-        <div class="goal-check">${sel ? '✓' : ''}</div>
-        <div class="goal-text">
-          <div class="g-title">${g.title}</div>
-          <div class="g-desc">${g.desc}${relevant ? ` <strong style="color:var(--teal)">Contribute ${pctNeeded}%+ of salary.</strong>` : salary > 0 ? ' <span style="color:#94a3b8">Already achieved at your salary.</span>' : ''}</div>
-        </div>
-      </div>`;
+      return '<div class="goal-item' + (sel ? ' selected' : '') + (!relevant && salary > 0 ? ' disabled' : '') + '" '
+        + 'onclick="toggleGoal(\'' + g.id + '\')" style="' + (!relevant && salary > 0 ? 'opacity:0.45;cursor:not-allowed;' : '') + '">'
+        + '<div class="goal-check">' + (sel ? '\u2713' : '') + '</div>'
+        + '<div class="goal-text">'
+        + '<div class="g-title">' + g.title + '</div>'
+        + '<div class="g-desc">' + g.desc
+        + (relevant ? ' <strong style="color:var(--teal)">Needs ' + pctNeeded + '% of salary.</strong>' : salary > 0 ? ' <span style="color:#94a3b8">Already achieved at your salary.</span>' : '')
+        + '</div></div></div>';
     }).join('');
 
     updateOptimiseResult();
@@ -1745,6 +1866,7 @@
   function updateOptimiseResult() {
     const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
     const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
+    const minTH = parseFloat(document.getElementById('minTakeHomePO').value) || 0;
     const resultBox = document.getElementById('optimiseResult');
 
     if (!salary || selectedGoals.size === 0) {
@@ -1752,41 +1874,92 @@
       return;
     }
 
-    // Find the max required employee contribution across all selected goals
     let maxNeeded = 0;
     let drivingGoals = [];
+    let minTHFlag = false;
 
-    selectedGoals.forEach(id => {
-      const goal = GOALS.find(g => g.id === id);
-      const needed = goal.calc(salary, empPct);
-      const empNeeded = Math.max(0, needed - salary * empPct / 100);
-      const pctNeeded = Math.ceil((empNeeded / salary) * 100);
+    // Min take-home goal: binary search for highest contrib that meets floor
+    if (selectedGoals.has('min_takehome') && minTH > 0) {
+      var lo = 0, hi = 100, bestPct = 0;
+      for (var i = 0; i < 25; i++) {
+        var mid = (lo + hi) / 2;
+        var taxable = salary - (salary * mid / 100);
+        var itax = taxable <= 12570 ? 0
+          : taxable <= 50270 ? (taxable - 12570) * 0.2
+          : (50270 - 12570) * 0.2 + (taxable - 50270) * 0.4;
+        var eni = taxable <= 12570 ? 0
+          : Math.min(taxable - 12570, 50270 - 12570) * 0.08
+          + Math.max(0, taxable - 50270) * 0.02;
+        var monthlyTH = (taxable - itax - eni) / 12;
+        if (monthlyTH >= minTH) { bestPct = mid; lo = mid; }
+        else { hi = mid; }
+      }
+      var pct = Math.floor(bestPct);
+      if (pct > maxNeeded) {
+        maxNeeded = pct;
+        drivingGoals = ['Protect my take-home pay'];
+        minTHFlag = true;
+      }
+    }
+
+    // Other goals
+    selectedGoals.forEach(function(id) {
+      if (id === 'min_takehome') return;
+      var goal = GOALS.find(function(g) { return g.id === id; });
+      if (!goal) return;
+      var needed = goal.calc(salary, empPct);
+      var empNeeded = Math.max(0, needed - salary * empPct / 100);
+      var pctNeeded = Math.ceil((empNeeded / salary) * 100);
       if (pctNeeded > maxNeeded) {
         maxNeeded = pctNeeded;
         drivingGoals = [goal.title];
+        minTHFlag = false;
       } else if (pctNeeded === maxNeeded) {
         drivingGoals.push(goal.title);
       }
     });
 
-    // Cap at annual allowance
-    const annualAllowancePct = Math.floor((60000 / salary) * 100);
-    const cappedPct = Math.min(maxNeeded, annualAllowancePct);
+    var annualAllowancePct = Math.floor((60000 / salary) * 100);
+    var cappedPct = Math.min(maxNeeded, annualAllowancePct);
 
-    // Write back to targetContrib
     document.getElementById('targetContrib').value = cappedPct;
 
-    const tags = Array.from(selectedGoals).map(id => {
-      const g = GOALS.find(g => g.id === id);
-      return `<span class="optimise-goal-tag">✓ ${g.title}</span>`;
+    // Projected take-home at this contribution
+    var projTaxable = salary - (salary * cappedPct / 100);
+    var projTax = projTaxable <= 12570 ? 0
+      : projTaxable <= 50270 ? (projTaxable - 12570) * 0.2
+      : (50270 - 12570) * 0.2 + (projTaxable - 50270) * 0.4;
+    var projNI = projTaxable <= 12570 ? 0
+      : Math.min(projTaxable - 12570, 50270 - 12570) * 0.08
+      + Math.max(0, projTaxable - 50270) * 0.02;
+    var projMonthlyTH = (projTaxable - projTax - projNI) / 12;
+    var belowFloor = minTH > 0 && projMonthlyTH < minTH && !minTHFlag;
+
+    var tags = Array.from(selectedGoals).map(function(id) {
+      var g = GOALS.find(function(g) { return g.id === id; });
+      return g ? '<span class="optimise-goal-tag">\u2713 ' + g.title + '</span>' : '';
     }).join('');
 
+    var floorWarning = belowFloor
+      ? '<div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:6px;padding:0.6rem 0.85rem;margin-top:0.6rem;font-size:0.78rem;color:#fbbf24;">'
+        + '\u26a0 This contribution would leave you with <strong>\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>'
+        + ' \u2014 below your \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month floor.'
+        + ' Consider reducing your goals or adjusting your minimum.'
+        + '</div>'
+      : '';
+
+    var mainMsg = minTHFlag
+      ? 'This is the highest contribution that keeps your take-home above \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month via salary sacrifice. Your estimated take-home: <strong style="color:rgba(255,255,255,0.8)">\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>.'
+      : 'This is the minimum employee contribution needed to achieve all your selected goals via salary sacrifice.';
+
     resultBox.style.display = 'block';
-    resultBox.innerHTML = `<div class="optimise-result-box">
-      <div class="or-title">Recommended contribution: <strong style="font-size:1.3rem;">${cappedPct}%</strong> &nbsp;<span style="font-size:0.8rem;color:rgba(255,255,255,0.45)">(${fmt(salary * cappedPct / 100)}/yr)</span></div>
-      <div style="margin-bottom:0.6rem;">${tags}</div>
-      <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;">This is the minimum employee contribution needed to achieve all your selected goals via salary sacrifice. The calculations on the next steps will use this figure.</p>
-    </div>`;
+    resultBox.innerHTML = '<div class="optimise-result-box">'
+      + '<div class="or-title">Recommended contribution: <strong style="font-size:1.3rem;">' + cappedPct + '%</strong>'
+      + ' &nbsp;<span style="font-size:0.8rem;color:rgba(255,255,255,0.45)">(' + fmt(salary * cappedPct / 100) + '/yr)</span></div>'
+      + '<div style="margin-bottom:0.6rem;">' + tags + '</div>'
+      + '<p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;">' + mainMsg + '</p>'
+      + floorWarning
+      + '</div>';
   }
 
   function syncManualTarget() {
@@ -1943,4 +2116,135 @@
     }
   })();
 
+
+  // ── PDF REPORT ─────────────────────────────────────────────────────────────
+  function loadJsPDF(cb) {
+    if (window.jspdf) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+
+  function generateReport() {
+    loadJsPDF(function() {
+      var doc = new window.jspdf.jsPDF();
+      var navy = [15,31,56], teal = [13,148,136], white = [255,255,255], grey = [74,85,104], light = [245,245,248];
+
+      // Inputs
+      var salary = parseFloat(document.getElementById('grossSalary').value) || 0;
+      var empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
+      var curPct = parseFloat(document.getElementById('employeeContrib').value) || 0;
+      var adjSlider = document.getElementById('adjContribPct');
+      var adjPct = adjSlider ? parseFloat(adjSlider.value) : (parseFloat(document.getElementById('targetContrib').value) || 0);
+      var years = parseInt(document.getElementById('yearsToRetire').value) || 25;
+      var isSS = state && state.method !== 'personal';
+      var method = isSS ? 'Salary Sacrifice' : 'Personal Contribution';
+
+      var curPension = salary * curPct / 100;
+      var adjPension = salary * adjPct / 100;
+      var empPension = salary * empPct / 100;
+      var curCalc = calcTakeHome(salary, curPension);
+      var adjCalc = calcTakeHome(salary, adjPension);
+      var curMonthly = curCalc.takeHome / 12;
+      var adjMonthly = adjCalc.takeHome / 12;
+      var diff = adjMonthly - curMonthly;
+      var totalPension = adjPension + empPension;
+      var growthRate = 0.04;
+      var potVal = Math.round(totalPension * ((Math.pow(1 + growthRate, years) - 1) / growthRate));
+
+      function fmtN(n) { return '\u00a3' + Math.round(n).toLocaleString('en-GB'); }
+
+      // ── Header ────────────────────────────────────────────────────────────
+      doc.setFillColor(...navy); doc.rect(0, 0, 210, 28, 'F');
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(16); doc.setTextColor(...white);
+      doc.text('MyPay', 14, 14);
+      doc.setFont('helvetica', 'normal'); doc.text('Picture', 33, 14);
+      doc.setFontSize(8); doc.setTextColor(180, 180, 180);
+      doc.text('MyPayOptimiser Report', 14, 22);
+      doc.text('Generated ' + new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'}), 196, 22, {align:'right'});
+
+      var y = 36;
+
+      // ── Title ─────────────────────────────────────────────────────────────
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.setTextColor(...navy);
+      doc.text('Your Pay Optimisation Summary', 14, y); y += 10;
+
+      // ── Section helper ─────────────────────────────────────────────────────
+      function section(title, rows, accent) {
+        accent = accent || navy;
+        doc.setFillColor(...accent); doc.rect(14, y, 182, 7, 'F');
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(...white);
+        doc.text(title.toUpperCase(), 17, y + 5); y += 11;
+        rows.forEach(function(row, i) {
+          if (i % 2 === 0) { doc.setFillColor(...light); doc.rect(14, y-3, 182, 8, 'F'); }
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(...grey);
+          doc.text(row[0], 17, y + 2);
+          doc.setFont('helvetica', 'bold'); doc.setTextColor(...navy);
+          if (row[2]) { // three-col (label, now, new)
+            doc.text(row[1], 120, y + 2, {align:'right'});
+            doc.setTextColor(...teal);
+            doc.text(row[2], 193, y + 2, {align:'right'});
+          } else {
+            doc.text(row[1], 193, y + 2, {align:'right'});
+          }
+          y += 8;
+        });
+        y += 4;
+      }
+
+      // ── Now vs New comparison ─────────────────────────────────────────────
+      // Column headers
+      doc.setFontSize(8); doc.setTextColor(...grey);
+      doc.text('Now (' + curPct + '%)', 120, y, {align:'right'});
+      doc.setTextColor(...teal);
+      doc.text('New (' + adjPct + '%)', 193, y, {align:'right'});
+      y += 4;
+
+      section('Your Pay & Contributions', [
+        ['Your pension contribution', fmtN(curPension/12)+'/mo', fmtN(adjPension/12)+'/mo'],
+        ['Employer contribution', fmtN(empPension/12)+'/mo', fmtN(empPension/12)+'/mo'],
+        ['Total into pension', fmtN((curPension+empPension)/12)+'/mo', fmtN((adjPension+empPension)/12)+'/mo'],
+        ['Contribution method', method, method],
+      ], navy);
+
+      section('Take-Home Impact', [
+        ['Income tax', fmtN(curCalc.tax/12)+'/mo', fmtN(adjCalc.tax/12)+'/mo'],
+        ['National Insurance', fmtN(curCalc.ni/12)+'/mo', fmtN(adjCalc.ni/12)+'/mo'],
+        ['Monthly take-home', fmtN(curMonthly), fmtN(adjMonthly)],
+        ['Annual take-home', fmtN(curCalc.takeHome), fmtN(adjCalc.takeHome)],
+        ['Monthly change', '', (diff >= 0 ? '+' : '') + fmtN(diff) + '/mo'],
+      ], teal);
+
+      section('Illustrative Pot Projection', [
+        ['Years to retirement', String(years) + ' years', String(years) + ' years'],
+        ['Annual growth rate assumed', '4%', '4%'],
+        ['Estimated pot at retirement', '', fmtN(potVal)],
+        ['Annual allowance', '\u00a360,000', '\u00a360,000'],
+        ['Total contributions vs allowance', fmtN(curPension+empPension)+'/yr', fmtN(totalPension)+'/yr'],
+      ], [80, 80, 100]);
+
+      // ── Disclaimer ────────────────────────────────────────────────────────
+      var ph = doc.internal.pageSize.height;
+      doc.setFillColor(...light); doc.rect(0, ph-18, 210, 18, 'F');
+      doc.setFont('helvetica', 'italic'); doc.setFontSize(7); doc.setTextColor(120,120,140);
+      doc.text('Illustrative only \u2014 not financial advice. Figures based on 2024/25 UK tax rates. Speak to a qualified financial adviser before making changes.', 14, ph-10);
+      doc.text('mypaypicture.com', 196, ph-4, {align:'right'});
+
+      doc.save('MyPayPicture-PayOptimiser-Report.pdf');
+    });
+  }
+
+
 </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.log('SW registration failed:', err);
+      });
+    });
+  }
+</script>
+</body>
+</html>

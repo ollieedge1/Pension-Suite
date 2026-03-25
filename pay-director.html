@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f1f38">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MyPayPicture">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
 <title>MyPayDirector — MyPayPicture</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -475,7 +482,7 @@
 </header>
 
 <div class="hero">
-  <h1>What's the most<br><em>tax-efficient</em> way to<br>pay yourself?</h1>
+  <h1>Running a limited company?<br><em>Be smart with your pay.</em></h1>
   <p>Find the optimal salary and dividend split for your limited company — and see exactly what you take home.</p>
 </div>
 
@@ -1307,6 +1314,16 @@ const STRATEGIES = [
   }
 
   function chatChip(el) { document.getElementById('chatInput').value = el.textContent; chatSend(); }
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) { console.log('SW registered'); })
+        .catch(function(err) { console.log('SW registration failed:', err); });
+    });
+  }
 </script>
 </body>
 </html>

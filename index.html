@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f1f38">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MyPayPicture">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
 <title>MyPayPicture — See your complete financial picture</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -243,25 +250,25 @@
       <a class="tool-card c-teal" href="pay-optimiser.html">
         <span class="tool-icon">&#128200;</span>
         <div class="tool-name">MyPayOptimiser</div>
-        <p class="tool-tagline">Find your ideal pension contribution and maximise take-home pay through salary sacrifice.</p>
+        <p class="tool-tagline">Optimising your pension? We'll show you exactly what to contribute and how much tax you can save.</p>
         <div class="tool-cta">Open MyPayOptimiser <span class="cta-arrow">&#8594;</span></div>
       </a>
       <a class="tool-card c-gold" href="pension-reclaim.html">
         <span class="tool-icon">&#128176;</span>
         <div class="tool-name">MyPensionReclaim</div>
-        <p class="tool-tagline">Missed salary sacrifice on your bonus? Recover the tax through a personal pension contribution.</p>
+        <p class="tool-tagline">Missed salary sacrifice on a bonus? You can still reclaim the tax through your pension.</p>
         <div class="tool-cta">Open MyPensionReclaim <span class="cta-arrow">&#8594;</span></div>
       </a>
       <a class="tool-card c-amber" href="pension-topup.html">
         <span class="tool-icon">&#10133;</span>
         <div class="tool-name">MyPensionTop-Up</div>
-        <p class="tool-tagline">Make Additional Voluntary Contributions from net pay and claim your full tax relief.</p>
+        <p class="tool-tagline">Topping up your pension? The government covers part of the cost through tax relief.</p>
         <div class="tool-cta">Open MyPensionTop-Up <span class="cta-arrow">&#8594;</span></div>
       </a>
       <a class="tool-card c-rose" href="family-benefits.html">
         <span class="tool-icon">&#128106;</span>
         <div class="tool-name">MyFamily&amp;Benefits</div>
-        <p class="tool-tagline">Child Benefit &amp; Tax-Free Childcare &#8212; see what you&#39;re losing and how pension contributions can help.</p>
+        <p class="tool-tagline">Paying the Child Benefit charge? See how to legally reduce or eliminate it.</p>
         <div class="tool-cta">Open MyFamily&amp;Benefits <span class="cta-arrow">&#8594;</span></div>
       </a>
     </div>
@@ -273,7 +280,7 @@
       <a class="tool-card c-indigo" href="pay-director.html">
         <span class="tool-icon">&#127962;</span>
         <div class="tool-name">MyPayDirector</div>
-        <p class="tool-tagline">Optimise your salary and dividend split, model corporation tax, and supercharge your pension with company contributions.</p>
+        <p class="tool-tagline">Running a limited company? Find the smartest way to pay yourself and keep more of what you earn.</p>
         <div class="tool-cta">Open MyPayDirector <span class="cta-arrow">&#8594;</span></div>
       </a>
     </div>
@@ -285,7 +292,7 @@
       <a class="tool-card c-stone" href="retirement-helper.html">
         <span class="tool-icon">&#127749;</span>
         <div class="tool-name">MyRetirementHelper</div>
-        <p class="tool-tagline">State Pension, drawdown vs annuity, tax-efficient withdrawals, sustainability modelling and Retirement Living Standards.</p>
+        <p class="tool-tagline">Near or at retirement? See where you stand, how long your money lasts, and what income to expect.</p>
         <div class="tool-cta">Open MyRetirementHelper <span class="cta-arrow">&#8594;</span></div>
       </a>
     </div>
@@ -412,6 +419,16 @@
   function chatChip(el) {
     document.getElementById('chatInput').value = el.textContent;
     chatSend();
+  }
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) { console.log('SW registered'); })
+        .catch(function(err) { console.log('SW registration failed:', err); });
+    });
   }
 </script>
 </body>

@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f1f38">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MyPayPicture">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
 <title>MyPensionTop-Up — MyPayPicture</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -321,7 +328,7 @@
 </header>
 
 <div class="hero">
-  <h1>Top up your pension.<br><em>The taxman pays part.</em></h1>
+  <h1>Topping up your pension?<br><em>The government helps pay for it.</em></h1>
   <p>Make additional voluntary contributions from your take-home pay and claim back up to 45% in tax relief.</p>
 </div>
 
@@ -867,4 +874,103 @@
     }
   })();
 
+
+  function loadJsPDF(cb) {
+    if (window.jspdf) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload = cb; document.head.appendChild(s);
+  }
+
+  function generateReport() {
+    loadJsPDF(function() {
+      var doc = new window.jspdf.jsPDF();
+      var navy = [15,31,56], accent = [13,148,136], white = [255,255,255], grey = [74,85,104], light = [245,245,248];
+
+      // Header
+      doc.setFillColor(...navy); doc.rect(0,0,210,28,'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.setTextColor(...white);
+      doc.text('MyPay',14,14);
+      doc.setFont('helvetica','normal'); doc.text('Picture',33,14);
+      doc.setFontSize(8); doc.setTextColor(180,180,180);
+      doc.text('MyPensionTop-Up Report', 14, 22);
+      doc.text('Generated ' + new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}), 196, 22, {align:'right'});
+
+      function fmtN(n) { return '\u00a3' + Math.round(n).toLocaleString('en-GB'); }
+
+      function section(title, rows) {
+        var y = doc.previousAutoTable ? doc.previousAutoTable.finalY + 8 : 36;
+        if (!doc._sectionY) doc._sectionY = 36;
+        var sy = doc._sectionY;
+        doc.setFillColor(...accent); doc.rect(14,sy,182,7,'F');
+        doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...white);
+        doc.text(title.toUpperCase(), 17, sy+5); sy += 11;
+        rows.forEach(function(row,i) {
+          if (i%2===0) { doc.setFillColor(...light); doc.rect(14,sy-3,182,8,'F'); }
+          doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...grey);
+          doc.text(row[0], 17, sy+2);
+          doc.setFont('helvetica','bold'); doc.setTextColor(...navy);
+          doc.text(row[1], 193, sy+2, {align:'right'});
+          sy += 8;
+        });
+        doc._sectionY = sy + 4;
+      }
+
+      
+      var salary = parseFloat(document.getElementById('salary') && document.getElementById('salary').value) || 0;
+      var contrib = parseFloat(document.getElementById('contribution') && document.getElementById('contribution').value) || 0;
+      var existing = parseFloat(document.getElementById('existingContribs') && document.getElementById('existingContribs').value) || 0;
+      var gross = contrib / 0.8;
+      var basicRelief = gross - contrib;
+      var isHigher = salary > 50270;
+      var higherRelief = isHigher ? gross * 0.2 : 0;
+
+      doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(...navy);
+      doc.text('Pension Top-Up — Tax Relief Summary', 14, 36);
+      doc._sectionY = 46;
+
+      section('Your Contribution', [
+        ['Annual salary', fmtN(salary)],
+        ['Tax band', isHigher ? 'Higher rate (40%)' : 'Basic rate (20%)'],
+        ['You contribute (net)', fmtN(contrib)],
+        ['Basic rate relief added by provider', fmtN(basicRelief)],
+        ['Gross pension contribution', fmtN(gross)],
+      ]);
+      section('Tax Relief', [
+        ['Basic rate relief (auto-claimed)', fmtN(basicRelief)],
+        ['Higher rate relief via Self Assessment', fmtN(higherRelief)],
+        ['Total relief', fmtN(basicRelief + higherRelief)],
+        ['Your effective cost', fmtN(contrib - higherRelief)],
+      ]);
+      section('Annual Allowance', [
+        ['Existing contributions this year', fmtN(existing)],
+        ['This contribution (gross)', fmtN(gross)],
+        ['Total', fmtN(existing + gross)],
+        ['Annual allowance', '\u00a360,000'],
+        ['Remaining headroom', fmtN(Math.max(0, 60000 - existing - gross))],
+      ]);
+
+
+      // Disclaimer
+      var ph = doc.internal.pageSize.height;
+      doc.setFillColor(...light); doc.rect(0,ph-18,210,18,'F');
+      doc.setFont('helvetica','italic'); doc.setFontSize(7); doc.setTextColor(120,120,140);
+      doc.text('Illustrative only \u2014 not financial advice. Based on 2024/25 UK tax rates. Speak to a qualified financial adviser before making changes.', 14, ph-10);
+      doc.text('mypaypicture.com', 196, ph-4, {align:'right'});
+
+      doc.save('MyPayPicture-MyPensionTop-Up-Report.pdf');
+    });
+  }
+
 </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.log('SW registration failed:', err);
+      });
+    });
+  }
+</script>
+</body>
+</html>
