@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f1f38">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Privacy Policy — MyPayPicture</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f38; --stone: #6b7280; --stone-light: #9ca3af;
+    --stone-pale: #f3f4f6; --cream: #f7f5f2; --slate: #4a5568;
+    --slate-light: #718096; --green: #40916c; --white: #ffffff;
+    --border: rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); }
+
+  header { background: var(--navy); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; text-decoration: none; }
+  .logo em { font-style: italic; color: var(--stone-light); }
+  .back-link { font-size: 0.82rem; color: rgba(255,255,255,0.5); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+  .back-link:hover { color: white; }
+
+  .hero { background: var(--navy); padding: 3rem 2rem 4rem; text-align: center; }
+  .hero-eyebrow { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.3); margin-bottom: 1rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: white; margin-bottom: 0.75rem; }
+  .hero p { color: rgba(255,255,255,0.45); font-size: 0.88rem; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+  .last-updated { font-size: 0.78rem; color: var(--stone); margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin: 2.5rem 0 0.75rem; }
+  h3 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin: 1.25rem 0 0.4rem; }
+  p { font-size: 0.92rem; color: var(--slate); line-height: 1.8; margin-bottom: 0.85rem; }
+  ul { padding-left: 1.25rem; margin-bottom: 0.85rem; }
+  ul li { font-size: 0.92rem; color: var(--slate); line-height: 1.8; margin-bottom: 0.3rem; }
+  a { color: var(--navy); }
+  strong { color: var(--navy); }
+
+  .section-box { background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+
+  .contact-box { background: var(--navy); border-radius: 12px; padding: 1.5rem; margin-top: 2.5rem; }
+  .contact-box h3 { font-family: 'Playfair Display', serif; color: white; font-size: 1rem; margin-bottom: 0.4rem; margin-top: 0; }
+  .contact-box p { color: rgba(255,255,255,0.5); font-size: 0.84rem; margin-bottom: 0.4rem; }
+  .contact-box a { color: white; }
+
+  .nav-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; }
+  .nav-link { font-size: 0.85rem; color: var(--stone); text-decoration: none; transition: color 0.2s; }
+  .nav-link:hover { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">MyPay<em>Picture</em></a>
+  <a href="index.html" class="back-link">&#8592; Back to tools</a>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p>How MyPayPicture handles your information</p>
+</div>
+
+<div class="container">
+
+  <div class="last-updated">Last updated: March 2026 &nbsp;&middot;&nbsp; Applies to mypaypicture.com and mypaypicture.co.uk</div>
+
+  <p>This Privacy Policy explains how MyPayPicture (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) collects, uses and protects information when you use our website and tools. We take your privacy seriously and have designed our tools to collect as little data as possible.</p>
+
+  <h2>1. Who we are</h2>
+  <div class="section-box">
+    <p>MyPayPicture is a UK personal finance tool suite operated by Ollie Edge. We are not currently incorporated as a limited company.</p>
+    <p><strong>Contact:</strong> <a href="mailto:hello@mypaypicture.com">hello@mypaypicture.com</a></p>
+    <p><strong>Website:</strong> mypaypicture.com</p>
+  </div>
+
+  <h2>2. What data we collect</h2>
+
+  <h3>Financial figures you enter into the tools</h3>
+  <p>The calculations in our tools (salary, pension contributions, tax figures, etc.) are processed entirely within your browser. <strong>We do not store, transmit, or retain any financial figures you enter.</strong> When you close the page, that data is gone.</p>
+
+  <h3>AI chat messages</h3>
+  <p>When you use the MyPayPicture Assistant chat feature, your messages are sent to our Cloudflare Worker backend, which forwards them to Anthropic's API (Claude) to generate a response. Messages are processed in real time and are not stored by us. Anthropic's own privacy policy applies to how they handle API requests — see <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a>.</p>
+
+  <h3>Email address (if you submit the lead form)</h3>
+  <p>If you voluntarily submit your email address via our lead capture form, that data is collected and stored by Tally.so on our behalf. We use it to send relevant information about MyPayPicture. You can request deletion at any time by emailing <a href="mailto:hello@mypaypicture.com">hello@mypaypicture.com</a>.</p>
+
+  <h3>Analytics data</h3>
+  <p>We use Google Analytics 4 to understand how people use our tools. This collects anonymised data including:</p>
+  <ul>
+    <li>Pages visited and time spent</li>
+    <li>Which tools are used and how far users progress</li>
+    <li>General location (country/region level only)</li>
+    <li>Device type and browser</li>
+    <li>Traffic source (how you found us)</li>
+  </ul>
+  <p>We do not use Google Analytics to collect any personally identifiable information. IP addresses are anonymised. You can opt out using the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-out Browser Add-on</a>.</p>
+
+  <h3>Payment data</h3>
+  <p>PDF report payments are processed by Stripe. We do not collect or store your card details — these are handled entirely by Stripe. See <a href="https://stripe.com/gb/privacy" target="_blank">stripe.com/gb/privacy</a> for their privacy policy.</p>
+
+  <h2>3. Legal basis for processing (UK GDPR)</h2>
+  <div class="section-box">
+    <ul>
+      <li><strong>Analytics:</strong> Legitimate interests — to understand how our tools are used and improve them</li>
+      <li><strong>Email (lead form):</strong> Consent — you explicitly submit your email address</li>
+      <li><strong>AI chat:</strong> Legitimate interests — to provide the service you have requested</li>
+    </ul>
+  </div>
+
+  <h2>4. Cookies</h2>
+  <p>We use the following cookies:</p>
+  <ul>
+    <li><strong>Google Analytics cookies</strong> (_ga, _ga_*) — analytics, expire after 2 years</li>
+    <li><strong>No advertising cookies</strong> — we do not run ads or use advertising cookies</li>
+    <li><strong>No tracking across other sites</strong> — we do not track you outside of mypaypicture.com</li>
+  </ul>
+  <p>By continuing to use our site you consent to these cookies. You can clear cookies at any time in your browser settings.</p>
+
+  <h2>5. Third-party services</h2>
+  <div class="section-box">
+    <ul>
+      <li><strong>Google Analytics 4</strong> — website analytics. <a href="https://policies.google.com/privacy" target="_blank">Privacy policy</a></li>
+      <li><strong>Anthropic (Claude API)</strong> — AI chat responses. <a href="https://www.anthropic.com/privacy" target="_blank">Privacy policy</a></li>
+      <li><strong>Cloudflare</strong> — API proxy and hosting. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Privacy policy</a></li>
+      <li><strong>Tally.so</strong> — email lead capture form. <a href="https://tally.so/privacy" target="_blank">Privacy policy</a></li>
+      <li><strong>Stripe</strong> — payment processing. <a href="https://stripe.com/gb/privacy" target="_blank">Privacy policy</a></li>
+      <li><strong>GitHub Pages</strong> — website hosting. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">Privacy policy</a></li>
+    </ul>
+  </div>
+
+  <h2>6. Your rights</h2>
+  <p>Under UK GDPR you have the right to:</p>
+  <ul>
+    <li><strong>Access</strong> the personal data we hold about you</li>
+    <li><strong>Rectification</strong> of inaccurate data</li>
+    <li><strong>Erasure</strong> of your data (&ldquo;right to be forgotten&rdquo;)</li>
+    <li><strong>Object</strong> to processing based on legitimate interests</li>
+    <li><strong>Withdraw consent</strong> at any time where consent is the legal basis</li>
+    <li><strong>Lodge a complaint</strong> with the ICO at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a></li>
+  </ul>
+  <p>To exercise any of these rights, email <a href="mailto:hello@mypaypicture.com">hello@mypaypicture.com</a>. We will respond within 30 days.</p>
+
+  <h2>7. Data retention</h2>
+  <ul>
+    <li><strong>Financial tool data:</strong> Not retained — processed in-browser only</li>
+    <li><strong>Email addresses:</strong> Retained until you request deletion</li>
+    <li><strong>Analytics data:</strong> Retained by Google Analytics for 14 months (default)</li>
+    <li><strong>Chat messages:</strong> Not retained by us</li>
+  </ul>
+
+  <h2>8. Security</h2>
+  <p>Our site is served over HTTPS. Financial calculations happen in your browser. Chat messages are transmitted to our Cloudflare Worker over encrypted connections. We do not store financial data on any server.</p>
+
+  <h2>9. Changes to this policy</h2>
+  <p>We may update this policy from time to time. The date at the top of this page shows when it was last updated. Continued use of the site after changes constitutes acceptance of the updated policy.</p>
+
+  <div class="contact-box">
+    <h3>Questions about your privacy?</h3>
+    <p>Email us at <a href="mailto:hello@mypaypicture.com">hello@mypaypicture.com</a> and we'll respond within 30 days.</p>
+    <p>You can also contact the UK Information Commissioner's Office at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a> if you have concerns about how we handle your data.</p>
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">&#8592; All tools</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="mailto:hello@mypaypicture.com" class="nav-link">Contact</a>
+  </div>
+
+</div>
+</body>
+</html>

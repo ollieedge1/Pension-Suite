@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f1f38">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>About — MyPayPicture</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f38; --stone: #6b7280; --stone-light: #9ca3af;
+    --stone-pale: #f3f4f6; --cream: #f7f5f2; --slate: #4a5568;
+    --slate-light: #718096; --green: #40916c; --white: #ffffff;
+    --gold: #c9a84c; --border: rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); }
+
+  header { background: var(--navy); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; text-decoration: none; }
+  .logo em { font-style: italic; color: var(--stone-light); }
+  .back-link { font-size: 0.82rem; color: rgba(255,255,255,0.5); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+  .back-link:hover { color: white; }
+
+  .hero { background: var(--navy); padding: 4rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.3); margin-bottom: 1rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: white; line-height: 1.15; margin-bottom: 1rem; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p { color: rgba(255,255,255,0.5); max-width: 480px; margin: 0 auto; line-height: 1.7; font-size: 0.95rem; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+  .section { margin-bottom: 3rem; }
+  .section-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--stone); font-weight: 700; margin-bottom: 1rem; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 1rem; line-height: 1.2; }
+  p { font-size: 0.95rem; color: var(--slate); line-height: 1.8; margin-bottom: 1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .founder-card { display: flex; gap: 1.75rem; align-items: flex-start; background: white; border-radius: 16px; padding: 2rem; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(15,31,56,0.05); margin-bottom: 2.5rem; }
+  .founder-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 100%); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--gold); }
+  .founder-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--navy); margin-bottom: 0.25rem; }
+  .founder-title { font-size: 0.8rem; color: var(--stone); margin-bottom: 0.75rem; }
+  .founder-bio { font-size: 0.88rem; color: var(--slate); line-height: 1.7; }
+
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+  @media (max-width: 560px) { .principles { grid-template-columns: 1fr; } .founder-card { flex-direction: column; } }
+  .principle { background: white; border-radius: 12px; padding: 1.25rem; border: 1px solid var(--border); }
+  .principle-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .principle-title { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+  .principle-desc { font-size: 0.8rem; color: var(--slate); line-height: 1.6; }
+
+  .disclaimer-box { background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; }
+  .disclaimer-box h3 { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .disclaimer-box p { font-size: 0.84rem; color: #92400e; line-height: 1.65; margin-bottom: 0.5rem; }
+
+  .contact-box { background: var(--navy); border-radius: 12px; padding: 1.75rem; text-align: center; }
+  .contact-box h3 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .contact-box p { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 1rem; }
+  .contact-email { color: white; font-weight: 600; font-size: 0.95rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; }
+  .contact-email:hover { border-color: white; }
+
+  .nav-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; }
+  .nav-link { font-size: 0.85rem; color: var(--stone); text-decoration: none; transition: color 0.2s; }
+  .nav-link:hover { color: var(--navy); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">MyPay<em>Picture</em></a>
+  <a href="index.html" class="back-link">&#8592; Back to tools</a>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">About MyPayPicture</div>
+  <h1>Built for people who<br><em>deserve clarity.</em></h1>
+  <p>UK personal finance is complicated. It shouldn't have to be. MyPayPicture exists to give everyone access to the kind of clear, honest financial insight that used to require an expensive adviser.</p>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="section-label">The founder</div>
+    <div class="founder-card">
+      <div class="founder-avatar">OE</div>
+      <div>
+        <div class="founder-name">Ollie Edge</div>
+        <div class="founder-title">Founder, MyPayPicture</div>
+        <div class="founder-bio">
+          I built MyPayPicture because I kept seeing smart, capable people making avoidable financial mistakes — not because they were careless, but because the information they needed was scattered, jargon-heavy, or locked behind a paywall.<br><br>
+          The tools on this site are the ones I wish had existed when I was trying to work out salary sacrifice, understand my pension, or figure out whether the Child Benefit charge applied to me. Plain numbers, plain English, no upsell.<br><br>
+          I'm not an IFA. I don't give personalised financial advice. What I do is build tools that help you understand your own situation clearly — so that when you do speak to an adviser, you arrive informed.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What we stand for</div>
+    <h2>Our principles</h2>
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-icon">&#128270;</div>
+        <div class="principle-title">Transparency</div>
+        <div class="principle-desc">Every calculation is explainable. We show you the numbers and the reasoning — not just an output.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">&#128274;</div>
+        <div class="principle-title">Privacy</div>
+        <div class="principle-desc">No data is stored on our servers. Your figures stay in your browser. We don't sell your information.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">&#9888;&#65039;</div>
+        <div class="principle-title">Honesty</div>
+        <div class="principle-desc">These are illustrative tools, not financial advice. We're clear about that on every page, not just in the footer.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-icon">&#127482;&#127472;</div>
+        <div class="principle-title">UK-focused</div>
+        <div class="principle-desc">Built specifically for the UK tax system. 2024/25 rates, HMRC rules, and real UK benchmarks throughout.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <div class="section-label">Important</div>
+    <div class="disclaimer-box">
+      <h3>&#9888; Not financial or tax advice</h3>
+      <p>MyPayPicture provides illustrative calculations based on 2024/25 UK tax rates and publicly available HMRC guidance. The tools are designed to help you understand your situation — not to replace professional advice.</p>
+      <p>MyPayPicture is not authorised or regulated by the Financial Conduct Authority (FCA). Nothing on this site constitutes personalised financial, tax or legal advice. Always consult a qualified financial adviser or accountant before making decisions about your pension, tax, or remuneration.</p>
+      <p>Calculations are based on standard UK rates and may not reflect your individual circumstances. We do our best to keep figures current but cannot guarantee accuracy at all times.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="contact-box">
+      <h3>Get in touch</h3>
+      <p>Questions, feedback, or partnership enquiries — we'd love to hear from you.</p>
+      <a href="mailto:hello@mypaypicture.com" class="contact-email">hello@mypaypicture.com</a>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">&#8592; All tools</a>
+    <a href="privacy.html" class="nav-link">Privacy Policy</a>
+    <a href="mailto:hello@mypaypicture.com" class="nav-link">Contact</a>
+  </div>
+
+</div>
+
+</body>
+</html>

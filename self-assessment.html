@@ -1037,7 +1037,7 @@
       var formatted = text.split('\n\n').map(function(p) {
         return p.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
       }).join('</p><p>');
-      bubble = '<p>'+formatted+'</p>';
+      bubble = '<p>'+formatted+' &nbsp;&middot;&nbsp; <a href="about.html" style="color:rgba(255,255,255,0.4);text-decoration:none;">About</a> &nbsp;&middot;&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,0.4);text-decoration:none;">Privacy</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@mypaypicture.com" style="color:rgba(255,255,255,0.4);text-decoration:none;">hello@mypaypicture.com</a></p>';
     }
     div.innerHTML = '<div class="msg-av">'+av+'</div><div class="msg-bub">'+bubble+'</div>';
     msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
