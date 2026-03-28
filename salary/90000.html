@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pension Calculator for £90,000 Salary — Take Home Pay with Pension Contributions 2025/26 | My Pay Picture</title>
+  <meta name="description" content="See exactly how pension contributions affect your take-home pay on a £90,000 salary. Compare 3%, 5%, 8%, 10%, 12%, 15% and 20% contribution rates. Free 2025/26 UK tax calculator.">
+  <meta name="keywords" content="pension calculator 90000 salary, take home pay 90000, salary sacrifice, UK tax calculator 2025/26, pension contributions">
+  <link rel="canonical" href="https://mypaypicture.com/salary/90000.html">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XY51DX80VL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XY51DX80VL');
+  </script>
+
+  <style>
+    :root {
+      --teal: #0d9488;
+      --navy: #0f1f38;
+      --light-gray: #f9fafb;
+      --text-gray: #6b7280;
+      --border-gray: #e5e7eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: white;
+    }
+
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-bottom: 3px solid var(--teal);
+    }
+
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #e0e7ff;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--navy);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .insight-card {
+      background: linear-gradient(135deg, var(--teal) 0%, #059669 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .insight-card p {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .insight-card strong {
+      font-size: 1.3rem;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: white;
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: var(--light-gray);
+      border-bottom: 2px solid var(--border-gray);
+    }
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .highlight-row {
+      background: #fef3c7;
+    }
+
+    .highlight-row td {
+      font-weight: 500;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 2rem;
+      background: var(--light-gray);
+      border-radius: 8px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--teal);
+      color: white;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s;
+      margin-bottom: 1rem;
+    }
+
+    .cta-button:hover {
+      background: #0d8476;
+    }
+
+    .explanation {
+      background: white;
+      padding: 1.5rem;
+      border-left: 4px solid var(--teal);
+      margin: 2rem 0;
+      border-radius: 4px;
+    }
+
+    .explanation p {
+      margin-bottom: 0.8rem;
+      color: var(--text-gray);
+      line-height: 1.7;
+    }
+
+    .adjacent-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .btn-prev, .btn-next {
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      background: var(--light-gray);
+      color: var(--navy);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .btn-prev:hover, .btn-next:hover {
+      background: var(--teal);
+      color: white;
+    }
+
+    .internal-links {
+      text-align: center;
+      padding: 2rem;
+      border-top: 2px solid var(--border-gray);
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+
+    .internal-links a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .internal-links a:hover {
+      color: var(--navy);
+      text-decoration: underline;
+    }
+
+    footer {
+      background: var(--navy);
+      color: white;
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .email-signup {
+      margin: 1.5rem 0;
+    }
+
+    .email-signup iframe {
+      max-width: 100%;
+    }
+
+    .footer-links {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-links a {
+      color: #e0e7ff;
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        padding: 0.6rem 0.5rem;
+      }
+
+      .adjacent-links {
+        flex-direction: column;
+      }
+
+      .btn-prev, .btn-next {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">My Pay Picture</a>
+      <span class="badge">Not financial advice</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Pension Calculator for £90,000 Salary</h1>
+      <p class="subtitle">How salary sacrifice pension contributions affect your take-home pay · 2025/26 tax year</p>
+    </div>
+
+    <div class="insight-card">
+      <p>On a £90,000 salary, every £1 you put into your pension only costs you <strong>-84p</strong> in take-home pay</p>
+      <small style="opacity: 0.9;">Based on 5% contribution with tax relief (2025/26 rates)</small>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Contribution %</th>
+          <th>Monthly Pension</th>
+          <th>Monthly Take-Home</th>
+          <th>Monthly Tax Saving</th>
+          <th>Monthly NI Saving</th>
+          <th>Effective Cost per £1</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr class="highlight-row">
+        <td><strong>0%</strong></td>
+        <td>£0</td>
+        <td>£5,229</td>
+        <td>£0</td>
+        <td>£0</td>
+        <td><strong>—</strong></td>
+      </tr>
+      <tr>
+        <td><strong>3%</strong></td>
+        <td>£225</td>
+        <td>£5,324</td>
+        <td>£90</td>
+        <td>£4</td>
+        <td><strong>-0.84p</strong></td>
+      </tr>
+      <tr>
+        <td><strong>5%</strong></td>
+        <td>£375</td>
+        <td>£5,387</td>
+        <td>£150</td>
+        <td>£7</td>
+        <td><strong>-0.84p</strong></td>
+      </tr>
+      <tr>
+        <td><strong>8%</strong></td>
+        <td>£600</td>
+        <td>£5,481</td>
+        <td>£240</td>
+        <td>£12</td>
+        <td><strong>-0.84p</strong></td>
+      </tr>
+      <tr>
+        <td><strong>10%</strong></td>
+        <td>£750</td>
+        <td>£5,544</td>
+        <td>£300</td>
+        <td>£15</td>
+        <td><strong>-0.84p</strong></td>
+      </tr>
+      <tr>
+        <td><strong>12%</strong></td>
+        <td>£900</td>
+        <td>£5,607</td>
+        <td>£360</td>
+        <td>£18</td>
+        <td><strong>-0.84p</strong></td>
+      </tr>
+      <tr>
+        <td><strong>15%</strong></td>
+        <td>£1,125</td>
+        <td>£5,702</td>
+        <td>£450</td>
+        <td>£22</td>
+        <td><strong>-0.84p</strong></td>
+      </tr>
+      <tr>
+        <td><strong>20%</strong></td>
+        <td>£1,500</td>
+        <td>£5,859</td>
+        <td>£600</td>
+        <td>£30</td>
+        <td><strong>-0.84p</strong></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="cta-section">
+      <h2 style="margin-bottom: 1rem;">Try the Full Calculator</h2>
+      <p style="margin-bottom: 1.5rem; color: var(--text-gray);">Get detailed breakdowns, tax projections, and personalized insights</p>
+      <a href="pension-optimiser.html?salary=90000" class="cta-button">Open Pension Optimizer</a>
+    </div>
+
+    <div class="explanation">
+      <h3 style="color: var(--navy); margin-bottom: 1rem;">How Salary Sacrifice Works</h3>
+      <p>When you contribute to your pension through salary sacrifice, your pension contribution is deducted from your gross salary <strong>before</strong> income tax and National Insurance are calculated. This means you pay less tax and NI, making your actual out-of-pocket cost lower than the percentage you contribute.</p>
+      <p>For example, on a £90,000 salary, a 5% contribution only costs -84p per £1 because of the combined tax and NI relief. Your employer may also match or exceed your contribution.</p>
+      <p>The figures above assume a 3% employer pension match, which is common in many schemes. Check your specific workplace pension for exact employer contribution details.</p>
+    </div>
+
+    <div class="adjacent-links">
+      <a href="80000.html" class="btn-prev">← £80,000 salary</a><a href="100000.html" class="btn-next">£100,000 salary →</a>
+    </div>
+
+    <div class="internal-links">
+      <p style="margin-bottom: 1rem; color: var(--navy); font-weight: 600;">See other salary calculators:</p>
+      <p><a href="20000.html">£20,000</a> · <a href="25000.html">£25,000</a> · <a href="30000.html">£30,000</a> · <a href="35000.html">£35,000</a> · <a href="40000.html">£40,000</a> · <a href="45000.html">£45,000</a> · <a href="50000.html">£50,000</a> · <a href="55000.html">£55,000</a> · <a href="60000.html">£60,000</a> · <a href="70000.html">£70,000</a> · <a href="80000.html">£80,000</a> · <a href="90000.html">£90,000</a> · <a href="100000.html">£100,000</a> · <a href="125000.html">£125,000</a> · <a href="150000.html">£150,000</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <h3 style="margin-bottom: 1rem;">Join thousands tracking their pension savings</h3>
+      <div class="email-signup">
+        <iframe src="https://tally.so/embed/zxZByE" width="100%" height="200" frameborder="0" marginheight="0" marginwidth="0" style="max-width:100%;border:none;border-radius:4px;"></iframe>
+      </div>
+      <div class="footer-links">
+        <a href="https://tally.so/r/VLV7pE">Send feedback</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="/terms">Terms of use</a>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #9ca3af;">© 2026 My Pay Picture. All rights reserved. Data provided for reference only, not financial advice.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "@id": "https://mypaypicture.com/salary/90000.html#faq-contribution",
+        "name": "How much pension should I contribute on a £90000 salary?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The optimal pension contribution depends on your personal circumstances. A common recommendation is 5-10% of your salary, which balances retirement savings with take-home income. At £90000, a 5% contribution costs you only -84p per £1 contributed due to tax relief."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "https://mypaypicture.com/salary/90000.html#faq-savings",
+        "name": "How much tax do I save with salary sacrifice pension contributions on a £90000 salary?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On a £90000 salary with 5% pension contributions, you save £1,800 annually in income tax and £90 in National Insurance. These savings are automatically applied when you use salary sacrifice."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "https://mypaypicture.com/salary/90000.html#faq-takehome",
+        "name": "What is my take-home pay on £90000 with 10% pension contribution?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With a 10% pension contribution (750 per month), your take-home pay is approximately £5,544 per month. Your employer typically also contributes 3% to your pension (£225 per month)."
+        }
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

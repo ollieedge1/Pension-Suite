@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Pension Calculator by Salary — Compare Take-Home Pay at Every Income Level | My Pay Picture</title>
+  <meta name="description" content="Free UK pension calculator for every salary level. See how pension contributions affect your take-home pay, with 2025/26 tax relief calculations. Compare salary bands from £20,000 to £150,000.">
+  <meta name="keywords" content="UK pension calculator, salary calculator, pension contributions, take home pay, salary sacrifice">
+  <link rel="canonical" href="https://mypaypicture.com/salary/">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XY51DX80VL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XY51DX80VL');
+  </script>
+
+  <style>
+    :root {
+      --teal: #0d9488;
+      --navy: #0f1f38;
+      --light-gray: #f9fafb;
+      --text-gray: #6b7280;
+      --border-gray: #e5e7eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: white;
+    }
+
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-bottom: 3px solid var(--teal);
+    }
+
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #e0e7ff;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--navy);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-gray);
+    }
+
+    .salary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .salary-block {
+      background: var(--light-gray);
+      border: 2px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .salary-block:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .salary-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .salary-block p {
+      color: var(--text-gray);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .block-link {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .block-link:hover {
+      color: var(--navy);
+    }
+
+    footer {
+      background: var(--navy);
+      color: white;
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-links a {
+      color: #e0e7ff;
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .salary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">My Pay Picture</a>
+      <span class="badge">Free calculator</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Pension Calculator by Salary</h1>
+      <p class="subtitle">See exactly how pension contributions affect your take-home pay · Free 2025/26 UK tax relief calculator</p>
+    </div>
+
+    <div class="salary-grid">
+    <div class="salary-block">
+      <h3>£20,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="20000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£25,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="25000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£30,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="30000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£35,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="35000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£40,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="40000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£45,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="45000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£50,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="50000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£55,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="55000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£60,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="60000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£70,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="70000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£80,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="80000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£90,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="90000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£100,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="100000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£125,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="125000.html" class="block-link">View calculator →</a>
+    </div>
+    <div class="salary-block">
+      <h3>£150,000</h3>
+      <p>Pension contributions, take-home pay, tax relief</p>
+      <a href="150000.html" class="block-link">View calculator →</a>
+    </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2026 My Pay Picture. All rights reserved. Data provided for reference only, not financial advice.</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XY51DX80VL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XY51DX80VL');
+  </script>
+</body>
+</html>
