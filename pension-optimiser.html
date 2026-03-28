@@ -649,6 +649,59 @@
     flex-shrink: 0;
   }
 
+  /* ── Visual comparison bars ────────────────────────────── */
+  /* ── The Deal card ────────────────────────────────────────── */
+  .deal-card {
+    display: flex; gap: 1rem; margin: 1.25rem 0;
+    flex-wrap: wrap;
+  }
+  .deal-half {
+    flex: 1 1 140px;
+    padding: 1.1rem 1rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .deal-half.cost {
+    background: rgba(180,83,9,0.06);
+    border: 1px solid rgba(180,83,9,0.15);
+  }
+  .deal-half.gain {
+    background: rgba(13,148,136,0.06);
+    border: 1px solid rgba(13,148,136,0.15);
+  }
+  .deal-half .deal-label {
+    font-size: 0.78rem; font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+  .deal-half.cost .deal-label { color: #b45309; }
+  .deal-half.gain .deal-label { color: var(--teal); }
+  .deal-half .deal-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.65rem; font-weight: 700; line-height: 1.15;
+  }
+  .deal-half.cost .deal-amount { color: #b45309; }
+  .deal-half.gain .deal-amount { color: var(--teal); }
+  .deal-half .deal-sub {
+    font-size: 0.7rem; color: var(--slate-light);
+    margin-top: 0.3rem;
+  }
+  .deal-verdict {
+    text-align: center; font-size: 0.82rem;
+    color: var(--teal); font-weight: 600;
+    margin: -0.25rem 0 0.5rem;
+  }
+  .deal-verdict .ratio {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+  }
+  .allowance-hint {
+    font-size: 0.75rem; color: var(--slate-light);
+    text-align: center; margin-top: 0.4rem;
+    padding: 0.4rem 0.6rem;
+    background: rgba(13,148,136,0.05);
+    border-radius: 6px;
+  }
+
   /* PROJECTION */
   .projection-canvas-wrap {
     margin: 1.5rem 0;
@@ -1522,15 +1575,16 @@
       </div>
       <div class="rec-slider-row">
         <button class="rec-nudge" onclick="nudgeContrib(-1)">&#8722;</button>
-        <input type="range" id="adjContribPct" min="0" max="30" step="1" value="5" oninput="renderStep2()">
+        <input type="range" id="adjContribPct" min="0" max="100" step="1" value="5" oninput="renderStep2()">
         <button class="rec-nudge" onclick="nudgeContrib(1)">+</button>
       </div>
       <div class="rec-slider-hints">
         <span>0%</span>
         <span id="adjSalaryDisplay" style="color:var(--teal); font-weight:600;"></span>
-        <span>30%</span>
+        <span id="adjMaxHint">100%</span>
       </div>
       <button class="reset-btn" onclick="resetContribution()" id="resetBtn" style="display:none;">&#8634; Reset to recommended</button>
+      <div id="allowanceHint" class="allowance-hint" style="display:none;"></div>
     </div>
 
     <!-- LIVE IMPACT GRID -->
@@ -1866,6 +1920,19 @@
     if (adjSalary) adjSalary.textContent = fmt(salary * adjPct / 100) + '/yr into pension';
     if (resetBtn) resetBtn.style.display = isRec ? 'none' : 'inline-flex';
 
+    // Annual allowance hint
+    var hint = document.getElementById('allowanceHint');
+    if (hint && adjSlider) {
+      var sliderMax = parseInt(adjSlider.max) || 100;
+      if (adjPct >= sliderMax) {
+        var allowance = salary > 260000 ? Math.max(10000, 60000 - Math.floor((salary - 260000) / 2)) : 60000;
+        hint.innerHTML = 'Capped at ' + adjPct + '% because your annual allowance is ' + fmt(allowance) + '. Contributing above this triggers a tax charge.';
+        hint.style.display = 'block';
+      } else {
+        hint.style.display = 'none';
+      }
+    }
+
     var curPension = salary * curPct / 100;
     var adjPension = salary * adjPct / 100;
     var effectiveEmpPct = getEffectiveEmployerContrib(adjPct);
@@ -1891,40 +1958,35 @@
     var summaryHtml = '';
     if (adjPct > curPct) {
       summaryHtml = '<div class="plain-summary">' +
-        '<p>By contributing ' + adjPct + '% instead of ' + curPct + '%, you\u2019d put an extra <strong>' + fmt(Math.max(0, grossExtra)/12) + '/month</strong> into your pension — but your take-home only drops by <strong>' + fmt(realCost) + '/month</strong>, because you pay less tax.' +
-        (empPension > curEmpPension ? ' Plus, your employer adds ' + fmt(empPension/12) + '/month on top.' : '') +
-        '</p></div>';
+        '<p>Salary sacrifice means you pay less tax, so more reaches your pension for less cost to you.</p></div>';
     } else if (adjPct === curPct) {
-      summaryHtml = '<div class="plain-summary"><p>This is your current setup — try moving the slider above to see what happens if you contribute more.</p></div>';
+      summaryHtml = '<div class="plain-summary"><p>This is your current setup — try moving the slider to see what changes.</p></div>';
     } else {
-      summaryHtml = '<div class="plain-summary"><p>At ' + adjPct + '%, you\u2019d take home ' + fmt(realCost) + '/month more, but ' + fmt(Math.abs(grossExtra)/12) + '/month less would go into your pension.</p></div>';
+      summaryHtml = '<div class="plain-summary"><p>At ' + adjPct + '%, more goes into your pocket, less into your pension.</p></div>';
     }
 
-    // ── Result boxes ──────────────────────────────────────────────────────
-    var diffCls = diff < -50 ? 'warn' : diff > 50 ? 'good' : 'highlight';
-    var boxesHtml =
-      '<div class="results-grid" style="grid-template-columns:repeat(4,1fr);">' +
-        '<div class="result-box">' +
-          '<div class="r-label">Current Take-Home</div>' +
-          '<div class="r-amount">' + fmt(curMonthly) + '</div>' +
-          '<div class="r-sub">at ' + curPct + '% contribution / mo</div>' +
+    // ── The Deal — one glance, zero thinking ─────────────────────────
+    var costPerMonth = Math.abs(diff);
+    var pensionGainPerMonth = (adjPension + empPension - curPension - curEmpPension) / 12;
+    var ratio = costPerMonth > 0 ? (pensionGainPerMonth / costPerMonth).toFixed(1) : 0;
+
+    var boxesHtml = '';
+    if (adjPct !== curPct) {
+      boxesHtml =
+        '<div class="deal-card">' +
+          '<div class="deal-half cost">' +
+            '<div class="deal-label">Your take-home drops by</div>' +
+            '<div class="deal-amount">' + fmt(costPerMonth) + '</div>' +
+            '<div class="deal-sub">per month</div>' +
+          '</div>' +
+          '<div class="deal-half gain">' +
+            '<div class="deal-label">Your pension grows by</div>' +
+            '<div class="deal-amount">' + fmt(pensionGainPerMonth) + '</div>' +
+            '<div class="deal-sub">per month (you + employer)</div>' +
+          '</div>' +
         '</div>' +
-        '<div class="result-box teal">' +
-          '<div class="r-label">' + (isRec ? 'Recommended' : 'Adjusted') + ' Take-Home</div>' +
-          '<div class="r-amount">' + fmt(adjMonthly) + '</div>' +
-          '<div class="r-sub">at ' + adjPct + '% contribution / mo</div>' +
-        '</div>' +
-        '<div class="result-box ' + diffCls + '">' +
-          '<div class="r-label">Monthly Change</div>' +
-          '<div class="r-amount">' + (diff >= 0 ? '+' : '') + fmt(diff) + '</div>' +
-          '<div class="r-sub">' + (diff < 0 ? 'less per month' : 'more per month') + '</div>' +
-        '</div>' +
-        '<div class="result-box highlight">' +
-          '<div class="r-label">Total Into Pension</div>' +
-          '<div class="r-amount">' + fmt(totalPension / 12) + '</div>' +
-          '<div class="r-sub">' + totalPct + '% combined / mo</div>' +
-        '</div>' +
-      '</div>';
+        (costPerMonth > 1 && pensionGainPerMonth > 0 ? '<div class="deal-verdict">Every \u00a31 less in take-home puts \u00a3' + ratio + ' into your pension</div>' : '');
+    }
 
     // ── Detail table ──────────────────────────────────────────────────────
     var newLabel = isRec ? 'New (' + adjPct + '%)' : 'Adjusted (' + adjPct + '%)';
@@ -2025,7 +2087,8 @@
   function nudgeContrib(delta) {
     var slider = document.getElementById('adjContribPct');
     if (!slider) return;
-    slider.value = Math.min(30, Math.max(0, parseInt(slider.value) + delta));
+    var maxPct = parseInt(slider.max) || 100;
+    slider.value = Math.min(maxPct, Math.max(0, parseInt(slider.value) + delta));
     renderStep2();
   }
 
@@ -2255,9 +2318,17 @@
     }
 
     if (step === 2) {
-      const tgt = parseFloat(document.getElementById('targetContrib').value) || 5;
+      const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
+      const allowance = salary > 260000 ? Math.max(10000, 60000 - Math.floor((salary - 260000) / 2)) : 60000;
+      const maxPct = salary > 0 ? Math.min(100, Math.floor((allowance / salary) * 100)) : 100;
       const slider = document.getElementById('adjContribPct');
-      if (slider) slider.value = tgt;
+      if (slider) {
+        slider.max = maxPct;
+        const tgt = Math.min(parseFloat(document.getElementById('targetContrib').value) || 5, maxPct);
+        slider.value = tgt;
+      }
+      var maxHint = document.getElementById('adjMaxHint');
+      if (maxHint) maxHint.textContent = maxPct + '%';
       renderStep2();
     }
     if (step === 3) { renderStep2(); setTimeout(renderStep4, 50); }
