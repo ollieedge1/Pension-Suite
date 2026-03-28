@@ -67,10 +67,10 @@
   <meta name="theme-color" content="#0f1f38">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="MyPayPicture">
+  <meta name="apple-mobile-web-app-title" content="My Pay Picture">
   <link rel="apple-touch-icon" href="icon-192.png">
   <meta name="mobile-web-app-capable" content="yes">
-<title>Retirement Income Calculator UK 2025/26 — How Long Will Your Money Last? | MyPayPicture</title>
+<title>Retirement Income Calculator UK 2025/26 — How Long Will Your Money Last? | My Pay Picture</title>
 <meta name="description" content="Free UK retirement calculator. See your total income, model drawdown vs annuity, check sustainability, and plan tax-efficient withdrawals. No sign-up, no data stored.">
 <meta name="keywords" content="retirement calculator UK, pension drawdown calculator, retirement income calculator, how long will my pension last, annuity vs drawdown calculator, State Pension calculator, retirement planning calculator UK 2025">
 <link rel="canonical" href="https://mypaypicture.com/retirement-helper.html">
@@ -79,25 +79,25 @@
 <meta property="og:title" content="Retirement Income Calculator — How Long Will Your Money Last?">
 <meta property="og:description" content="Model your retirement income, compare drawdown vs annuity, and check if your money will last. Free, private calculator.">
 <meta property="og:image" content="https://mypaypicture.com/og-retirement.png">
-<meta property="og:site_name" content="MyPayPicture">
+<meta property="og:site_name" content="My Pay Picture">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Retirement Income Calculator — How Long Will Your Money Last?">
 <meta name="twitter:description" content="Model your retirement income, compare drawdown vs annuity, and check if your money will last. Free, private calculator.">
 <meta name="twitter:image" content="https://mypaypicture.com/og-retirement.png">
 <meta name="robots" content="index, follow">
-<meta name="author" content="MyPayPicture">
+<meta name="author" content="My Pay Picture">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "MyRetirementHelper — Retirement Income Calculator",
+  "name": "My Retirement Helper — Retirement Income Calculator",
   "url": "https://mypaypicture.com/retirement-helper.html",
   "description": "Free UK retirement income calculator. Model State Pension, drawdown, annuity, tax-efficient withdrawals, and sustainability.",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
-  "author": { "@type": "Organization", "name": "MyPayPicture", "url": "https://mypaypicture.com" },
+  "author": { "@type": "Organization", "name": "My Pay Picture", "url": "https://mypaypicture.com" },
   "inLanguage": "en-GB"
 }
 </script>
@@ -828,6 +828,12 @@
 
   /* ── Active tab text fix ────────────────────────────────── */
   .step-tab.active.completed { color: white !important; }
+  .email-capture { padding: 2.5rem 1rem; text-align: center; }
+  .ec-inner { max-width: 480px; margin: 0 auto; background: rgba(255,255,255,0.85); border-radius: 16px; padding: 2rem 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .ec-inner h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #1e293b; margin: 0 0 0.5rem; }
+  .ec-inner p { font-size: 0.88rem; color: #64748b; margin: 0 0 1.25rem; line-height: 1.5; }
+  .ec-btn { display: inline-block; padding: 0.7rem 2rem; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; color: #fff; background: var(--stone); cursor: pointer; transition: opacity 0.2s; }
+  .ec-btn:hover { opacity: 0.88; }
 </style>
 </head>
 <body>
@@ -835,17 +841,21 @@
 <header>
   <div class="app-switcher" id="appSwitcher">
     <div class="switcher-trigger" onclick="toggleSwitcher(event)">
-      <div class="app-name">MyRetirement<span>Helper</span></div>
+      <div class="app-name">My Retirement <span>Helper</span></div>
       <div class="chevron">▼</div>
     </div>
     <div class="switcher-dropdown">
       <div class="switcher-item" onclick="window.location.href='index.html'">
         <div class="switcher-item-icon" style="background:rgba(255,255,255,0.06);">&#127968;</div>
-        <div class="switcher-item-text"><div class="item-name" style="color:rgba(255,255,255,0.4);font-size:0.8rem;">&#8592; MyPayPicture</div></div>
+        <div class="switcher-item-text"><div class="item-name" style="color:rgba(255,255,255,0.4);font-size:0.8rem;">&#8592; My Pay Picture</div></div>
       </div>
       <div class="switcher-item current" style="cursor:default;">
         <div class="switcher-item-icon" style="background:rgba(107,114,128,0.15);">&#127749;</div>
-        <div class="switcher-item-text"><div class="item-name">MyRetirementHelper</div><div class="item-desc">Near or at retirement? See where you stand.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Retirement Helper</div><div class="item-desc">Near or at retirement? See where you stand.</div></div>
+      </div>
+      <div class="switcher-item" onclick="window.location.href='mortgage-vs-pension.html'">
+        <div class="switcher-item-icon" style="background:rgba(5,150,105,0.15);">&#127968;</div>
+        <div class="switcher-item-text"><div class="item-name">My Mortgage &amp; Pension</div><div class="item-desc">Build more wealth: mortgage or pension?</div></div>
       </div>
       <div class="switcher-group-label">&#8505; Info</div>
       <div class="switcher-item" onclick="window.location.href='about.html'">
@@ -860,7 +870,7 @@
 <div class="hero">
   <canvas id="heroCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
   <div style="position:relative;z-index:1;">
-    <div class="hero-eyebrow">MyPayPicture</div>
+    <div class="hero-eyebrow">My Pay Picture</div>
     <h1>Near or at retirement?<br><em>Let&#8217;s see where you stand.</em></h1>
     <p><span class="tooltip-wrap">State Pension<span class="tooltip-icon">?</span><span class="tooltip-bubble">Your government pension, based on your National Insurance record.</span></span>, <span class="tooltip-wrap">drawdown<span class="tooltip-icon">?</span><span class="tooltip-bubble">Taking income directly from your pension pot, with some tax benefits.</span></span>, sustainability and what income you can expect.</p>
   </div>
@@ -1299,12 +1309,12 @@
       </div>
     </div>
 <div class="chat-wrap">
-  <div class="chat-divider">Ask MyPayPicture Assistant</div>
+  <div class="chat-divider">Ask My Pay Picture Assistant</div>
   <div class="chat-box">
     <div class="chat-head">
       <div class="chat-head-icon">✦</div>
       <div>
-        <div class="chat-head-title">MyPayPicture Assistant</div>
+        <div class="chat-head-title">My Pay Picture Assistant</div>
         <div class="chat-head-sub">General information only · Not financial advice</div>
       </div>
     </div>
@@ -1319,6 +1329,16 @@
     <div class="chat-footer-note">General information only. Always consult a qualified financial adviser before making decisions.</div>
   </div>
 </div>
+
+<section class="email-capture">
+  <div class="ec-inner">
+    <h3>Get free tax-year updates</h3>
+    <p>Plain-English pension &amp; tax tips for UK taxpayers. No spam, unsubscribe anytime.</p>
+    <button class="ec-btn" data-tally-open="zxZByE" data-tally-layout="modal" data-tally-emoji-animation="none">
+      Subscribe free
+    </button>
+  </div>
+</section>
 
 <footer style="background:var(--navy); border-top:3px solid var(--stone); padding:2rem 1.5rem;">
   <div style="max-width:860px; margin:0 auto; display:flex; gap:1.25rem; align-items:flex-start;">
@@ -2030,7 +2050,7 @@
 
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
   const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
-  const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in MyPayPicture\'s Retirement Helper tool. This tool helps people approaching or in retirement understand State Pension, drawdown vs annuity, tax-efficient withdrawals, and pension sustainability.\n\nKey topics: State Pension (11973 per year full 2025/26, 35 qualifying years), drawdown, annuity, flexi-access, 25 percent tax-free cash (capped at 268275), Retirement Living Standards (Minimum 13400, Moderate 31700, Comfortable 43900 for one person), Pension Wise, MoneyHelper.\n\nRules:\n- UK English, 2025/26 rates\n- General information only, major irreversible decisions need regulated advice\n- Always recommend Pension Wise and a regulated financial adviser\n- Calm, clear, reassuring tone';
+  const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in My Pay Picture\'s Retirement Helper tool. This tool helps people approaching or in retirement understand State Pension, drawdown vs annuity, tax-efficient withdrawals, and pension sustainability.\n\nKey topics: State Pension (11973 per year full 2025/26, 35 qualifying years), drawdown, annuity, flexi-access, 25 percent tax-free cash (capped at 268275), Retirement Living Standards (Minimum 13400, Moderate 31700, Comfortable 43900 for one person), Pension Wise, MoneyHelper.\n\nRules:\n- UK English, 2025/26 rates\n- General information only, major irreversible decisions need regulated advice\n- Always recommend Pension Wise and a regulated financial adviser\n- Calm, clear, reassuring tone';
   let chatHist = [];
   let chatBusy = false;
 
@@ -2045,10 +2065,11 @@
       bubble = '<div class="chat-typing"><span></span><span></span><span></span></div>';
     } else {
       const toolLinks = {
-        'MyPensionOptimiser': 'pension-optimiser.html',
-        'MyPensionReclaim': 'pension-reclaim.html',
-        'MyPensionTop-Up': 'pension-topup.html',
-        'MyRetirementHelper': 'retirement-helper.html',
+        'My Pension Optimiser': 'pension-optimiser.html',
+        'My Pension Reclaim': 'pension-reclaim.html',
+        'My Pension Top-Up': 'pension-topup.html',
+        'My Retirement Helper': 'retirement-helper.html',
+        'My Mortgage & Pension': 'mortgage-vs-pension.html',
       };
       const formatted = text.split('\n\n').map(function(p) {
         var line = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -2189,7 +2210,7 @@
       doc.text('MyPay',14,14);
       doc.setFont('helvetica','normal'); doc.text('Picture',33,14);
       doc.setFontSize(8); doc.setTextColor(180,180,180);
-      doc.text('MyRetirementHelper Report', 14, 22);
+      doc.text('My Retirement Helper Report', 14, 22);
       doc.text('Generated ' + new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}), 196, 22, {align:'right'});
 
       function fmtN(n) { return '\u00a3' + Math.round(n).toLocaleString('en-GB'); }
@@ -2257,7 +2278,7 @@
       doc.text('Illustrative only \u2014 not financial advice. Based on 2025/26 UK tax rates. Speak to a qualified financial adviser before making changes.', 14, ph-10);
       doc.text('mypaypicture.com', 196, ph-4, {align:'right'});
 
-      doc.save('MyPayPicture-MyRetirementHelper-Report.pdf');
+      doc.save('MyPayPicture-RetirementHelper-Report.pdf');
     });
   }
 

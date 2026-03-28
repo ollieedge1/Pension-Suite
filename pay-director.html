@@ -67,10 +67,10 @@
   <meta name="theme-color" content="#0f1f38">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="MyPayPicture">
+  <meta name="apple-mobile-web-app-title" content="My Pay Picture">
   <link rel="apple-touch-icon" href="icon-192.png">
   <meta name="mobile-web-app-capable" content="yes">
-<title>Director Salary & Dividend Calculator UK 2025/26 — Optimal Pay Split | MyPayPicture</title>
+<title>Director Salary & Dividend Calculator UK 2025/26 — Optimal Pay Split | My Pay Picture</title>
 <meta name="description" content="Free salary vs dividend calculator for UK limited company directors. Find the most tax-efficient way to pay yourself in 2025/26. No sign-up, no data stored.">
 <meta name="keywords" content="director salary dividend calculator, salary vs dividend calculator UK, limited company pay calculator, director pay calculator 2025, optimal salary dividend split, how much salary should a director take, corporation tax calculator directors">
 <link rel="canonical" href="https://mypaypicture.com/pay-director.html">
@@ -79,25 +79,25 @@
 <meta property="og:title" content="Director Salary & Dividend Calculator — Optimal Pay Split">
 <meta property="og:description" content="Find the most tax-efficient salary-and-dividend split for your limited company. Free, private calculator.">
 <meta property="og:image" content="https://mypaypicture.com/og-director.png">
-<meta property="og:site_name" content="MyPayPicture">
+<meta property="og:site_name" content="My Pay Picture">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Director Salary & Dividend Calculator — Optimal Pay Split">
 <meta name="twitter:description" content="Find the most tax-efficient salary-and-dividend split for your limited company. Free, private calculator.">
 <meta name="twitter:image" content="https://mypaypicture.com/og-director.png">
 <meta name="robots" content="index, follow">
-<meta name="author" content="MyPayPicture">
+<meta name="author" content="My Pay Picture">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "MyPayDirector — Salary & Dividend Calculator",
+  "name": "My Pay Director — Salary & Dividend Calculator",
   "url": "https://mypaypicture.com/pay-director.html",
   "description": "Free UK salary vs dividend calculator for limited company directors. Find the optimal pay split to minimise tax.",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
-  "author": { "@type": "Organization", "name": "MyPayPicture", "url": "https://mypaypicture.com" },
+  "author": { "@type": "Organization", "name": "My Pay Picture", "url": "https://mypaypicture.com" },
   "inLanguage": "en-GB"
 }
 </script>
@@ -604,6 +604,12 @@
     .btn-row { justify-content: stretch; }
     .btn-primary, .btn-secondary { flex: 1; text-align: center; }
   }
+  .email-capture { padding: 2.5rem 1rem; text-align: center; }
+  .ec-inner { max-width: 480px; margin: 0 auto; background: rgba(255,255,255,0.85); border-radius: 16px; padding: 2rem 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .ec-inner h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #1e293b; margin: 0 0 0.5rem; }
+  .ec-inner p { font-size: 0.88rem; color: #64748b; margin: 0 0 1.25rem; line-height: 1.5; }
+  .ec-btn { display: inline-block; padding: 0.7rem 2rem; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; color: #fff; background: var(--indigo); cursor: pointer; transition: opacity 0.2s; }
+  .ec-btn:hover { opacity: 0.88; }
 </style>
 </head>
 <body>
@@ -611,17 +617,21 @@
 <header>
   <div class="app-switcher" id="appSwitcher">
     <div class="switcher-trigger" onclick="toggleSwitcher(event)">
-      <div class="app-name">MyPay<span>Director</span></div>
+      <div class="app-name">My Pay <span>Director</span></div>
       <div class="chevron">▼</div>
     </div>
     <div class="switcher-dropdown">
       <div class="switcher-item" onclick="window.location.href='index.html'">
         <div class="switcher-item-icon" style="background:rgba(255,255,255,0.06);">&#127968;</div>
-        <div class="switcher-item-text"><div class="item-name" style="color:rgba(255,255,255,0.4);font-size:0.8rem;">&#8592; MyPayPicture</div></div>
+        <div class="switcher-item-text"><div class="item-name" style="color:rgba(255,255,255,0.4);font-size:0.8rem;">&#8592; My Pay Picture</div></div>
       </div>
       <div class="switcher-item current" style="cursor:default;">
         <div class="switcher-item-icon" style="background:rgba(79,70,229,0.15);">&#127962;</div>
-        <div class="switcher-item-text"><div class="item-name">MyPayDirector</div><div class="item-desc">Be smart with your pay.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Pay Director</div><div class="item-desc">Be smart with your pay.</div></div>
+      </div>
+      <div class="switcher-item" onclick="window.location.href='mortgage-vs-pension.html'">
+        <div class="switcher-item-icon" style="background:rgba(5,150,105,0.15);">&#127968;</div>
+        <div class="switcher-item-text"><div class="item-name">My Mortgage &amp; Pension</div><div class="item-desc">Build more wealth: mortgage or pension?</div></div>
       </div>
       <div class="switcher-group-label">&#8505; Info</div>
       <div class="switcher-item" onclick="window.location.href='about.html'">
@@ -636,7 +646,7 @@
 <div class="hero">
   <canvas id="heroCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
   <div style="position:relative;z-index:1;">
-    <div class="hero-eyebrow">MyPayPicture</div>
+    <div class="hero-eyebrow">My Pay Picture</div>
     <h1>Running a limited company?<br><em>Be smart with your pay.</em></h1>
     <p>Find the optimal salary and dividend split for your limited company.</p>
   </div>
@@ -886,12 +896,12 @@
 </div>
 
 <div class="chat-wrap">
-  <div class="chat-divider">Ask MyPayPicture Assistant</div>
+  <div class="chat-divider">Ask My Pay Picture Assistant</div>
   <div class="chat-box">
     <div class="chat-head">
       <div class="chat-head-icon">✦</div>
       <div>
-        <div class="chat-head-title">MyPayPicture Assistant</div>
+        <div class="chat-head-title">My Pay Picture Assistant</div>
         <div class="chat-head-sub">General information only · Not financial advice</div>
       </div>
     </div>
@@ -912,6 +922,16 @@
     <div class="chat-footer-note">General information only. Always consult a qualified financial adviser or accountant before making decisions.</div>
   </div>
 </div>
+
+<section class="email-capture">
+  <div class="ec-inner">
+    <h3>Get free tax-year updates</h3>
+    <p>Plain-English pension &amp; tax tips for UK taxpayers. No spam, unsubscribe anytime.</p>
+    <button class="ec-btn" data-tally-open="zxZByE" data-tally-layout="modal" data-tally-emoji-animation="none">
+      Subscribe free
+    </button>
+  </div>
+</section>
 
 <footer style="background:var(--navy); border-top:3px solid var(--indigo); padding:2rem 1.5rem;">
   <div style="max-width:860px; margin:0 auto; display:flex; gap:1.25rem; align-items:flex-start;">
@@ -1378,7 +1398,7 @@ const STRATEGIES = [
       doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.setTextColor(...white);
       doc.text('MyPay',14,14); doc.setFont('helvetica','normal'); doc.text('Picture',33,14);
       doc.setFontSize(8); doc.setTextColor(180,180,180);
-      doc.text('MyPayDirector Report', 14, 22);
+      doc.text('My Pay Director Report', 14, 22);
       doc.text('Generated ' + new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}), 196, 22, {align:'right'});
       let y = 36;
       doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(...navy);
@@ -1424,7 +1444,7 @@ const STRATEGIES = [
 
   // ── CHAT ───────────────────────────────────────────────────────────────────
   const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
-  const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in MyPayPicture\'s MyPayDirector tool. This tool helps limited company directors optimise their salary and dividend split.\n\nKey topics: salary vs dividends, corporation tax (19-25% 2025/26), dividend tax rates (8.75% basic, 33.75% higher, 39.35% additional), employer pension contributions, NI Secondary Threshold (5000 from April 2025, employer NI now 15%), Personal Allowance (12570), IR35, Making Tax Digital.\n\nOptimal salary levels: 5000 (no employer NI), 12570 (full personal allowance). Both are common choices depending on whether the director has other income.\n\nRules:\n- UK English, 2025/26 rates\n- General information only, not personalised tax advice\n- Always recommend consulting a qualified accountant for director remuneration decisions\n- Plain English, practical tone';
+  const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in My Pay Picture\'s My Pay Director tool. This tool helps limited company directors optimise their salary and dividend split.\n\nKey topics: salary vs dividends, corporation tax (19-25% 2025/26), dividend tax rates (8.75% basic, 33.75% higher, 39.35% additional), employer pension contributions, NI Secondary Threshold (5000 from April 2025, employer NI now 15%), Personal Allowance (12570), IR35, Making Tax Digital.\n\nOptimal salary levels: 5000 (no employer NI), 12570 (full personal allowance). Both are common choices depending on whether the director has other income.\n\nRules:\n- UK English, 2025/26 rates\n- General information only, not personalised tax advice\n- Always recommend consulting a qualified accountant for director remuneration decisions\n- Plain English, practical tone';
 
   let chatHist = [], chatBusy = false;
 
@@ -1438,7 +1458,7 @@ const STRATEGIES = [
     if (typing) {
       bubble = '<div class="chat-typing"><span></span><span></span><span></span></div>';
     } else {
-      const toolLinks = { 'MyPensionOptimiser':'pension-optimiser.html','MyPensionReclaim':'pension-reclaim.html','MyPensionTop-Up':'pension-topup.html','MyRetirementHelper':'retirement-helper.html' };
+      const toolLinks = { 'My Pension Optimiser':'pension-optimiser.html','My Pension Reclaim':'pension-reclaim.html','My Pension Top-Up':'pension-topup.html','My Mortgage & Pension':'mortgage-vs-pension.html','My Retirement Helper':'retirement-helper.html' };
       let formatted = text.split('\n\n').map(function(p) {
         var line = p.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
         line = line.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2" target="_blank" style="color:var(--navy);font-weight:600;text-decoration:underline;">$1</a>');
