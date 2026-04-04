@@ -406,19 +406,19 @@
       </div>
       <div class="switcher-item" onclick="window.location.href='pension-optimiser.html'">
         <div class="switcher-item-icon" style="background:rgba(13,148,136,0.15);">&#128200;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Optimiser</div><div class="item-desc">Optimising your pension? Pay less tax.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Pension Optimiser</div><div class="item-desc">Put more in your pension, pay less tax.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='pension-reclaim.html'">
         <div class="switcher-item-icon" style="background:rgba(201,168,76,0.15);">&#128176;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Reclaim</div><div class="item-desc">Missed salary sacrifice? Get it back.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Pension Reclaim</div><div class="item-desc">Got a bonus? Claim back the tax.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='pension-topup.html'">
         <div class="switcher-item-icon" style="background:rgba(237,172,0,0.15);">&#10133;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Top-Up</div><div class="item-desc">The government helps pay for it.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Pension Top-Up</div><div class="item-desc">Paid into your pension yourself? Get money back.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='family-benefits.html'">
         <div class="switcher-item-icon" style="background:rgba(244,167,185,0.2);">&#128106;</div>
-        <div class="switcher-item-text"><div class="item-name">My Family &amp; Benefits</div><div class="item-desc">Paying the Child Benefit charge? Reduce it.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Family &amp; Benefits</div><div class="item-desc">Earn over £50k with kids? Keep your benefits.</div></div>
       </div>
       <div class="switcher-item current" style="cursor:default;">
         <div class="switcher-item-icon" style="background:rgba(124,58,237,0.15);">&#128203;</div>
@@ -482,7 +482,7 @@
 
     <div class="two-col">
       <div class="field-group">
-        <label>Employment income (gross salary)</label>
+        <label>Salary before tax</label>
         <div class="input-wrap"><span class="input-prefix">£</span>
           <input type="number" id="empIncome" placeholder="e.g. 55000" min="0" oninput="updateTaxEstimate()">
         </div>
@@ -986,7 +986,7 @@
     if (totalIncome > 100000 && totalIncome <= 125140) {
       guidance += '<div class="alert-box warning"><h4>Personal Allowance taper applies</h4>' +
         '<details class="breakdown-toggle"><summary>Why does this matter?</summary>' +
-        '<p>Your income is between \u00a3100,000 and \u00a3125,140. Your Personal Allowance reduces by \u00a31 for every \u00a32 above \u00a3100,000, creating an effective 60% tax rate on income in this band. Pension contributions can reduce your adjusted net income and recover your allowance.</p>' +
+        '<p>Your income is between \u00a3100,000 and \u00a3125,140. Your tax-free allowance shrinks by \u00a31 for every \u00a32 above \u00a3100,000, meaning you effectively pay 60% tax on income in this band. Putting more into your pension can bring your income back below \u00a3100,000 and restore your full allowance.</p>' +
         '</details></div>';
     }
     if (r.balance > 3000 && d.selfEmp > 0) {

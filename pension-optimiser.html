@@ -1369,19 +1369,19 @@
       </div>
       <div class="switcher-item current" style="cursor:default;">
         <div class="switcher-item-icon" style="background:rgba(13,148,136,0.15);">&#128200;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Optimiser</div><div class="item-desc">Optimising your pension? Pay less tax.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Pension Optimiser</div><div class="item-desc">Put more in your pension, pay less tax.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='pension-reclaim.html'">
         <div class="switcher-item-icon" style="background:rgba(201,168,76,0.15);">&#128176;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Reclaim</div><div class="item-desc">Missed salary sacrifice? Get it back.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Pension Reclaim</div><div class="item-desc">Got a bonus? Claim back the tax.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='pension-topup.html'">
         <div class="switcher-item-icon" style="background:rgba(237,172,0,0.15);">&#10133;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Top-Up</div><div class="item-desc">The government helps pay for it.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Pension Top-Up</div><div class="item-desc">Paid into your pension yourself? Get money back.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='family-benefits.html'">
         <div class="switcher-item-icon" style="background:rgba(244,167,185,0.2);">&#128106;</div>
-        <div class="switcher-item-text"><div class="item-name">My Family &amp; Benefits</div><div class="item-desc">Paying the Child Benefit charge? Reduce it.</div></div>
+        <div class="switcher-item-text"><div class="item-name">My Family &amp; Benefits</div><div class="item-desc">Earn over £50k with kids? Keep your benefits.</div></div>
       </div>
       <div class="switcher-item" onclick="window.location.href='self-assessment.html'">
         <div class="switcher-item-icon" style="background:rgba(124,58,237,0.15);">&#128203;</div>
@@ -1430,9 +1430,9 @@
       <div class="field-group">
         <label>
           <span class="tooltip-wrap">
-            Annual gross salary
+            Your salary before tax
             <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">Your total yearly pay before any deductions like tax, National Insurance, or pension contributions. You'll find this on your contract or at the top of your payslip.</span>
+            <span class="tooltip-bubble">Your total yearly pay before any deductions. You'll find this on your contract or at the top of your payslip — it's usually the biggest number.</span>
           </span>
         </label>
         <div class="input-wrap">
@@ -2380,7 +2380,7 @@
     {
       id: 'child_benefit',
       title: 'Keep Child Benefit',
-      desc: 'Keep adjusted net income below £60,000 to avoid the High Income Child Benefit Charge.',
+      desc: 'Keep your income below £60,000 to avoid losing Child Benefit.',
       calc: (salary, empPct) => Math.max(0, salary - 60000),
     },
     {
@@ -2474,8 +2474,10 @@
     let maxNeeded = 0;
     let drivingGoals = [];
     let minTHFlag = false;
+    let takeHomeCeiling = Infinity;
 
     // Min take-home goal: binary search for highest contrib that meets floor
+    // This sets a CEILING — the max contribution that still protects take-home
     if (selectedGoals.has('min_takehome') && minTH > 0) {
       var lo = 0, hi = 100, bestPct = 0;
       for (var i = 0; i < 25; i++) {
@@ -2491,15 +2493,11 @@
         if (monthlyTH >= minTH) { bestPct = mid; lo = mid; }
         else { hi = mid; }
       }
-      var pct = Math.floor(bestPct);
-      if (pct > maxNeeded) {
-        maxNeeded = pct;
-        drivingGoals = ['Protect my take-home pay'];
-        minTHFlag = true;
-      }
+      takeHomeCeiling = Math.floor(bestPct);
+      drivingGoals.push('Protect my take-home pay');
     }
 
-    // Other goals
+    // Other goals — these set FLOORS (minimum contribution needed)
     selectedGoals.forEach(function(id) {
       if (id === 'min_takehome') return;
       var goal = GOALS.find(function(g) { return g.id === id; });
@@ -2509,15 +2507,18 @@
       var pctNeeded = Math.ceil((empNeeded / salary) * 100);
       if (pctNeeded > maxNeeded) {
         maxNeeded = pctNeeded;
-        drivingGoals = [goal.title];
-        minTHFlag = false;
-      } else if (pctNeeded === maxNeeded) {
-        drivingGoals.push(goal.title);
       }
+      drivingGoals.push(goal.title);
     });
 
+    // Apply take-home ceiling as a hard constraint
     var annualAllowancePct = Math.floor((60000 / salary) * 100);
+    var uncappedPct = maxNeeded;
     var cappedPct = Math.min(maxNeeded, annualAllowancePct);
+    if (takeHomeCeiling < Infinity) {
+      cappedPct = Math.min(cappedPct, takeHomeCeiling);
+      minTHFlag = true;
+    }
 
     document.getElementById('targetContrib').value = cappedPct;
 
@@ -2530,24 +2531,28 @@
       : Math.min(projTaxable - 12570, 50270 - 12570) * 0.08
       + Math.max(0, projTaxable - 50270) * 0.02;
     var projMonthlyTH = (projTaxable - projTax - projNI) / 12;
-    var belowFloor = minTH > 0 && projMonthlyTH < minTH && !minTHFlag;
-
     var tags = Array.from(selectedGoals).map(function(id) {
       var g = GOALS.find(function(g) { return g.id === id; });
       return g ? '<span class="optimise-goal-tag">\u2713 ' + g.title + '</span>' : '';
     }).join('');
 
-    var floorWarning = belowFloor
+    // Check if take-home ceiling constrained other goals
+    var goalsCapped = minTHFlag && uncappedPct > takeHomeCeiling;
+    var floorWarning = goalsCapped
       ? '<div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:6px;padding:0.6rem 0.85rem;margin-top:0.6rem;font-size:0.78rem;color:#fbbf24;">'
-        + '\u26a0 This contribution would leave you with <strong>\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>'
-        + ' \u2014 below your \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month floor.'
-        + ' Consider reducing your goals or adjusting your minimum.'
+        + '\u26a0 Your other goals would need <strong>' + uncappedPct + '%</strong>, but that would take your take-home below \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month.'
+        + ' We\u2019ve capped it at ' + cappedPct + '% to protect your take-home.'
         + '</div>'
       : '';
 
-    var mainMsg = minTHFlag
-      ? 'This is the highest contribution that keeps your take-home above \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month via salary sacrifice. Your estimated take-home: <strong style="color:rgba(255,255,255,0.8)">\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>.'
-      : 'This is the minimum employee contribution needed to achieve all your selected goals via salary sacrifice.';
+    var mainMsg;
+    if (minTHFlag && selectedGoals.size > 1) {
+      mainMsg = 'Contributing ' + cappedPct + '% keeps your take-home above \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month while getting as close to your other goals as possible. Estimated take-home: <strong style="color:rgba(255,255,255,0.8)">\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>.';
+    } else if (minTHFlag) {
+      mainMsg = 'This is the highest contribution that keeps your take-home above \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month via salary sacrifice. Your estimated take-home: <strong style="color:rgba(255,255,255,0.8)">\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>.';
+    } else {
+      mainMsg = 'This is the minimum employee contribution needed to achieve all your selected goals via salary sacrifice.';
+    }
 
     resultBox.style.display = 'block';
     resultBox.innerHTML = '<div class="optimise-result-box">'
