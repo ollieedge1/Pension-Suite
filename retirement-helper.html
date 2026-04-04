@@ -876,8 +876,8 @@
 <div class="hero">
 <div style="position:relative;z-index:1;">
     <div class="hero-eyebrow">My Pay Picture</div>
-    <h1>Near or at retirement?<br><em>Let&#8217;s see where you stand.</em></h1>
-    <p>See how much income you'll have in retirement — from your government pension, your savings, and everything in between.</p>
+    <h1>Planning for retirement?<br><em>Let&#8217;s see where you stand.</em></h1>
+    <p>Find out how much money you'll have when you stop working — and whether it's enough to live the way you want.</p>
   </div>
 </div>
 
@@ -888,17 +888,17 @@
   </div>
 
   <div class="steps-nav">
-    <div class="step-tab active" onclick="goTo(1)" id="tab1"><span class="step-num">1</span>Your income</div>
-    <div class="step-tab" onclick="goTo(2)" id="tab2"><span class="step-num">2</span>The picture</div>
-    <div class="step-tab" onclick="goTo(3)" id="tab3"><span class="step-num">3</span>How to access</div>
-    <div class="step-tab" onclick="goTo(4)" id="tab4"><span class="step-num">4</span>Tax impact</div>
+    <div class="step-tab active" onclick="goTo(1)" id="tab1"><span class="step-num">1</span>Your money</div>
+    <div class="step-tab" onclick="goTo(2)" id="tab2"><span class="step-num">2</span>The big picture</div>
+    <div class="step-tab" onclick="goTo(3)" id="tab3"><span class="step-num">3</span>Your options</div>
+    <div class="step-tab" onclick="goTo(4)" id="tab4"><span class="step-num">4</span>Tax</div>
     <div class="step-tab" onclick="goTo(5)" id="tab5"><span class="step-num">5</span>Will it last?</div>
   </div>
 
 <!-- STEP 1: INCOME INPUTS -->
   <div class="card active" id="step1">
-    <div class="card-title">Your retirement income</div>
-    <p class="card-subtitle">Tell us about your income sources and pot size.</p>
+    <div class="card-title">Your money in retirement</div>
+    <p class="card-subtitle">Tell us what you have saved and what income you'll get.</p>
 
     <div class="two-col">
       <div class="field-group">
@@ -908,16 +908,16 @@
         </div>
       </div>
       <div class="field-group">
-        <label>Years of National Insurance contributions</label>
+        <label>Years you've paid National Insurance</label>
         <div class="input-wrap">
           <input type="number" id="niYears" placeholder="e.g. 30" min="0" max="35" class="no-prefix">
         </div>
-        <p class="hint">You need 35 years for the full State Pension. Check yours at <a href="https://www.gov.uk/check-state-pension" target="_blank" style="color:var(--stone);">gov.uk</a>.</p>
+        <p class="hint">You need 35 years for the full government pension. Not sure? Check at <a href="https://www.gov.uk/check-state-pension" target="_blank" style="color:var(--stone);">gov.uk</a>.</p>
       </div>
     </div>
 
     <div class="field-group">
-      <label><span class="tooltip-wrap">State Pension<span class="tooltip-icon">?</span><span class="tooltip-bubble">Your government pension, based on your National Insurance record.</span></span> — have you claimed it yet?</label>
+      <label><span class="tooltip-wrap">State Pension<span class="tooltip-icon">?</span><span class="tooltip-bubble">The pension the government pays you, based on how many years you've paid National Insurance.</span></span> — are you already receiving it?</label>
       <div class="radio-group">
         <div class="radio-btn selected" id="sp_yes" onclick="selectSP('yes')">Yes, I receive it</div>
         <div class="radio-btn" id="sp_no" onclick="selectSP('no')">Not yet / before retirement</div>
@@ -926,12 +926,12 @@
 
     <div id="spAmountWrap">
       <div class="field-group">
-        <label>State Pension received (annual)</label>
+        <label>How much State Pension do you get per year?</label>
         <div class="input-wrap">
           <span class="input-prefix">£</span>
           <input type="number" id="statePension" placeholder="e.g. 11500" min="0">
         </div>
-        <p class="hint">Full State Pension is £11,502/year. Enter yours if different.</p>
+        <p class="hint">The full amount is £11,502/year. Enter yours if it's different.</p>
       </div>
     </div>
 
@@ -939,34 +939,34 @@
 
     <div class="two-col">
       <div class="field-group">
-        <label>Pension pot value</label>
+        <label>How much is in your pension pot?</label>
         <div class="input-wrap">
           <span class="input-prefix">£</span>
           <input type="number" id="potValue" placeholder="e.g. 250000" min="0">
         </div>
-        <p class="hint">The total saved in your pension pot(s) — check your provider's website or latest statement.</p>
+        <p class="hint">The total you've saved up in your pension(s). Check your provider's website or your latest statement.</p>
       </div>
     </div>
 
     <details class="optional-section" id="otherIncomeSection">
-      <summary class="optional-toggle">I have other income too <span style="color:var(--slate-light); font-weight:400; font-size:0.76rem;">— guaranteed pension, rental income, part-time work, etc.</span></summary>
+      <summary class="optional-toggle">I have other money coming in <span style="color:var(--slate-light); font-weight:400; font-size:0.76rem;">— workplace pension, rent, part-time work, etc.</span></summary>
       <div style="padding-top:0.75rem; display:flex; flex-direction:column; gap:1rem;">
         <div class="two-col" style="margin:0;">
           <div class="field-group" style="margin-bottom:0;">
-            <label>Guaranteed pension <span style="color:var(--slate-light); font-weight:400;">(annual)</span></label>
+            <label>Workplace pension <span style="color:var(--slate-light); font-weight:400;">(per year)</span></label>
             <div class="input-wrap">
               <span class="input-prefix">£</span>
               <input type="number" id="dbPension" placeholder="e.g. 8000" min="0">
             </div>
-            <p class="hint">Sometimes called a "final salary" or "defined benefit" pension — a fixed amount paid by a former employer.</p>
+            <p class="hint">A fixed amount paid by a former employer every year. Sometimes called a "final salary" pension.</p>
           </div>
           <div class="field-group" style="margin-bottom:0;">
-            <label>Other income <span style="color:var(--slate-light); font-weight:400;">(annual)</span></label>
+            <label>Any other income <span style="color:var(--slate-light); font-weight:400;">(per year)</span></label>
             <div class="input-wrap">
               <span class="input-prefix">£</span>
               <input type="number" id="otherIncome" placeholder="e.g. 5000" min="0">
             </div>
-            <p class="hint">Rental income, part-time work, interest, etc.</p>
+            <p class="hint">Rent from a property, part-time work, savings interest, etc.</p>
           </div>
         </div>
       </div>
@@ -975,7 +975,7 @@
     <hr>
 
     <div class="field-group">
-      <label>How much you want to spend per year</label>
+      <label>How much do you want to spend each year?</label>
       <div class="input-wrap">
         <span class="input-prefix">£</span>
         <input type="number" id="spending" placeholder="e.g. 30000" min="0">
@@ -984,19 +984,19 @@
     </div>
 
     <div class="field-group" style="margin-bottom:0;">
-      <label>Retirement Living Standard — what lifestyle are you aiming for?</label>
-      <p class="hint" style="margin-bottom:0.75rem;">Based on <a href="https://www.retirementlivingstandards.org.uk" target="_blank" style="color:var(--stone);">Retirement Living Standards 2025/26</a>. Pick one to fill your spending target, or enter your own.</p>
+      <label>What kind of lifestyle do you want?</label>
+      <p class="hint" style="margin-bottom:0.75rem;">These are based on <a href="https://www.retirementlivingstandards.org.uk" target="_blank" style="color:var(--stone);">real research into what things cost in retirement</a>. Pick one to fill in your spending, or type your own number above.</p>
 
       <div class="rls-section">
         <div class="rls-toggle">
-          <button class="rls-toggle-btn active" id="rls_single" onclick="setRLSHousehold('single')">One person</button>
-          <button class="rls-toggle-btn" id="rls_couple" onclick="setRLSHousehold('couple')">Two person</button>
+          <button class="rls-toggle-btn active" id="rls_single" onclick="setRLSHousehold('single')">Just me</button>
+          <button class="rls-toggle-btn" id="rls_couple" onclick="setRLSHousehold('couple')">Me and a partner</button>
         </div>
         <div class="rls-grid">
           <div class="rls-card" id="rls_min" onclick="selectRLS('min')">
             <div class="rls-card-level min">Minimum</div>
             <div class="rls-card-amount" id="rls_min_amt">£13,400</div>
-            <div class="rls-card-desc">Covers all basic needs with some left over for fun</div>
+            <div class="rls-card-desc">Covers all your basics with a little left over for fun</div>
           </div>
           <div class="rls-card" id="rls_mod" onclick="selectRLS('mod')">
             <div class="rls-card-level mod">Moderate</div>
@@ -1012,15 +1012,15 @@
         <details class="breakdown-toggle">
           <summary>What's included in each standard?</summary>
           <div class="rls-breakdown" id="rlsBreakdown" style="margin-top:0.75rem;">
-            <div style="font-size:0.75rem; font-weight:600; color:var(--navy); margin-bottom:0.5rem;">One-person household (2025/26)</div>
-            <div class="rls-breakdown-row"><span>Minimum — basic needs + some fun</span><span>£13,400/yr</span></div>
-            <div class="rls-breakdown-row"><span>Moderate — overseas holiday, car, eating out</span><span>£31,700/yr</span></div>
-            <div class="rls-breakdown-row"><span>Comfortable — 4★ holidays, flexibility</span><span>£43,900/yr</span></div>
-            <div style="font-size:0.75rem; font-weight:600; color:var(--navy); margin:0.6rem 0 0.4rem;">Two-person household (2025/26)</div>
+            <div style="font-size:0.75rem; font-weight:600; color:var(--navy); margin-bottom:0.5rem;">Living alone (2025/26)</div>
+            <div class="rls-breakdown-row"><span>Minimum — basics plus a little fun</span><span>£13,400/yr</span></div>
+            <div class="rls-breakdown-row"><span>Moderate — holidays abroad, a car, eating out</span><span>£31,700/yr</span></div>
+            <div class="rls-breakdown-row"><span>Comfortable — nicer holidays, more freedom</span><span>£43,900/yr</span></div>
+            <div style="font-size:0.75rem; font-weight:600; color:var(--navy); margin:0.6rem 0 0.4rem;">Living as a couple (2025/26)</div>
             <div class="rls-breakdown-row"><span>Minimum</span><span>£21,600/yr</span></div>
             <div class="rls-breakdown-row"><span>Moderate</span><span>£43,900/yr</span></div>
             <div class="rls-breakdown-row"><span>Comfortable</span><span>£60,600/yr</span></div>
-            <div style="font-size:0.7rem; color:var(--slate-light); margin-top:0.5rem; line-height:1.5;">Source: Retirement Living Standards 2025/26, Loughborough University / Pensions UK.</div>
+            <div style="font-size:0.7rem; color:var(--slate-light); margin-top:0.5rem; line-height:1.5;">Source: Retirement Living Standards 2025/26 by Loughborough University.</div>
           </div>
         </details>
       </div>
@@ -1028,14 +1028,14 @@
 
     <div class="step-reassurance">Your data stays private and isn't saved anywhere.</div>
     <div class="btn-row">
-      <button class="btn-primary" onclick="goTo(2)">See my full picture →</button>
+      <button class="btn-primary" onclick="goTo(2)">Show me my picture →</button>
     </div>
   </div>
 
   <!-- STEP 2: FULL PICTURE -->
   <div class="card" id="step2">
     <div class="card-title">Your retirement picture</div>
-    <p class="card-subtitle">How your income sources add up vs. your spending target.</p>
+    <p class="card-subtitle">Here's how your money adds up against what you want to spend.</p>
 
     <div class="results-grid" id="pictureGrid"></div>
 
@@ -1046,20 +1046,20 @@
 
     <div class="summary-panel" id="pictureSummary"></div>
 
-    <div class="step-reassurance">These are rough estimates. Real-world results depend on many factors.</div>
+    <div class="step-reassurance">These are rough estimates — real life will be different.</div>
     <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(1)">← Back</button>
-      <button class="btn-primary" onclick="goTo(3)">Drawdown vs annuity →</button>
+      <button class="btn-primary" onclick="goTo(3)">See your options →</button>
     </div>
   </div>
 
   <!-- STEP 3: DRAWDOWN VS ANNUITY -->
   <div class="card" id="step3">
-    <div class="card-title"><span class="tooltip-wrap">Drawdown<span class="tooltip-icon">?</span><span class="tooltip-bubble">Taking income directly from your pension pot, with some tax benefits and investment risk.</span></span> vs <span class="tooltip-wrap">annuity<span class="tooltip-icon">?</span><span class="tooltip-bubble">A guaranteed income for life from an insurance company, with no investment risk.</span></span></div>
-    <p class="card-subtitle">Two ways to turn your pot into income. Which fits your situation better?</p>
+    <div class="card-title">How do you want to use your pot?</div>
+    <p class="card-subtitle">There are two main ways to turn your pension savings into spending money. You can take money out bit by bit (<span class="tooltip-wrap"><strong>drawdown</strong><span class="tooltip-icon">?</span><span class="tooltip-bubble">You keep your money invested and take out what you need. Flexible, but your pot could run out.</span></span>), or swap it for a guaranteed income for life (<span class="tooltip-wrap"><strong>annuity</strong><span class="tooltip-icon">?</span><span class="tooltip-bubble">You give your pot to an insurance company and they pay you a fixed amount every year for the rest of your life.</span></span>).</p>
 
     <div class="field-group">
-      <label>What annual income do you want from your pot?</label>
+      <label>How much do you want to take from your pot each year?</label>
       <div class="input-wrap">
         <span class="input-prefix">£</span>
         <input type="number" id="desiredIncome" placeholder="e.g. 15000" min="0" oninput="renderStep3()">
@@ -1067,7 +1067,7 @@
     </div>
 
     <div class="field-group">
-      <label>Assumed <span class="tooltip-wrap">annuity<span class="tooltip-icon">?</span><span class="tooltip-bubble">A guaranteed income for life from an insurance company, with no investment risk.</span></span> rate</label>
+      <label>Annuity rate <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-bubble">This is the percentage of your pot that an insurance company would pay you each year for life. A higher rate means more income. Rates depend on your age and health.</span></span></label>
       <div class="range-wrap">
         <input type="range" id="annuityRate" min="3" max="8" step="0.1" value="5" oninput="renderStep3()">
         <div class="range-labels">
@@ -1076,7 +1076,7 @@
           <span>8%</span>
         </div>
       </div>
-      <p class="hint">Current rates for a 65-year-old: roughly 5–6%. Vary by age, health, provider.</p>
+      <p class="hint">Today's rates for a 65-year-old are roughly 5–6%. Older or less healthy people often get better rates.</p>
     </div>
 
     <div id="comparisonContent"></div>
@@ -1085,23 +1085,23 @@
     <hr>
 
     <div>
-      <div style="font-size:0.85rem; font-weight:600; color:var(--navy); margin-bottom:0.25rem;">What are you leaning towards?</div>
-      <p style="font-size:0.8rem; color:var(--slate-light); margin-bottom:0.75rem; line-height:1.5;">Which appeals to you?</p>
+      <div style="font-size:0.85rem; font-weight:600; color:var(--navy); margin-bottom:0.25rem;">What sounds right for you?</div>
+      <p style="font-size:0.8rem; color:var(--slate-light); margin-bottom:0.75rem; line-height:1.5;">Pick the option that appeals most — we'll show you what to do next.</p>
       <div class="pref-grid">
         <div class="pref-card" id="pref_annuity" onclick="selectPref('annuity')">
           <div class="pref-icon">🔒</div>
-          <div class="pref-label">Annuity</div>
-          <div class="pref-desc">I want guaranteed income for life</div>
+          <div class="pref-label">Guaranteed for life</div>
+          <div class="pref-desc">I want to know exactly what I'll get, forever</div>
         </div>
         <div class="pref-card" id="pref_drawdown" onclick="selectPref('drawdown')">
           <div class="pref-icon">📊</div>
-          <div class="pref-label">Drawdown</div>
-          <div class="pref-desc">I want flexibility and control</div>
+          <div class="pref-label">Flexible</div>
+          <div class="pref-desc">I want to stay in control and adjust as I go</div>
         </div>
         <div class="pref-card" id="pref_blend" onclick="selectPref('blend')">
           <div class="pref-icon">⚖️</div>
-          <div class="pref-label">Both</div>
-          <div class="pref-desc">Security for essentials, flexibility for the rest</div>
+          <div class="pref-label">A bit of both</div>
+          <div class="pref-desc">Guarantee the essentials, keep the rest flexible</div>
         </div>
       </div>
       <div id="nextStepsContent"></div>
@@ -1110,17 +1110,17 @@
     <div class="step-reassurance">Your choice isn't locked in — you can change your mind later.</div>
     <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(2)">← Back</button>
-      <button class="btn-primary" onclick="goTo(4)">Tax & withdrawals →</button>
+      <button class="btn-primary" onclick="goTo(4)">See your tax →</button>
     </div>
   </div>
 
   <!-- STEP 4: TAX & WITHDRAWALS -->
   <div class="card" id="step4">
-    <div class="card-title">Tax impact</div>
-    <p class="card-subtitle">Tax on different withdrawal levels from your pot.</p>
+    <div class="card-title">How much tax will you pay?</div>
+    <p class="card-subtitle">See how much tax you'd owe depending on how much you take from your pot.</p>
 
     <div class="field-group">
-      <label>Annual withdrawal from pension pot</label>
+      <label>How much would you take from your pot each year?</label>
       <div class="range-wrap">
         <input type="range" id="withdrawalSlider" min="0" max="80000" step="500" value="15000" oninput="renderStep4()">
         <div class="range-labels">
@@ -1134,38 +1134,38 @@
     <div id="taxContent"></div>
 
     <div class="guidance-box">
-      <h4>The 25% tax-free lump sum</h4>
-      <p>Up to 25% of your pension pot can be taken tax-free (capped at £268,275 lifetime). You don't have to take it all at once — with <span class="tooltip-wrap">flexi-access drawdown<span class="tooltip-icon">?</span><span class="tooltip-bubble">A flexible way to access your pension pot, with 25% of each withdrawal tax-free.</span></span>, 25% of each withdrawal can be tax-free, with the rest taxed as income.</p>
+      <h4>Your 25% tax-free money</h4>
+      <p>You can take up to 25% of your pension pot without paying any tax (up to a maximum of £268,275 in total). You don't have to take it all in one go — if you take money out gradually, 25% of each amount you take is tax-free and the rest is taxed like normal income.</p>
     </div>
 
-    <div class="step-reassurance">Tax rules change. Review these figures each year.</div>
+    <div class="step-reassurance">Tax rules can change — it's worth checking these each year.</div>
     <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(3)">← Back</button>
-      <button class="btn-primary" onclick="goTo(5)">How long will it last? →</button>
+      <button class="btn-primary" onclick="goTo(5)">Will my money last? →</button>
     </div>
   </div>
 
   <!-- STEP 5: SUSTAINABILITY -->
   <div class="card" id="step5">
-    <div class="card-title">Will it last?</div>
-    <p class="card-subtitle">Project your pot with inflation, spending changes, and major events.</p>
+    <div class="card-title">Will your money last?</div>
+    <p class="card-subtitle">See how long your pension pot could last, including rising prices, changes in spending, and big one-off costs.</p>
 
     <div class="two-col">
       <div class="field-group">
-        <label>Base annual withdrawal from pot</label>
+        <label>How much you'll take from your pot each year</label>
         <div class="input-wrap">
           <span class="input-prefix">£</span>
           <input type="number" id="annualWithdrawal" placeholder="e.g. 15000" min="0" oninput="renderStep5()">
         </div>
-        <p class="hint">Your default spending from the pot before any adjustments below.</p>
+        <p class="hint">The amount you plan to take out each year as your starting point.</p>
       </div>
       <div class="field-group">
-        <label>Assumed annual growth rate</label>
+        <label>How fast your pot might grow each year</label>
         <div class="input-wrap">
           <input type="number" id="growthRate" value="4" min="0" max="10" class="has-suffix no-prefix" oninput="renderStep5()">
           <span class="input-suffix">%</span>
         </div>
-        <p class="hint">Typical balanced portfolio: 3–5%.</p>
+        <p class="hint">A typical mix of investments grows about 3–5% per year on average.</p>
       </div>
     </div>
 
@@ -1175,20 +1175,20 @@
         <div class="customise-header-left">
           <span class="customise-icon">📈</span>
           <div>
-            <div class="customise-title">Inflation adjustment</div>
-            <div class="customise-sub">Increase withdrawals each year to maintain purchasing power</div>
+            <div class="customise-title">Rising prices</div>
+            <div class="customise-sub">Take a bit more each year so your money buys the same amount</div>
           </div>
         </div>
         <div class="customise-toggle" id="inflationSection_toggle">+ Add</div>
       </div>
       <div class="customise-body" id="inflationSection" style="display:none;">
         <div class="field-group" style="margin-bottom:0;">
-          <label>Annual inflation rate</label>
+          <label>How fast do prices go up each year?</label>
           <div class="input-wrap">
             <input type="number" id="inflationRate" value="2.5" min="0" max="10" class="has-suffix no-prefix" oninput="renderStep5()">
             <span class="input-suffix">%</span>
           </div>
-          <p class="hint">ONS long-run target is 2%. Recent years have been higher. This increases your withdrawal each year to keep pace.</p>
+          <p class="hint">The government aims for 2%, but recently it's been higher. We'll increase what you take each year to keep up.</p>
         </div>
       </div>
     </div>
@@ -1199,14 +1199,14 @@
         <div class="customise-header-left">
           <span class="customise-icon">🗓️</span>
           <div>
-            <div class="customise-title">Spending phases</div>
-            <div class="customise-sub">Different spending levels at different life stages</div>
+            <div class="customise-title">Changes in spending</div>
+            <div class="customise-sub">You might spend more or less at different ages</div>
           </div>
         </div>
         <div class="customise-toggle" id="phasesSection_toggle">+ Add</div>
       </div>
       <div class="customise-body" id="phasesSection" style="display:none;">
-        <p class="hint" style="margin-bottom:0.75rem;">Define up to three spending phases. Leave blank to use the base withdrawal for that period. Common pattern: higher in early retirement (travel, active), lower in middle years, higher again in later years (care).</p>
+        <p class="hint" style="margin-bottom:0.75rem;">Add up to three periods where your spending changes. A common pattern: spend more in your 60s (travel, being active), less in your 70s (quieter years), then more again later (care costs).</p>
         <div id="phasesList">
           <div class="phase-row">
             <div class="phase-ages">
@@ -1234,14 +1234,14 @@
         <div class="customise-header-left">
           <span class="customise-icon">⚡</span>
           <div>
-            <div class="customise-title">One-off events</div>
-            <div class="customise-sub">Large expenses or windfalls at specific ages</div>
+            <div class="customise-title">Big one-off costs or windfalls</div>
+            <div class="customise-sub">Large expenses or money coming in at certain ages</div>
           </div>
         </div>
         <div class="customise-toggle" id="eventsSection_toggle">+ Add</div>
       </div>
       <div class="customise-body" id="eventsSection" style="display:none;">
-        <p class="hint" style="margin-bottom:0.75rem;">Add any significant one-off amounts — home renovations, gifting to children, inheritances, care fees lump sums, holidays of a lifetime. Positive = windfall (adds to pot), negative = expense (reduces pot).</p>
+        <p class="hint" style="margin-bottom:0.75rem;">Add big one-off amounts — like home improvements, gifts to children, an inheritance, or a big holiday. Use a positive number for money coming in (like an inheritance) and a negative number for money going out (like a renovation).</p>
         <div id="eventsList"></div>
         <button class="btn-add-phase" onclick="addEvent()">+ Add an event</button>
       </div>
@@ -1253,8 +1253,8 @@
         <div class="customise-header-left">
           <span class="customise-icon">🏥</span>
           <div>
-            <div class="customise-title">Care cost modelling</div>
-            <div class="customise-sub">Model the potential impact of later-life care needs</div>
+            <div class="customise-title">Care costs</div>
+            <div class="customise-sub">What happens if you need care later in life?</div>
           </div>
         </div>
         <div class="customise-toggle" id="careSection_toggle">+ Add</div>
@@ -1266,14 +1266,14 @@
             <div class="input-wrap"><input type="number" id="careAge" placeholder="e.g. 82" min="60" max="99" class="no-prefix" oninput="renderStep5()"></div>
           </div>
           <div class="field-group">
-            <label>Additional annual care cost</label>
+            <label>Extra care costs per year</label>
             <div class="input-wrap"><span class="input-prefix">£</span><input type="number" id="careCost" placeholder="e.g. 30000" min="0" oninput="renderStep5()"></div>
           </div>
         </div>
-        <p class="hint">Average residential care in the UK costs £35,000–£55,000/year. Home care is typically lower. This is added on top of your base withdrawal from the care age onwards.</p>
+        <p class="hint">A care home in the UK typically costs £35,000–£55,000/year. Care at home is usually less. This amount gets added to what you take from your pot from that age onwards.</p>
         <div class="alert-box warning" style="margin-top:0.75rem;">
-          <h4>Care cost cap (from October 2025)</h4>
-          <p>The government's planned care cost cap of £86,000 has been delayed. Currently there is no cap on personal care costs. Local authority support is means-tested — assets above £23,250 must be self-funded in England.</p>
+          <h4>Who pays for care?</h4>
+          <p>Right now, there's no limit on how much you might have to pay for care. If you have savings and property worth more than £23,250 (in England), you'll have to pay for your own care. The government planned to introduce an £86,000 cap, but this has been delayed.</p>
         </div>
       </div>
     </div>
@@ -1281,18 +1281,18 @@
     <div id="sustainContent" style="margin-top:1.5rem;"></div>
 
     <details class="breakdown-toggle" style="margin-top:1rem;">
-      <summary>Important caveats</summary>
+      <summary>Keep in mind</summary>
       <div class="guidance-box" style="margin-top:0.75rem;">
-        <p>These projections use simplified assumptions. Investment returns vary year to year, inflation fluctuates, and life is unpredictable. Use this as a directional guide, not a plan. Review regularly with a financial adviser.</p>
+        <p>These numbers are rough estimates, not predictions. In real life, your investments will go up and down, prices will change, and unexpected things will happen. Use this as a starting point for thinking about your future — not as a firm plan. It's a good idea to review your situation with a financial adviser.</p>
       </div>
     </details>
 
     <div class="summary-panel" id="finalSummary"></div>
 
-    <div class="step-reassurance">Share these results with a financial adviser for a full review.</div>
+    <div class="step-reassurance">Share these results with a financial adviser for a proper review.</div>
         <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(4)">← Back</button>
-      <button class="btn-primary" onclick="window.open('https://www.moneyhelper.org.uk/en/pensions-and-retirement','_blank')">MoneyHelper guidance ↗</button>
+      <button class="btn-primary" onclick="window.open('https://www.moneyhelper.org.uk/en/pensions-and-retirement','_blank')">Free government guidance ↗</button>
     </div>
 
     <!-- PDF INLINE CTA -->
@@ -1330,9 +1330,9 @@
       </div>
     </div>
     <div class="chat-msgs" id="chatMsgs"></div>
-    <div class="chat-chips" id="chatChips"><div class="chat-chip" onclick="chatChip(this)">Is my pot big enough?</div><div class="chat-chip" onclick="chatChip(this)">Drawdown or annuity?</div><div class="chat-chip" onclick="chatChip(this)">How long will my money last?</div><div class="chat-chip" onclick="chatChip(this)">What is the State Pension worth?</div></div>
+    <div class="chat-chips" id="chatChips"><div class="chat-chip" onclick="chatChip(this)">Is my pension pot big enough?</div><div class="chat-chip" onclick="chatChip(this)">Should I take it all or get a guaranteed income?</div><div class="chat-chip" onclick="chatChip(this)">How long will my money last?</div><div class="chat-chip" onclick="chatChip(this)">How much State Pension will I get?</div></div>
     <div class="chat-input-wrap">
-      <textarea class="chat-textarea" id="chatInput" placeholder="Ask a question about your finances..." rows="1"
+      <textarea class="chat-textarea" id="chatInput" placeholder="Ask anything about your retirement..." rows="1"
         onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();chatSend();}"
         oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,110)+'px'"></textarea>
       <button class="chat-send" id="chatSendBtn" onclick="chatSend()">&#8594;</button>
@@ -1343,8 +1343,8 @@
 
 <section class="email-capture">
   <div class="ec-inner">
-    <h3>Get free tax-year updates</h3>
-    <p>Plain-English pension &amp; tax tips for UK taxpayers. No spam, unsubscribe anytime.</p>
+    <h3>Get free updates</h3>
+    <p>Simple pension and tax tips in plain English. No spam, unsubscribe any time.</p>
     <button class="ec-btn" data-tally-open="zxZByE" data-tally-layout="modal" data-tally-emoji-animation="none">
       Subscribe free
     </button>
@@ -1355,9 +1355,9 @@
   <div style="max-width:860px; margin:0 auto; display:flex; gap:1.25rem; align-items:flex-start;">
     <div style="font-size:1.5rem; line-height:1; flex-shrink:0;">⚠️</div>
     <div>
-      <div style="font-family:'Playfair Display',serif; color:var(--stone-light); font-size:0.95rem; margin-bottom:0.4rem;">Important — Not Financial or Tax Advice</div>
+      <div style="font-family:'Playfair Display',serif; color:var(--stone-light); font-size:0.95rem; margin-bottom:0.4rem;">Important — This Is Not Financial Advice</div>
       <p style="color:rgba(255,255,255,0.5); font-size:0.8rem; line-height:1.7; margin:0;">
-        This tool provides illustrative scenarios only and does not constitute financial, tax, or legal advice. All figures are estimates based on 2025/26 UK rates. Retirement decisions are complex and personal — always consult a qualified financial adviser before making decisions about your pension. No data is stored.
+        This tool gives you rough estimates to help you think about your future — it's not a plan you should follow without getting proper advice. All numbers are based on 2025/26 UK tax rates. Before making any big decisions about your pension, please speak to a qualified financial adviser. None of your information is stored or sent anywhere.
       </p>
     </div>
   </div>
@@ -1476,29 +1476,29 @@
       <div class="result-box">
         <div class="r-label">Guaranteed income</div>
         <div class="r-amount">${fmt(guaranteed)}</div>
-        <div class="r-sub">SP + DB + other</div>
+        <div class="r-sub">money you'll definitely get</div>
       </div>
       <div class="result-box">
-        <div class="r-label">Pot income (4% rule)</div>
+        <div class="r-label">From your pension pot</div>
         <div class="r-amount">${fmtK(potIncome)}</div>
-        <div class="r-sub">illustrative</div>
+        <div class="r-sub">if you take 4% each year</div>
       </div>
       <div class="result-box ${surplus >= 0 ? 'good' : 'danger'}">
-        <div class="r-label">${surplus >= 0 ? 'Annual surplus' : 'Annual shortfall'}</div>
+        <div class="r-label">${surplus >= 0 ? 'Left over each year' : 'Short each year'}</div>
         <div class="r-amount">${fmtK(Math.abs(surplus))}</div>
-        <div class="r-sub">vs spending target</div>
+        <div class="r-sub">compared to your spending</div>
       </div>`;
 
     const maxIncome = Math.max(totalIncome, d.spending, 1);
     const bars = [
-      { label: 'State Pension',        val: d.statePension, color: '#6b7280' },
-      { label: 'DB / final salary',    val: d.db,           color: '#78716c' },
-      { label: 'Other income',         val: d.other,        color: '#9ca3af' },
-      { label: 'Pot income (4% rule)', val: potIncome,      color: '#374151' },
-      { label: 'Spending target',      val: d.spending,     color: '#b91c1c', dashed: true },
+      { label: 'State Pension',             val: d.statePension, color: '#6b7280' },
+      { label: 'Workplace pension',         val: d.db,           color: '#78716c' },
+      { label: 'Other income',              val: d.other,        color: '#9ca3af' },
+      { label: 'From your pension pot (4%)', val: potIncome,     color: '#374151' },
+      { label: 'What you want to spend',    val: d.spending,     color: '#b91c1c', dashed: true },
     ].filter(b => b.val > 0);
 
-    document.getElementById('incomeBars').innerHTML = '<div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; color:var(--slate-light); margin-bottom:0.85rem;">Income sources</div>' +
+    document.getElementById('incomeBars').innerHTML = '<div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; color:var(--slate-light); margin-bottom:0.85rem;">Where your money comes from</div>' +
       bars.map(b => `
         <div class="income-bar-row">
           <div class="income-bar-label">
@@ -1511,33 +1511,33 @@
         </div>`).join('');
 
     const statusHtml = surplus >= 0
-      ? `<div class="alert-box"><h4>✓ Your income covers your spending target</h4><p>Based on illustrative figures, your retirement income of ${fmt(totalIncome)}/year exceeds your ${fmt(d.spending)}/year target by ${fmt(surplus)}. The pot income figure uses the 4% rule as a rough guide — actual results depend on investment returns and how long you draw down.</p></div>`
-      : `<div class="alert-box warning"><h4>Your income may fall short of your target</h4><p>There's an illustrative gap of ${fmt(Math.abs(surplus))}/year between your projected income of ${fmt(totalIncome)} and your spending target of ${fmt(d.spending)}. This could be bridged by drawing more from your pot, reducing spending, or deferring retirement. See the sustainability check on step 5.</p></div>`;
+      ? `<div class="alert-box"><h4>✓ Your money covers what you want to spend</h4><p>Your retirement income of ${fmt(totalIncome)}/year is more than your ${fmt(d.spending)}/year target by ${fmt(surplus)}. We've estimated your pension pot income using the "4% rule" — a rough guide that suggests taking 4% of your pot each year. Your actual income will depend on how your savings are invested and how long you take money out.</p></div>`
+      : `<div class="alert-box warning"><h4>You might not have quite enough</h4><p>There's a gap of about ${fmt(Math.abs(surplus))}/year between the income you'd have (${fmt(totalIncome)}) and what you want to spend (${fmt(d.spending)}). You could close this gap by taking a bit more from your pot, spending a bit less, or working a little longer. Check step 5 to see how long your pot could last.</p></div>`;
 
     // RLS position
     const rlsPos = getRLSPosition(totalIncome);
     const rlsR = RLS[rlsHousehold];
     if (rlsPos) {
       const next = rlsPos.level === 'com' ? null : rlsPos.level === 'mod' ? { label: 'Comfortable', gap: rlsR.com - totalIncome } : rlsPos.level === 'min' ? { label: 'Moderate', gap: rlsR.mod - totalIncome } : { label: 'Minimum', gap: rlsR.min - totalIncome };
-      const nextMsg = next ? ` You're ${fmt(next.gap)}/year away from the <strong>${next.label}</strong> standard.` : `You're at or above the Comfortable standard.`;
+      const nextMsg = next ? ` You'd need an extra ${fmt(next.gap)}/year to reach the <strong>${next.label}</strong> level.` : `You're at or above the Comfortable level — the highest standard.`;
       document.getElementById('rlsPosition').innerHTML = `
         <div class="rls-position ${rlsPos.cls}">
-          <div class="rls-position-title">${rlsPos.level === 'below' ? 'Below Minimum standard' : rlsPos.label + ' standard'}</div>
-          <div class="rls-position-sub">Your illustrative retirement income of ${fmt(totalIncome)}/year places you at the <strong>${rlsPos.label}</strong> Retirement Living Standard (${rlsHousehold === 'couple' ? 'two-person' : 'one-person'} household).${nextMsg}</div>
+          <div class="rls-position-title">${rlsPos.level === 'below' ? 'Below the Minimum lifestyle' : rlsPos.label + ' lifestyle'}</div>
+          <div class="rls-position-sub">With ${fmt(totalIncome)}/year, your retirement income puts you at the <strong>${rlsPos.label}</strong> level (${rlsHousehold === 'couple' ? 'as a couple' : 'living alone'}).${nextMsg}</div>
         </div>`;
     }
     document.getElementById('pictureStatus').innerHTML = statusHtml;
 
     document.getElementById('pictureSummary').innerHTML = `
-      <div class="summary-title">Your income summary</div>
+      <div class="summary-title">Your money at a glance</div>
       <div class="summary-row"><span class="s-label">State Pension</span><span class="s-val">${fmt(d.statePension)}/yr</span></div>
-      <div class="summary-row"><span class="s-label">DB / final salary pension</span><span class="s-val">${d.db ? fmt(d.db) + '/yr' : '—'}</span></div>
+      <div class="summary-row"><span class="s-label">Workplace pension</span><span class="s-val">${d.db ? fmt(d.db) + '/yr' : '—'}</span></div>
       <div class="summary-row"><span class="s-label">Other income</span><span class="s-val">${d.other ? fmt(d.other) + '/yr' : '—'}</span></div>
-      <div class="summary-row"><span class="s-label">Guaranteed annual income</span><span class="s-val stone">${fmt(guaranteed)}/yr</span></div>
+      <div class="summary-row"><span class="s-label">Guaranteed income (total)</span><span class="s-val stone">${fmt(guaranteed)}/yr</span></div>
       <div class="summary-row"><span class="s-label">Pension pot</span><span class="s-val">${fmt(d.pot)}</span></div>
-      <div class="summary-row"><span class="s-label">Pot income (4% illustrative)</span><span class="s-val">${fmt(potIncome)}/yr</span></div>
-      <div class="summary-row"><span class="s-label">Spending target</span><span class="s-val">${fmt(d.spending)}/yr</span></div>
-      <div class="summary-row"><span class="s-label">${surplus >= 0 ? 'Illustrative surplus' : 'Illustrative shortfall'}</span><span class="s-val ${surplus >= 0 ? 'good' : 'warn'}">${surplus >= 0 ? '+' : '−'}${fmt(Math.abs(surplus))}/yr</span></div>`;
+      <div class="summary-row"><span class="s-label">Income from pot (at 4%)</span><span class="s-val">${fmt(potIncome)}/yr</span></div>
+      <div class="summary-row"><span class="s-label">What you want to spend</span><span class="s-val">${fmt(d.spending)}/yr</span></div>
+      <div class="summary-row"><span class="s-label">${surplus >= 0 ? 'Left over' : 'Short by'}</span><span class="s-val ${surplus >= 0 ? 'good' : 'warn'}">${surplus >= 0 ? '+' : '−'}${fmt(Math.abs(surplus))}/yr</span></div>`;
   }
 
   // ── STEP 3: DRAWDOWN VS ANNUITY ────────────────────────────────────────────
@@ -1554,71 +1554,71 @@
     document.getElementById('comparisonContent').innerHTML = `
       <div class="results-grid" style="margin-bottom:1.5rem;">
         <div class="result-box stone">
-          <div class="r-label">Annuity income</div>
+          <div class="r-label">Guaranteed for life</div>
           <div class="r-amount">${fmt(annuityIncome)}</div>
-          <div class="r-sub">per year, guaranteed for life</div>
+          <div class="r-sub">per year with an annuity</div>
         </div>
         <div class="result-box highlight">
-          <div class="r-label">Drawdown target</div>
+          <div class="r-label">Taking money out yourself</div>
           <div class="r-amount">${fmt(desired)}</div>
-          <div class="r-sub">${drawdownRate.toFixed(1)}% of pot per year</div>
+          <div class="r-sub">${drawdownRate.toFixed(1)}% of your pot each year</div>
         </div>
       </div>
       <table class="compare-table">
         <thead>
           <tr>
-            <th>Factor</th>
-            <th class="col-a">Annuity</th>
-            <th class="col-b">Drawdown</th>
+            <th></th>
+            <th class="col-a">Guaranteed for life (annuity)</th>
+            <th class="col-b">Take it out yourself (drawdown)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Income certainty</td>
-            <td class="pro">✓ Guaranteed for life</td>
-            <td class="neutral">Varies with markets</td>
+            <td>Do I know what I'll get?</td>
+            <td class="pro">✓ Yes, fixed amount forever</td>
+            <td class="neutral">It depends on your investments</td>
           </tr>
           <tr>
-            <td>Longevity risk</td>
-            <td class="pro">✓ None — insured</td>
-            <td class="con">Pot could run out</td>
+            <td>Could I run out of money?</td>
+            <td class="pro">✓ No — it's guaranteed for life</td>
+            <td class="con">Yes, if you take too much</td>
           </tr>
           <tr>
-            <td>Flexibility</td>
-            <td class="con">✗ Fixed once purchased</td>
-            <td class="pro">✓ Adjust any time</td>
+            <td>Can I change my mind?</td>
+            <td class="con">✗ No — once you buy it, it's fixed</td>
+            <td class="pro">✓ Yes, change the amount any time</td>
           </tr>
           <tr>
-            <td>Inheritance</td>
-            <td class="con">✗ Usually nothing on death</td>
-            <td class="pro">✓ Remaining pot passes on</td>
+            <td>What happens when I die?</td>
+            <td class="con">✗ Usually nothing left for family</td>
+            <td class="pro">✓ Whatever's left goes to your family</td>
           </tr>
           <tr>
-            <td>Investment risk</td>
-            <td class="pro">✓ None</td>
-            <td class="neutral">You bear the risk</td>
+            <td>Do I take any risk?</td>
+            <td class="pro">✓ No risk at all</td>
+            <td class="neutral">Yes — your investments could go down</td>
           </tr>
           <tr>
-            <td>Inflation protection</td>
-            <td class="neutral">Optional (costs more)</td>
-            <td class="pro">✓ Can adjust withdrawals</td>
+            <td>What about rising prices?</td>
+            <td class="neutral">You can add this, but it costs more</td>
+            <td class="pro">✓ You can take more as prices go up</td>
           </tr>
           <tr>
-            <td>Tax-free cash</td>
-            <td class="neutral">Normally taken before</td>
-            <td class="pro">✓ 25% of each withdrawal</td>
+            <td>Tax-free money</td>
+            <td class="neutral">Usually taken before you buy</td>
+            <td class="pro">✓ 25% of each withdrawal is tax-free</td>
           </tr>
           <tr>
-            <td>Best suited for</td>
-            <td class="neutral">Those wanting certainty, limited savings elsewhere</td>
-            <td class="neutral">Those with other income, comfortable with risk</td>
+            <td>Best for people who...</td>
+            <td class="neutral">Want peace of mind and a simple, certain income</td>
+            <td class="neutral">Have other income and are happy managing their money</td>
           </tr>
         </tbody>
       </table>
-      ${drawdownRate > 6 ? `<div class="alert-box warning"><h4>High drawdown rate</h4><p>Drawing ${drawdownRate.toFixed(1)}% of your pot annually is above the commonly cited 4% sustainable withdrawal rate. This could deplete your pot faster than expected, especially if returns disappoint. See step 5 for a sustainability check.</p></div>` : ''}
+      ${drawdownRate > 6 ? `<div class="alert-box warning"><h4>You're taking quite a lot each year</h4><p>Taking ${drawdownRate.toFixed(1)}% of your pot each year is more than the 4% that most experts suggest as a safe amount. Your money could run out sooner than you expect, especially if your investments don't do well. Check step 5 to see how long it could last.</p></div>` : ''}
       <div class="guidance-box">
-        <h4>Can I mix both?</h4>
-        <p>Yes — many people use an annuity to cover essential costs (alongside State Pension) and keep the rest in drawdown for flexibility. This blended approach can give you both security and adaptability.</p>
+        <h4>Can I do both?</h4>
+        <p>Yes — lots of people use an annuity to cover their essential bills (like housing and food) and keep the rest of their pot in drawdown for extras like holidays and treats. That way you get the security of a guaranteed income plus the flexibility to spend more when you want to.</p>
       </div>`;
   }
 
@@ -1646,39 +1646,34 @@
     document.getElementById('taxContent').innerHTML = `
       <div class="results-grid">
         <div class="result-box">
-          <div class="r-label">Gross withdrawal</div>
+          <div class="r-label">You take out</div>
           <div class="r-amount">${fmt(withdrawal)}</div>
-          <div class="r-sub">from pension pot</div>
+          <div class="r-sub">from your pension pot</div>
         </div>
         <div class="result-box stone">
-          <div class="r-label">Tax-free element</div>
+          <div class="r-label">Tax-free part</div>
           <div class="r-amount">${fmt(taxFreeElement)}</div>
-          <div class="r-sub">25% of withdrawal</div>
+          <div class="r-sub">25% is yours tax-free</div>
         </div>
         <div class="result-box">
-          <div class="r-label">Estimated tax</div>
+          <div class="r-label">Tax you'd pay</div>
           <div class="r-amount">${fmt(tax)}</div>
-          <div class="r-sub">${effectiveRate.toFixed(1)}% effective rate</div>
+          <div class="r-sub">${effectiveRate.toFixed(1)}% overall</div>
         </div>
         <div class="result-box ${netWithdrawal + otherIncome >= d.spending ? 'good' : 'warn'}">
-          <div class="r-label">Total net income</div>
+          <div class="r-label">What you actually get</div>
           <div class="r-amount">${fmt(totalNetIncome)}</div>
-          <div class="r-sub">after estimated tax</div>
+          <div class="r-sub">after tax</div>
         </div>
       </div>
       <div class="guidance-box">
-        <h4>Your personal allowance in retirement</h4>
-        <p>Your Personal Allowance of £12,570 applies to all income including State Pension and pension withdrawals. If your State Pension alone (${fmt(d.statePension)}) uses ${fmt(Math.min(d.statePension, PA))} of your allowance, you only have ${fmt(Math.max(0, PA - d.statePension))} of allowance remaining for other income before tax kicks in.</p>
+        <h4>Your tax-free amount in retirement</h4>
+        <p>Everyone can earn £12,570 per year before paying any tax. But your State Pension counts towards this. Since your State Pension is ${fmt(d.statePension)}, you only have ${fmt(Math.max(0, PA - d.statePension))} of tax-free allowance left for other income before you start paying tax.</p>
       </div>
-      ${otherIncome + taxableElement > BRT ? `<div class="alert-box warning"><h4>Higher rate tax territory</h4><p>At this withdrawal level, your combined taxable income of ${fmt(otherIncome + taxableElement)} exceeds the £50,270 higher rate threshold. Consider spreading withdrawals across tax years to stay in the basic rate band.</p></div>` : ''}
+      ${otherIncome + taxableElement > BRT ? `<div class="alert-box warning"><h4>You'd be paying a higher rate of tax</h4><p>At this level, your total taxable income of ${fmt(otherIncome + taxableElement)} goes above £50,270 — the point where tax jumps from 20% to 40%. You could pay less tax by taking smaller amounts spread over more years.</p></div>` : ''}
       <div class="guidance-box">
-        <h4>Spreading withdrawals across tax years</h4>
-        <ul>
-          <li>Keep total taxable income below £50,270 to avoid higher rate tax (40%)</li>
-          <li>Using your ISA or savings in high-income years reduces pension withdrawals needed</li>
-          <li>Delaying State Pension deferral increases it by ~5.8% per year and shifts the tax timing</li>
-          <li>Consider your spouse or partner's allowances if applicable</li>
-        </ul>
+        <h4>Tips to pay less tax</h4>
+        <p>Try to keep your total income below £50,270 each year to avoid the 40% tax rate. If you have ISA savings, use those in years when your income is high so you don't need to take as much from your pension. Delaying your State Pension increases it by about 5.8% for each year you wait, which can also help with timing. If you have a partner, think about using their tax-free allowance too.</p>
       </div>`;
   }
 
@@ -1801,28 +1796,28 @@
     document.getElementById('sustainContent').innerHTML = `
       <div class="results-grid">
         <div class="result-box ${comfortable ? 'good' : atRisk ? 'danger' : 'warn'}">
-          <div class="r-label">Pot lasts</div>
+          <div class="r-label">Your pot lasts</div>
           <div class="r-amount">${yearsLast >= MAX_YEARS ? MAX_YEARS + '+ yrs' : yearsLast + ' yrs'}</div>
-          <div class="r-sub">with all adjustments</div>
+          <div class="r-sub">with everything included</div>
         </div>
         <div class="result-box">
-          <div class="r-label">Pot runs out at age</div>
+          <div class="r-label">Runs out at age</div>
           <div class="r-amount">${yearsLast >= MAX_YEARS ? (retirementAge + MAX_YEARS) + '+' : ageWhenGone}</div>
-          <div class="r-sub">illustrative</div>
+          <div class="r-sub">roughly</div>
         </div>
         <div class="result-box stone">
           <div class="r-label">Pot in 10 years</div>
           <div class="r-amount">${fmtK(m10)}</div>
-          <div class="r-sub">age ${retirementAge + 10}</div>
+          <div class="r-sub">when you're ${retirementAge + 10}</div>
         </div>
         <div class="result-box">
           <div class="r-label">Pot in 20 years</div>
           <div class="r-amount">${fmtK(m20)}</div>
-          <div class="r-sub">age ${retirementAge + 20}</div>
+          <div class="r-sub">when you're ${retirementAge + 20}</div>
         </div>
       </div>
       <div class="pot-chart">
-        <div class="pot-chart-title">Illustrative pot value over time</div>
+        <div class="pot-chart-title">How your pot changes over time</div>
         <canvas class="pot-canvas" id="potCanvas" height="160"></canvas>
         <div class="pot-chart-legend">
           <div class="pot-chart-legend-item"><div class="legend-dot" style="background:#d1d5db;"></div> Pot value</div>
@@ -1832,14 +1827,14 @@
       </div>
       <div style="margin:1rem 0;">
         <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.4rem;">
-          <span style="color:var(--slate); font-weight:500;">Sustainability indicator</span>
-          <span style="color:${fillColor}; font-weight:600; font-family:'Playfair Display',serif;">${yearsLast >= MAX_YEARS ? 'Very strong' : comfortable ? 'Strong' : atRisk ? 'At risk' : 'Moderate'}</span>
+          <span style="color:var(--slate); font-weight:500;">How safe is your pot?</span>
+          <span style="color:${fillColor}; font-weight:600; font-family:'Playfair Display',serif;">${yearsLast >= MAX_YEARS ? 'Looking great' : comfortable ? 'Looking good' : atRisk ? 'Could run out' : 'Okay for now'}</span>
         </div>
         <div class="sustainability-track"><div class="sustainability-fill" style="width:${fillPct}%; background:${fillColor};"></div></div>
         <div class="sustainability-labels"><span>0 years</span><span>20 years</span><span>40+ years</span></div>
       </div>
-      ${atRisk ? `<div class="alert-box danger"><h4>Your pot may not last your lifetime</h4><p>With your current settings, the pot could run out around age ${ageWhenGone}. Try reducing withdrawals, adjusting growth assumptions, or considering an annuity for part of your pot.</p></div>` : ''}
-      ${comfortable ? `<div class="alert-box"><h4>✓ Your pot appears sustainable</h4><p>Your pot could last ${yearsLast >= MAX_YEARS ? 'over ' + MAX_YEARS + ' years' : yearsLast + ' years'} — well beyond typical life expectancy. You may have flexibility to spend more or gift more to family.</p></div>` : ''}`;
+      ${atRisk ? `<div class="alert-box danger"><h4>Your money might not last</h4><p>At this rate, your pot could run out by age ${ageWhenGone}. You could make it last longer by taking less each year, or by swapping some of your pot for a guaranteed income (an annuity).</p></div>` : ''}
+      ${comfortable ? `<div class="alert-box"><h4>✓ Your money looks like it will last</h4><p>Your pot could last ${yearsLast >= MAX_YEARS ? 'over ' + MAX_YEARS + ' years' : yearsLast + ' years'} — well beyond what most people need. You might be able to spend a bit more or pass some on to family.</p></div>` : ''}`;
 
     // Draw chart
     setTimeout(() => {
@@ -1902,16 +1897,16 @@
     }, 50);
 
     document.getElementById('finalSummary').innerHTML = `
-      <div class="summary-title">Your retirement at a glance</div>
-      <div class="summary-row"><span class="s-label">Current age</span><span class="s-val">${retirementAge}</span></div>
+      <div class="summary-title">Everything at a glance</div>
+      <div class="summary-row"><span class="s-label">Your age</span><span class="s-val">${retirementAge}</span></div>
       <div class="summary-row"><span class="s-label">Pension pot</span><span class="s-val">${fmt(d.pot)}</span></div>
-      <div class="summary-row"><span class="s-label">Guaranteed annual income</span><span class="s-val">${fmt(d.statePension + d.db + d.other)}/yr</span></div>
-      <div class="summary-row"><span class="s-label">Base annual withdrawal</span><span class="s-val">${fmt(baseWithdrawal)}/yr</span></div>
-      <div class="summary-row"><span class="s-label">Inflation adjustment</span><span class="s-val">${inflationOn ? (inflation*100).toFixed(1) + '%/yr' : 'Off'}</span></div>
-      <div class="summary-row"><span class="s-label">Spending phases</span><span class="s-val">${phases.length > 0 ? phases.length + ' phase' + (phases.length > 1 ? 's' : '') : 'None'}</span></div>
-      <div class="summary-row"><span class="s-label">One-off events</span><span class="s-val">${events.length > 0 ? events.length + ' event' + (events.length > 1 ? 's' : '') : 'None'}</span></div>
-      <div class="summary-row"><span class="s-label">Care costs modelled</span><span class="s-val">${careOn && careCost > 0 ? fmt(careCost) + '/yr from age ' + careAge : 'None'}</span></div>
-      <div class="summary-row"><span class="s-label">Pot sustainability</span><span class="s-val ${comfortable ? 'good' : atRisk ? 'warn' : 'stone'}">${yearsLast >= MAX_YEARS ? MAX_YEARS + '+ years' : yearsLast + ' years'}</span></div>`;
+      <div class="summary-row"><span class="s-label">Guaranteed income</span><span class="s-val">${fmt(d.statePension + d.db + d.other)}/yr</span></div>
+      <div class="summary-row"><span class="s-label">Taking from pot</span><span class="s-val">${fmt(baseWithdrawal)}/yr</span></div>
+      <div class="summary-row"><span class="s-label">Rising prices</span><span class="s-val">${inflationOn ? (inflation*100).toFixed(1) + '%/yr' : 'Not included'}</span></div>
+      <div class="summary-row"><span class="s-label">Spending changes</span><span class="s-val">${phases.length > 0 ? phases.length + ' period' + (phases.length > 1 ? 's' : '') : 'None'}</span></div>
+      <div class="summary-row"><span class="s-label">Big one-offs</span><span class="s-val">${events.length > 0 ? events.length + ' event' + (events.length > 1 ? 's' : '') : 'None'}</span></div>
+      <div class="summary-row"><span class="s-label">Care costs</span><span class="s-val">${careOn && careCost > 0 ? fmt(careCost) + '/yr from age ' + careAge : 'Not included'}</span></div>
+      <div class="summary-row"><span class="s-label">How long your pot lasts</span><span class="s-val ${comfortable ? 'good' : atRisk ? 'warn' : 'stone'}">${yearsLast >= MAX_YEARS ? MAX_YEARS + '+ years' : yearsLast + ' years'}</span></div>`;
   }
 
 
@@ -1920,89 +1915,89 @@
 
   const NEXT_STEPS = {
     annuity: {
-      title: 'How to purchase an annuity',
+      title: 'How to get a guaranteed income for life',
       items: [
         {
-          title: 'Get a State Pension forecast',
-          body: 'Before buying an annuity, confirm your State Pension amount via your personal tax account at <a href="https://www.gov.uk/check-state-pension" target="_blank">gov.uk/check-state-pension</a>. This tells you exactly what guaranteed income you already have.'
+          title: 'Check your State Pension first',
+          body: 'Before doing anything, find out exactly how much State Pension you\'ll get. You can check this for free at <a href="https://www.gov.uk/check-state-pension" target="_blank">gov.uk/check-state-pension</a>. This tells you how much guaranteed income you already have.'
         },
         {
-          title: 'Shop around — don\'t just use your existing provider',
-          body: 'You have the right to an Open Market Option — this means you can buy an annuity from any provider, not just your pension company. Rates vary significantly, so comparing quotes can make a meaningful difference to your lifetime income.'
+          title: 'Compare prices — don\'t just go with your pension provider',
+          body: 'You don\'t have to buy an annuity from the company your pension is with. You\'re allowed to shop around, and the prices can be very different. Getting quotes from several companies could mean hundreds of pounds more every year for the rest of your life.'
         },
         {
-          title: 'Declare any health conditions',
-          body: 'If you have a serious health condition or lifestyle factors (smoking, obesity, high blood pressure), you may qualify for an "enhanced" or "impaired life" annuity paying significantly more. Always disclose fully.'
+          title: 'Tell them about your health',
+          body: 'If you have any health problems — or if you smoke, are overweight, or have high blood pressure — you could get a much better deal. Companies pay more to people who are less healthy, because they expect to pay out for fewer years. Always be honest about your health.'
         },
         {
-          title: 'Decide your annuity options before buying',
-          body: 'Key decisions include: single or joint life (does it continue to a spouse?), inflation-linking (level or increasing?), guarantee period (minimum payout even if you die early), and value protection. These cannot be changed once purchased.'
+          title: 'Decide what features you want',
+          body: 'Before you buy, you\'ll need to choose: Should the payments continue to your partner after you die? Should the amount go up each year to keep up with prices? Should there be a minimum payout period? Once you buy, you can\'t change these, so take your time.'
         },
         {
-          title: 'Use a whole-of-market broker or adviser',
-          body: 'The Pension Advisory Service at <a href="https://www.moneyhelper.org.uk" target="_blank">MoneyHelper.org.uk</a> offers free guidance. A regulated financial adviser can compare the full market and help you avoid mistakes. Buying an annuity is irreversible — take the time to get it right.'
+          title: 'Get help from an adviser',
+          body: '<a href="https://www.moneyhelper.org.uk" target="_blank">MoneyHelper.org.uk</a> offers free guidance. Or you can pay a financial adviser to compare the whole market for you and make sure you get the best deal. Buying an annuity is a big decision you can\'t undo — it\'s worth getting help.'
         },
         {
-          title: 'Consider Pension Wise before deciding',
-          body: 'Anyone over 50 with a defined contribution pension is entitled to a free, impartial guidance session from <a href="https://www.moneyhelper.org.uk/en/pensions-and-retirement/pension-wise" target="_blank">Pension Wise</a>. They can explain your options without pressure to buy anything.'
+          title: 'Book a free Pension Wise session',
+          body: 'If you\'re over 50, you can get a free, no-pressure chat with <a href="https://www.moneyhelper.org.uk/en/pensions-and-retirement/pension-wise" target="_blank">Pension Wise</a>. They\'ll explain all your options in plain English — and they won\'t try to sell you anything.'
         }
       ]
     },
     drawdown: {
-      title: 'How to set up flexible drawdown',
+      title: 'How to take money from your pot flexibly',
       items: [
         {
-          title: 'Book a Pension Wise appointment first',
-          body: 'Before touching your pension, book a free guidance session at <a href="https://www.moneyhelper.org.uk/en/pensions-and-retirement/pension-wise" target="_blank">MoneyHelper.org.uk</a>. It\'s free, impartial, and available to anyone over 50. They\'ll walk through all your options without selling anything.'
+          title: 'Book a free Pension Wise session first',
+          body: 'Before you do anything with your pension, book a free chat at <a href="https://www.moneyhelper.org.uk/en/pensions-and-retirement/pension-wise" target="_blank">MoneyHelper.org.uk</a>. It\'s free, they won\'t sell you anything, and they\'ll help you understand all your options. Available to anyone over 50.'
         },
         {
-          title: 'Check whether your pension scheme offers drawdown',
-          body: 'Contact your pension provider and ask if your scheme supports flexi-access drawdown. Many workplace pensions don\'t offer it directly — you may need to transfer to a drawdown-compatible provider. Ask about any transfer charges before doing so.'
+          title: 'Check if your pension lets you do this',
+          body: 'Call your pension provider and ask if they offer flexible withdrawals (called "drawdown"). Not all pensions do — you might need to move your pot to a provider that does. Ask about any charges before you move it.'
         },
         {
           title: 'Decide how much to take tax-free',
-          body: 'You can take up to 25% of your pot tax-free (capped at £268,275). You don\'t have to take it all at once — with drawdown, 25% of each withdrawal is tax-free. Consider whether a lump sum now or phased tax-free income suits you better.'
+          body: 'You can take up to 25% of your pot without paying tax (up to £268,275 in total). You don\'t have to take it all at once — you can take 25% of each withdrawal tax-free. Think about whether a lump sum now or a bit tax-free each time works better for you.'
         },
         {
-          title: 'Set a sustainable withdrawal rate',
-          body: 'Use step 5 of this tool to model how long your pot could last at different withdrawal rates. A common starting point is 3–4% of the pot per year, but your right rate depends on your other income, spending needs, and investment approach.'
+          title: 'Work out how much to take each year',
+          body: 'Use step 5 of this tool to see how long your pot could last at different amounts. A common starting point is taking 3–4% of your pot each year, but the right amount for you depends on what other income you have and how much you need to spend.'
         },
         {
-          title: 'Choose your investment strategy',
-          body: 'In drawdown, your pot stays invested. You\'ll need to decide how it\'s invested — typically a mix of equities, bonds, and cash. Most providers offer ready-made portfolios. As you age, gradually reducing investment risk is common practice.'
+          title: 'Think about how your money is invested',
+          body: 'When you take money out gradually, the rest stays invested. You\'ll need to choose how — usually a mix of different types of investments. Most providers offer ready-made options. As you get older, it\'s common to choose less risky options.'
         },
         {
-          title: 'Review annually with a financial adviser',
-          body: 'Drawdown needs ongoing management — checking your withdrawal rate is still sustainable, reviewing investment performance, and adjusting as your circumstances change. An annual review with a regulated adviser is strongly recommended.'
+          title: 'Review once a year',
+          body: 'Taking money from your pot flexibly needs a bit of looking after. Check each year that you\'re not taking too much, see how your investments are doing, and adjust if things change. A financial adviser can help with this.'
         }
       ]
     },
     blend: {
-      title: 'How to blend annuity and drawdown',
+      title: 'How to use both options together',
       items: [
         {
-          title: 'Map your essential vs flexible spending',
-          body: 'Start by listing your non-negotiable monthly outgoings — housing costs, utilities, food, insurance. The goal is to cover these with guaranteed income (State Pension + annuity), leaving discretionary spending to drawdown.'
+          title: 'Work out your essential bills',
+          body: 'Start by adding up the things you absolutely have to pay for every month — housing, bills, food, insurance. The idea is to cover these with guaranteed money (your State Pension plus an annuity), so you know the essentials are always taken care of.'
         },
         {
-          title: 'Calculate the annuity you need for your essential floor',
-          body: 'Subtract your guaranteed income (State Pension, DB pension) from your essential spending. The gap is the minimum income you need the annuity to cover. Use an annuity calculator to see how much of your pot this would require.'
+          title: 'Work out how much guaranteed income you need',
+          body: 'Take your essential spending and subtract what you\'re already guaranteed (State Pension, workplace pension). The gap is how much you need an annuity to cover. An annuity calculator can tell you how much of your pot this would cost.'
         },
         {
-          title: 'Keep the remainder in drawdown',
-          body: 'The rest of your pot goes into flexible drawdown for holidays, home improvements, gifts, and unexpected expenses. This part stays invested and can be passed on to beneficiaries.'
+          title: 'Keep the rest for flexible spending',
+          body: 'Whatever\'s left in your pot stays invested and you can dip into it when you want — for holidays, home improvements, gifts, or surprises. This part can also be passed on to your family when you die.'
         },
         {
-          title: 'Don\'t annuitise everything at once',
-          body: 'Some people buy annuities in tranches as they age — a portion at 65, more at 75, more at 80. Annuity rates generally improve with age, and your needs change over time. A phased approach gives you flexibility and potentially better rates later.'
+          title: 'You don\'t have to do it all at once',
+          body: 'Some people buy a small annuity at 65, then another bit at 75, and more later. The rates often get better as you get older, and your needs change over time. Doing it gradually gives you flexibility.'
         },
         {
-          title: 'Get regulated advice for the blend decision',
-          body: 'The decision about how much to annuitise is one of the most consequential financial decisions you\'ll make — and it\'s irreversible for the annuity portion. A whole-of-market financial adviser can model both sides and find the right balance for your situation.'
+          title: 'Get advice before splitting your pot',
+          body: 'Deciding how much to guarantee and how much to keep flexible is one of the biggest money decisions you\'ll make — and the guaranteed part can\'t be undone. A financial adviser can help you find the right balance for your situation.'
         },
         {
-          title: 'Use Pension Wise as your starting point',
-          body: '<a href="https://www.moneyhelper.org.uk/en/pensions-and-retirement/pension-wise" target="_blank">Pension Wise</a> offers free impartial guidance for anyone over 50. They can explain the blended approach without any obligation. It\'s a valuable first step before engaging paid advice.'
+          title: 'Start with a free Pension Wise session',
+          body: '<a href="https://www.moneyhelper.org.uk/en/pensions-and-retirement/pension-wise" target="_blank">Pension Wise</a> gives free, no-pressure guidance to anyone over 50. They can explain how combining both options works, in plain English, without trying to sell you anything. A great first step.'
         }
       ]
     }
@@ -2026,8 +2021,8 @@
             </div>
           </div>`).join('')}
         <div class="alert-box" style="margin-top:1rem;">
-          <h4>Always seek regulated financial advice</h4>
-          <p>The guidance above is illustrative and general. Retirement decisions are personal and complex. A regulated financial adviser can model your full situation and help you avoid costly mistakes. Find one at <a href="https://www.unbiased.co.uk" target="_blank" style="color:var(--green);">unbiased.co.uk</a> or <a href="https://www.vouchedfor.co.uk" target="_blank" style="color:var(--green);">vouchedfor.co.uk</a>.</p>
+          <h4>Talk to a professional before making big decisions</h4>
+          <p>The information above is general — your situation is unique. A qualified financial adviser can look at your full picture and make sure you don't make any expensive mistakes. You can find one at <a href="https://www.unbiased.co.uk" target="_blank" style="color:var(--green);">unbiased.co.uk</a> or <a href="https://www.vouchedfor.co.uk" target="_blank" style="color:var(--green);">vouchedfor.co.uk</a>.</p>
         </div>
       </div>`;
   }
@@ -2061,7 +2056,7 @@
 
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
   const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
-  const SYS_PROMPT = 'You are a helpful UK personal finance assistant embedded in My Pay Picture\'s Retirement Helper tool. This tool helps people approaching or in retirement understand State Pension, drawdown vs annuity, tax-efficient withdrawals, and pension sustainability.\n\nKey topics: State Pension (11973 per year full 2025/26, 35 qualifying years), drawdown, annuity, flexi-access, 25 percent tax-free cash (capped at 268275), Retirement Living Standards (Minimum 13400, Moderate 31700, Comfortable 43900 for one person), Pension Wise, MoneyHelper.\n\nRules:\n- UK English, 2025/26 rates\n- General information only, major irreversible decisions need regulated advice\n- Always recommend Pension Wise and a regulated financial adviser\n- Calm, clear, reassuring tone';
+  const SYS_PROMPT = 'You are a friendly UK retirement helper built into My Pay Picture. You help people who may know nothing about pensions understand their options in simple, everyday language.\n\nKey facts: State Pension is up to £11,973/year (2025/26) if you\'ve paid National Insurance for 35 years. You can take money from your pension pot flexibly (drawdown) or swap it for a guaranteed income for life (annuity). 25% of your pot can be taken tax-free (up to £268,275). Retirement Living Standards: Minimum £13,400, Moderate £31,700, Comfortable £43,900 per year for one person.\n\nRules:\n- Use simple, everyday language — no jargon\n- UK English, 2025/26 rates\n- This is general information only, not financial advice\n- Always suggest speaking to Pension Wise (free) or a financial adviser for big decisions\n- Be warm, calm, and reassuring — many people find pensions confusing and that\'s okay';
   let chatHist = [];
   let chatBusy = false;
 

@@ -861,8 +861,8 @@
 <div class="hero">
 <div style="position:relative;z-index:1;">
     <div class="hero-eyebrow">My Pay Picture</div>
-    <h1>Overpay your mortgage<br><em>or boost your pension?</em></h1>
-    <p>See exactly which strategy builds more wealth for your situation.</p>
+    <h1>Pay off your mortgage faster<br><em>or save more for retirement?</em></h1>
+    <p>If you have spare money each month, find out where it'll do the most good.</p>
   </div>
 </div>
 
@@ -881,8 +881,8 @@
 
   <!-- STEP 1: YOUR DETAILS -->
   <div class="card active" id="step1">
-    <div class="card-title">Your details</div>
-    <p class="card-subtitle">We'll calculate how different strategies work for your circumstances.</p>
+    <div class="card-title">About you</div>
+    <p class="card-subtitle">Tell us a bit about your situation so we can compare your options.</p>
 
     <div class="two-col">
       <div class="field-group">
@@ -894,9 +894,9 @@
       <div class="field-group">
         <label>
           <span class="tooltip-wrap">
-            Annual gross salary
+            Your salary (before tax)
             <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">Your total yearly pay before any deductions. Find this on your payslip or contract.</span>
+            <span class="tooltip-bubble">Your total yearly pay before anything is taken off. You'll find this on your payslip or contract.</span>
           </span>
         </label>
         <div class="input-wrap">
@@ -908,9 +908,9 @@
       <div class="field-group">
         <label>
           <span class="tooltip-wrap">
-            Monthly spare cash
+            Spare money each month
             <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">How much extra you can put towards either mortgage or pension each month, on top of your existing commitments.</span>
+            <span class="tooltip-bubble">How much extra you could put towards your mortgage or pension each month, after all your usual bills and spending.</span>
           </span>
         </label>
         <div class="input-wrap">
@@ -920,20 +920,20 @@
       </div>
 
       <div class="field-group">
-        <label>Annual bonus to allocate (optional)</label>
+        <label>Yearly bonus (optional)</label>
         <div class="input-wrap">
           <span class="input-prefix">£</span>
           <input type="number" id="annualBonus" placeholder="e.g. 5000" min="0">
         </div>
-        <div class="hint">One-off or regular lump sum you want to direct to mortgage or pension.</div>
+        <div class="hint">If you get a yearly bonus, how much of it would you put towards your mortgage or pension?</div>
       </div>
 
       <div class="field-group">
         <label>
           <span class="tooltip-wrap">
-            Current pension contribution
+            How much you put into your pension
             <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">What percentage of your salary you currently contribute to your pension.</span>
+            <span class="tooltip-bubble">The percentage of your salary that goes into your pension each month. Check your payslip if you're not sure.</span>
           </span>
         </label>
         <div class="input-wrap">
@@ -945,9 +945,9 @@
       <div class="field-group">
         <label>
           <span class="tooltip-wrap">
-            Employer pension contribution
+            How much your employer adds
             <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">What percentage your employer adds. Check your scheme details or payslip.</span>
+            <span class="tooltip-bubble">The percentage your employer puts into your pension on top of your own contribution. Check your payslip or benefits page.</span>
           </span>
         </label>
         <div class="input-wrap">
@@ -957,7 +957,13 @@
       </div>
 
       <div class="field-group">
-        <label>Does your employer offer salary sacrifice?</label>
+        <label>
+          <span class="tooltip-wrap">
+            Does your pension come straight out of your salary?
+            <span class="tooltip-icon" tabindex="0">?</span>
+            <span class="tooltip-bubble">This is sometimes called "salary sacrifice". It means your pension is taken from your pay before tax, which saves you money. If you're not sure, your employer or payslip should say.</span>
+          </span>
+        </label>
         <div class="radio-group">
           <button type="button" class="radio-btn selected" onclick="setRadio(this, 'salarySacrifice', 'yes')">Yes</button>
           <button type="button" class="radio-btn" onclick="setRadio(this, 'salarySacrifice', 'no')">No</button>
@@ -974,25 +980,25 @@
   <!-- STEP 2: YOUR MORTGAGE -->
   <div class="card" id="step2">
     <div class="card-title">Your mortgage</div>
-    <p class="card-subtitle">Tell us about your current mortgage arrangement.</p>
+    <p class="card-subtitle">Tell us about your mortgage so we can work out the numbers.</p>
 
     <div class="two-col">
       <div class="field-group">
-        <label>Remaining mortgage balance</label>
+        <label>How much you still owe</label>
         <div class="input-wrap">
           <span class="input-prefix">£</span>
           <input type="number" id="mortgageBalance" placeholder="e.g. 130000" min="0">
         </div>
       </div>
       <div class="field-group">
-        <label>Mortgage interest rate</label>
+        <label>Your interest rate</label>
         <div class="input-wrap">
           <input type="number" id="mortgageRate" placeholder="e.g. 3.9" min="0" max="20" step="0.1">
           <span class="input-suffix">%</span>
         </div>
       </div>
       <div class="field-group">
-        <label>Years remaining on mortgage</label>
+        <label>Years left on your mortgage</label>
         <div class="input-wrap">
           <input type="number" id="mortgageYears" placeholder="e.g. 26" min="1" max="50">
         </div>
@@ -1000,9 +1006,9 @@
       <div class="field-group">
         <label>
           <span class="tooltip-wrap">
-            Current monthly payment
+            What you pay each month
             <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">Your normal monthly mortgage payment before any overpayments.</span>
+            <span class="tooltip-bubble">Your normal monthly mortgage payment — not including any extra you might pay on top.</span>
           </span>
         </label>
         <div class="input-wrap">
@@ -1015,8 +1021,8 @@
     <div class="field-group">
       <label>Is your rate fixed?</label>
       <div class="radio-group">
-        <button type="button" class="radio-btn selected" onclick="setRadio(this, 'rateFixed', 'yes'); showFixedOptions();">Yes — fixed</button>
-        <button type="button" class="radio-btn" onclick="setRadio(this, 'rateFixed', 'no'); hideFixedOptions();">No — variable</button>
+        <button type="button" class="radio-btn selected" onclick="setRadio(this, 'rateFixed', 'yes'); showFixedOptions();">Yes — it's fixed</button>
+        <button type="button" class="radio-btn" onclick="setRadio(this, 'rateFixed', 'no'); hideFixedOptions();">No — it can change</button>
         <button type="button" class="radio-btn" onclick="setRadio(this, 'rateFixed', 'unsure'); hideFixedOptions();">Not sure</button>
       </div>
     </div>
@@ -1026,14 +1032,14 @@
         <div class="field-group">
           <label>Fixed until (month/year)</label>
           <input type="month" id="fixedUntil">
-          <div class="hint">Early repayment charges may apply if you overpay beyond the allowed threshold.</div>
+          <div class="hint">You might be charged a fee if you pay off more than your lender allows while on a fixed rate.</div>
         </div>
         <div class="field-group">
           <label>
             <span class="tooltip-wrap">
-              Annual overpayment allowance
+              How much extra you can pay each year
               <span class="tooltip-icon" tabindex="0">?</span>
-              <span class="tooltip-bubble">Most fixed mortgages let you overpay up to 10% of the balance per year without penalty.</span>
+              <span class="tooltip-bubble">Most fixed-rate mortgages let you pay up to 10% extra per year without a fee. Check your mortgage paperwork to be sure.</span>
             </span>
           </label>
           <div class="input-wrap">
@@ -1045,8 +1051,8 @@
     </div>
 
     <div class="guidance-box">
-      <h4>Early repayment charges</h4>
-      <p>Most fixed-rate mortgages allow overpayments of up to 10% of the outstanding balance per year without early repayment charges. Check your mortgage terms for the exact allowance.</p>
+      <h4>Paying extra on a fixed rate</h4>
+      <p>If you're on a fixed rate, most lenders let you pay up to 10% extra each year without charging a fee. Go over that limit and you could face a penalty. Check your mortgage paperwork for the exact amount you're allowed.</p>
     </div>
 
     <div class="btn-row">
@@ -1058,11 +1064,17 @@
   <!-- STEP 3: YOUR PENSIONS -->
   <div class="card" id="step3">
     <div class="card-title">Your pensions</div>
-    <p class="card-subtitle">Tell us about your current pension arrangements.</p>
+    <p class="card-subtitle">Tell us what you've already got saved for retirement.</p>
 
     <div class="two-col">
       <div class="field-group">
-        <label>Do you have any defined benefit (DB) pensions?</label>
+        <label>
+          <span class="tooltip-wrap">
+            Do you have a workplace pension that pays a set amount?
+            <span class="tooltip-icon" tabindex="0">?</span>
+            <span class="tooltip-bubble">Some employers (often public sector) promise to pay you a fixed amount each year when you retire, based on your salary and years of service. This is different from a pension pot you build up yourself.</span>
+          </span>
+        </label>
         <div class="radio-group">
           <button type="button" class="radio-btn" onclick="setRadio(this, 'hasDB', 'yes'); showDBPensions();">Yes</button>
           <button type="button" class="radio-btn selected" onclick="setRadio(this, 'hasDB', 'no'); hideDBPensions();">No</button>
@@ -1073,25 +1085,25 @@
     <div id="dbSection" style="display:none;">
       <div class="two-col">
         <div class="field-group">
-          <label>DB Pension 1 — Annual amount</label>
+          <label>Workplace pension 1 — Yearly amount</label>
           <div class="input-wrap">
             <span class="input-prefix">£</span>
             <input type="number" id="db1Amount" placeholder="e.g. 8000" min="0">
           </div>
         </div>
         <div class="field-group">
-          <label>DB Pension 1 — Payable from age</label>
+          <label>Workplace pension 1 — Starts at age</label>
           <input type="number" id="db1Age" placeholder="e.g. 65" min="55" max="80">
         </div>
         <div class="field-group">
-          <label>DB Pension 2 — Annual amount</label>
+          <label>Workplace pension 2 — Yearly amount</label>
           <div class="input-wrap">
             <span class="input-prefix">£</span>
             <input type="number" id="db2Amount" placeholder="e.g. 4000" min="0">
           </div>
         </div>
         <div class="field-group">
-          <label>DB Pension 2 — Payable from age</label>
+          <label>Workplace pension 2 — Starts at age</label>
           <input type="number" id="db2Age" placeholder="e.g. 60" min="55" max="80">
         </div>
       </div>
@@ -1099,26 +1111,26 @@
 
     <div class="two-col">
       <div class="field-group">
-        <label>Existing pension pot (optional)</label>
+        <label>How much is in your pension pot? (optional)</label>
         <div class="input-wrap">
           <span class="input-prefix">£</span>
           <input type="number" id="pensionPot" placeholder="e.g. 50000" min="0">
         </div>
-        <div class="hint">Your current defined contribution pension pot value.</div>
+        <div class="hint">The total value of any pension savings you've built up so far. You can usually find this on your pension provider's website or app.</div>
       </div>
       <div class="field-group">
-        <label>Target retirement age</label>
+        <label>When do you want to retire?</label>
         <input type="number" id="retirementAge" placeholder="e.g. 60" min="50" max="80">
       </div>
     </div>
 
     <div class="field-group">
-      <label>State pension?</label>
+      <label>Will you get the State Pension?</label>
       <div class="radio-group">
         <button type="button" class="radio-btn selected" onclick="setRadio(this, 'hasState', 'yes')">Yes</button>
         <button type="button" class="radio-btn" onclick="setRadio(this, 'hasState', 'no')">No</button>
       </div>
-      <div class="hint">Assumes £11,973/year from age 67 if yes.</div>
+      <div class="hint">Most people who've worked in the UK will get this. It's currently up to £11,973 a year from age 67.</div>
     </div>
 
     <div class="btn-row">
@@ -1130,14 +1142,14 @@
   <!-- STEP 4: YOUR STRATEGIES (RESULTS) -->
   <div class="card" id="step4">
     <div class="card-title">Your strategies</div>
-    <p class="card-subtitle">Compare three approaches to see which builds more wealth for you.</p>
+    <p class="card-subtitle">Here are three ways you could use your spare money. See which one leaves you better off.</p>
 
     <div class="strategy-cards" id="strategyCards"></div>
 
     <hr>
 
     <div class="field-group">
-      <label>View year-by-year breakdown for:</label>
+      <label>See the numbers year by year for:</label>
       <div class="radio-group" id="timelineStrategySelect"></div>
     </div>
 
@@ -1161,8 +1173,8 @@
 
 <section class="email-capture">
   <div class="ec-inner">
-    <h3>Get free tax-year updates</h3>
-    <p>Plain-English pension &amp; tax tips for UK taxpayers. No spam, unsubscribe anytime.</p>
+    <h3>Stay in the loop</h3>
+    <p>Simple tips on pensions, tax, and making the most of your money. Free, no spam, and you can unsubscribe any time.</p>
     <button class="ec-btn" data-tally-open="zxZByE" data-tally-layout="modal" data-tally-emoji-animation="none">Subscribe free</button>
   </div>
 </section>
@@ -1171,9 +1183,9 @@
   <div style="max-width: 900px; margin: 0 auto; display: flex; gap: 1.25rem; align-items: flex-start;">
     <div style="font-size: 1.5rem; line-height:1; flex-shrink:0;">⚠️</div>
     <div>
-      <div style="font-family: 'Playfair Display', serif; color: var(--emerald-light); font-size: 0.95rem; margin-bottom: 0.4rem;">Important — Not Financial or Tax Advice</div>
+      <div style="font-family: 'Playfair Display', serif; color: var(--emerald-light); font-size: 0.95rem; margin-bottom: 0.4rem;">Important — this isn't financial advice</div>
       <p style="color: rgba(255,255,255,0.55); font-size: 0.8rem; line-height: 1.7; margin:0;">
-        This tool is for illustrative and educational purposes only. It does not constitute financial, tax, or legal advice. Calculations are estimates based on standard 2025/26 UK tax rates and may not reflect your individual circumstances. Tax rules and mortgage terms are subject to change. Always verify your position with <a href="https://www.gov.uk/contact-hmrc" target="_blank">HMRC</a> or a qualified financial adviser before making decisions.
+        This tool gives you a rough idea of your options — it's not a substitute for proper financial advice. The numbers are estimates based on 2025/26 UK tax rates and may not match your exact situation. Tax rules and mortgage terms can change. Before making any big decisions, check with <a href="https://www.gov.uk/contact-hmrc" target="_blank">HMRC</a> or speak to a qualified financial adviser.
       </p>
     </div>
   </div>
@@ -1424,23 +1436,23 @@ function calculateStrategies() {
 
   return {
     A: {
-      name: 'All Mortgage',
-      desc: 'Every spare penny attacks the mortgage. Your pension stays as-is.',
-      how: fmt(monthlySpare) + '/mo + ' + fmt(annualBonus) + ' bonus → mortgage overpayment',
+      name: 'Pay off mortgage',
+      desc: 'Put all your spare money towards paying off your mortgage faster. Your pension stays the same.',
+      how: fmt(monthlySpare) + '/mo + ' + fmt(annualBonus) + ' bonus goes to your mortgage',
       mortgageData: mortgageA, pensionData: pensionA, taxRelief: taxReliefA, mortgagePaidOff: mortgageA.paidOffAge, pensionPot: pensionA.finalPot
     },
     B: {
-      name: 'All Pension',
-      desc: 'Every spare penny boosts your pension via salary sacrifice. Mortgage runs its normal term.',
-      how: fmt(monthlySpare) + '/mo + ' + fmt(annualBonus) + ' bonus → extra pension contributions',
+      name: 'Boost pension',
+      desc: 'Put all your spare money into your pension to grow your retirement savings. Your mortgage carries on as normal.',
+      how: fmt(monthlySpare) + '/mo + ' + fmt(annualBonus) + ' bonus goes into your pension',
       mortgageData: mortgageB, pensionData: pensionB, taxRelief: taxReliefB, mortgagePaidOff: mortgageB.paidOffAge, pensionPot: pensionB.finalPot
     },
     C: {
-      name: 'Smart Split',
+      name: 'Split it',
       desc: salary > BRT
-        ? 'Puts ' + fmt(Math.round(pensionPriorityC)) + '/yr into pension to use up your 40% tax band, then ' + fmt(Math.round(mortgageRemainderC)) + '/yr overpays the mortgage.'
-        : 'Splits 40/60 between pension and mortgage — a balanced approach at basic rate.',
-      how: fmt(Math.round(pensionPriorityC / 12)) + '/mo → pension, ' + fmt(Math.round(monthlyOverpaymentC)) + '/mo → mortgage',
+        ? 'Puts ' + fmt(Math.round(pensionPriorityC)) + '/yr into your pension to save you the most tax, then uses the remaining ' + fmt(Math.round(mortgageRemainderC)) + '/yr to pay down your mortgage faster.'
+        : 'Splits your spare money between pension (40%) and mortgage (60%) — a balanced approach.',
+      how: fmt(Math.round(pensionPriorityC / 12)) + '/mo to pension, ' + fmt(Math.round(monthlyOverpaymentC)) + '/mo to mortgage',
       splitPension: pensionPriorityC,
       splitMortgage: mortgageRemainderC,
       isHigherRate: salary > BRT,
@@ -1465,15 +1477,15 @@ function displayResults() {
         <span class="value">${Math.round(strategy.mortgagePaidOff)}</span>
       </div>
       <div class="strategy-metric">
-        <span class="label">Pension pot at retirement</span>
+        <span class="label">Pension pot when you retire</span>
         <span class="value">${fmt(strategy.pensionPot)}</span>
       </div>
       <div class="strategy-metric">
-        <span class="label">Tax relief earned</span>
+        <span class="label">Tax you save</span>
         <span class="value">${fmt(strategy.taxRelief)}</span>
       </div>
       <div class="strategy-metric total">
-        <span class="label">Net wealth at retirement</span>
+        <span class="label">Total you're worth at retirement</span>
         <span class="value">${fmt(netWealth)}</span>
       </div>
     </div>`;
@@ -1512,11 +1524,11 @@ function displayResults() {
   const gapYears = dbAge - gapAge;
 
   if (gapYears > 0) {
-    document.getElementById('gapAnalysis').innerHTML = `<h4>Income gap between retirement and pensions</h4>
-    <p>Between age ${gapAge} (mortgage paid off) and age ${dbAge} (DB pensions start), you'll need to fund ${gapYears} years of living expenses from your DC pension pot. Make sure it's sufficient for this bridge period.</p>`;
+    document.getElementById('gapAnalysis').innerHTML = `<h4>A gap to watch out for</h4>
+    <p>Between age ${gapAge} (when your mortgage is paid off) and age ${dbAge} (when your workplace pension starts paying), there are ${gapYears} years where you'll need to live off your pension pot. Make sure you'll have enough saved to cover this period.</p>`;
   } else {
-    document.getElementById('gapAnalysis').innerHTML = `<h4>No funding gap</h4>
-    <p>Your DC pension will start paying before your DB pensions begin, or they overlap. Good planning!</p>`;
+    document.getElementById('gapAnalysis').innerHTML = `<h4>No gap to worry about</h4>
+    <p>Your pension pot and workplace pensions overlap nicely — you won't have a period where you're short of income. Good planning!</p>`;
   }
 
   // Key insight
@@ -1524,8 +1536,8 @@ function displayResults() {
   const annualSpare = parseInt(state.monthlySpare) * 12 + (parseInt(state.annualBonus) || 0);
   const reliefPerYear = annualSpare > 0 ? getTaxRelief(annualSpare, parseInt(state.salary)) : 0;
   const effectiveCost = annualSpare > 0 ? ((annualSpare - reliefPerYear) / annualSpare * 100).toFixed(0) : 100;
-  document.getElementById('keyInsight').innerHTML = `<h4>The key insight</h4>
-    <p>Your mortgage costs <strong>${rate}% per year</strong>. Pension contributions via salary sacrifice give you an immediate <strong>${annualSpare > 0 ? Math.round(reliefPerYear / annualSpare * 100) : 0}% return</strong> in tax and NI savings. For every £1 you put into your pension, you only lose <strong>${effectiveCost}p</strong> in take-home pay.</p>`;
+  document.getElementById('keyInsight').innerHTML = `<h4>Why this matters</h4>
+    <p>Your mortgage charges you <strong>${rate}% a year</strong> in interest. But when you put money into your pension, the government gives you back <strong>${annualSpare > 0 ? Math.round(reliefPerYear / annualSpare * 100) : 0}%</strong> in tax savings straight away. That means for every £1 you add to your pension, it only costs you <strong>${effectiveCost}p</strong> out of your pay packet.</p>`;
 
   // Accordion for detail
   const accordionHTML = ['A', 'B', 'C'].map(key => {
@@ -1533,14 +1545,14 @@ function displayResults() {
     const mortgageBalance = strategy.mortgageData.yearsData[strategy.mortgageData.yearsData.length - 1]?.balance || 0;
     return `<div class="accordion-item">
       <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
-        <span>${strategy.name} — detailed maths</span>
+        <span>${strategy.name} — how we worked it out</span>
         <span class="chevron">▼</span>
       </div>
       <div class="accordion-content">
-        <p><strong>Mortgage position:</strong> Balance paid off by age ${Math.round(strategy.mortgagePaidOff)}, final balance £${Math.round(mortgageBalance).toLocaleString('en-GB')}</p>
-        <p><strong>Pension position:</strong> Pot value at retirement: ${fmt(strategy.pensionPot)}</p>
-        <p><strong>Tax relief:</strong> Total over ${yearsToRetirement} years: ${fmt(strategy.taxRelief)}</p>
-        <p><strong>Net wealth:</strong> ${fmt(strategy.pensionPot - mortgageBalance)}</p>
+        <p><strong>Your mortgage:</strong> Paid off by age ${Math.round(strategy.mortgagePaidOff)}, with £${Math.round(mortgageBalance).toLocaleString('en-GB')} left at retirement</p>
+        <p><strong>Your pension pot:</strong> Worth ${fmt(strategy.pensionPot)} when you retire</p>
+        <p><strong>Tax saved:</strong> ${fmt(strategy.taxRelief)} over ${yearsToRetirement} years</p>
+        <p><strong>Total you're worth:</strong> ${fmt(strategy.pensionPot - mortgageBalance)}</p>
       </div>
     </div>`;
   }).join('');
@@ -1579,9 +1591,9 @@ function updateTimeline() {
 
   const table = `<thead><tr>
     <th>Age</th>
-    <th>Mortgage balance</th>
+    <th>Mortgage left</th>
     <th>Pension pot</th>
-    <th>Net wealth</th>
+    <th>Total worth</th>
   </tr></thead><tbody>${rows.join('')}</tbody>`;
 
   document.getElementById('timelineTable').innerHTML = table;
@@ -1589,12 +1601,12 @@ function updateTimeline() {
 
 function downloadResults() {
   const strategies = calculateStrategies();
-  let text = 'My Pay Picture — Mortgage vs Pension Analysis\n\n';
+  let text = 'My Pay Picture — Mortgage vs Pension Summary\n\n';
   Object.entries(strategies).forEach(([key, s]) => {
-    text += `Strategy ${key}: ${s.name}\n`;
+    text += `${s.name}\n`;
     text += `Mortgage paid off by age: ${Math.round(s.mortgagePaidOff)}\n`;
-    text += `Pension pot: ${fmt(s.pensionPot)}\n`;
-    text += `Tax relief: ${fmt(s.taxRelief)}\n\n`;
+    text += `Pension pot when you retire: ${fmt(s.pensionPot)}\n`;
+    text += `Tax saved: ${fmt(s.taxRelief)}\n\n`;
   });
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
