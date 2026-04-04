@@ -318,14 +318,7 @@
         <div class="switcher-item-icon" style="background:rgba(13,148,136,0.15);">&#128200;</div>
         <div class="switcher-item-text"><div class="item-name">My Pension Optimiser</div><div class="item-desc">Put more in your pension, pay less tax.</div></div>
       </div>
-      <div class="switcher-item" onclick="window.location.href='pension-reclaim.html'">
-        <div class="switcher-item-icon" style="background:rgba(201,168,76,0.15);">&#128176;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Reclaim</div><div class="item-desc">Got a bonus? Claim back the tax.</div></div>
-      </div>
-      <div class="switcher-item" onclick="window.location.href='pension-topup.html'">
-        <div class="switcher-item-icon" style="background:rgba(237,172,0,0.15);">&#10133;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Top-Up</div><div class="item-desc">Paid into your pension yourself? Get money back.</div></div>
-      </div>
+      <!-- Pension Reclaim and Pension Top-Up hidden per request -->
       <div class="switcher-item" onclick="window.location.href='family-benefits.html'">
         <div class="switcher-item-icon" style="background:rgba(244,167,185,0.2);">&#128106;</div>
         <div class="switcher-item-text"><div class="item-name">My Family &amp; Benefits</div><div class="item-desc">Earn over £50k with kids? Keep your benefits.</div></div>
@@ -397,20 +390,7 @@
         <div class="tool-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Takes about 2 minutes</div>
         <div class="tool-cta">Get started <span class="cta-arrow">&#8594;</span></div>
       </a>
-      <a class="tool-card c-gold" href="pension-reclaim.html">
-        <span class="tool-icon">&#128176;</span>
-        <div class="tool-name">My Pension Reclaim</div>
-        <p class="tool-tagline">Got a bonus but didn’t put any into your pension? You might be able to claim tax back.</p>
-        <div class="tool-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> You’ll need your bonus amount and payslip</div>
-        <div class="tool-cta">Get started <span class="cta-arrow">&#8594;</span></div>
-      </a>
-      <a class="tool-card c-amber" href="pension-topup.html">
-        <span class="tool-icon">&#10133;</span>
-        <div class="tool-name">My Pension Top-Up</div>
-        <p class="tool-tagline">Put extra money into your pension yourself? The government owes you some back.</p>
-        <div class="tool-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> You’ll need your contribution amount and salary</div>
-        <div class="tool-cta">Get started <span class="cta-arrow">&#8594;</span></div>
-      </a>
+      <!-- Pension Reclaim and Pension Top-Up tool cards hidden per request -->
       <a class="tool-card c-rose" href="family-benefits.html">
         <span class="tool-icon">&#128106;</span>
         <div class="tool-name">My Family &amp; Benefits</div>
@@ -534,7 +514,7 @@
 
   // CHAT
   const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
-  const SYS_PROMPT = 'You are a helpful UK personal finance assistant for My Pay Picture, a suite of tools helping people understand their pay, pension, and benefits. Help users find the right tool and answer general UK personal finance questions.\n\nTools: My Pension Optimiser (salary sacrifice, contributions), My Pension Reclaim (missed salary sacrifice on bonuses), My Pension Top-Up (AVCs and tax relief), My Family & Benefits (Child Benefit and Tax-Free Childcare), My Mortgage & Pension (mortgage vs pension overpayment), My Retirement Helper (State Pension, drawdown, sustainability), My Pay Director (salary vs dividends for limited company directors).\n\nRules:\n- UK English, 2025/26 rates\n- General information only, not personalised financial advice\n- When recommending a tool, always use its exact name: My Pension Optimiser, My Pension Reclaim, My Pension Top-Up, My Mortgage & Pension, My Retirement Helper, My Pay Director\n- Direct users to the right tool\n- Warm, clear, approachable tone';
+  const SYS_PROMPT = 'You are a helpful UK personal finance assistant for My Pay Picture, a suite of tools helping people understand their pay, pension, and benefits. Help users find the right tool and answer general UK personal finance questions.\n\nTools: My Pension Optimiser (salary sacrifice, contributions), My Family & Benefits (Child Benefit and Tax-Free Childcare), My Mortgage & Pension (mortgage vs pension overpayment), My Retirement Helper (State Pension, drawdown, sustainability), My Pay Director (salary vs dividends for limited company directors).\n\nRules:\n- UK English, 2025/26 rates\n- General information only, not personalised financial advice\n- When recommending a tool, always use its exact name: My Pension Optimiser, My Mortgage & Pension, My Retirement Helper, My Pay Director\n- Direct users to the right tool\n- Warm, clear, approachable tone';
 
   let chatHist = [], chatBusy = false;
 
@@ -550,8 +530,6 @@
     } else {
       const toolLinks = {
         'My Pension Optimiser':'pension-optimiser.html',
-        'My Pension Reclaim':'pension-reclaim.html',
-        'My Pension Top-Up':'pension-topup.html',
         'My Mortgage & Pension':'mortgage-vs-pension.html',
         'My Retirement Helper':'retirement-helper.html',
         'My Pay Director':'pay-director.html'

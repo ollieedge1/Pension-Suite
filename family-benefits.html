@@ -293,6 +293,12 @@
   /* FORM */
   .field-group { margin-bottom: 1.5rem; }
   .field-group:last-child { margin-bottom: 0; }
+  .optional-section { margin-top: 0.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 0 1rem; }
+  .optional-toggle { padding: 0.85rem 0; font-size: 0.85rem; font-weight: 500; color: var(--teal); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.4rem; }
+  .optional-toggle::-webkit-details-marker { display: none; }
+  .optional-toggle::before { content: '+'; font-size: 1.1rem; font-weight: 600; width: 1.2rem; text-align: center; transition: transform 0.2s; }
+  details[open] .optional-toggle::before { content: '−'; }
+  details[open] .optional-section, .optional-section[open] { padding-bottom: 1rem; }
   label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--navy); margin-bottom: 0.5rem; }
   .input-wrap { position: relative; }
   .input-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--slate); font-size: 1rem; pointer-events: none; }
@@ -528,14 +534,7 @@
         <div class="switcher-item-icon" style="background:rgba(13,148,136,0.15);">&#128200;</div>
         <div class="switcher-item-text"><div class="item-name">My Pension Optimiser</div><div class="item-desc">Put more in your pension, pay less tax.</div></div>
       </div>
-      <div class="switcher-item" onclick="window.location.href='pension-reclaim.html'">
-        <div class="switcher-item-icon" style="background:rgba(201,168,76,0.15);">&#128176;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Reclaim</div><div class="item-desc">Got a bonus? Claim back the tax.</div></div>
-      </div>
-      <div class="switcher-item" onclick="window.location.href='pension-topup.html'">
-        <div class="switcher-item-icon" style="background:rgba(237,172,0,0.15);">&#10133;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Top-Up</div><div class="item-desc">Paid into your pension yourself? Get money back.</div></div>
-      </div>
+      <!-- Pension Reclaim and Pension Top-Up hidden -->
       <div class="switcher-item current" style="cursor:default;">
         <div class="switcher-item-icon" style="background:rgba(244,167,185,0.2);">&#128106;</div>
         <div class="switcher-item-text"><div class="item-name">My Family &amp; Benefits</div><div class="item-desc">Earn over £50k with kids? Keep your benefits.</div></div>
@@ -598,14 +597,6 @@
     </div>
 
     <div class="field-group">
-      <label>Partner salary <span style="color:var(--slate-light); font-weight:400;">(optional)</span></label>
-      <div class="input-wrap">
-        <span class="input-prefix">£</span>
-        <input type="number" id="partnerSalary" placeholder="e.g. 35000" min="0">
-      </div>
-    </div>
-
-    <div class="field-group">
       <label>Number of children</label>
       <div class="tooltip-trigger" data-show-label="What are the current rates?" onclick="toggleTooltip('tt-children')" style="margin-bottom:0.6rem;">
         <span class="tt-icon">i</span><span class="tt-label">What are the current Child Benefit rates?</span>
@@ -644,35 +635,50 @@
       </div>
     </div>
 
-    <div class="field-group">
-      <label>Annual childcare costs <span style="color:var(--slate-light); font-weight:400;">(optional)</span></label>
-      <div class="input-wrap">
-        <span class="input-prefix">£</span>
-        <input type="number" id="childcareCosts" placeholder="e.g. 12000" min="0">
-      </div>
-      <p class="hint">Paid to registered providers — nursery, childminder, after-school clubs.</p>
-      <div class="tooltip-trigger" data-show-label="What is Tax-Free Childcare?" onclick="toggleTooltip('tt-tfc')">
-        <span class="tt-icon">i</span><span class="tt-label">What is Tax-Free Childcare?</span>
-      </div>
-      <div class="tooltip-body" id="tt-tfc">
-        <p>Tax-Free Childcare (TFC) is a separate government scheme. For every <strong>£8 you pay</strong> into a TFC account, the government adds <strong>£2</strong> — up to £500 per child per quarter (£2,000/year per child). It applies to children under 11 in registered childcare.</p>
-        <p>Either parent earning over <strong>£100,000</strong> makes the household ineligible. Pension contributions can reduce income below this <span class="tooltip-wrap">threshold<span class="tooltip-icon" tabindex="0">?</span><span class="tooltip-bubble">A boundary income level. If either parent earns above £100,000, the whole household loses Tax-Free Childcare eligibility. Pension contributions can bring you under this limit.</span></span> and restore entitlement.</p>
-      </div>
-    </div>
+    <details class="optional-section" id="childcareSection">
+      <summary class="optional-toggle">I also pay for childcare <span style="color:var(--slate-light); font-weight:400; font-size:0.76rem;">— check if you qualify for Tax-Free Childcare too</span></summary>
+      <div style="padding-top:0.75rem; display:flex; flex-direction:column; gap:1rem;">
 
-    <div class="field-group">
-      <label>Ages of children in childcare <span style="color:var(--slate-light); font-weight:400;">(optional)</span></label>
-      <div id="childAges"></div>
-      <p class="hint">TFC applies to children under 11. Used to calculate eligible children.</p>
-    </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label>Partner salary <span style="color:var(--slate-light); font-weight:400;">(optional)</span></label>
+          <div class="input-wrap">
+            <span class="input-prefix">£</span>
+            <input type="number" id="partnerSalary" placeholder="e.g. 35000" min="0">
+          </div>
+        </div>
 
-    <div class="field-group" style="margin-bottom:0;">
-      <label>Are both parents working?</label>
-      <div class="radio-group">
-        <div class="radio-btn selected" id="both_yes" onclick="selectBothWorking(true)">Yes</div>
-        <div class="radio-btn" id="both_no" onclick="selectBothWorking(false)">No / Single parent</div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label>Annual childcare costs</label>
+          <div class="input-wrap">
+            <span class="input-prefix">£</span>
+            <input type="number" id="childcareCosts" placeholder="e.g. 12000" min="0">
+          </div>
+          <p class="hint">Nursery, childminder, after-school clubs — anything with a registered provider.</p>
+          <div class="tooltip-trigger" data-show-label="What is Tax-Free Childcare?" onclick="toggleTooltip('tt-tfc')">
+            <span class="tt-icon">i</span><span class="tt-label">What is Tax-Free Childcare?</span>
+          </div>
+          <div class="tooltip-body" id="tt-tfc">
+            <p>Tax-Free Childcare (TFC) is a separate government scheme. For every <strong>£8 you pay</strong> into a TFC account, the government adds <strong>£2</strong> — up to £500 per child per quarter (£2,000/year per child). It applies to children under 11 in registered childcare.</p>
+            <p>Either parent earning over <strong>£100,000</strong> makes the household ineligible. Pension contributions can reduce income below this limit and restore entitlement.</p>
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label>Ages of children in childcare <span style="color:var(--slate-light); font-weight:400;">(optional)</span></label>
+          <div id="childAges"></div>
+          <p class="hint">TFC applies to children under 11.</p>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label>Are both parents working?</label>
+          <div class="radio-group">
+            <div class="radio-btn selected" id="both_yes" onclick="selectBothWorking(true)">Yes</div>
+            <div class="radio-btn" id="both_no" onclick="selectBothWorking(false)">No / Single parent</div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </details>
 
     <p class="step-reassurance">Nearly there — let's see where you stand.</p>
     <div class="btn-row">
@@ -1083,8 +1089,6 @@
     } else {
       const toolLinks = {
         'My Pension Optimiser': 'pension-optimiser.html',
-        'My Pension Reclaim': 'pension-reclaim.html',
-        'My Pension Top-Up': 'pension-topup.html',
         'My Retirement Helper': 'retirement-helper.html',
         'My Mortgage & Pension': 'mortgage-vs-pension.html',
       };

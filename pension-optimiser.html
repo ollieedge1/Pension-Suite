@@ -322,6 +322,12 @@
 
   /* FORM */
   .field-group { margin-bottom: 1.4rem; }
+  .optional-section { margin-top: 0.5rem; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 0 1rem; }
+  .optional-toggle { padding: 0.85rem 0; font-size: 0.85rem; font-weight: 500; color: var(--teal); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.4rem; }
+  .optional-toggle::-webkit-details-marker { display: none; }
+  .optional-toggle::before { content: '+'; font-size: 1.1rem; font-weight: 600; width: 1.2rem; text-align: center; }
+  details[open] .optional-toggle::before { content: '−'; }
+  details[open].optional-section { padding-bottom: 1rem; }
 
   label {
     display: block;
@@ -1371,14 +1377,7 @@
         <div class="switcher-item-icon" style="background:rgba(13,148,136,0.15);">&#128200;</div>
         <div class="switcher-item-text"><div class="item-name">My Pension Optimiser</div><div class="item-desc">Put more in your pension, pay less tax.</div></div>
       </div>
-      <div class="switcher-item" onclick="window.location.href='pension-reclaim.html'">
-        <div class="switcher-item-icon" style="background:rgba(201,168,76,0.15);">&#128176;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Reclaim</div><div class="item-desc">Got a bonus? Claim back the tax.</div></div>
-      </div>
-      <div class="switcher-item" onclick="window.location.href='pension-topup.html'">
-        <div class="switcher-item-icon" style="background:rgba(237,172,0,0.15);">&#10133;</div>
-        <div class="switcher-item-text"><div class="item-name">My Pension Top-Up</div><div class="item-desc">Paid into your pension yourself? Get money back.</div></div>
-      </div>
+      <!-- Pension Reclaim and Pension Top-Up hidden -->
       <div class="switcher-item" onclick="window.location.href='family-benefits.html'">
         <div class="switcher-item-icon" style="background:rgba(244,167,185,0.2);">&#128106;</div>
         <div class="switcher-item-text"><div class="item-name">My Family &amp; Benefits</div><div class="item-desc">Earn over £50k with kids? Keep your benefits.</div></div>
@@ -1529,46 +1528,53 @@
       </div>
     </div>
 
-    <div class="field-group">
-      <label>
-        <span class="tooltip-wrap">
-          Does your employer offer salary sacrifice?
-          <span class="tooltip-icon" tabindex="0">?</span>
-          <span class="tooltip-bubble">Salary sacrifice means your employer reduces your salary by the pension amount before calculating tax — so you pay less tax and National Insurance. Most large employers offer this. If you're not sure, ask your HR or payroll team.</span>
-        </span>
-      </label>
-      <div class="radio-group">
-        <div class="radio-btn selected" id="rb_ss" onclick="selectMethod('salary_sacrifice')">Yes</div>
-        <div class="radio-btn" id="rb_pc" onclick="selectMethod('personal')">No</div>
-        <div class="radio-btn" id="rb_unsure" onclick="selectMethod('salary_sacrifice')" style="color:var(--slate-light);">Not sure</div>
-      </div>
-    </div>
+    <details class="optional-section" id="advancedSection">
+      <summary class="optional-toggle">More details <span style="color:var(--slate-light); font-weight:400; font-size:0.76rem;">— pension method, pot value, years to retirement</span></summary>
+      <div style="padding-top:0.75rem; display:flex; flex-direction:column; gap:1rem;">
 
-    <div class="field-group">
-      <label>
-        <span class="tooltip-wrap">
-          Current pension pot value (optional)
-          <span class="tooltip-icon" tabindex="0">?</span>
-          <span class="tooltip-bubble">How much is already in your pension pot today. You can find this by logging into your pension provider's website, or on your annual pension statement. It's fine to leave this blank.</span>
-        </span>
-      </label>
-      <div class="input-wrap">
-        <span class="input-prefix">£</span>
-        <input type="number" id="currentPot" placeholder="e.g. 25000" min="0">
-      </div>
-    </div>
-
-    <div class="field-group">
-      <label>Years to retirement</label>
-      <div class="range-wrap">
-        <input type="range" id="yearsToRetire" min="5" max="45" value="25" oninput="updateYearsLabel()">
-        <div class="range-labels">
-          <span>5 yrs</span>
-          <span id="yearsLabel" style="color: var(--teal); font-weight:600;">25 years</span>
-          <span>45 yrs</span>
+        <div class="field-group" style="margin-bottom:0;">
+          <label>
+            <span class="tooltip-wrap">
+              Does your pension come out of your salary before tax?
+              <span class="tooltip-icon" tabindex="0">?</span>
+              <span class="tooltip-bubble">This is called "salary sacrifice" — your employer takes the pension amount out before calculating your tax, so you pay less. Most large employers do this. If you're not sure, ask HR or check your payslip.</span>
+            </span>
+          </label>
+          <div class="radio-group">
+            <div class="radio-btn selected" id="rb_ss" onclick="selectMethod('salary_sacrifice')">Yes</div>
+            <div class="radio-btn" id="rb_pc" onclick="selectMethod('personal')">No</div>
+            <div class="radio-btn" id="rb_unsure" onclick="selectMethod('salary_sacrifice')" style="color:var(--slate-light);">Not sure</div>
+          </div>
         </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label>
+            <span class="tooltip-wrap">
+              Current pension pot value <span style="font-weight:400;color:var(--slate-light);">(optional)</span>
+              <span class="tooltip-icon" tabindex="0">?</span>
+              <span class="tooltip-bubble">How much is already saved in your pension. Check your provider's website or annual statement. Fine to skip this.</span>
+            </span>
+          </label>
+          <div class="input-wrap">
+            <span class="input-prefix">£</span>
+            <input type="number" id="currentPot" placeholder="e.g. 25000" min="0">
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label>Years to retirement</label>
+          <div class="range-wrap">
+            <input type="range" id="yearsToRetire" min="5" max="45" value="25" oninput="updateYearsLabel()">
+            <div class="range-labels">
+              <span>5 yrs</span>
+              <span id="yearsLabel" style="color: var(--teal); font-weight:600;">25 years</span>
+              <span>45 yrs</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </details>
 
     <p class="step-reassurance">That's it — takes 30 seconds.</p>
     <div class="btn-row">
@@ -2594,8 +2600,6 @@
     } else {
       const toolLinks = {
         'My Pension Optimiser': 'pension-optimiser.html',
-        'My Pension Reclaim': 'pension-reclaim.html',
-        'My Pension Top-Up': 'pension-topup.html',
         'My Mortgage & Pension': 'mortgage-vs-pension.html',
         'My Retirement Helper': 'retirement-helper.html',
       };
