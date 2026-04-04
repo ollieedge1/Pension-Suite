@@ -360,11 +360,11 @@
 
   input[type="number"], select {
     width: 100%;
-    padding: 0.72rem 2.2rem 0.72rem 2rem;
+    padding: 0.9rem 2.2rem 0.9rem 2rem;
     border: 1.5px solid #dde1e7;
-    border-radius: 8px;
+    border-radius: 10px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: var(--navy);
     background: white;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -1859,14 +1859,28 @@
         </div>
       </div>
       <div class="field-group">
-        <label>Years to retirement</label>
-        <div class="range-wrap">
-          <input type="range" id="yearsToRetire" min="5" max="45" value="25" oninput="updateYearsLabel(); renderStep4();">
-          <div class="range-labels">
-            <span>5 yrs</span>
-            <span id="yearsLabel" style="color: var(--teal); font-weight:600;">25 years</span>
-            <span>45 yrs</span>
-          </div>
+        <label>
+          <span class="tooltip-wrap">
+            One-off lump sum <span style="font-weight:400;color:var(--slate-light);">(optional)</span>
+            <span class="tooltip-icon" tabindex="0">?</span>
+            <span class="tooltip-bubble">A one-off extra amount you're thinking of adding to your pension — for example from savings, a bonus, or an inheritance. This is added on top of your regular contributions.</span>
+          </span>
+        </label>
+        <div class="input-wrap">
+          <span class="input-prefix">£</span>
+          <input type="number" id="lumpSum" placeholder="e.g. 10000" min="0" oninput="renderStep4()">
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-bottom:1.25rem;">
+      <label>Years to retirement</label>
+      <div class="range-wrap">
+        <input type="range" id="yearsToRetire" min="5" max="45" value="25" oninput="updateYearsLabel(); renderStep4();">
+        <div class="range-labels">
+          <span>5 yrs</span>
+          <span id="yearsLabel" style="color: var(--teal); font-weight:600;">25 years</span>
+          <span>45 yrs</span>
         </div>
       </div>
     </div>
@@ -2288,12 +2302,13 @@
     const curPct = parseFloat(document.getElementById('employeeContrib').value) || 0;
     const tgtPct = parseFloat(document.getElementById('targetContrib').value) || 0;
     const currentPot = parseFloat(document.getElementById('currentPot').value) || 0;
+    const lumpSum = parseFloat(document.getElementById('lumpSum').value) || 0;
     const years = parseInt(document.getElementById('yearsToRetire').value) || 25;
     const growth = (parseFloat(document.getElementById('growthRate').value) || 5) / 100;
     const salGrowth = (parseFloat(document.getElementById('salaryGrowth').value) || 2) / 100;
 
     function project(employeePct) {
-      let pot = currentPot;
+      let pot = currentPot + lumpSum;
       let sal = salary;
       const pts = [pot];
       for (let y = 0; y < years; y++) {
