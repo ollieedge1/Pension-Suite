@@ -610,6 +610,16 @@
   .ec-inner p { font-size: 0.88rem; color: #64748b; margin: 0 0 1.25rem; line-height: 1.5; }
   .ec-btn { display: inline-block; padding: 0.7rem 2rem; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; color: #fff; background: var(--indigo); cursor: pointer; transition: opacity 0.2s; }
   .ec-btn:hover { opacity: 0.88; }
+
+  /* ── Action plan checklist ──────────── */
+  .action-plan { background: var(--stone-pale, #f3f4f6); border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); padding: 1.25rem 1.25rem 1rem; }
+  .action-plan-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+  .action-plan-subtitle { font-size: 0.78rem; color: var(--slate); margin-bottom: 1rem; line-height: 1.4; }
+  .action-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .action-item:last-child { border-bottom: none; }
+  .action-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--indigo, #6366f1); flex-shrink: 0; cursor: pointer; }
+  .action-item-text { font-size: 0.85rem; color: var(--navy); line-height: 1.45; }
+  .action-item-text .action-hint { display: block; font-size: 0.72rem; color: var(--slate); margin-top: 0.15rem; }
 </style>
 </head>
 <body>
@@ -854,6 +864,8 @@
     <div id="summaryAllowance"></div>
 
     <div class="summary-panel" id="finalSummary"></div>
+
+    <div id="pdActionPlan" style="margin-top:1.25rem;"></div>
 
     <div class="guidance-box" style="margin-top:1rem;">
       <h4>Important — always take professional advice</h4>
@@ -1339,6 +1351,59 @@ const STRATEGIES = [
       <div class="summary-row"><span class="s-label">Total tax paid</span><span class="s-val warn">${fmtP(r.totalTax)} (${r.effectiveRate.toFixed(1)}%)</span></div>
       <div class="summary-row"><span class="s-label">Take-home</span><span class="s-val indigo">${fmtP(r.takeHome)} ${periodLabel()}</span></div>
       <div class="summary-row"><span class="s-label">Into pension</span><span class="s-val good">${fmtP(d.empPension + d.persPension)}</span></div>`;
+
+    // Action plan
+    var actionEl = document.getElementById('pdActionPlan');
+    if (actionEl) {
+      actionEl.innerHTML =
+        '<div class="action-plan">' +
+          '<div class="action-plan-title">Your next steps</div>' +
+          '<div class="action-plan-subtitle">Here\u2019s what to do to put this into practice.</div>' +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="pd_a1">' +
+            '<label class="action-item-text" for="pd_a1">Download your PDF report using the button below' +
+              '<span class="action-hint">Take it to your accountant so they can review the numbers against your full position.</span>' +
+            '</label>' +
+          '</div>' +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="pd_a2">' +
+            '<label class="action-item-text" for="pd_a2">Discuss your salary and dividend split with your accountant' +
+              '<span class="action-hint">Share this report with them. They can factor in IR35 status, other income, and any upcoming changes to your circumstances.</span>' +
+            '</label>' +
+          '</div>' +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="pd_a3">' +
+            '<label class="action-item-text" for="pd_a3">Update your payroll to the agreed salary of ' + fmtP(d.salary) + '/yr' +
+              '<span class="action-hint">If you use payroll software, update the director\u2019s salary there. Your accountant can help if you\u2019re not sure how.</span>' +
+            '</label>' +
+          '</div>' +
+
+          (d.empPension > 0 ?
+          '<div class="action-item">' +
+            '<input type="checkbox" id="pd_a4">' +
+            '<label class="action-item-text" for="pd_a4">Set up employer pension contributions of ' + fmtP(d.empPension) + '/yr' +
+              '<span class="action-hint">Employer contributions are a corporation tax deduction and don\u2019t attract NI. Make sure your pension scheme accepts employer contributions.</span>' +
+            '</label>' +
+          '</div>' : '') +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="pd_a5">' +
+            '<label class="action-item-text" for="pd_a5">Plan your dividend timing for the tax year' +
+              '<span class="action-hint">Dividends are taxed when declared, not when paid. Your accountant can help you time them to stay within the right tax band.</span>' +
+            '</label>' +
+          '</div>' +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="pd_a6">' +
+            '<label class="action-item-text" for="pd_a6">Review this at least once a year' +
+              '<span class="action-hint">Tax rates and thresholds change. Run the numbers again each April or when your circumstances change.</span>' +
+            '</label>' +
+          '</div>' +
+        '</div>';
+    }
 
     checkAndShowPdfCta();
   }

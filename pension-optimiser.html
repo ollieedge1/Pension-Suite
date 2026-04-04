@@ -494,6 +494,188 @@
     margin-top: 0.3rem;
   }
 
+  /* ── Retirement Living Standards indicator ──────────── */
+  .rls-section {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--stone-pale);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .rls-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+
+  .rls-subtitle {
+    font-size: 0.75rem;
+    color: var(--slate-light);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .rls-track-wrap {
+    position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .rls-track {
+    position: relative;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .rls-pip {
+    position: absolute;
+    bottom: -20px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .rls-pip.above {
+    bottom: auto;
+    top: -20px;
+    flex-direction: column-reverse;
+  }
+
+  .rls-pip-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 6px solid var(--slate);
+  }
+
+  .rls-pip.above .rls-pip-arrow {
+    border-bottom: none;
+    border-top: 6px solid var(--navy);
+  }
+
+  .rls-pip-tag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 1px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    color: white;
+    background: var(--slate);
+    margin-top: 1px;
+  }
+
+  .rls-pip.above .rls-pip-tag {
+    background: var(--navy);
+    margin-top: 0;
+    margin-bottom: 1px;
+  }
+
+  .rls-zone {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: white;
+    position: relative;
+  }
+
+  .rls-zone.zone-below    { background: #94a3b8; }
+  .rls-zone.zone-minimum  { background: #f59e0b; }
+  .rls-zone.zone-moderate { background: #0d9488; }
+  .rls-zone.zone-comfortable { background: #0f766e; }
+
+  .rls-positions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+
+  .rls-pos-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .rls-pos-row.target {
+    border: 2px solid var(--navy);
+  }
+
+  .rls-pos-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: white;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .rls-pos-income {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .rls-pos-level {
+    font-size: 0.72rem;
+    color: var(--slate);
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .rls-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-top: 0.75rem;
+  }
+
+  .rls-label-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    color: var(--slate);
+  }
+
+  .rls-label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .rls-verdict {
+    margin-top: 1.25rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--navy);
+  }
+
+  .rls-verdict strong { color: var(--teal); }
+
   /* COMPARISON TABLE */
   .compare-table {
     width: 100%;
@@ -845,6 +1027,61 @@
   .summary-row .s-val { color: white; font-weight: 500; }
   .summary-row .s-val.teal { color: var(--teal-light); font-weight: 600; }
   .summary-row .s-val.dim { color: rgba(255,255,255,0.35); }
+
+  /* ── Action plan checklist ──────────── */
+  .action-plan {
+    background: var(--stone-pale);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .action-plan-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .action-plan-subtitle {
+    font-size: 0.78rem;
+    color: var(--slate);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .action-item:last-child { border-bottom: none; }
+
+  .action-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--teal);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .action-item-text {
+    font-size: 0.85rem;
+    color: var(--navy);
+    line-height: 1.45;
+  }
+
+  .action-item-text .action-hint {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--slate);
+    margin-top: 0.15rem;
+  }
 
   @media (max-width: 600px) {
     .hero { padding: 2rem 1.25rem 4rem; }
@@ -1201,65 +1438,110 @@
     font-weight: 600;
   }
 
-  .rec-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.75rem;
-  }
-
-  @media (max-width: 640px) {
-    .rec-cards { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  .rec-card {
-    background: var(--navy);
-    border-radius: 10px;
-    padding: 1.1rem 1rem;
+  .rec-hero {
     text-align: center;
-    transition: transform 0.15s ease;
-  }
-
-  .rec-card:hover { transform: translateY(-2px); }
-
-  .rec-card.teal {
+    padding: 1.5rem 1rem;
     background: linear-gradient(135deg, var(--teal) 0%, #0f766e 100%);
+    border-radius: 12px;
+    color: white;
   }
 
-  .rec-card .rc-icon {
-    font-size: 1.15rem;
-    margin-bottom: 0.45rem;
-    opacity: 0.7;
-  }
-
-  .rec-card .rc-label {
-    font-size: 0.68rem;
+  .rec-hero .rc-hero-label {
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.07em;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 0.4rem;
-    line-height: 1.3;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 0.3rem;
   }
 
-  .rec-card.teal .rc-label { color: rgba(255,255,255,0.75); }
-
-  .rec-card .rc-amount {
+  .rec-hero .rc-hero-amount {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .rec-hero .rc-hero-sub {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.35rem;
+    line-height: 1.4;
+  }
+
+  /* ── Grouped horizontal bar charts ───────────────────── */
+  .pay-bars { margin-top: 0.5rem; }
+
+  .pay-bar-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .pay-bar-group-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .pay-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .pay-bar-label {
+    font-size: 0.72rem;
+    color: var(--slate);
+    width: 70px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .pay-bar-track {
+    flex: 1;
+    height: 22px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pay-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.68rem;
+    font-weight: 600;
     color: white;
-    line-height: 1;
+    transition: width 0.4s ease;
+    white-space: nowrap;
   }
 
-  .rec-card .rc-sub {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.4);
-    margin-top: 0.3rem;
+  .pay-bar-fill.now { opacity: 0.45; }
+
+  .pay-bar-value {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--navy);
+    width: 75px;
+    flex-shrink: 0;
+    text-align: right;
   }
 
-  .rec-card.teal .rc-sub { color: rgba(255,255,255,0.65); }
+  .pay-bar-diff {
+    font-size: 0.68rem;
+    font-weight: 500;
+    width: 70px;
+    flex-shrink: 0;
+    text-align: left;
+    padding-left: 0.25rem;
+  }
 
-  .rec-card .rc-amount.warn { color: #fbb040; }
-  .rec-card .rc-amount.good { color: var(--teal-light); }
+  .pay-bar-diff.positive { color: #16a34a; }
+  .pay-bar-diff.negative { color: #dc2626; }
+  .pay-bar-diff.neutral  { color: var(--slate-light); }
 
   /* TOOLTIP */
   .tooltip-wrap {
@@ -1425,57 +1707,17 @@
     <div class="card-title">Tell us about your pay</div>
     <p class="card-subtitle">We just need a few numbers from your payslip. Tap <span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:rgba(13,148,136,0.12);color:var(--teal);font-size:0.6rem;font-weight:700;vertical-align:middle;">?</span> if you're not sure.</p>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>
-          <span class="tooltip-wrap">
-            Your salary before tax
-            <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">Your total yearly pay before any deductions. You'll find this on your contract or at the top of your payslip — it's usually the biggest number.</span>
-          </span>
-        </label>
-        <div class="input-wrap">
-          <span class="input-prefix">£</span>
-          <input type="number" id="grossSalary" placeholder="e.g. 55000" min="0">
-        </div>
-      </div>
-      <div class="field-group">
-        <label>
-          <span class="tooltip-wrap">
-            Employer pension contribution
-            <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">The percentage your employer puts into your pension on top of your own contribution. Check your payslip or benefits portal — it's often listed as "employer contribution".</span>
-          </span>
-        </label>
-        <div class="input-wrap">
-          <input type="number" id="employerContrib" placeholder="e.g. 3" min="0" max="100" class="has-suffix no-prefix" oninput="toggleMatchFields()">
-          <span class="input-suffix">%</span>
-        </div>
-        <div style="margin-top:0.65rem;">
-          <label style="font-size:0.8rem; color:var(--slate); display:flex; align-items:center; gap:0.5rem; cursor:pointer; font-weight:400;">
-            <input type="checkbox" id="hasMatch" onchange="toggleMatchFields()" style="width:auto; padding:0; border:none; accent-color:var(--teal);"> My employer matches my contributions
-          </label>
-        </div>
-        <div id="matchFields" style="display:none; margin-top:0.75rem; padding:0.85rem; background:var(--stone-pale); border-radius:8px; border:1px solid rgba(0,0,0,0.07);">
-          <div style="font-size:0.78rem; font-weight:600; color:var(--navy); margin-bottom:0.6rem;">Matching arrangement</div>
-          <div class="two-col" style="gap:0.75rem; margin-bottom:0;">
-            <div class="field-group" style="margin-bottom:0;">
-              <label style="font-size:0.78rem;">They match up to</label>
-              <div class="input-wrap">
-                <input type="number" id="matchUpTo" placeholder="e.g. 5" min="0" max="20" class="has-suffix no-prefix" oninput="updateMatchPreview()" style="font-size:0.88rem;">
-                <span class="input-suffix">%</span>
-              </div>
-            </div>
-            <div class="field-group" style="margin-bottom:0;">
-              <label style="font-size:0.78rem;">If you contribute at least</label>
-              <div class="input-wrap">
-                <input type="number" id="matchThreshold" placeholder="e.g. 5" min="0" max="20" class="has-suffix no-prefix" oninput="updateMatchPreview()" style="font-size:0.88rem;">
-                <span class="input-suffix">%</span>
-              </div>
-            </div>
-          </div>
-          <div id="matchPreview" style="margin-top:0.65rem; font-size:0.78rem; color:var(--teal); font-weight:500; line-height:1.5;"></div>
-        </div>
+    <div class="field-group">
+      <label>
+        <span class="tooltip-wrap">
+          Your salary before tax
+          <span class="tooltip-icon" tabindex="0">?</span>
+          <span class="tooltip-bubble">Your total yearly pay before any deductions. You'll find this on your contract or at the top of your payslip — it's usually the biggest number.</span>
+        </span>
+      </label>
+      <div class="input-wrap" style="max-width:280px;">
+        <span class="input-prefix">£</span>
+        <input type="number" id="grossSalary" placeholder="e.g. 55000" min="0">
       </div>
     </div>
 
@@ -1496,40 +1738,35 @@
       <div class="field-group">
         <label>
           <span class="tooltip-wrap">
-            Desired contribution (what you're exploring)
+            Employer pension contribution
             <span class="tooltip-icon" tabindex="0">?</span>
-            <span class="tooltip-bubble">The new contribution level you'd like to explore. Don't worry about getting this exactly right — you can adjust it on the next screen with a slider.</span>
+            <span class="tooltip-bubble">The percentage your employer puts into your pension on top of your own contribution. Check your payslip or benefits portal — it's often listed as "employer contribution".</span>
           </span>
         </label>
-        <div class="radio-group" style="margin-bottom:0.6rem;">
-          <div class="radio-btn selected" id="mode_manual" onclick="setContribMode('manual')">Enter manually</div>
-          <div class="radio-btn" id="mode_optimise" onclick="setContribMode('optimise')" style="border-color:var(--teal);color:var(--teal);font-weight:600;">✦ Optimise for me</div>
-        </div>
-        <div id="manualContribWrap">
-          <div class="input-wrap">
-            <input type="number" id="targetContrib" placeholder="e.g. 10" min="0" max="100" class="has-suffix no-prefix" oninput="syncManualTarget()">
-            <span class="input-suffix">%</span>
-          </div>
-        </div>
-        <div id="optimiseWrap" style="display:none;">
-          <p style="font-size:0.82rem;color:var(--slate);margin-bottom:0.75rem;line-height:1.5;">What are your goals? Select all that apply and we'll work out the ideal contribution.</p>
-          <div class="field-group" style="margin-bottom:0.85rem;">
-            <label style="font-size:0.8rem;">Minimum monthly take-home you need <span style="font-weight:400;color:var(--slate-light);">(optional)</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">£</span>
-              <input type="number" id="minTakeHomePO" placeholder="e.g. 3500" min="0" class="has-suffix" oninput="renderGoals()" style="font-size:0.9rem;">
-              <span class="input-suffix">/mo</span>
-            </div>
-            <p class="hint" style="font-size:0.72rem;">Used to enable the &ldquo;Protect minimum take-home&rdquo; goal below.</p>
-          </div>
-          <div id="goalsList" style="display:flex;flex-direction:column;gap:0.5rem;"></div>
-          <div id="optimiseResult" style="display:none;margin-top:1rem;"></div>
+        <div class="input-wrap">
+          <input type="number" id="employerContrib" placeholder="e.g. 3" min="0" max="100" class="has-suffix no-prefix">
+          <span class="input-suffix">%</span>
         </div>
       </div>
     </div>
 
+    <div id="manualContribWrap" style="display:none;">
+      <div class="input-wrap">
+        <input type="number" id="targetContrib" placeholder="e.g. 10" min="0" max="100" class="has-suffix no-prefix" oninput="syncManualTarget()">
+        <span class="input-suffix">%</span>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:0.5rem;">
+      <label style="font-size:0.95rem; font-weight:600; color:var(--navy);">What are your goals?</label>
+      <p style="font-size:0.82rem;color:var(--slate);margin-bottom:0.75rem;line-height:1.5;">Select all that apply and we'll work out the ideal contribution for you.</p>
+      <div id="optimiseWrap">
+        <div id="goalsList" style="display:flex;flex-direction:column;gap:0.5rem;"></div>
+      </div>
+    </div>
+
     <details class="optional-section" id="advancedSection">
-      <summary class="optional-toggle">More details <span style="color:var(--slate-light); font-weight:400; font-size:0.76rem;">— pension method, pot value, years to retirement</span></summary>
+      <summary class="optional-toggle">More details <span style="color:var(--slate-light); font-weight:400; font-size:0.76rem;">— pension method</span></summary>
       <div style="padding-top:0.75rem; display:flex; flex-direction:column; gap:1rem;">
 
         <div class="field-group" style="margin-bottom:0;">
@@ -1544,32 +1781,6 @@
             <div class="radio-btn selected" id="rb_ss" onclick="selectMethod('salary_sacrifice')">Yes</div>
             <div class="radio-btn" id="rb_pc" onclick="selectMethod('personal')">No</div>
             <div class="radio-btn" id="rb_unsure" onclick="selectMethod('salary_sacrifice')" style="color:var(--slate-light);">Not sure</div>
-          </div>
-        </div>
-
-        <div class="field-group" style="margin-bottom:0;">
-          <label>
-            <span class="tooltip-wrap">
-              Current pension pot value <span style="font-weight:400;color:var(--slate-light);">(optional)</span>
-              <span class="tooltip-icon" tabindex="0">?</span>
-              <span class="tooltip-bubble">How much is already saved in your pension. Check your provider's website or annual statement. Fine to skip this.</span>
-            </span>
-          </label>
-          <div class="input-wrap">
-            <span class="input-prefix">£</span>
-            <input type="number" id="currentPot" placeholder="e.g. 25000" min="0">
-          </div>
-        </div>
-
-        <div class="field-group" style="margin-bottom:0;">
-          <label>Years to retirement</label>
-          <div class="range-wrap">
-            <input type="range" id="yearsToRetire" min="5" max="45" value="25" oninput="updateYearsLabel()">
-            <div class="range-labels">
-              <span>5 yrs</span>
-              <span id="yearsLabel" style="color: var(--teal); font-weight:600;">25 years</span>
-              <span>45 yrs</span>
-            </div>
           </div>
         </div>
 
@@ -1633,6 +1844,33 @@
     <div class="card-title">How your pension could grow</div>
     <p class="card-subtitle">A rough estimate — not a guarantee, just a helpful picture.</p>
 
+    <div class="two-col" style="margin-bottom:1.25rem;">
+      <div class="field-group">
+        <label>
+          <span class="tooltip-wrap">
+            Current pension pot value <span style="font-weight:400;color:var(--slate-light);">(optional)</span>
+            <span class="tooltip-icon" tabindex="0">?</span>
+            <span class="tooltip-bubble">How much is already saved in your pension. Check your provider's website or annual statement. Fine to skip this.</span>
+          </span>
+        </label>
+        <div class="input-wrap">
+          <span class="input-prefix">£</span>
+          <input type="number" id="currentPot" placeholder="e.g. 25000" min="0" oninput="renderStep4()">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Years to retirement</label>
+        <div class="range-wrap">
+          <input type="range" id="yearsToRetire" min="5" max="45" value="25" oninput="updateYearsLabel(); renderStep4();">
+          <div class="range-labels">
+            <span>5 yrs</span>
+            <span id="yearsLabel" style="color: var(--teal); font-weight:600;">25 years</span>
+            <span>45 yrs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <details class="breakdown-toggle">
       <summary>Adjust assumptions</summary>
       <div class="two-col" style="margin-top:0.75rem; margin-bottom:1rem;">
@@ -1668,16 +1906,18 @@
     <div class="projection-canvas-wrap">
       <canvas id="projectionChart"></canvas>
       <div class="proj-legend">
-        <div class="proj-legend-item"><div class="proj-legend-dot" style="background:var(--teal-light)"></div> Target contribution</div>
+        <div class="proj-legend-item"><div class="proj-legend-dot" style="background:var(--teal-light)"></div> Suggested contribution</div>
         <div class="proj-legend-item"><div class="proj-legend-dot" style="background:rgba(255,255,255,0.3)"></div> Current contribution</div>
       </div>
     </div>
 
     <div class="results-grid" id="projectionResults"></div>
 
+    <div id="rlsIndicator"></div>
+
     <div class="guidance-box" style="margin-top:1rem;">
       <h4>A few things to keep in mind</h4>
-      <p>This is a rough picture to help you think ahead — actual returns will vary depending on your fund, charges, and market conditions. A financial adviser can build a more detailed plan for your personal situation.</p>
+      <p>This is a rough picture to help you think ahead — actual returns will vary depending on your fund, charges, and market conditions. The retirement living standards are set by the PLSA and show what different lifestyles cost in retirement. A financial adviser can build a more detailed plan for you.</p>
     </div>
 
     <p class="step-reassurance">Nearly done.</p>
@@ -1708,9 +1948,11 @@
       </div>
     </details>
 
-    <div class="summary-panel" id="finalSummary"></div>
+    <div class="summary-panel" id="finalSummary" style="margin-top:1.25rem;"></div>
 
-        <div class="btn-row">
+    <div id="actionPlan" style="margin-top:1.5rem;"></div>
+
+    <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(3)">&#8592; Back</button>
       <button class="btn-primary" onclick="window.open('https://www.gov.uk/tax-on-your-private-pension','_blank')">Read more on gov.uk ↗</button>
     </div>
@@ -1871,72 +2113,8 @@
 
   // ── STEP 2 ─────────────────────────────────────────────────────────────────
 // ── EMPLOYER MATCH ─────────────────────────────────────────────────────────
-  function toggleMatchFields() {
-    var hasMatch = document.getElementById('hasMatch').checked;
-    document.getElementById('matchFields').style.display = hasMatch ? 'block' : 'none';
-    updateMatchPreview();
-  }
-
-  function getMatchInfo() {
-    var hasMatch = document.getElementById('hasMatch') && document.getElementById('hasMatch').checked;
-    if (!hasMatch) return null;
-    var matchUpTo = parseFloat(document.getElementById('matchUpTo').value) || 0;
-    var matchThreshold = parseFloat(document.getElementById('matchThreshold').value) || 0;
-    return { matchUpTo: matchUpTo, matchThreshold: matchThreshold };
-  }
-
   function getEffectiveEmployerContrib(employeePct) {
-    var basePct = parseFloat(document.getElementById('employerContrib').value) || 0;
-    var match = getMatchInfo();
-    if (!match || match.matchUpTo === 0) return basePct;
-    // Employer contributes base + match if employee meets threshold
-    if (employeePct >= match.matchThreshold) {
-      return basePct + match.matchUpTo;
-    }
-    return basePct;
-  }
-
-  function updateMatchPreview() {
-    var preview = document.getElementById('matchPreview');
-    if (!preview) return;
-    var match = getMatchInfo();
-    var salary = parseFloat(document.getElementById('grossSalary').value) || 0;
-    if (!match || match.matchUpTo === 0 || match.matchThreshold === 0) {
-      preview.textContent = '';
-      return;
-    }
-    var matchValue = salary * match.matchUpTo / 100;
-    preview.innerHTML = 'If you contribute at least ' + match.matchThreshold + '%, your employer adds ' +
-      match.matchUpTo + '% (' + fmt(matchValue) + '/yr) on top of their base contribution.';
-  }
-
-  function getMatchAlertHtml(adjPct) {
-    var match = getMatchInfo();
-    if (!match || match.matchUpTo === 0 || match.matchThreshold === 0) return '';
-
-    var salary = parseFloat(document.getElementById('grossSalary').value) || 0;
-    var basePct = parseFloat(document.getElementById('employerContrib').value) || 0;
-    var matchValue = salary * match.matchUpTo / 100;
-    var isGettingMatch = adjPct >= match.matchThreshold;
-
-    if (isGettingMatch) {
-      return '<div class="match-alert">' +
-        '<div class="match-alert-icon">&#10003;</div>' +
-        '<div class="match-alert-body">' +
-          '<div class="match-alert-title">You’re getting the full employer match</div>' +
-          '<div class="match-alert-desc">At ' + adjPct + '% your employer adds their full <strong>' + match.matchUpTo + '% match (' + fmt(matchValue) + '/yr)</strong> on top of their base ' + basePct + '% contribution.</div>' +
-        '</div>' +
-      '</div>';
-    } else {
-      var shortfall = match.matchThreshold - adjPct;
-      return '<div class="match-alert warning">' +
-        '<div class="match-alert-icon">&#9888;</div>' +
-        '<div class="match-alert-body">' +
-          '<div class="match-alert-title">You’re leaving ' + fmt(matchValue) + '/yr on the table</div>' +
-          '<div class="match-alert-desc">Increase your contribution by just <strong>' + shortfall + '%</strong> (to ' + match.matchThreshold + '%) and your employer will add <strong>' + fmt(matchValue) + '/yr</strong> extra. That’s free money — the most valuable thing this tool can tell you.</div>' +
-        '</div>' +
-      '</div>';
-    }
+    return parseFloat(document.getElementById('employerContrib').value) || 0;
   }
 
     function renderStep2() {
@@ -1986,78 +2164,50 @@
     var isHigher = salary > 50270;
 
     // ── Employer match alert ───────────────────────────────────────────────
-    var matchAlertHtml = getMatchAlertHtml(adjPct);
 
-    // ── Plain-English summary ──────────────────────────────────────────
+
+    // ── Grouped horizontal bar charts ──────────────────────────────────
     var grossExtra = adjPension - curPension;
     var realCost = Math.abs(diff);
-    var summaryHtml = '';
-    if (adjPct > curPct) {
-      summaryHtml = '<div class="plain-summary">' +
-        '<p>Salary sacrifice means you pay less tax, so more reaches your pension for less cost to you.</p></div>';
-    } else if (adjPct === curPct) {
-      summaryHtml = '<div class="plain-summary"><p>This is your current setup — try moving the slider to see what changes.</p></div>';
-    } else {
-      summaryHtml = '<div class="plain-summary"><p>At ' + adjPct + '%, more goes into your pocket, less into your pension.</p></div>';
-    }
 
-    // ── The Deal — one glance, zero thinking ─────────────────────────
-    var costPerMonth = Math.abs(diff);
-    var pensionGainPerMonth = (adjPension + empPension - curPension - curEmpPension) / 12;
-    var ratio = costPerMonth > 0 ? (pensionGainPerMonth / costPerMonth).toFixed(1) : 0;
+    // Find the max value across all metrics for consistent bar scaling
+    var curPensionTotal = (curPension + curEmpPension) / 12;
+    var adjPensionTotal = (adjPension + empPension) / 12;
+    var curTaxTotal = (curCalc.tax + curCalc.ni) / 12;
+    var adjTaxTotal = (adjCalc.tax + adjCalc.ni) / 12;
+    var barMax = Math.max(curMonthly, adjMonthly, curPensionTotal, adjPensionTotal, curTaxTotal, adjTaxTotal, 1);
 
-    var boxesHtml = '';
-    if (adjPct !== curPct) {
-      boxesHtml =
-        '<div class="deal-card">' +
-          '<div class="deal-half cost">' +
-            '<div class="deal-label">Your take-home drops by</div>' +
-            '<div class="deal-amount">' + fmt(costPerMonth) + '</div>' +
-            '<div class="deal-sub">per month</div>' +
-          '</div>' +
-          '<div class="deal-half gain">' +
-            '<div class="deal-label">Your pension grows by</div>' +
-            '<div class="deal-amount">' + fmt(pensionGainPerMonth) + '</div>' +
-            '<div class="deal-sub">per month (you + employer)</div>' +
-          '</div>' +
+    function buildGroup(title, color, nowVal, newVal) {
+      var nowPct = (nowVal / barMax * 100).toFixed(1);
+      var newPct = (newVal / barMax * 100).toFixed(1);
+      var diffVal = newVal - nowVal;
+      var diffCls = diffVal > 0.5 ? 'positive' : diffVal < -0.5 ? 'negative' : 'neutral';
+      var diffStr = diffVal > 0.5 ? '+' + fmt(Math.round(diffVal)) : diffVal < -0.5 ? '-' + fmt(Math.round(Math.abs(diffVal))) : 'no change';
+      var newLabel = isRec ? 'Suggested' : 'Adjusted';
+      return '<div class="pay-bar-group">' +
+        '<div class="pay-bar-group-title">' + title + '</div>' +
+        '<div class="pay-bar-row">' +
+          '<div class="pay-bar-label">Now</div>' +
+          '<div class="pay-bar-track"><div class="pay-bar-fill now" style="width:' + nowPct + '%; background:' + color + ';">' + (parseFloat(nowPct) > 12 ? fmt(Math.round(nowVal)) : '') + '</div></div>' +
+          '<div class="pay-bar-value">' + fmt(Math.round(nowVal)) + '</div>' +
+          '<div class="pay-bar-diff neutral"></div>' +
         '</div>' +
-        (costPerMonth > 1 && pensionGainPerMonth > 0 ? '<div class="deal-verdict">Every \u00a31 less in take-home puts \u00a3' + ratio + ' into your pension</div>' : '');
+        '<div class="pay-bar-row">' +
+          '<div class="pay-bar-label">' + newLabel + '</div>' +
+          '<div class="pay-bar-track"><div class="pay-bar-fill" style="width:' + newPct + '%; background:' + color + ';">' + (parseFloat(newPct) > 12 ? fmt(Math.round(newVal)) : '') + '</div></div>' +
+          '<div class="pay-bar-value">' + fmt(Math.round(newVal)) + '</div>' +
+          '<div class="pay-bar-diff ' + diffCls + '">' + diffStr + '</div>' +
+        '</div>' +
+      '</div>';
     }
 
-    // ── Detail table ──────────────────────────────────────────────────────
-    var newLabel = isRec ? 'New (' + adjPct + '%)' : 'Adjusted (' + adjPct + '%)';
-    var rows = [
-      { label: 'You put into your pension', cur: fmt(curPension/12)+'/mo', adj: fmt(adjPension/12)+'/mo', adjCls: adjPension >= curPension ? 'win' : '' },
-      { label: 'Your employer puts in',     cur: fmt(curEmpPension/12)+'/mo', adj: fmt(empPension/12)+'/mo', adjCls: empPension > curEmpPension ? 'win' : '' },
-      { label: 'Total going into your pension', cur: fmt((curPension+curEmpPension)/12)+'/mo', adj: fmt(totalPension/12)+'/mo', adjCls: totalPension > curPension+curEmpPension ? 'win' : '' },
-      { label: 'Tax you pay',               cur: fmt(curCalc.tax/12)+'/mo', adj: fmt(adjCalc.tax/12)+'/mo', adjCls: adjCalc.tax < curCalc.tax ? 'win' : '' },
-      { label: 'National Insurance you pay', cur: fmt(curCalc.ni/12)+'/mo', adj: fmt(adjCalc.ni/12)+'/mo', adjCls: adjCalc.ni < curCalc.ni ? 'win' : '' },
-      { label: 'What you take home each month', cur: fmt(curMonthly), adj: fmt(adjMonthly), adjCls: adjMonthly >= curMonthly ? 'win' : 'lose', bold: true },
-      { label: 'What you take home each year',  cur: fmt(curCalc.takeHome), adj: fmt(adjCalc.takeHome), adjCls: adjCalc.takeHome >= curCalc.takeHome ? 'win' : 'lose', bold: true },
-    ];
+    var barsHtml = '<div class="pay-bars">' +
+      buildGroup('Take-home', '#0d9488', curMonthly, adjMonthly) +
+      buildGroup('Pension', '#0f766e', curPensionTotal, adjPensionTotal) +
+      buildGroup('Tax', '#dc2626', curTaxTotal, adjTaxTotal) +
+    '</div>';
 
-    var tableHtml =
-      '<table class="compare-table" style="margin-top:1.25rem;">' +
-        '<thead><tr>' +
-          '<th>Item</th>' +
-          '<th>Now (' + curPct + '%)</th>' +
-          '<th class="teal-col">' + newLabel + '</th>' +
-        '</tr></thead><tbody>';
-
-    rows.forEach(function(row) {
-      tableHtml +=
-        '<tr><td' + (row.bold ? ' style="font-weight:600;color:var(--navy);"' : '') + '>' + row.label + '</td>' +
-        '<td>' + row.cur + '</td>' +
-        '<td class="' + (row.adjCls||'') + '">' + row.adj + '</td></tr>';
-    });
-    tableHtml += '</tbody></table>';
-
-    var toggleHtml =
-      '<details class="breakdown-toggle">' +
-        '<summary>See full breakdown</summary>' +
-        tableHtml +
-      '</details>';
-    document.getElementById('takeHomeGrid').innerHTML = matchAlertHtml + summaryHtml + boxesHtml + toggleHtml;
+    document.getElementById('takeHomeGrid').innerHTML = barsHtml;
 
     var bc = document.getElementById('barChart');
     if (bc) bc.innerHTML = '';
@@ -2065,57 +2215,45 @@
     // Guidance
     var subsidyPct = grossExtra > 0 ? Math.round((grossExtra - realCost * 12) / grossExtra * 100) : 0;
 
-    var guidanceHtml = isRec
-      ? '<div class="guidance-box">' +
-          '<h4>Why we suggest ' + adjPct + '%</h4>' +
-          '<p>To put an extra ' + fmt(Math.max(0, grossExtra)/12) + '/month into your pension via salary sacrifice, your take-home reduces by just ' + fmt(realCost) + '/month \u2014 because you save ' + (isHigher ? '40%' : '20%') + ' income tax and 8% NI on the amount sacrificed. ' +
-          (isHigher ? 'As a higher rate taxpayer, salary sacrifice is particularly powerful \u2014 the government effectively subsidises ' + subsidyPct + '% of your contribution.' : 'Every \u00a3100 extra you contribute only costs you around \u00a372 in take-home pay.') +
-          ' Use the slider above to explore different levels.</p>' +
-          '<p style="font-size:0.75rem;color:var(--slate-light);margin-top:0.5rem;font-style:italic;">Remember, this is just a guide \u2014 a financial adviser can help you decide what\u2019s right for you.</p>' +
-        '</div>'
-      : '<div class="guidance-box">' +
-          '<h4>At ' + adjPct + '% contribution</h4>' +
-          '<p>You\u2019d take home ' + fmt(adjMonthly) + '/month and contribute ' + fmt(adjPension) + '/year to your pension' +
-          (empPension > 0 ? ', plus ' + fmt(empPension) + '/year from your employer (total ' + fmt(totalPension) + '/year going in)' : '') +
-          '. Your take-home ' + (diff < 0 ? 'reduces by ' + fmt(realCost) + '/month compared to now' : 'stays the same or increases') + '.</p>' +
-          '<p style="font-size:0.75rem;color:var(--slate-light);margin-top:0.5rem;font-style:italic;">This is just a guide \u2014 a financial adviser can help you decide what\u2019s right for you.</p>' +
-        '</div>';
+    var guidanceSummary = isRec ? 'Why we suggest ' + adjPct + '%' : 'At ' + adjPct + '% contribution';
+    var guidanceBody = isRec
+      ? '<p>For every extra ' + fmt(Math.round(Math.max(0, grossExtra)/12)) + ' that goes into your pension each month, your actual pay only drops by ' + fmt(realCost) + '. ' +
+        'That\u2019s because pension contributions are taken before tax, so you don\u2019t pay tax or National Insurance on that money. ' +
+        (isHigher ? 'Because you\u2019re a higher earner, you save even more \u2014 roughly ' + subsidyPct + 'p of every \u00a31 is covered by tax you would have paid anyway.' : 'Roughly 28p of every \u00a31 you put in is covered by tax you would have paid anyway.') +
+        '</p>' +
+        '<p style="font-size:0.75rem;color:var(--slate-light);margin-top:0.5rem;font-style:italic;">This is just a guide \u2014 a financial adviser can help you decide what\u2019s right for you.</p>'
+      : '<p>At ' + adjPct + '%, your monthly take-home would be ' + fmt(adjMonthly) + ' and ' + fmt(Math.round(adjPension)) + '/year would go into your pension' +
+        (empPension > 0 ? ' (plus ' + fmt(Math.round(empPension)) + ' from your employer)' : '') +
+        '. ' + (diff < 0 ? 'That\u2019s ' + fmt(realCost) + '/month less in your pocket than now.' : 'Your take-home stays the same or goes up.') + '</p>' +
+        '<p style="font-size:0.75rem;color:var(--slate-light);margin-top:0.5rem;font-style:italic;">This is just a guide \u2014 a financial adviser can help you decide what\u2019s right for you.</p>';
 
-    document.getElementById('takeHomeGuidance').innerHTML = guidanceHtml;
+    document.getElementById('takeHomeGuidance').innerHTML =
+      '<details class="breakdown-toggle">' +
+        '<summary>' + guidanceSummary + '</summary>' +
+        '<div class="guidance-box" style="margin-top:0.75rem;">' + guidanceBody + '</div>' +
+      '</details>';
 
     // Summary panel
     var recEl = document.getElementById('recSummary');
     if (recEl) {
-      var diffAmtClass = diff < -10 ? 'warn' : 'good';
-      var diffSign = diff >= 0 ? '+' : '';
-      recEl.innerHTML =
-        '<div class="rec-summary-title">' + (isRec ? '&#10022; Our suggestion' : '&#9998; Your adjusted scenario') + '</div>' +
-        '<div class="rec-cards">' +
-          '<div class="rec-card teal">' +
-            '<div class="rc-icon">&#128178;</div>' +
-            '<div class="rc-label">Your contribution</div>' +
-            '<div class="rc-amount">' + adjPct + '%</div>' +
-            '<div class="rc-sub">' + fmt(adjPension) + '/yr</div>' +
-          '</div>' +
-          '<div class="rec-card">' +
-            '<div class="rc-icon">&#127970;</div>' +
-            '<div class="rc-label">Employer adds</div>' +
-            '<div class="rc-amount">' + effectiveEmpPct + '%</div>' +
-            '<div class="rc-sub">' + fmt(empPension) + '/yr</div>' +
-          '</div>' +
-          '<div class="rec-card teal">' +
-            '<div class="rc-icon">&#128200;</div>' +
-            '<div class="rc-label">Total into pension</div>' +
-            '<div class="rc-amount">' + totalPct + '%</div>' +
-            '<div class="rc-sub">' + fmt(totalPension) + '/yr</div>' +
-          '</div>' +
-          '<div class="rec-card">' +
-            '<div class="rc-icon">&#128176;</div>' +
-            '<div class="rc-label">Monthly take-home</div>' +
-            '<div class="rc-amount">' + fmt(adjMonthly) + '</div>' +
-            '<div class="rc-sub">' + diffSign + fmt(diff) + ' vs current</div>' +
-          '</div>' +
-        '</div>';
+      var increasePct = adjPct - curPct;
+      var increaseAmt = Math.abs(adjPension - curPension);
+      if (adjPct === curPct) {
+        recEl.innerHTML =
+          '<div class="rec-summary-title">&#9998; Your current setup</div>' +
+          '<div class="rec-hero"><div class="rc-hero-amount">' + adjPct + '%</div>' +
+          '<div class="rc-hero-sub">contribution — try the slider to explore changes</div></div>';
+      } else {
+        var totalInPct = adjPct + effectiveEmpPct;
+        var totalInAmt = (adjPension + empPension) / 12;
+        recEl.innerHTML =
+          '<div class="rec-summary-title">' + (isRec ? '&#10022; Our suggestion' : '&#9998; Your adjusted scenario') + '</div>' +
+          '<div class="rec-hero">' +
+            '<div class="rc-hero-label">' + (adjPct > curPct ? 'Increase your contribution to' : 'Decrease your contribution to') + '</div>' +
+            '<div class="rc-hero-amount">' + adjPct + '%</div>' +
+            '<div class="rc-hero-sub">' + fmt(Math.round(totalInAmt)) + '/mo total into your pension (includes ' + effectiveEmpPct + '% from your employer)</div>' +
+          '</div>';
+      }
     }
   }
 
@@ -2247,7 +2385,7 @@
         <div class="r-sub">At ${curPct}% contribution</div>
       </div>
       <div class="result-box highlight">
-        <div class="r-label">Pot at Retirement (Target Rate)</div>
+        <div class="r-label">Pot at Retirement (Suggested Rate)</div>
         <div class="r-amount">${finalTgt >= 1000000 ? (finalTgt/1000000).toFixed(2)+'M' : fmt(finalTgt)}</div>
         <div class="r-sub">At ${tgtPct}% contribution</div>
       </div>
@@ -2255,6 +2393,99 @@
         <div class="r-label">Extra Accumulated</div>
         <div class="r-amount">${extra >= 1000000 ? (extra/1000000).toFixed(2)+'M' : fmt(extra)}</div>
         <div class="r-sub">By increasing your contribution</div>
+      </div>
+    `;
+
+    // ── Retirement Living Standards indicator ─────────────────────────
+    // PLSA 2025 figures (single person, after tax)
+    const RLS_MIN = 13400;
+    const RLS_MOD = 31700;
+    const RLS_COM = 43900;
+    // State Pension (full new, 2025/26)
+    const statePension = 11973;
+
+    // Estimate annual retirement income using 4% drawdown rule
+    // Add State Pension to give a fuller picture
+    const curIncome = (finalCur * 0.04) + statePension;
+    const tgtIncome = (finalTgt * 0.04) + statePension;
+
+    function rlsLevel(income) {
+      if (income >= RLS_COM) return { label: 'Comfortable', cls: 'comfortable', color: '#0f766e' };
+      if (income >= RLS_MOD) return { label: 'Moderate', cls: 'moderate', color: '#0d9488' };
+      if (income >= RLS_MIN) return { label: 'Minimum', cls: 'minimum', color: '#f59e0b' };
+      return { label: 'Below minimum', cls: 'below', color: '#94a3b8' };
+    }
+
+    const curLevel = rlsLevel(curIncome);
+    const tgtLevel = rlsLevel(tgtIncome);
+
+    // Position markers on a scale from 0 to comfortable * 1.2
+    const scaleMax = RLS_COM * 1.3;
+    function pct(v) { return Math.min(100, Math.max(0, (v / scaleMax) * 100)); }
+
+    const zoneBelow = pct(RLS_MIN);
+    const zoneMin   = pct(RLS_MOD) - zoneBelow;
+    const zoneMod   = pct(RLS_COM) - pct(RLS_MOD);
+    const zoneCom   = 100 - pct(RLS_COM);
+
+    const curPos = pct(curIncome);
+    const tgtPos = pct(tgtIncome);
+
+    let verdictHtml = '';
+    if (tgtPct > curPct) {
+      if (tgtLevel.label === curLevel.label) {
+        verdictHtml = `<p>Both your current and suggested contributions put you at a <strong>${tgtLevel.label.toLowerCase()}</strong> retirement living standard. Increasing your contribution builds more buffer within that level.</p>`;
+      } else {
+        verdictHtml = `<p>Your current contribution puts you at a <strong style="color:${curLevel.color}">${curLevel.label.toLowerCase()}</strong> standard. Increasing to ${tgtPct}% moves you up to <strong>${tgtLevel.label.toLowerCase()}</strong>.</p>`;
+      }
+    } else {
+      verdictHtml = `<p>At your current contribution, you're on track for a <strong style="color:${tgtLevel.color}">${tgtLevel.label.toLowerCase()}</strong> retirement living standard (about ${fmt(Math.round(tgtIncome))}/yr including State Pension).</p>`;
+    }
+
+    document.getElementById('rlsIndicator').innerHTML = `
+      <div class="rls-section">
+        <div class="rls-title">Where you stand</div>
+        <div class="rls-subtitle">Estimated retirement income based on 4% drawdown plus full State Pension (${fmt(statePension)}/yr). Standards set by the <a href="https://www.retirementlivingstandards.org.uk/" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:underline;">PLSA Retirement Living Standards</a>.</div>
+
+        <div style="display:flex; flex-direction:column; gap:0.3rem; margin-bottom:0.75rem;">
+          <div style="font-size:0.72rem; color:var(--slate);"><span style="display:inline-block;width:8px;height:8px;border-radius:3px;background:#f59e0b;margin-right:0.35rem;vertical-align:middle;"></span><strong style="color:#f59e0b;">Minimum</strong> ${fmt(RLS_MIN)}/yr</div>
+          <div style="font-size:0.72rem; color:var(--slate);"><span style="display:inline-block;width:8px;height:8px;border-radius:3px;background:#0d9488;margin-right:0.35rem;vertical-align:middle;"></span><strong style="color:#0d9488;">Moderate</strong> ${fmt(RLS_MOD)}/yr</div>
+          <div style="font-size:0.72rem; color:var(--slate);"><span style="display:inline-block;width:8px;height:8px;border-radius:3px;background:#0f766e;margin-right:0.35rem;vertical-align:middle;"></span><strong style="color:#0f766e;">Comfortable</strong> ${fmt(RLS_COM)}/yr</div>
+        </div>
+
+        <div class="rls-track-wrap">
+          <div class="rls-track">
+            <div class="rls-zone zone-below" style="width:${zoneBelow}%">Below</div>
+            <div class="rls-zone zone-minimum" style="width:${zoneMin}%">Minimum</div>
+            <div class="rls-zone zone-moderate" style="width:${zoneMod}%">Moderate</div>
+            <div class="rls-zone zone-comfortable" style="width:${zoneCom}%">Comfortable</div>
+          </div>
+
+          ${curPct !== tgtPct ? `<div class="rls-pip" style="left:${curPos}%">
+            <div class="rls-pip-arrow"></div>
+            <div class="rls-pip-tag">Now</div>
+          </div>` : ''}
+
+          <div class="rls-pip above" style="left:${tgtPos}%">
+            <div class="rls-pip-arrow"></div>
+            <div class="rls-pip-tag">${curPct === tgtPct ? 'You' : 'Suggested'}</div>
+          </div>
+        </div>
+
+        <div class="rls-positions">
+          ${curPct !== tgtPct ? `<div class="rls-pos-row">
+            <div class="rls-pos-badge" style="background:${curLevel.color};">Now</div>
+            <div class="rls-pos-income">${fmt(Math.round(curIncome))}/yr</div>
+            <div class="rls-pos-level">${curLevel.label} standard</div>
+          </div>` : ''}
+          <div class="rls-pos-row target">
+            <div class="rls-pos-badge" style="background:var(--navy);">${curPct === tgtPct ? 'You' : 'Suggested'}</div>
+            <div class="rls-pos-income">${fmt(Math.round(tgtIncome))}/yr</div>
+            <div class="rls-pos-level">${tgtLevel.label} standard</div>
+          </div>
+        </div>
+
+        <div class="rls-verdict">${verdictHtml}</div>
       </div>
     `;
   }
@@ -2276,7 +2507,29 @@
     const meterColor = breached ? '#e53e3e' : usedPct > 80 ? '#d97706' : 'var(--teal)';
 
     document.getElementById('allowanceContent').innerHTML = `
-      <div class="allowance-meter">
+      ${breached ? `<div class="rec-hero" style="background:linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);">
+        <div class="rc-hero-label">Annual allowance exceeded</div>
+        <div class="rc-hero-amount">${fmt(totalContrib - annualAllowance)}</div>
+        <div class="rc-hero-sub">over the £60,000 limit — the excess would be subject to a tax charge at your marginal rate</div>
+      </div>` : ''}
+      ${!breached && usedPct > 80 ? `<div class="rec-hero" style="background:linear-gradient(135deg, #d97706 0%, #b45309 100%);">
+        <div class="rc-hero-label">Approaching your annual allowance</div>
+        <div class="rc-hero-amount">${fmt(remaining)}</div>
+        <div class="rc-hero-sub">remaining of your £60,000 allowance this tax year</div>
+      </div>` : ''}
+      ${!breached && usedPct <= 80 ? `<div class="rec-hero">
+        <div class="rc-hero-label">Within annual allowance</div>
+        <div class="rc-hero-amount">${fmt(remaining)}</div>
+        <div class="rc-hero-sub">remaining of your £60,000 allowance — you're comfortably within the limit</div>
+      </div>` : ''}
+
+      ${tapered ? `<div class="rec-hero" style="background:linear-gradient(135deg, #d97706 0%, #b45309 100%); margin-top:0.75rem;">
+        <div class="rc-hero-label">Tapered annual allowance may apply</div>
+        <div class="rc-hero-amount">${fmt(taperedAllowance)}</div>
+        <div class="rc-hero-sub">Your salary exceeds £260,000 so your allowance may be reduced. This needs specialist advice.</div>
+      </div>` : ''}
+
+      <div class="allowance-meter" style="margin-top:1.25rem;">
         <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.5rem;">
           <span style="font-size:0.85rem; font-weight:500; color:var(--navy);">Annual allowance used</span>
           <span style="font-family:'Playfair Display',serif; font-size:1.1rem; color:${meterColor}; font-weight:700;">${fmt(totalContrib)} / ${fmt(annualAllowance)}</span>
@@ -2291,27 +2544,23 @@
         </div>
       </div>
 
-      ${breached ? `<div class="alert-box danger"><h4>⚠ Annual allowance exceeded</h4><p>Your total contributions of ${fmt(totalContrib)} exceed the £60,000 annual allowance. The excess (${fmt(totalContrib - annualAllowance)}) would be subject to a tax charge at your marginal rate. Consider reducing contributions or using carry forward.</p></div>` : ''}
-      ${!breached && usedPct > 80 ? `<div class="alert-box warning"><h4>Approaching your annual allowance</h4><p>You're using ${Math.round(usedPct)}% of your allowance. You have ${fmt(remaining)} of headroom remaining this tax year.</p></div>` : ''}
-      ${!breached && usedPct <= 80 ? `<div class="alert-box"><h4>✓ Within annual allowance</h4><p>Your total contributions of ${fmt(totalContrib)} are comfortably within the £60,000 limit. You have ${fmt(remaining)} of remaining allowance this year.</p></div>` : ''}
-
-      ${tapered ? `<div class="alert-box warning" style="margin-top:0.75rem;"><h4>Tapered annual allowance may apply</h4><p>Your salary exceeds £260,000. Your tapered allowance could be as low as ${fmt(taperedAllowance)}. This requires specialist advice to calculate accurately.</p></div>` : ''}
-
-      <div style="margin-top:1.25rem;">
-        <div style="font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:var(--slate-light); margin-bottom:0.75rem;">Contribution breakdown</div>
-        <div class="summary-row" style="border-top:1px solid rgba(0,0,0,0.07); border-bottom:1px solid rgba(0,0,0,0.07); padding:0.5rem 0;">
-          <span style="font-size:0.85rem; color:var(--slate);">Your contribution (${tgtPct}%)</span>
-          <span style="font-size:0.85rem; font-weight:500; color:var(--navy);">${fmt(salary * tgtPct / 100)}/yr</span>
+      <details class="breakdown-toggle" style="margin-top:1.25rem;">
+        <summary>Contribution breakdown</summary>
+        <div style="margin-top:0.75rem;">
+          <div class="summary-row" style="border-top:1px solid rgba(0,0,0,0.07); border-bottom:1px solid rgba(0,0,0,0.07); padding:0.5rem 0;">
+            <span style="font-size:0.85rem; color:var(--slate);">Your contribution (${tgtPct}%)</span>
+            <span style="font-size:0.85rem; font-weight:500; color:var(--navy);">${fmt(salary * tgtPct / 100)}/yr</span>
+          </div>
+          <div class="summary-row" style="border-bottom:1px solid rgba(0,0,0,0.07); padding:0.5rem 0;">
+            <span style="font-size:0.85rem; color:var(--slate);">Employer contribution (${empPct}%)</span>
+            <span style="font-size:0.85rem; font-weight:500; color:var(--navy);">${fmt(salary * empPct / 100)}/yr</span>
+          </div>
+          <div class="summary-row" style="padding:0.5rem 0;">
+            <span style="font-size:0.85rem; font-weight:600; color:var(--navy);">Total going in</span>
+            <span style="font-size:0.85rem; font-weight:600; color:var(--teal);">${fmt(totalContrib)}/yr</span>
+          </div>
         </div>
-        <div class="summary-row" style="border-bottom:1px solid rgba(0,0,0,0.07); padding:0.5rem 0;">
-          <span style="font-size:0.85rem; color:var(--slate);">Employer contribution (${empPct}%)</span>
-          <span style="font-size:0.85rem; font-weight:500; color:var(--navy);">${fmt(salary * empPct / 100)}/yr</span>
-        </div>
-        <div class="summary-row" style="padding:0.5rem 0;">
-          <span style="font-size:0.85rem; font-weight:600; color:var(--navy);">Total going in</span>
-          <span style="font-size:0.85rem; font-weight:600; color:var(--teal);">${fmt(totalContrib)}/yr</span>
-        </div>
-      </div>`;
+      </details>`;
 
     // Final summary panel
     const salary2 = salary;
@@ -2325,14 +2574,56 @@
     document.getElementById('finalSummary').innerHTML = `
       <div class="summary-panel-title">Your optimised pension plan</div>
       <div class="summary-row"><span class="s-label">Gross salary</span><span class="s-val">${fmt(salary)}/yr</span></div>
-      <div class="summary-row"><span class="s-label">Your contribution</span><span class="s-val teal">${tgtPct}% (${fmt(tgtPension)}/yr)</span></div>
-      <div class="summary-row"><span class="s-label">Employer contribution</span><span class="s-val">${empPct}% (${fmt(salary * empPct / 100)}/yr)</span></div>
+      <div class="summary-row"><span class="s-label">Your contribution</span><span class="s-val teal">${fmt(tgtPension)}/yr (${tgtPct}%)</span></div>
+      <div class="summary-row"><span class="s-label">Employer contribution</span><span class="s-val">${fmt(salary * empPct / 100)}/yr (${empPct}%)</span></div>
       <div class="summary-row"><span class="s-label">Monthly take-home</span><span class="s-val">${fmt(tgtCalc.takeHome / 12)}</span></div>
       <div class="summary-row"><span class="s-label">Monthly take-home change</span><span class="s-val">${fmt((tgtCalc.takeHome - curCalc.takeHome) / 12)}</span></div>
       <div class="summary-row"><span class="s-label">Recommended method</span><span class="s-val teal">Salary Sacrifice</span></div>
-      <div class="summary-row"><span class="s-label">Years to retirement</span><span class="s-val">${years}</span></div>
       <div class="summary-row"><span class="s-label">Annual allowance status</span><span class="s-val ${breached ? '' : 'teal'}">${breached ? '⚠ Exceeded' : '✓ Within limit'}</span></div>
     `;
+
+    const diffPct = tgtPct - curPct;
+    const actionEl = document.getElementById('actionPlan');
+    if (actionEl) {
+      actionEl.innerHTML = `
+        <div class="action-plan">
+          <div class="action-plan-title">Your next steps</div>
+          <div class="action-plan-subtitle">Here's what to do to put this plan into action.</div>
+
+          <div class="action-item">
+            <input type="checkbox" id="action1">
+            <label class="action-item-text" for="action1">
+              Download your PDF report using the button below
+              <span class="action-hint">Keep a copy for your records and to share with your employer or adviser.</span>
+            </label>
+          </div>
+
+          <div class="action-item">
+            <input type="checkbox" id="action2">
+            <label class="action-item-text" for="action2">
+              Contact your HR or payroll team and ask to ${diffPct > 0 ? 'increase' : 'change'} your pension contribution to ${tgtPct}% via salary sacrifice
+              <span class="action-hint">Most employers have a form or online portal for this. Ask for salary sacrifice specifically — it saves you the most.</span>
+            </label>
+          </div>
+
+          <div class="action-item">
+            <input type="checkbox" id="action3">
+            <label class="action-item-text" for="action3">
+              Check your next payslip to confirm the change has been applied
+              <span class="action-hint">Your take-home should be around ${fmt(Math.round(tgtCalc.takeHome / 12))}/month and your pension deduction should show ${tgtPct}%.</span>
+            </label>
+          </div>
+
+          <div class="action-item">
+            <input type="checkbox" id="action4">
+            <label class="action-item-text" for="action4">
+              Consider speaking to a financial adviser for personalised guidance
+              <span class="action-hint">Especially useful if you're close to the annual allowance, have multiple pensions, or want to explore your options further.</span>
+            </label>
+          </div>
+        </div>
+      `;
+    }
   }
 
   // ── NAVIGATION ─────────────────────────────────────────────────────────────
@@ -2378,65 +2669,91 @@
   // ── OPTIMISE MODE ───────────────────────────────────────────────────────────
   const GOALS = [
     {
+      id: 'min_takehome',
+      title: 'Protect my take-home pay',
+      desc: 'Tell us the minimum you need each month and we won\u2019t suggest going below that.',
+      dynamic: true,
+      calc: (salary, empPct) => 1, // always relevant — user sets the amount
+    },
+    {
       id: 'avoid_higher',
-      title: 'Avoid higher rate tax',
-      desc: 'Keep income below £50,270 so you stay in the basic rate band.',
+      title: 'Pay less tax',
+      desc: 'Put enough in your pension to keep your taxable pay below £50,270 — the point where you start paying more tax.',
       calc: (salary, empPct) => Math.max(0, salary - 50270),
     },
     {
       id: 'child_benefit',
       title: 'Keep Child Benefit',
-      desc: 'Keep your income below £60,000 to avoid losing Child Benefit.',
+      desc: 'If you earn over £60,000 you start losing Child Benefit. We\u2019ll bring your taxable pay below that.',
       calc: (salary, empPct) => Math.max(0, salary - 60000),
     },
     {
       id: 'avoid_additional',
-      title: 'Avoid additional rate tax',
-      desc: 'Keep income below £125,140 to avoid the 45% rate and retain your personal allowance.',
+      title: 'Keep more of my high earnings',
+      desc: 'Above £125,140 you lose your tax-free allowance and pay the highest rate. We\u2019ll help you keep below that.',
       calc: (salary, empPct) => Math.max(0, salary - 125140),
-    },
-    {
-      id: 'maximise',
-      title: 'Maximise pension growth',
-      desc: 'Contribute up to the annual allowance (£60,000 or 100% of salary, whichever is lower).',
-      calc: (salary, empPct) => Math.max(0, Math.min(60000, salary) - salary * empPct / 100),
     },
   ];
 
   let selectedGoals = new Set();
-  let optimiseMode = false;
+  let optimiseMode = true;
 
   function setContribMode(mode) {
     optimiseMode = mode === 'optimise';
-    document.getElementById('mode_manual').classList.toggle('selected', !optimiseMode);
-    document.getElementById('mode_optimise').classList.toggle('selected', optimiseMode);
-    document.getElementById('manualContribWrap').style.display = optimiseMode ? 'none' : 'block';
-    document.getElementById('optimiseWrap').style.display = optimiseMode ? 'block' : 'none';
+    var manualWrap = document.getElementById('manualContribWrap');
+    var optWrap = document.getElementById('optimiseWrap');
+    if (manualWrap) manualWrap.style.display = optimiseMode ? 'none' : 'block';
+    if (optWrap) optWrap.style.display = optimiseMode ? 'block' : 'none';
     if (optimiseMode) renderGoals();
+  }
+
+  var _minTakeHomeVal = '';
+
+  function onMinTakeHomeInput() {
+    var el = document.getElementById('minTakeHomePO');
+    if (el) _minTakeHomeVal = el.value;
+    // Update just the description text without rebuilding the input
+    var descEl = document.getElementById('minTakeHomeDesc');
+    var v = parseFloat(_minTakeHomeVal) || 0;
+    if (descEl) {
+      var goal = GOALS.find(function(g) { return g.id === 'min_takehome'; });
+      descEl.innerHTML = v > 0
+        ? 'We\'ll keep your take-home above <strong style="color:var(--navy)">\u00a3' + Math.round(v).toLocaleString('en-GB') + '/month</strong>.'
+        : goal.desc;
+    }
+    updateOptimiseResult();
   }
 
   function renderGoals() {
     const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
     const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
-    const minTH = parseFloat(document.getElementById('minTakeHomePO').value) || 0;
+    const minTH = parseFloat(_minTakeHomeVal) || 0;
     const list = document.getElementById('goalsList');
 
     list.innerHTML = GOALS.map(function(g) {
       const sel = selectedGoals.has(g.id);
 
       if (g.dynamic && g.id === 'min_takehome') {
-        const hasMin = minTH > 0;
+        const hasMin = sel && minTH > 0;
         const desc = hasMin
-          ? 'Find the highest contribution that keeps take-home above <strong style="color:var(--navy)">\u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month</strong>.'
+          ? 'We\'ll keep your take-home above <strong style="color:var(--navy)">\u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month</strong>.'
           : g.desc;
-        return '<div class="goal-item' + (sel ? ' selected' : '') + (!hasMin ? ' disabled' : '') + '" '
-          + (hasMin ? 'onclick="toggleGoal(\'' + g.id + '\')"' : '')
-          + ' style="' + (!hasMin ? 'opacity:0.45;cursor:not-allowed;' : '') + '">'
+        var html = '<div class="goal-item' + (sel ? ' selected' : '') + '" '
+          + 'onclick="toggleGoal(\'' + g.id + '\')">'
           + '<div class="goal-check">' + (sel ? '\u2713' : '') + '</div>'
           + '<div class="goal-text">'
           + '<div class="g-title">' + g.title + '</div>'
-          + '<div class="g-desc">' + desc + (!hasMin ? ' <span style="color:#94a3b8">Enter a minimum above to use this goal.</span>' : '') + '</div>'
+          + '<div class="g-desc" id="minTakeHomeDesc">' + desc + '</div>'
           + '</div></div>';
+        if (sel) {
+          html += '<div style="margin-left:2rem; margin-top:0.25rem; margin-bottom:0.25rem;">'
+            + '<div class="input-wrap" style="max-width:220px;">'
+            + '<span class="input-prefix">\u00a3</span>'
+            + '<input type="number" id="minTakeHomePO" placeholder="e.g. 3500" min="0" class="has-suffix" value="' + (_minTakeHomeVal || '') + '" oninput="onMinTakeHomeInput()" style="font-size:0.9rem;">'
+            + '<span class="input-suffix">/mo</span>'
+            + '</div></div>';
+        }
+        return html;
       }
 
       const needed = salary > 0 ? g.calc(salary, empPct) : null;
@@ -2448,7 +2765,7 @@
         + '<div class="goal-text">'
         + '<div class="g-title">' + g.title + '</div>'
         + '<div class="g-desc">' + g.desc
-        + (relevant ? ' <strong style="color:var(--teal)">Needs ' + pctNeeded + '% of salary.</strong>' : salary > 0 ? ' <span style="color:#94a3b8">Already achieved at your salary.</span>' : '')
+        + (!relevant && salary > 0 ? ' <span style="color:#94a3b8">Already achieved at your salary.</span>' : '')
         + '</div></div></div>';
     }).join('');
 
@@ -2459,8 +2776,10 @@
     const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
     const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
     const goal = GOALS.find(g => g.id === id);
-    const needed = goal.calc(salary, empPct);
-    if (needed <= 0 && salary > 0) return; // already achieved
+    if (!goal.dynamic) {
+      const needed = goal.calc(salary, empPct);
+      if (needed <= 0 && salary > 0) return; // already achieved
+    }
     if (selectedGoals.has(id)) selectedGoals.delete(id);
     else selectedGoals.add(id);
     renderGoals();
@@ -2469,11 +2788,8 @@
   function updateOptimiseResult() {
     const salary = parseFloat(document.getElementById('grossSalary').value) || 0;
     const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
-    const minTH = parseFloat(document.getElementById('minTakeHomePO').value) || 0;
-    const resultBox = document.getElementById('optimiseResult');
-
-    if (!salary || selectedGoals.size === 0) {
-      resultBox.style.display = 'none';
+    const minTH = parseFloat(_minTakeHomeVal) || 0;
+    if (!salary) {
       return;
     }
 
@@ -2517,8 +2833,12 @@
       drivingGoals.push(goal.title);
     });
 
-    // Apply take-home ceiling as a hard constraint
+    // Default: maximise up to annual allowance
     var annualAllowancePct = Math.floor((60000 / salary) * 100);
+    var hasNonTHGoals = Array.from(selectedGoals).some(function(id) { return id !== 'min_takehome'; });
+    if (!hasNonTHGoals) {
+      maxNeeded = Math.ceil((Math.max(0, Math.min(60000, salary) - salary * empPct / 100) / salary) * 100);
+    }
     var uncappedPct = maxNeeded;
     var cappedPct = Math.min(maxNeeded, annualAllowancePct);
     if (takeHomeCeiling < Infinity) {
@@ -2527,47 +2847,6 @@
     }
 
     document.getElementById('targetContrib').value = cappedPct;
-
-    // Projected take-home at this contribution
-    var projTaxable = salary - (salary * cappedPct / 100);
-    var projTax = projTaxable <= 12570 ? 0
-      : projTaxable <= 50270 ? (projTaxable - 12570) * 0.2
-      : (50270 - 12570) * 0.2 + (projTaxable - 50270) * 0.4;
-    var projNI = projTaxable <= 12570 ? 0
-      : Math.min(projTaxable - 12570, 50270 - 12570) * 0.08
-      + Math.max(0, projTaxable - 50270) * 0.02;
-    var projMonthlyTH = (projTaxable - projTax - projNI) / 12;
-    var tags = Array.from(selectedGoals).map(function(id) {
-      var g = GOALS.find(function(g) { return g.id === id; });
-      return g ? '<span class="optimise-goal-tag">\u2713 ' + g.title + '</span>' : '';
-    }).join('');
-
-    // Check if take-home ceiling constrained other goals
-    var goalsCapped = minTHFlag && uncappedPct > takeHomeCeiling;
-    var floorWarning = goalsCapped
-      ? '<div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:6px;padding:0.6rem 0.85rem;margin-top:0.6rem;font-size:0.78rem;color:#fbbf24;">'
-        + '\u26a0 Your other goals would need <strong>' + uncappedPct + '%</strong>, but that would take your take-home below \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month.'
-        + ' We\u2019ve capped it at ' + cappedPct + '% to protect your take-home.'
-        + '</div>'
-      : '';
-
-    var mainMsg;
-    if (minTHFlag && selectedGoals.size > 1) {
-      mainMsg = 'Contributing ' + cappedPct + '% keeps your take-home above \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month while getting as close to your other goals as possible. Estimated take-home: <strong style="color:rgba(255,255,255,0.8)">\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>.';
-    } else if (minTHFlag) {
-      mainMsg = 'This is the highest contribution that keeps your take-home above \u00a3' + Math.round(minTH).toLocaleString('en-GB') + '/month via salary sacrifice. Your estimated take-home: <strong style="color:rgba(255,255,255,0.8)">\u00a3' + Math.round(projMonthlyTH).toLocaleString('en-GB') + '/month</strong>.';
-    } else {
-      mainMsg = 'This is the minimum employee contribution needed to achieve all your selected goals via salary sacrifice.';
-    }
-
-    resultBox.style.display = 'block';
-    resultBox.innerHTML = '<div class="optimise-result-box">'
-      + '<div class="or-title">Recommended contribution: <strong style="font-size:1.3rem;">' + cappedPct + '%</strong>'
-      + ' &nbsp;<span style="font-size:0.8rem;color:rgba(255,255,255,0.45)">(' + fmt(salary * cappedPct / 100) + '/yr)</span></div>'
-      + '<div style="margin-bottom:0.6rem;">' + tags + '</div>'
-      + '<p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;">' + mainMsg + '</p>'
-      + floorWarning
-      + '</div>';
   }
 
   function syncManualTarget() {
@@ -2581,6 +2860,7 @@
   });
 
   updateYearsLabel();
+  renderGoals();
 
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
   const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
@@ -2824,7 +3104,6 @@
       ], teal);
 
       section('Illustrative Pot Projection', [
-        ['Years to retirement', String(years) + ' years', String(years) + ' years'],
         ['Annual growth rate assumed', '4%', '4%'],
         ['Estimated pot at retirement', '', fmtN(potVal)],
         ['Annual allowance', '\u00a360,000', '\u00a360,000'],

@@ -389,6 +389,16 @@
   .ec-inner p { font-size: 0.88rem; color: #64748b; margin: 0 0 1.25rem; line-height: 1.5; }
   .ec-btn { display: inline-block; padding: 0.7rem 2rem; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; color: #fff; background: #7c3aed; cursor: pointer; transition: opacity 0.2s; }
   .ec-btn:hover { opacity: 0.88; }
+
+  /* ── Action plan checklist ──────────── */
+  .action-plan { background: var(--stone-pale); border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); padding: 1.25rem 1.25rem 1rem; }
+  .action-plan-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+  .action-plan-subtitle { font-size: 0.78rem; color: var(--slate); margin-bottom: 1rem; line-height: 1.4; }
+  .action-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .action-item:last-child { border-bottom: none; }
+  .action-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--sa, #7c3aed); flex-shrink: 0; cursor: pointer; }
+  .action-item-text { font-size: 0.85rem; color: var(--navy); line-height: 1.45; }
+  .action-item-text .action-hint { display: block; font-size: 0.72rem; color: var(--slate); margin-top: 0.15rem; }
 </style>
 </head>
 <body>
@@ -614,28 +624,9 @@
 
     <div id="deadlineSection"></div>
 
-    <hr>
-
-    <div class="guidance-box">
-      <h4>Gather these before filing</h4>
-      <ul>
-        <li><strong>P60</strong> — shows your gross pay and tax paid</li>
-        <li><strong>P11D</strong> — if you received taxable benefits</li>
-        <li><strong>Bank interest statements</strong> — if above allowance</li>
-        <li><strong>Rental records</strong> — rent and expenses</li>
-        <li><strong>Dividend statements</strong> — if you received any</li>
-        <li><strong>Pension certificates</strong> — for higher rate relief</li>
-        <li><strong>Gift Aid records</strong> — for higher rate relief</li>
-        <li><strong>UTR number</strong> — your 10-digit taxpayer reference</li>
-      </ul>
-    </div>
-
-    <div class="guidance-box" style="margin-top:1rem;">
-      <h4>First time filing?</h4>
-      <p>Register at gov.uk/register-for-self-assessment by <strong>5 October 2025</strong>. You&#8217;ll get your UTR within 10 days.</p>
-    </div>
-
     <div class="summary-panel" id="finalSummary"></div>
+
+    <div id="saActionPlan" style="margin-top:1.5rem;"></div>
 
     <div class="step-reassurance">You're almost done. Take it one step at a time.</div>
     <div class="btn-row">
@@ -1028,6 +1019,78 @@
       '<div class="summary-row"><span class="s-label">' + (r.balance > 0 ? 'To pay by 31 Jan 2026' : 'Refund due') + '</span><span class="s-val ' + (r.balance > 0 ? 'warn' : 'good') + '">' + fmt(r.balance) + '</span></div>' +
       (r.extraRelief > 0 ? '<div class="summary-row"><span class="s-label">Higher rate relief to claim</span><span class="s-val good">' + fmt(r.extraRelief) + '</span></div>' : '') +
       '<div class="summary-row"><span class="s-label">Filing deadline</span><span class="s-val">31 January 2027</span></div>';
+
+    // Action plan
+    var docs = [];
+    if (d.emp > 0) docs.push('P60 from your employer');
+    if (d.emp > 0) docs.push('P11D if you received any taxable benefits');
+    if (d.selfEmp > 0) docs.push('Business income and expense records');
+    if (d.rental > 0) docs.push('Rental income records and expense receipts');
+    if (d.dividends > 0) docs.push('Dividend statements or vouchers');
+    if (d.pension > 0) docs.push('Pension contribution certificates');
+    if (d.giftAid > 0) docs.push('Gift Aid donation records');
+    docs.push('Your UTR number (10-digit taxpayer reference)');
+
+    var docItems = docs.map(function(doc, i) {
+      return '<div class="action-item">' +
+        '<input type="checkbox" id="sa_doc_' + i + '">' +
+        '<label class="action-item-text" for="sa_doc_' + i + '">' + doc + '</label>' +
+      '</div>';
+    }).join('');
+
+    var actionEl = document.getElementById('saActionPlan');
+    if (actionEl) {
+      actionEl.innerHTML =
+        '<div class="action-plan">' +
+          '<div class="action-plan-title">Your next steps</div>' +
+          '<div class="action-plan-subtitle">Work through these to get your return filed.</div>' +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="sa_a1">' +
+            '<label class="action-item-text" for="sa_a1">Download your PDF summary using the button below' +
+              '<span class="action-hint">Keep it for your records or share with your accountant.</span>' +
+            '</label>' +
+          '</div>' +
+
+          (d.selfEmp > 0 || d.rental > 0 || d.dividends > 0 || d.other > 0 ?
+          '<div class="action-item">' +
+            '<input type="checkbox" id="sa_a1b">' +
+            '<label class="action-item-text" for="sa_a1b">Register for Self Assessment if you haven\u2019t already' +
+              '<span class="action-hint">Do this by 5 October at <a href="https://www.gov.uk/register-for-self-assessment" target="_blank" style="color:var(--sa);">gov.uk/register-for-self-assessment</a>. You\u2019ll get your UTR within 10 days.</span>' +
+            '</label>' +
+          '</div>' : '') +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="sa_a2">' +
+            '<label class="action-item-text" for="sa_a2">Gather your documents' +
+              '<span class="action-hint">Based on what you\u2019ve told us, you\u2019ll need:</span>' +
+            '</label>' +
+          '</div>' +
+          '<div style="margin-left:2.2rem; margin-bottom:0.5rem;">' + docItems + '</div>' +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="sa_a3">' +
+            '<label class="action-item-text" for="sa_a3">File your return online by 31 January 2027' +
+              '<span class="action-hint">Log in at <a href="https://www.gov.uk/self-assessment-tax-returns" target="_blank" style="color:var(--sa);">gov.uk/self-assessment-tax-returns</a> and follow the steps.</span>' +
+            '</label>' +
+          '</div>' +
+
+          (r.balance > 0 ?
+          '<div class="action-item">' +
+            '<input type="checkbox" id="sa_a4">' +
+            '<label class="action-item-text" for="sa_a4">Pay ' + fmt(r.balance) + ' to HMRC by 31 January 2027' +
+              '<span class="action-hint">You can pay online, by bank transfer, or set up a payment plan if needed.</span>' +
+            '</label>' +
+          '</div>' : '') +
+
+          '<div class="action-item">' +
+            '<input type="checkbox" id="sa_a5">' +
+            '<label class="action-item-text" for="sa_a5">Consider speaking to a tax adviser or accountant' +
+              '<span class="action-hint">Especially useful if your situation is complex or you want someone to file on your behalf.</span>' +
+            '</label>' +
+          '</div>' +
+        '</div>';
+    }
   }
 
   // ── NAVIGATION ─────────────────────────────────────────────────────────────

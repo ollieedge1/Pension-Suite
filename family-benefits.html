@@ -515,6 +515,16 @@
   .ec-inner p { font-size: 0.88rem; color: #64748b; margin: 0 0 1.25rem; line-height: 1.5; }
   .ec-btn { display: inline-block; padding: 0.7rem 2rem; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; color: #fff; background: var(--rose); cursor: pointer; transition: opacity 0.2s; }
   .ec-btn:hover { opacity: 0.88; }
+
+  /* ── Action plan checklist ──────────── */
+  .action-plan { background: var(--stone-pale, #f3f4f6); border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); padding: 1.25rem 1.25rem 1rem; }
+  .action-plan-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+  .action-plan-subtitle { font-size: 0.78rem; color: var(--slate); margin-bottom: 1rem; line-height: 1.4; }
+  .action-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .action-item:last-child { border-bottom: none; }
+  .action-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--rose, #e91e7b); flex-shrink: 0; cursor: pointer; }
+  .action-item-text { font-size: 0.85rem; color: var(--navy); line-height: 1.45; }
+  .action-item-text .action-hint { display: block; font-size: 0.72rem; color: var(--slate); margin-top: 0.15rem; }
 </style>
 </head>
 <body>
@@ -787,12 +797,9 @@
 
     <hr>
 
-    <div class="alert-box warning">
-      <h4>Next steps</h4>
-      <p>Speak to your employer's HR team about salary sacrifice, or consult a qualified financial adviser to explore your options.</p>
-    </div>
+    <div id="fbActionPlan" style="margin-top:1rem;"></div>
 
-        <div class="btn-row">
+    <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(2)">&#8592; Back</button>
     </div>
 
@@ -1049,6 +1056,59 @@
         <span class="or-label" style="font-weight:600; color:rgba(255,255,255,0.75);">Illustrative net impact</span>
         <span class="or-val ${netImpact >= 0 ? 'green' : 'amber'}" style="font-size:1.2rem;">${netImpact >= 0 ? '+' : ''}${fmt(netImpact)}/yr</span>
       </div>`;
+    renderFbActionPlan();
+  }
+
+  function renderFbActionPlan() {
+    var r = runCalc();
+    var el = document.getElementById('fbActionPlan');
+    if (!el || !r) return;
+    var extra = parseFloat(document.getElementById('pensionSlider').value) || 0;
+    var pensionStr = extra > 0 ? fmt(extra) + '/yr' : 'the amount shown';
+    var adjIncome = r.adj;
+    var isOptedOut = r.charge > 0;
+
+    el.innerHTML =
+      '<div class="action-plan">' +
+        '<div class="action-plan-title">Your next steps</div>' +
+        '<div class="action-plan-subtitle">Here\u2019s what to do to keep more of your benefits.</div>' +
+
+        '<div class="action-item">' +
+          '<input type="checkbox" id="fb_a1">' +
+          '<label class="action-item-text" for="fb_a1">Download your PDF report using the button below' +
+            '<span class="action-hint">Handy to share with your partner or take to an adviser.</span>' +
+          '</label>' +
+        '</div>' +
+
+        (extra > 0 ?
+        '<div class="action-item">' +
+          '<input type="checkbox" id="fb_a2">' +
+          '<label class="action-item-text" for="fb_a2">Contact your HR or payroll team and ask to increase your pension contribution by ' + fmt(extra) + '/yr via salary sacrifice' +
+            '<span class="action-hint">Salary sacrifice reduces your adjusted income, which is what HMRC uses to calculate the charge. Ask HR specifically for salary sacrifice.</span>' +
+          '</label>' +
+        '</div>' : '') +
+
+        '<div class="action-item">' +
+          '<input type="checkbox" id="fb_a3">' +
+          '<label class="action-item-text" for="fb_a3">Make sure you\u2019re claiming Child Benefit' +
+            '<span class="action-hint">If you opted out because of the charge, you can <a href="https://www.gov.uk/child-benefit/how-to-claim" target="_blank" style="color:var(--rose);">opt back in on gov.uk</a>. Even if you owe the charge, claiming keeps your National Insurance record intact.</span>' +
+          '</label>' +
+        '</div>' +
+
+        '<div class="action-item">' +
+          '<input type="checkbox" id="fb_a4">' +
+          '<label class="action-item-text" for="fb_a4">Check your next payslip to confirm the pension change' +
+            '<span class="action-hint">Your gross pay should be lower by the amount sacrificed, and your pension deduction should increase to match.</span>' +
+          '</label>' +
+        '</div>' +
+
+        '<div class="action-item">' +
+          '<input type="checkbox" id="fb_a5">' +
+          '<label class="action-item-text" for="fb_a5">Consider speaking to a financial adviser' +
+            '<span class="action-hint">They can check your full position including other income, benefits, and pension options.</span>' +
+          '</label>' +
+        '</div>' +
+      '</div>';
   }
 
   function goTo(step) {
@@ -1064,7 +1124,7 @@
       else if (i > step) tab.classList.remove('completed');
     }
     if (step === 2) renderStep2();
-    if (step === 3) { renderStep2(); updateSlider(); }
+    if (step === 3) { renderStep2(); updateSlider(); renderFbActionPlan(); }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (step >= 3) { checkAndShowPdfCta(); showAdviserCta(); } else if (hasEnoughData && hasEnoughData()) { showAdviserCta(); }
   }
