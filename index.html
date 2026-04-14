@@ -532,13 +532,7 @@
     </div>
   </div>
 
-    <div class="user-tab" id="utab_director" onclick="switchTab('director')">
-      <span class="tab-emoji">&#127962;</span><span>Director</span>
-    </div>
-    <div class="user-tab" id="utab_retirement" onclick="switchTab('retirement')">
-      <span class="tab-emoji">&#127749;</span><span>Retired</span>
-    </div>
-  </div>
+
 
 
   <!-- BUY A HOME -->
@@ -691,7 +685,6 @@
       document.getElementById('tpanel_' + t).classList.toggle('active', t === tab);
     });
     gaEvent('tab_switch', {tab: tab});
-  });
   }
 
   // CHAT
