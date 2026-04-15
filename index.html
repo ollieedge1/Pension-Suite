@@ -248,6 +248,7 @@
 
   /* Accent per tool */
 
+  .tool-card.c-taxpot { --ac: #5b21b6; --ac-pale: #f5f3ff; }
   .tool-card.c-prop   { --ac: #2d6a4f; --ac-pale: #d8f3dc; }
   .tool-card.c-teal   { --ac: #0d9488; --ac-pale: #f0fdfa; }
   .tool-card.c-gold   { --ac: #b8940a; --ac-pale: #fefce8; }
@@ -394,12 +395,12 @@
 
   @media (max-width: 640px) {
     header { padding: 1rem 1.25rem; }
-    .hero { padding: 4rem 1.25rem 5rem; width: 100%; }
-    .container { padding: 2rem 1rem 3rem; overflow-x: hidden; }
-    .tabs-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; width: 100%; }
-    .user-tabs { width: max-content; margin: 0 0 2.75rem; }
-    .user-tab { font-size: 0.72rem; padding: 0.55rem 0.85rem; white-space: nowrap; }
-    .user-tab .tab-emoji { font-size: 0.85rem; }
+    .hero { padding: 3.5rem 1.25rem 4.5rem; width: 100%; }
+    .container { padding: 2rem 1rem 3rem; }
+    .tabs-wrap { width: 100%; }
+    .user-tabs { width: 100%; flex-direction: column; border-radius: 14px; margin: 0 0 2rem; gap: 6px; }
+    .user-tab { width: 100%; justify-content: flex-start; border-radius: 10px; padding: 0.75rem 1rem; font-size: 0.9rem; }
+    .user-tab.active { border-radius: 10px; }
     .chat-wrap { padding: 0 1rem 2rem; }
     .group-grid-2 { grid-template-columns: 1fr; }
   }
@@ -567,6 +568,12 @@
         <div class="tool-name">MySelfAssessment</div>
         <p class="tool-tagline">First time filing a tax return? We’ll walk you through what you owe and what to do next.</p>
         <div class="tool-cta">Open MySelfAssessment <span class="cta-arrow">&#8594;</span></div>
+      </a>
+      <a class="tool-card c-taxpot" href="tax-pot.html">
+        <span class="tool-icon">&#128180;</span>
+        <div class="tool-name">MyTaxPot</div>
+        <p class="tool-tagline">Self-employed? Find out exactly what HMRC will want — before they ask.</p>
+        <div class="tool-cta">Open MyTaxPot <span class="cta-arrow">&#8594;</span></div>
       </a>
     </div>
   </div>
