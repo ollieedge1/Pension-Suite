@@ -85,13 +85,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:         #0e0d33;
-    --ink-mid:     #161544;
-    --accent:      #4338ca;
-    --accent-dark: #3730a3;
-    --accent-pale: #eef2ff;
-    --accent-light:#a5b4fc;
-    --accent-xpale:#eef2ff;
+    --ink:         #0c2340;
+    --ink-mid:     #153055;
+    --accent:      #0369a1;
+    --accent-dark: #0256871;
+    --accent-pale: #e0f2fe;
+    --accent-light:#38bdf8;
+    --accent-xpale:#e0f2fe;
     --yellow:      #ffdb00;
     --sky:         #5cc3e8;
     --slate:       #314855;
@@ -100,9 +100,9 @@
     --stone-pale:  #f5f4f2;
     --red:         #b91c1c;
     --amber:       #d97706;
-    --bg:          #f5f5ff;
+    --bg:          #f0f7ff;
     --surface:     #ffffff;
-    --border:      rgba(67,56,202,0.12);
+    --border:      rgba(3,105,161,0.15);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -132,7 +132,7 @@
 
   /* HERO */
   .hero { background: var(--ink); padding: 5rem 2rem 6.5rem; text-align: center; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 15% 50%, rgba(67,56,202,0.2) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 85% 20%, rgba(165,180,252,0.1) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 55% 90%, rgba(14,13,51,0.3) 0%, transparent 50%); pointer-events: none; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 15% 50%, rgba(3,105,161,0.2) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 85% 20%, rgba(56,189,248,0.1) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 55% 90%, rgba(12,35,64,0.3) 0%, transparent 50%); pointer-events: none; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-light); margin-bottom: 1.75rem; padding: 0.35rem 1.1rem; border-radius: 100px; border: 1px solid rgba(149,213,178,0.25); background: rgba(149,213,178,0.08); }
   .hero h1 { font-family: 'Nunito', sans-serif; font-size: clamp(2.6rem, 7vw, 5rem); color: white; line-height: 1.0; max-width: 780px; margin: 0 auto 1.5rem; font-weight: 800; letter-spacing: -0.03em; }
   .hero h1 em { font-style: italic; color: var(--accent-light); font-weight: 300; display: block; }
@@ -167,7 +167,7 @@
   .input-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--slate-soft); font-size: 0.95rem; pointer-events: none; }
   .input-suffix { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--slate-soft); font-size: 0.9rem; pointer-events: none; }
   input[type="number"], select { width: 100%; padding: 0.75rem 1rem 0.75rem 2rem; border: 1.5px solid #ddd; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 600; color: var(--ink); background: var(--surface); transition: border-color 0.2s; appearance: none; }
-  input[type="number"]:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(67,56,202,0.1); }
+  input[type="number"]:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(3,105,161,0.12); }
   input.no-prefix { padding-left: 1rem; }
   input.has-suffix { padding-right: 2.5rem; }
   .hint { font-size: 0.76rem; color: var(--slate-soft); margin-top: 0.4rem; line-height: 1.5; }
