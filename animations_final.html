@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyPayPicture — All Animations</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #111;
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    gap: 2rem; align-items: center;
+  }
+  h1 { font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.2); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .scene {
+    width: 540px; height: 540px;
+    position: relative; overflow: hidden;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .scene-label { font-size: 0.7rem; color: rgba(255,255,255,0.2); text-align: center; margin-top: 0.5rem; font-family: 'Nunito', sans-serif; }
+  .replay-btn {
+    display: block; margin: 0.4rem auto 0;
+    padding: 0.3rem 0.9rem; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.12); background: transparent;
+    color: rgba(255,255,255,0.3); font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem; cursor: pointer; transition: all 0.2s;
+  }
+  .replay-btn:hover { border-color: #ffdb00; color: #ffdb00; }
+
+  .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.72rem; font-weight: 800; color: rgba(255,255,255,0.12);
+  }
+  .logo em { font-style: italic; color: rgba(255,219,0,0.35); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── SHARED CENTER LAYOUT ─────────────────────────────── */
+  .center {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    gap: 1rem; padding: 2.5rem;
+  }
+  .eyebrow {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .big-number {
+    font-size: 8rem; font-weight: 800; line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .main-label {
+    font-size: 1.05rem; font-weight: 600;
+    color: rgba(255,255,255,0.65); line-height: 1.55;
+    max-width: 340px;
+  }
+  .main-label strong { color: white; }
+  .sub-note {
+    font-size: 0.8rem; color: rgba(255,255,255,0.3); font-weight: 600;
+  }
+  .pill {
+    padding: 0.55rem 1.4rem; border-radius: 100px;
+    background: rgba(255,255,255,0.07);
+    font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.45);
+  }
+  .pill em { font-style: normal; color: #ffdb00; }
+
+  /* ══ 1: COUNTUP ══════════════════════════════════════════ */
+  #s1 { background: #1e2832; }
+  #s1 .eyebrow { color: #5cc3e8; opacity:0; animation: fadeUp 0.4s ease 0.5s forwards; }
+  #s1 .main-label { opacity:0; animation: fadeUp 0.4s ease 1.2s forwards; }
+  #s1 .big-number { color: #ffdb00; opacity:0; animation: popIn 0.4s ease 1.7s forwards; }
+  #s1 .sub-note   { opacity:0; animation: fadeUp 0.4s ease 2s forwards; }
+  #s1 .pill       { opacity:0; animation: fadeUp 0.4s ease 6.2s forwards; }
+
+  /* ══ 2: BAR COMPARISON ═══════════════════════════════════ */
+  #s2 { background: #111; }
+  #s2 .center { gap: 1.25rem; }
+  #s2 .eyebrow { color: rgba(255,255,255,0.35); opacity:0; animation: fadeUp 0.4s ease 0.4s forwards; }
+  #s2 .bars { display: flex; gap: 2.5rem; align-items: flex-end; height: 200px; }
+  #s2 .bar-col { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+  #s2 .bar-val { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; opacity:0; }
+  #s2 .bar-col:nth-child(1) .bar-val { color: rgba(255,255,255,0.4); animation: fadeUp 0.4s ease 1s forwards; }
+  #s2 .bar-col:nth-child(2) .bar-val { color: #ffdb00; animation: fadeUp 0.4s ease 2s forwards; }
+  #s2 .bar-track { width: 90px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; display: flex; align-items: flex-end; }
+  #s2 .bar-fill { width: 100%; border-radius: 10px; }
+  #s2 .bar-col:nth-child(1) .bar-fill { background: rgba(255,255,255,0.15); height: 0; animation: b1 1.4s cubic-bezier(0.16,1,0.3,1) 2.0s forwards; }
+  #s2 .bar-col:nth-child(2) .bar-fill { background: #ffdb00; height: 0; box-shadow: 0 0 30px rgba(255,219,0,0.25); animation: b2 1.5s cubic-bezier(0.16,1,0.3,1) 3.8s forwards; }
+  @keyframes b1 { to { height: 110px; } }
+  @keyframes b2 { to { height: 170px; } }
+  #s2 .bar-label { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.35); text-align: center; line-height: 1.4; opacity:0; }
+  #s2 .bar-col:nth-child(1) .bar-label { animation: fadeUp 0.4s ease 1s forwards; }
+  #s2 .bar-col:nth-child(2) .bar-label { animation: fadeUp 0.4s ease 2s forwards; }
+  #s2 .bottom { font-size: 1rem; font-weight: 800; color: white; opacity:0; animation: fadeUp 0.5s ease 6.2s forwards; }
+  #s2 .bottom span { color: #ffdb00; }
+
+  /* ══ 3: GROWTH ═══════════════════════════════════════════ */
+  #s3 { background: #0d1a12; }
+  #s3 .eyebrow { color: rgba(255,255,255,0.35); opacity:0; animation: fadeUp 0.4s ease 0.4s forwards; }
+  #s3 canvas { opacity:0; animation: fadeIn 0.5s ease 1.1s forwards; }
+  #s3 .legend { display:flex; gap:1.25rem; opacity:0; animation: fadeUp 0.4s ease 5.8s forwards; }
+  #s3 .leg { display:flex; align-items:center; gap:0.4rem; font-size:0.72rem; color:rgba(255,255,255,0.4); font-weight:600; }
+  #s3 .leg-dot { width:8px; height:8px; border-radius:50%; }
+  #s3 .bottom-label { font-size:0.85rem; font-weight:700; color:rgba(255,255,255,0.5); text-align:center; max-width:320px; line-height:1.5; opacity:0; animation: fadeUp 0.5s ease 6.2s forwards; }
+  #s3 .bottom-label strong { color: white; }
+
+  /* ══ 4: SALARY SLIP ══════════════════════════════════════ */
+  #s4 { background: #1e2832; }
+  #s4 .center { gap: 1.5rem; width: 100%; padding: 2.5rem; }
+  #s4 .eyebrow { color: rgba(255,255,255,0.35); opacity:0; animation: fadeUp 0.4s ease 0.5s forwards; }
+  #s4 .slip { width: 100%; background: rgba(255,255,255,0.05); border-radius: 14px; padding: 1.25rem; display:flex; flex-direction:column; gap:0; }
+  #s4 .row { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); opacity:0; }
+  #s4 .row:last-child { border-bottom: none; }
+  #s4 .row:nth-child(1) { animation: fadeUp 0.35s ease 1.3s forwards; }
+  #s4 .row:nth-child(2) { animation: fadeUp 0.35s ease 2.1s forwards; }
+  #s4 .row:nth-child(3) { animation: fadeUp 0.35s ease 2.8s forwards; }
+  #s4 .row:nth-child(4) { animation: fadeUp 0.35s ease 3.6s forwards; }
+  #s4 .row:nth-child(5) { animation: fadeUp 0.35s ease 4.4s forwards; }
+  #s4 .row-label { font-size:0.82rem; font-weight:600; color:rgba(255,255,255,0.4); }
+  #s4 .row-vals { display:flex; align-items:center; gap:0.6rem; }
+  #s4 .before { font-size:0.82rem; font-weight:600; color:rgba(255,255,255,0.2); text-decoration:line-through; }
+  #s4 .after  { font-size:0.9rem; font-weight:800; }
+  #s4 .tag { font-size:0.6rem; font-weight:800; padding:0.12rem 0.45rem; border-radius:100px; }
+  #s4 .tag-down { background:rgba(74,222,128,0.15); color:#4ade80; }
+  #s4 .tag-up   { background:rgba(255,219,0,0.12);  color:#ffdb00; }
+  #s4 .tag-same { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.35); }
+  #s4 .punchline { font-size:0.88rem; font-weight:700; color:rgba(255,255,255,0.45); text-align:center; line-height:1.5; opacity:0; animation: fadeUp 0.5s ease 6.2s forwards; }
+  #s4 .punchline strong { color: #ffdb00; }
+
+  /* ══ 5: 60% TRAP ═════════════════════════════════════════ */
+  #s5 { background: #111; }
+  #s5 .eyebrow { color: rgba(255,255,255,0.3); opacity:0; animation: fadeUp 0.4s ease 0.4s forwards; }
+  #s5 .big-number { color: #ef4444; opacity:0; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards; }
+  #s5 .main-label { opacity:0; animation: fadeUp 0.4s ease 2.9s forwards; }
+  #s5 .sub-note   { opacity:0; animation: fadeUp 0.4s ease 2s forwards; }
+  #s5 .pill       { opacity:0; animation: fadeUp 0.4s ease 6.2s forwards; }
+
+  /* ══ 6: COST OF £1 ═══════════════════════════════════════ */
+  #s6 { background: #0d1a0f; }
+  #s6 .question { font-size:0.9rem; font-weight:600; color:rgba(255,255,255,0.35); opacity:0; animation: fadeUp 0.4s ease 0.5s forwards; }
+  #s6 .eq { display:flex; align-items:center; gap:1.25rem; opacity:0; animation: fadeIn 0.4s ease 1.9s forwards; }
+  #s6 .pound-in { font-size:5rem; font-weight:800; color:rgba(255,255,255,0.18); text-decoration:line-through; text-decoration-color:rgba(255,255,255,0.12); letter-spacing:-0.04em; }
+  #s6 .arrow { font-size:1.8rem; color:rgba(255,255,255,0.15); }
+  #s6 .cost { font-size:7rem; font-weight:800; color:#4ade80; letter-spacing:-0.04em; opacity:0; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 1.5s forwards; }
+  #s6 .main-label { opacity:0; animation: fadeUp 0.4s ease 6.2s forwards; }
+  #s6 .sub-note   { opacity:0; animation: fadeUp 0.4s ease 3s forwards; }
+
+  /* ══ 7: CHILD BENEFIT ════════════════════════════════════ */
+  #s7 { background: #111; }
+  #s7 .states { display:flex; width:100%; height:100%; position:relative; }
+  #s7 .state { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.6rem; padding:2rem; text-align:center; }
+  #s7 .divider { width:1px; background:rgba(255,255,255,0.07); align-self:stretch; margin:3rem 0; opacity:0; animation: fadeIn 0.4s ease 2.3s forwards; }
+  #s7 .s-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+  #s7 .s-val   { font-size:2.2rem; font-weight:800; letter-spacing:-0.03em; color:white; }
+  #s7 .b-label { font-size:0.68rem; color:rgba(255,255,255,0.3); font-weight:600; margin-top:0.35rem; }
+  #s7 .b-val   { font-size:2.6rem; font-weight:800; letter-spacing:-0.03em; }
+  #s7 .tick    { font-size:1.8rem; }
+  #s7 .state-a { opacity:0; animation: fadeUp 0.5s ease 0.8s forwards; }
+  #s7 .state-b { opacity:0; animation: fadeUp 0.5s ease 3.1s forwards; }
+  #s7 .state-a .b-val { color:#4ade80; }
+  #s7 .state-a .tick  { color:#4ade80; }
+  #s7 .state-b .b-val { color:#ef4444; }
+  #s7 .state-b .tick  { color:#ef4444; }
+  #s7 .punchline { position:absolute; bottom:2rem; left:0; right:0; text-align:center; font-size:0.88rem; font-weight:700; color:rgba(255,255,255,0.4); padding:0 2rem; line-height:1.55; opacity:0; animation: fadeUp 0.5s ease 6.2s forwards; }
+  #s7 .punchline strong { color:white; }
+</style>
+</head>
+<body>
+<h1>MyPayPicture — Animation Templates</h1>
+
+<!-- 1: COUNTUP -->
+<div>
+  <div class="scene" id="s1">
+    <div class="center">
+      <div class="eyebrow">Salary sacrifice · £65k salary</div>
+      <div class="main-label">You could save</div>
+      <div class="big-number" id="countup">£0</div>
+      <div class="sub-note">every year in tax and NI</div>
+      <div class="pill">Just by changing your pension contribution</div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">1 — Annual saving countup</div>
+  <button class="replay-btn" onclick="replay('s1', initS1)">↺ Replay</button>
+</div>
+
+<!-- 2: BAR COMPARISON -->
+<div>
+  <div class="scene" id="s2">
+    <div class="center">
+      <div class="eyebrow">Monthly take-home · £65k salary</div>
+      <div class="bars">
+        <div class="bar-col">
+          <div class="bar-val">£3,183</div>
+          <div class="bar-track" style="height:200px;"><div class="bar-fill"></div></div>
+          <div class="bar-label">No salary<br>sacrifice</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-val">£3,287</div>
+          <div class="bar-track" style="height:200px;"><div class="bar-fill"></div></div>
+          <div class="bar-label">With 5%<br>sacrifice</div>
+        </div>
+      </div>
+      <div class="bottom">+<span>£104/mo</span> take-home. More in pension.</div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">2 — Take-home bar comparison</div>
+  <button class="replay-btn" onclick="replay('s2', null)">↺ Replay</button>
+</div>
+
+<!-- 3: GROWTH -->
+<div>
+  <div class="scene" id="s3">
+    <div class="center" style="width:100%;padding:2.5rem;gap:0.75rem;">
+      <div class="eyebrow">Pension pot after 25 years · 6% growth assumed</div>
+      <canvas id="growthCanvas" width="460" height="280"></canvas>
+      <div class="legend">
+        <div class="leg"><div class="leg-dot" style="background:rgba(255,255,255,0.3);"></div>5% contributions</div>
+        <div class="leg"><div class="leg-dot" style="background:#ffdb00;"></div>8% contributions</div>
+      </div>
+      <div class="bottom-label">The gap between lines is <strong>extra money at retirement</strong></div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">3 — Compound growth</div>
+  <button class="replay-btn" onclick="replay('s3', initS3)">↺ Replay</button>
+</div>
+
+<!-- 4: SALARY SLIP -->
+<div>
+  <div class="scene" id="s4">
+    <div class="center">
+      <div class="eyebrow">£65k salary · 8% salary sacrifice</div>
+      <div class="slip">
+        <div class="row">
+          <div class="row-label">Gross liable to tax</div>
+          <div class="row-vals"><span class="before">£65,000</span><span class="after" style="color:rgba(255,255,255,0.5);">£59,800</span></div>
+        </div>
+        <div class="row">
+          <div class="row-label">Income tax</div>
+          <div class="row-vals"><span class="before">£13,432</span><span class="after" style="color:#4ade80;">£11,512 <span class="tag tag-down">↓ £1,920</span></span></div>
+        </div>
+        <div class="row">
+          <div class="row-label">National Insurance</div>
+          <div class="row-vals"><span class="before">£4,284</span><span class="after" style="color:#4ade80;">£3,756 <span class="tag tag-down">↓ £528</span></span></div>
+        </div>
+        <div class="row">
+          <div class="row-label">Pension contribution</div>
+          <div class="row-vals"><span class="before">£0</span><span class="after" style="color:#ffdb00;">£5,200 <span class="tag tag-up">↑ yours</span></span></div>
+        </div>
+        <div class="row" style="margin-top:0.25rem;">
+          <div class="row-label" style="color:white;font-weight:700;">Monthly take-home</div>
+          <div class="row-vals"><span class="before">£3,941</span><span class="after" style="color:#ffdb00;font-size:1rem;">£3,961 <span class="tag tag-same">≈ same</span></span></div>
+        </div>
+      </div>
+      <div class="punchline">Take-home barely moves.<br><strong>£2,448/yr goes to your pension instead of HMRC.</strong></div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">4 — Salary slip before/after</div>
+  <button class="replay-btn" onclick="replay('s4', null)">↺ Replay</button>
+</div>
+
+<!-- 5: 60% TRAP -->
+<div>
+  <div class="scene" id="s5">
+    <div class="center">
+      <div class="eyebrow">Earning £100k–£125k?</div>
+      <div class="big-number">60%</div>
+      <div class="main-label">The effective tax rate on those earnings.<br><strong>Not 40%. Sixty.</strong></div>
+      <div class="sub-note">Personal allowance tapers to zero above £100k</div>
+      <div class="pill">Pension contributions bring it back to <em>40%</em></div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">5 — The 60% tax trap</div>
+  <button class="replay-btn" onclick="replay('s5', null)">↺ Replay</button>
+</div>
+
+<!-- 6: COST OF £1 -->
+<div>
+  <div class="scene" id="s6">
+    <div class="center">
+      <div class="question">Putting £1 into your pension costs you...</div>
+      <div class="eq">
+        <div class="pound-in">£1</div>
+        <div class="arrow">→</div>
+        <div class="cost">58p</div>
+      </div>
+      <div class="main-label">After tax and NI relief.<br><strong>Higher rate taxpayer? Just 48p.</strong></div>
+      <div class="sub-note">Salary sacrifice · basic rate · 2024/25</div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">6 — Real cost of £1</div>
+  <button class="replay-btn" onclick="replay('s6', null)">↺ Replay</button>
+</div>
+
+<!-- 7: CHILD BENEFIT -->
+<div>
+  <div class="scene" id="s7">
+    <div class="states">
+      <div class="state state-a">
+        <div class="s-label">Salary</div>
+        <div class="s-val">£55k</div>
+        <div class="b-label">Child Benefit (2 kids)</div>
+        <div class="b-val">£2,212</div>
+        <div class="tick">✓</div>
+      </div>
+      <div class="divider"></div>
+      <div class="state state-b">
+        <div class="s-label">Salary</div>
+        <div class="s-val">£65k</div>
+        <div class="b-label">Child Benefit (2 kids)</div>
+        <div class="b-val">£0</div>
+        <div class="tick">✗</div>
+      </div>
+    </div>
+    <div class="punchline"><strong>£10k more salary. £2,212 benefit gone.</strong><br>Pension contributions can get it back.</div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">7 — Child Benefit clawback</div>
+  <button class="replay-btn" onclick="replay('s7', null)">↺ Replay</button>
+</div>
+
+<script>
+function replay(id, initFn) {
+  var el = document.getElementById(id);
+  var parent = el.parentNode, next = el.nextSibling;
+  var clone = el.cloneNode(true);
+  parent.removeChild(el);
+  parent.insertBefore(clone, next);
+  if (initFn) setTimeout(initFn, 50);
+}
+
+// COUNTUP
+function initS1() {
+  var el = document.getElementById('countup');
+  if (!el) return;
+  var target = 2448, duration = 2800, start = null;
+  setTimeout(function() {
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = '£' + Math.round(ease * target).toLocaleString('en-GB');
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }, 1500);
+}
+
+// GROWTH CHART
+function initS3() {
+  var canvas = document.getElementById('growthCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var pad = { top: 20, right: 60, bottom: 32, left: 52 };
+  var years = 25, salary = 65000, rate = 0.06;
+
+  function pot(pct, y) {
+    var p = 0;
+    for (var i = 0; i < y; i++) p = (p + salary * pct) * (1 + rate);
+    return p;
+  }
+
+  var l1 = [], l2 = [];
+  for (var i = 0; i <= years; i++) { l1.push(pot(0.05,i)); l2.push(pot(0.08,i)); }
+  var max = l2[years] * 1.1;
+
+  function tx(i) { return pad.left + (i/years)*(W-pad.left-pad.right); }
+  function ty(v) { return H - pad.bottom - (v/max)*(H-pad.top-pad.bottom); }
+
+  function grid() {
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+    for (var g = 1; g <= 3; g++) {
+      var y = pad.top + (g/4)*(H-pad.top-pad.bottom);
+      ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+      var v = max*(1-g/4);
+      ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.font='10px Nunito,sans-serif'; ctx.textAlign='right';
+      ctx.fillText('£'+Math.round(v/1000)+'k', pad.left-5, y+4);
+    }
+    ctx.textAlign='center';
+    [0,5,10,15,20,25].forEach(function(yr) {
+      ctx.fillStyle='rgba(255,255,255,0.2)'; ctx.font='10px Nunito,sans-serif';
+      ctx.fillText(yr+'y', tx(yr), H-pad.bottom+16);
+    });
+  }
+
+  function drawLine(data, color, fill, progress, thick) {
+    var pts = Math.min(years, Math.floor(progress*(years+1)));
+    if (pts < 1) return;
+    ctx.beginPath(); ctx.moveTo(tx(0),ty(data[0]));
+    for (var i=1;i<=pts;i++) ctx.lineTo(tx(i),ty(data[i]));
+    ctx.lineTo(tx(pts),H-pad.bottom); ctx.lineTo(tx(0),H-pad.bottom); ctx.closePath();
+    ctx.fillStyle=fill; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(tx(0),ty(data[0]));
+    for (var j=1;j<=pts;j++) ctx.lineTo(tx(j),ty(data[j]));
+    ctx.strokeStyle=color; ctx.lineWidth=thick; ctx.lineJoin='round'; ctx.lineCap='round';
+    if (thick>2) { ctx.shadowColor=color; ctx.shadowBlur=8; }
+    ctx.stroke(); ctx.shadowBlur=0;
+    if (pts===years) {
+      ctx.beginPath(); ctx.arc(tx(years),ty(data[years]),thick>2?6:4,0,Math.PI*2);
+      ctx.fillStyle=color; ctx.fill();
+      ctx.font='bold 12px Nunito,sans-serif'; ctx.fillStyle=color; ctx.textAlign='left';
+      ctx.fillText('£'+Math.round(data[years]/1000)+'k', tx(years)+10, ty(data[years])+5);
+    }
+  }
+
+  var t0=null, dur=4500;
+  function animate(ts) {
+    if(!t0) t0=ts;
+    var p=Math.min((ts-t0)/dur,1), ease=1-Math.pow(1-p,3);
+    ctx.clearRect(0,0,W,H); grid();
+    drawLine(l1,'rgba(255,255,255,0.4)','rgba(255,255,255,0.04)',ease,2);
+    drawLine(l2,'#ffdb00','rgba(255,219,0,0.08)',ease,3);
+    if(p<1) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+initS1();
+initS3();
+</script>
+</body>
+</html>

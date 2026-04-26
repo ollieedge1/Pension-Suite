@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyPayPicture — Animation Pack 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #111820;
+    color: white;
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    gap: 2.5rem; align-items: center;
+  }
+  h1 { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .scene {
+    width: 540px; height: 540px;
+    position: relative; overflow: hidden;
+    border-radius: 20px; flex-shrink: 0;
+  }
+  .scene-label { font-size: 0.72rem; color: rgba(255,255,255,0.3); text-align: center; margin-top: 0.6rem; letter-spacing: 0.06em; }
+  .replay-btn {
+    display: block; margin: 0.4rem auto 0;
+    padding: 0.35rem 1rem; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15); background: transparent;
+    color: rgba(255,255,255,0.4); font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem; cursor: pointer; transition: all 0.2s;
+  }
+  .replay-btn:hover { border-color: #ffdb00; color: #ffdb00; }
+
+  /* ── SHARED ANIMATIONS ─────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.6); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.6; }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     ANIMATION 5 — THE 60% TAX TRAP
+  ══════════════════════════════════════════════════════════ */
+  #scene5 { background: #1a0a00; }
+  #scene5 .amber-glow {
+    position: absolute; width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(217,119,6,0.12) 0%, transparent 65%);
+    top: -150px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  #scene5 .content {
+    position: absolute; inset: 0; padding: 2.25rem 2.5rem;
+    display: flex; flex-direction: column;
+  }
+
+  #scene5 .eyebrow {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #d97706; margin-bottom: 0.6rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.2s forwards;
+  }
+
+  #scene5 .headline {
+    font-size: 1.5rem; font-weight: 800; line-height: 1.15;
+    color: white; margin-bottom: 0.35rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.4s forwards;
+  }
+  #scene5 .headline em { font-style: italic; color: #d97706; }
+
+  #scene5 .sub {
+    font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.75rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.6s forwards;
+  }
+
+  /* Rate bars */
+  #scene5 .bars-wrap {
+    flex: 1; display: flex; flex-direction: column; gap: 0.75rem;
+    justify-content: center;
+  }
+
+  #scene5 .rate-row {
+    display: flex; align-items: center; gap: 0.85rem;
+    opacity: 0;
+  }
+  #scene5 .rate-row:nth-child(1) { animation: fadeUp 0.4s ease 0.9s forwards; }
+  #scene5 .rate-row:nth-child(2) { animation: fadeUp 0.4s ease 1.1s forwards; }
+  #scene5 .rate-row:nth-child(3) { animation: fadeUp 0.4s ease 1.3s forwards; }
+  #scene5 .rate-row:nth-child(4) { animation: fadeUp 0.4s ease 1.5s forwards; }
+
+  #scene5 .rate-label {
+    font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.45);
+    min-width: 100px; flex-shrink: 0; line-height: 1.3;
+  }
+
+  #scene5 .rate-track {
+    flex: 1; height: 28px; background: rgba(255,255,255,0.06);
+    border-radius: 6px; overflow: hidden; position: relative;
+  }
+
+  #scene5 .rate-fill {
+    height: 100%; border-radius: 6px; position: absolute;
+    top: 0; left: 0; width: 0;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.6rem;
+  }
+
+  #scene5 .rate-fill .pct {
+    font-size: 0.78rem; font-weight: 800; color: white; white-space: nowrap;
+  }
+
+  /* Row 1 — 20% basic */
+  #scene5 .rate-row:nth-child(1) .rate-fill {
+    background: rgba(92,195,232,0.5);
+    animation: fillTo20 0.8s cubic-bezier(0.16,1,0.3,1) 1.1s both;
+  }
+  @keyframes fillTo20 { from { width: 0; } to { width: 33%; } }
+
+  /* Row 2 — 40% higher */
+  #scene5 .rate-row:nth-child(2) .rate-fill {
+    background: rgba(217,119,6,0.7);
+    animation: fillTo40 0.8s cubic-bezier(0.16,1,0.3,1) 1.3s both;
+  }
+  @keyframes fillTo40 { from { width: 0; } to { width: 67%; } }
+
+  /* Row 3 — 60% TRAP — red, pulsing */
+  #scene5 .rate-row:nth-child(3) .rate-fill {
+    background: linear-gradient(90deg, #c2410c, #ef4444);
+    box-shadow: 0 0 20px rgba(239,68,68,0.4);
+    animation: fillTo60 1s cubic-bezier(0.16,1,0.3,1) 1.6s both;
+  }
+  @keyframes fillTo60 { from { width: 0; } to { width: 100%; } }
+
+  #scene5 .rate-row:nth-child(3) .rate-label { color: #fca5a5; }
+
+  /* Row 4 — with pension (back to 40%) */
+  #scene5 .rate-row:nth-child(4) .rate-fill {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    animation: fillTo40again 0.8s cubic-bezier(0.16,1,0.3,1) 2.8s both;
+  }
+  @keyframes fillTo40again { from { width: 0; } to { width: 67%; } }
+  #scene5 .rate-row:nth-child(4) .rate-label { color: #86efac; }
+
+  #scene5 .trap-badge {
+    position: absolute; right: 2.5rem; top: 50%;
+    transform: translateY(-50%);
+    background: #ef4444; color: white;
+    border-radius: 8px; padding: 0.3rem 0.6rem;
+    font-size: 0.68rem; font-weight: 800; text-align: center;
+    line-height: 1.3;
+    opacity: 0; animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) 2.5s forwards;
+    white-space: nowrap;
+  }
+
+  #scene5 .solution-note {
+    margin-top: 1.5rem; padding: 0.85rem 1rem;
+    background: rgba(34,197,94,0.1); border-radius: 10px;
+    border-left: 3px solid #22c55e;
+    font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.5;
+    opacity: 0; animation: fadeUp 0.5s ease 3.2s forwards;
+  }
+  #scene5 .solution-note strong { color: #86efac; }
+
+  #scene5 .logo { position: absolute; bottom: 1.25rem; right: 1.5rem; font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.2); }
+  #scene5 .logo em { font-style: italic; color: #ffdb00; opacity: 0.5; }
+
+
+  /* ══════════════════════════════════════════════════════════
+     ANIMATION 6 — COST OF £1 INTO PENSION
+  ══════════════════════════════════════════════════════════ */
+  #scene6 { background: #0e1f14; }
+  #scene6 .green-glow {
+    position: absolute; width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(22,163,74,0.12) 0%, transparent 65%);
+    bottom: -100px; right: -80px; pointer-events: none;
+  }
+
+  #scene6 .content {
+    position: absolute; inset: 0; padding: 2.25rem 2.5rem;
+    display: flex; flex-direction: column;
+  }
+
+  #scene6 .eyebrow {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #22c55e; margin-bottom: 0.6rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.2s forwards;
+  }
+  #scene6 .headline {
+    font-size: 1.4rem; font-weight: 800; line-height: 1.2;
+    color: white; margin-bottom: 0.3rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.4s forwards;
+  }
+  #scene6 .headline em { color: #4ade80; font-style: italic; }
+  #scene6 .sub {
+    font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.6s forwards;
+  }
+
+  /* The pound coin split */
+  #scene6 .coin-section {
+    display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem;
+    opacity: 0; animation: fadeIn 0.4s ease 0.9s forwards;
+  }
+
+  #scene6 .coin-group { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+
+  #scene6 .coin-title {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+  }
+
+  #scene6 .pound { font-size: 2.5rem; font-weight: 800; line-height: 1; }
+
+  #scene6 .coin-stack {
+    width: 80px; display: flex; flex-direction: column; gap: 3px;
+  }
+
+  #scene6 .coin-segment {
+    width: 100%; border-radius: 4px; height: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 800; color: rgba(0,0,0,0.7);
+    overflow: hidden; transition: height 0.6s cubic-bezier(0.16,1,0.3,1);
+    white-space: nowrap;
+  }
+
+  /* Basic rate stack segments */
+  #scene6 .basic .seg-cost   { background: #4ade80; }
+  #scene6 .basic .seg-tax    { background: #fbbf24; }
+  #scene6 .basic .seg-ni     { background: #f87171; }
+
+  /* Higher rate stack */
+  #scene6 .higher .seg-cost  { background: #4ade80; }
+  #scene6 .higher .seg-tax   { background: #f97316; }
+  #scene6 .higher .seg-ni    { background: #f87171; }
+
+  #scene6 .cost-callout {
+    font-size: 2.8rem; font-weight: 800; line-height: 1;
+    text-align: center; margin-top: 0.25rem;
+  }
+  #scene6 .cost-callout.green { color: #4ade80; }
+  #scene6 .cost-callout.yellow { color: #fbbf24; }
+
+  #scene6 .cost-sub {
+    font-size: 0.72rem; color: rgba(255,255,255,0.4); text-align: center;
+  }
+
+  #scene6 .legend {
+    display: flex; flex-direction: column; gap: 0.4rem; margin-top: 1.5rem;
+    opacity: 0; animation: fadeUp 0.5s ease 3s forwards;
+  }
+  #scene6 .legend-row {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.75rem; color: rgba(255,255,255,0.5);
+  }
+  #scene6 .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  #scene6 .logo { position: absolute; bottom: 1.25rem; right: 1.5rem; font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.2); }
+  #scene6 .logo em { font-style: italic; color: #ffdb00; opacity: 0.5; }
+
+
+  /* ══════════════════════════════════════════════════════════
+     ANIMATION 7 — CHILD BENEFIT CLAWBACK
+  ══════════════════════════════════════════════════════════ */
+  #scene7 { background: #150a1e; }
+  #scene7 .purple-glow {
+    position: absolute; width: 450px; height: 450px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 65%);
+    top: -100px; left: -100px; pointer-events: none;
+  }
+
+  #scene7 .content {
+    position: absolute; inset: 0; padding: 2.25rem 2.5rem;
+    display: flex; flex-direction: column;
+  }
+
+  #scene7 .eyebrow {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #a78bfa; margin-bottom: 0.6rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.2s forwards;
+  }
+  #scene7 .headline {
+    font-size: 1.35rem; font-weight: 800; line-height: 1.2;
+    color: white; margin-bottom: 0.3rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.4s forwards;
+  }
+  #scene7 .headline em { color: #c4b5fd; font-style: italic; }
+  #scene7 .sub {
+    font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.6s forwards;
+  }
+
+  /* Income slider visual */
+  #scene7 .track-section {
+    opacity: 0; animation: fadeIn 0.5s ease 0.8s forwards;
+  }
+
+  #scene7 .track-label {
+    font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+
+  #scene7 .income-track {
+    width: 100%; height: 14px; background: rgba(255,255,255,0.08);
+    border-radius: 100px; position: relative; margin-bottom: 0.3rem;
+  }
+
+  #scene7 .income-fill {
+    height: 100%; border-radius: 100px; width: 0;
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    transition: width 0.05s linear;
+  }
+
+  #scene7 .threshold-mark {
+    position: absolute; top: -4px; height: 22px; width: 2px;
+    background: rgba(255,255,255,0.3); border-radius: 2px;
+  }
+  #scene7 .threshold-mark::after {
+    content: attr(data-label); position: absolute;
+    top: 26px; left: 50%; transform: translateX(-50%);
+    font-size: 0.6rem; color: rgba(255,255,255,0.3);
+    white-space: nowrap; font-weight: 600;
+  }
+
+  #scene7 .income-val {
+    font-size: 1.6rem; font-weight: 800; color: white;
+    text-align: right; margin-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+  }
+  #scene7 .income-val span { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.4); }
+
+  /* Benefit card */
+  #scene7 .benefit-section {
+    margin-top: 1.25rem;
+    opacity: 0; animation: fadeIn 0.5s ease 1.2s forwards;
+  }
+
+  #scene7 .benefit-card {
+    background: rgba(255,255,255,0.06); border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.85rem;
+  }
+
+  #scene7 .benefit-row {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  #scene7 .benefit-label {
+    font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.5);
+  }
+
+  #scene7 .benefit-amount {
+    font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em;
+    transition: color 0.3s ease;
+  }
+
+  #scene7 .charge-bar-wrap {
+    background: rgba(255,255,255,0.06); border-radius: 6px; height: 8px; overflow: hidden;
+  }
+  #scene7 .charge-bar-fill {
+    height: 100%; border-radius: 6px; width: 0%;
+    background: linear-gradient(90deg, #dc2626, #f87171);
+    transition: width 0.05s linear;
+  }
+
+  #scene7 .pension-note {
+    margin-top: 1rem; padding: 0.75rem 1rem;
+    background: rgba(167,139,250,0.1); border-radius: 10px;
+    border-left: 3px solid #a78bfa;
+    font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.5;
+    opacity: 0;
+  }
+  #scene7 .pension-note strong { color: #c4b5fd; }
+
+  #scene7 .logo { position: absolute; bottom: 1.25rem; right: 1.5rem; font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.2); }
+  #scene7 .logo em { font-style: italic; color: #ffdb00; opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<h1>MyPayPicture — Animation Pack 2</h1>
+
+<!-- ══ ANIMATION 5 — 60% TAX TRAP ══════════════════════════════════════ -->
+<div>
+  <div class="scene" id="scene5">
+    <div class="amber-glow"></div>
+    <div class="content">
+      <div class="eyebrow">The Tax Trap Nobody Talks About</div>
+      <div class="headline">Earn £100k–£125k?<br>You're paying <em>60% tax.</em></div>
+      <div class="sub">Here's how — and how to avoid it</div>
+
+      <div class="bars-wrap">
+        <div class="rate-row">
+          <div class="rate-label">Under £50,270<br><span style="font-size:0.65rem;opacity:0.6;">Basic rate</span></div>
+          <div class="rate-track">
+            <div class="rate-fill"><span class="pct">20%</span></div>
+          </div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-label">£50,270–£100k<br><span style="font-size:0.65rem;opacity:0.6;">Higher rate</span></div>
+          <div class="rate-track">
+            <div class="rate-fill"><span class="pct">40%</span></div>
+          </div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-label" style="color:#fca5a5;">£100k–£125k<br><span style="font-size:0.65rem;opacity:0.6;">The trap zone</span></div>
+          <div class="rate-track">
+            <div class="rate-fill"><span class="pct">60% ⚠</span></div>
+          </div>
+          <div class="trap-badge">Personal<br>allowance<br>lost here</div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-label" style="color:#86efac;">With pension<br><span style="font-size:0.65rem;opacity:0.6;">Income below £100k</span></div>
+          <div class="rate-track">
+            <div class="rate-fill"><span class="pct">40% ✓</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-note">
+        Salary sacrifice your pension to bring income below <strong>£100,000</strong> — keep your full personal allowance and pay <strong>40% not 60%</strong>
+      </div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 5 — The 60% tax trap</div>
+  <button class="replay-btn" onclick="replayScene('scene5')">↺ Replay</button>
+</div>
+
+<!-- ══ ANIMATION 6 — COST OF £1 ════════════════════════════════════════ -->
+<div>
+  <div class="scene" id="scene6">
+    <div class="green-glow"></div>
+    <div class="content">
+      <div class="eyebrow">The Real Cost of Saving</div>
+      <div class="headline">Every <em>£1</em> into your pension<br>doesn't cost you £1</div>
+      <div class="sub">After tax and NI relief — salary sacrifice, 2024/25</div>
+
+      <div class="coin-section">
+        <div class="coin-group basic">
+          <div class="coin-title">Basic rate (20%)</div>
+          <div class="coin-stack">
+            <div class="coin-segment seg-cost" id="b-cost"></div>
+            <div class="coin-segment seg-tax"  id="b-tax"></div>
+            <div class="coin-segment seg-ni"   id="b-ni"></div>
+          </div>
+          <div class="cost-callout green" id="basic-cost">58p</div>
+          <div class="cost-sub">actual cost to you</div>
+        </div>
+        <div style="width:1px; background:rgba(255,255,255,0.08); align-self:stretch; margin: 0.5rem 0;"></div>
+        <div class="coin-group higher">
+          <div class="coin-title">Higher rate (40%)</div>
+          <div class="coin-stack">
+            <div class="coin-segment seg-cost" id="h-cost"></div>
+            <div class="coin-segment seg-tax"  id="h-tax"></div>
+            <div class="coin-segment seg-ni"   id="h-ni"></div>
+          </div>
+          <div class="cost-callout yellow" id="higher-cost">48p</div>
+          <div class="cost-sub">actual cost to you</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-row"><div class="legend-dot" style="background:#4ade80;"></div>Your net cost (take-home reduction)</div>
+        <div class="legend-row"><div class="legend-dot" style="background:#fbbf24;"></div>Income tax saved</div>
+        <div class="legend-row"><div class="legend-dot" style="background:#f87171;"></div>National Insurance saved</div>
+      </div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 6 — Real cost of £1 into pension</div>
+  <button class="replay-btn" onclick="replayScene('scene6')">↺ Replay</button>
+</div>
+
+<!-- ══ ANIMATION 7 — CHILD BENEFIT CLAWBACK ════════════════════════════ -->
+<div>
+  <div class="scene" id="scene7">
+    <div class="purple-glow"></div>
+    <div class="content">
+      <div class="eyebrow">Child Benefit Clawback</div>
+      <div class="headline">Watch what happens to your<br><em>Child Benefit</em> as income rises</div>
+      <div class="sub">2 children · 2024/25 rates · adjusted net income</div>
+
+      <div class="track-section">
+        <div class="income-val" id="incomeDisplay">£<span id="incomeNum">40,000</span> <span>annual income</span></div>
+        <div class="income-track">
+          <div class="income-fill" id="incomeFill"></div>
+          <div class="threshold-mark" style="left:50%;" data-label="£60,000"></div>
+          <div class="threshold-mark" style="left:100%;" data-label="£80,000"></div>
+        </div>
+      </div>
+
+      <div class="benefit-section">
+        <div class="benefit-card">
+          <div class="benefit-row">
+            <div class="benefit-label">Child Benefit (2 children)</div>
+            <div class="benefit-amount" id="benefitAmount" style="color:#c4b5fd;">£2,212/yr</div>
+          </div>
+          <div class="benefit-row" style="flex-direction:column; align-items:stretch; gap:0.4rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="benefit-label" id="chargeLabel">High Income Charge</div>
+              <div class="benefit-label" id="chargeAmount" style="color:#f87171;">£0</div>
+            </div>
+            <div class="charge-bar-wrap"><div class="charge-bar-fill" id="chargeFill"></div></div>
+          </div>
+          <div class="benefit-row">
+            <div class="benefit-label" style="font-weight:700;">Net benefit kept</div>
+            <div class="benefit-amount" id="netBenefit" style="color:#4ade80;">£2,212/yr</div>
+          </div>
+        </div>
+        <div class="pension-note" id="pensionNote">
+          💡 <strong>Salary sacrifice tip:</strong> Increasing pension contributions to bring income below <strong>£60,000</strong> restores the full benefit
+        </div>
+      </div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 7 — Child Benefit clawback</div>
+  <button class="replay-btn" onclick="replayScene('scene7')">↺ Replay</button>
+</div>
+
+<script>
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function fmt(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }
+
+function replayScene(id) {
+  var scene = document.getElementById(id);
+  var parent = scene.parentNode;
+  var next = scene.nextSibling;
+  var clone = scene.cloneNode(true);
+  parent.removeChild(scene);
+  parent.insertBefore(clone, next);
+  if (id === 'scene6') setTimeout(initScene6, 100);
+  if (id === 'scene7') setTimeout(initScene7, 100);
+}
+
+// ── ANIMATION 6: COST OF £1 ──────────────────────────────────────────────────
+function initScene6() {
+  // Basic rate: 58p net cost, 20p tax saved, 10p NI saved (approx)
+  // Higher rate: 48p net cost, 40p tax saved, 2p* (NI above UEL is 2%)
+  var segments = [
+    { id: 'b-cost', h: 58, color: '#4ade80',  delay: 1100 },
+    { id: 'b-tax',  h: 30, color: '#fbbf24',  delay: 1400 },
+    { id: 'b-ni',   h: 12, color: '#f87171',  delay: 1700 },
+    { id: 'h-cost', h: 48, color: '#4ade80',  delay: 1300 },
+    { id: 'h-tax',  h: 40, color: '#f97316',  delay: 1600 },
+    { id: 'h-ni',   h: 12, color: '#f87171',  delay: 1900 },
+  ];
+
+  segments.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (!el) return;
+    el.style.height = '0px';
+    el.style.background = s.color;
+    setTimeout(function() {
+      el.style.height = s.h + 'px';
+      el.style.transition = 'height 0.7s cubic-bezier(0.16,1,0.3,1)';
+    }, s.delay);
+  });
+}
+
+// ── ANIMATION 7: CHILD BENEFIT CLAWBACK ─────────────────────────────────────
+function initScene7() {
+  var CB = 2212; // 2 children
+  var TAPER_START = 60000;
+  var TAPER_END = 80000;
+  var MAX_INCOME = 80000;
+
+  var startIncome = 45000;
+  var endIncome = 82000;
+  var duration = 4000;
+  var startTime = null;
+  var pensionNoteShown = false;
+
+  function calcCharge(income) {
+    if (income <= TAPER_START) return 0;
+    if (income >= TAPER_END) return CB;
+    return Math.round(CB * (income - TAPER_START) / (TAPER_END - TAPER_START));
+  }
+
+  function update(income) {
+    var pct = Math.min(income / MAX_INCOME, 1) * 100;
+    var fillEl = document.getElementById('incomeFill');
+    var numEl = document.getElementById('incomeNum');
+    var benefitEl = document.getElementById('benefitAmount');
+    var chargeEl = document.getElementById('chargeAmount');
+    var chargeFillEl = document.getElementById('chargeFill');
+    var netEl = document.getElementById('netBenefit');
+    var noteEl = document.getElementById('pensionNote');
+
+    if (!fillEl) return;
+
+    fillEl.style.width = pct + '%';
+    numEl.textContent = Math.round(income / 1000) * 1000 >= 1000
+      ? (Math.round(income / 1000)).toFixed(0) + ',000'
+      : income.toLocaleString('en-GB');
+
+    var charge = calcCharge(income);
+    var net = Math.max(0, CB - charge);
+    var chargePct = (charge / CB) * 100;
+
+    benefitEl.textContent = fmt(CB) + '/yr';
+    chargeEl.textContent = charge > 0 ? '−' + fmt(charge) + '/yr' : '£0';
+    chargeEl.style.color = charge > 0 ? '#f87171' : 'rgba(255,255,255,0.3)';
+    chargeFillEl.style.width = chargePct + '%';
+
+    netEl.textContent = fmt(net) + '/yr';
+    netEl.style.color = net === CB ? '#4ade80' : net === 0 ? '#f87171' : '#fbbf24';
+
+    if (income >= 62000 && !pensionNoteShown && noteEl) {
+      pensionNoteShown = true;
+      noteEl.style.animation = 'fadeUp 0.6s ease forwards';
+      noteEl.style.opacity = '1';
+    }
+  }
+
+  function animate(ts) {
+    if (!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+    var progress = Math.min(elapsed / duration, 1);
+    var ease = progress < 0.5
+      ? 2 * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+    var income = startIncome + (endIncome - startIncome) * ease;
+    update(income);
+    if (progress < 1) requestAnimationFrame(animate);
+  }
+
+  setTimeout(function() { requestAnimationFrame(animate); }, 1200);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+initScene6();
+initScene7();
+</script>
+</body>
+</html>

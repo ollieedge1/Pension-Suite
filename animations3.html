@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyPayPicture — Animation Pack 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #111;
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    gap: 2rem; align-items: center;
+  }
+
+  .scene {
+    width: 540px; height: 540px;
+    position: relative; overflow: hidden;
+    border-radius: 20px; background: #1e2832;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .scene-label {
+    font-size: 0.72rem; color: rgba(255,255,255,0.25);
+    text-align: center; margin-top: 0.6rem;
+    font-family: 'Nunito', sans-serif; letter-spacing: 0.06em;
+  }
+  .replay-btn {
+    display: block; margin: 0.4rem auto 0;
+    padding: 0.35rem 1rem; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15); background: transparent;
+    color: rgba(255,255,255,0.4); font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem; cursor: pointer; transition: all 0.2s;
+  }
+  .replay-btn:hover { border-color: #ffdb00; color: #ffdb00; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.75); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+
+  /* ══ SCENE 5 — 60% TAX TRAP ══════════════════════════════ */
+  #scene5 { background: #111; }
+
+  #scene5 .center {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center; gap: 1rem;
+  }
+
+  #scene5 .rate {
+    font-size: 9rem; font-weight: 800; line-height: 1;
+    letter-spacing: -0.04em; color: #ef4444;
+    opacity: 0; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards;
+  }
+
+  #scene5 .label {
+    font-size: 1.15rem; font-weight: 600;
+    color: rgba(255,255,255,0.7); line-height: 1.5;
+    max-width: 340px;
+    opacity: 0; animation: fadeUp 0.5s ease 1.2s forwards;
+  }
+
+  #scene5 .label strong { color: white; }
+
+  #scene5 .sub {
+    font-size: 0.85rem; color: rgba(255,255,255,0.35);
+    opacity: 0; animation: fadeUp 0.5s ease 2s forwards;
+  }
+
+  #scene5 .fix {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.4rem; border-radius: 100px;
+    background: rgba(255,255,255,0.07);
+    font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.5);
+    opacity: 0; animation: fadeUp 0.5s ease 2.8s forwards;
+  }
+  #scene5 .fix em { color: #ffdb00; font-style: normal; }
+
+  #scene5 .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.15);
+    font-family: 'Nunito', sans-serif;
+  }
+  #scene5 .logo em { font-style: italic; color: rgba(255,219,0,0.4); }
+
+
+  /* ══ SCENE 6 — COST OF £1 ════════════════════════════════ */
+  #scene6 { background: #0d1f0f; }
+
+  #scene6 .center {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center; gap: 1.25rem;
+  }
+
+  #scene6 .question {
+    font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.02em;
+    opacity: 0; animation: fadeUp 0.4s ease 0.2s forwards;
+  }
+
+  #scene6 .equation {
+    display: flex; align-items: center; gap: 1.5rem;
+    opacity: 0; animation: fadeIn 0.4s ease 0.7s forwards;
+  }
+
+  #scene6 .pound-in {
+    font-size: 5.5rem; font-weight: 800; line-height: 1;
+    color: rgba(255,255,255,0.2); letter-spacing: -0.04em;
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,255,255,0.15);
+  }
+
+  #scene6 .arrow {
+    font-size: 2rem; color: rgba(255,255,255,0.2);
+    opacity: 0; animation: fadeIn 0.3s ease 1.3s forwards;
+  }
+
+  #scene6 .cost {
+    font-size: 7rem; font-weight: 800; line-height: 1;
+    color: #4ade80; letter-spacing: -0.04em;
+    opacity: 0; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 1.5s forwards;
+  }
+
+  #scene6 .label {
+    font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.6);
+    max-width: 320px; line-height: 1.5;
+    opacity: 0; animation: fadeUp 0.5s ease 2.3s forwards;
+  }
+  #scene6 .label strong { color: white; }
+
+  #scene6 .small-note {
+    font-size: 0.78rem; color: rgba(255,255,255,0.25);
+    opacity: 0; animation: fadeUp 0.5s ease 3s forwards;
+  }
+
+  #scene6 .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.1);
+    font-family: 'Nunito', sans-serif;
+  }
+  #scene6 .logo em { font-style: italic; color: rgba(255,219,0,0.3); }
+
+
+  /* ══ SCENE 7 — CHILD BENEFIT ═════════════════════════════ */
+  #scene7 { background: #111; }
+
+  #scene7 .states {
+    display: flex; gap: 0; width: 100%; height: 100%;
+    position: relative;
+  }
+
+  #scene7 .state {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.75rem; padding: 2rem;
+    text-align: center;
+  }
+
+  #scene7 .state-divider {
+    width: 1px; background: rgba(255,255,255,0.08);
+    align-self: stretch; margin: 2.5rem 0;
+  }
+
+  #scene7 .salary {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  #scene7 .salary-val {
+    font-size: 2.4rem; font-weight: 800; line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  #scene7 .benefit-label {
+    font-size: 0.75rem; color: rgba(255,255,255,0.35);
+    font-weight: 600; margin-top: 0.5rem;
+  }
+
+  #scene7 .benefit-val {
+    font-size: 2.8rem; font-weight: 800; line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  #scene7 .tick {
+    font-size: 2rem; line-height: 1;
+  }
+
+  /* State A — before */
+  #scene7 .state-a .salary     { color: rgba(255,255,255,0.35); }
+  #scene7 .state-a .salary-val { color: white; }
+  #scene7 .state-a .benefit-val{ color: #4ade80; }
+  #scene7 .state-a .tick       { color: #4ade80; }
+
+  /* State B — after */
+  #scene7 .state-b .salary     { color: rgba(255,255,255,0.35); }
+  #scene7 .state-b .salary-val { color: white; }
+  #scene7 .state-b .benefit-val{ color: #ef4444; }
+  #scene7 .state-b .tick       { color: #ef4444; }
+
+  /* Animations */
+  #scene7 .state-a {
+    opacity: 0; animation: fadeUp 0.5s ease 0.3s forwards;
+  }
+  #scene7 .state-divider {
+    opacity: 0; animation: fadeIn 0.4s ease 0.8s forwards;
+  }
+  #scene7 .state-b {
+    opacity: 0; animation: fadeUp 0.5s ease 1.1s forwards;
+  }
+
+  #scene7 .bottom-line {
+    position: absolute; bottom: 2rem; left: 0; right: 0;
+    text-align: center;
+    font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    opacity: 0; animation: fadeUp 0.5s ease 2.2s forwards;
+    padding: 0 2rem;
+  }
+  #scene7 .bottom-line strong { color: white; }
+
+  #scene7 .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.12);
+    font-family: 'Nunito', sans-serif;
+  }
+  #scene7 .logo em { font-style: italic; color: rgba(255,219,0,0.3); }
+</style>
+</head>
+<body>
+
+<!-- ══ 5: 60% TAX TRAP ════════════════════════════════════════════════ -->
+<div>
+  <div class="scene" id="scene5">
+    <div class="center">
+      <div class="rate">60%</div>
+      <div class="label">The tax rate on earnings between<br><strong>£100,000 and £125,140</strong></div>
+      <div class="sub">Not 40%. Sixty.</div>
+      <div class="fix">Pension contributions can bring it back to <em>40%</em></div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 5 — 60% tax trap</div>
+  <button class="replay-btn" onclick="replayScene('scene5')">↺ Replay</button>
+</div>
+
+<!-- ══ 6: COST OF £1 ══════════════════════════════════════════════════ -->
+<div>
+  <div class="scene" id="scene6">
+    <div class="center">
+      <div class="question">Putting £1 into your pension actually costs you...</div>
+      <div class="equation">
+        <div class="pound-in">£1</div>
+        <div class="arrow">→</div>
+        <div class="cost">58p</div>
+      </div>
+      <div class="label">After tax and NI relief.<br><strong>Higher rate? Just 48p.</strong></div>
+      <div class="small-note">Salary sacrifice · basic rate taxpayer · 2024/25</div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 6 — Real cost of £1</div>
+  <button class="replay-btn" onclick="replayScene('scene6')">↺ Replay</button>
+</div>
+
+<!-- ══ 7: CHILD BENEFIT ═══════════════════════════════════════════════ -->
+<div>
+  <div class="scene" id="scene7">
+    <div class="states">
+      <div class="state state-a">
+        <div class="salary">Salary</div>
+        <div class="salary-val">£55k</div>
+        <div class="benefit-label">Child Benefit (2 kids)</div>
+        <div class="benefit-val">£2,212</div>
+        <div class="tick">✓</div>
+      </div>
+      <div class="state-divider"></div>
+      <div class="state state-b">
+        <div class="salary">Salary</div>
+        <div class="salary-val">£65k</div>
+        <div class="benefit-label">Child Benefit (2 kids)</div>
+        <div class="benefit-val">£0</div>
+        <div class="tick">✗</div>
+      </div>
+    </div>
+    <div class="bottom-line">
+      <strong>£10k more salary. £2,212 benefit gone.</strong><br>
+      Pension contributions can get it back.
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 7 — Child Benefit clawback</div>
+  <button class="replay-btn" onclick="replayScene('scene7')">↺ Replay</button>
+</div>
+
+<script>
+function replayScene(id) {
+  var scene = document.getElementById(id);
+  var parent = scene.parentNode;
+  var next = scene.nextSibling;
+  var clone = scene.cloneNode(true);
+  parent.removeChild(scene);
+  parent.insertBefore(clone, next);
+}
+</script>
+</body>
+</html>

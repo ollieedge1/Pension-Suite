@@ -363,6 +363,174 @@
     padding: 0.3rem 0.85rem; border-radius: 100px; letter-spacing: 0.04em;
   }
 
+
+  /* RANGE SLIDER */
+  .range-wrap { margin-top: 0.5rem; }
+  input[type="range"] {
+    width: 100%; accent-color: var(--accent);
+    height: 4px; cursor: pointer; display: block;
+  }
+  .range-labels {
+    display: flex; justify-content: space-between;
+    font-size: 0.72rem; color: var(--slate-soft);
+    margin-top: 0.35rem;
+  }
+
+  /* HELP ME CHOOSE — goals panel */
+  .rec-nudge {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1.5px solid var(--border); background: var(--surface);
+    color: var(--ink); font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.15s;
+  }
+  .rec-nudge:hover { border-color: var(--accent); color: var(--accent); }
+  .rec-adjuster { margin: 1rem 0; }
+  .rec-adjuster-label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.82rem; color: var(--slate-soft); margin-bottom: 0.5rem;
+  }
+  .rec-pct-display {
+    font-size: 1.1rem; font-weight: 800; color: var(--accent);
+  }
+  .rec-slider-row {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .rec-slider-hints {
+    display: flex; justify-content: space-between;
+    font-size: 0.7rem; color: var(--slate-soft); margin-top: 0.25rem;
+  }
+  .rec-summary {
+    background: var(--accent-pale); border-radius: 12px;
+    padding: 1.1rem 1.25rem; margin-bottom: 1rem;
+    border: 1px solid var(--border);
+  }
+  .rec-disclaimer {
+    display: flex; gap: 0.6rem; align-items: flex-start;
+    background: rgba(0,0,0,0.03); border-radius: 8px;
+    padding: 0.75rem 1rem; margin-bottom: 1.25rem;
+    font-size: 0.78rem; color: var(--slate-soft); line-height: 1.5;
+  }
+  .rec-disclaimer-icon { flex-shrink: 0; font-size: 1rem; }
+
+/* GOAL CARDS — app style */
+  .goal-item {
+    display: flex; align-items: center; gap: 0.85rem;
+    padding: 0.9rem 1rem; border-radius: 12px;
+    border: 1.5px solid var(--border); background: white;
+    cursor: pointer; transition: all 0.18s; margin-bottom: 0.5rem;
+    position: relative;
+  }
+  .goal-item:hover  { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .goal-item.selected { border-color: var(--accent); background: var(--accent-pale); }
+  .goal-item.disabled { pointer-events: none; }
+  .g-icon { font-size: 1.5rem; flex-shrink: 0; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; background: var(--accent-pale); border-radius: 10px; }
+  .goal-text { flex: 1; min-width: 0; }
+  .g-title { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 0.15rem; }
+  .goal-item.selected .g-title { color: var(--accent); }
+  .g-desc  { font-size: 0.75rem; color: var(--slate-soft); line-height: 1.4; }
+  .g-pct   { font-size: 0.72rem; color: var(--accent); font-weight: 700; margin-top: 0.2rem; }
+  .g-tick  { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); background: white; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: white; flex-shrink: 0; transition: all 0.18s; }
+  .g-tick.visible { background: var(--accent); border-color: var(--accent); }
+
+  /* RANGE SLIDERS — bigger thumb, teal track */
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 6px; border-radius: 3px;
+    background: #e2e8f0; cursor: pointer; outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 2.5px solid var(--accent);
+    cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: box-shadow 0.15s;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  input[type="range"]::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: white; border: 2.5px solid var(--accent);
+    cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+
+  /* RESULT BOXES */
+  .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.85rem; margin: 1.25rem 0; }
+  .result-box { background: var(--ink); border-radius: 12px; padding: 1.1rem; text-align: center; }
+  .result-box.teal { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); }
+  .result-box.highlight { background: linear-gradient(135deg, #1e3a4a 0%, var(--ink) 100%); border: 1px solid var(--accent); }
+  .result-box.good { background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); }
+  .result-box.warn { background: linear-gradient(135deg, #92400e 0%, #d97706 100%); }
+  .result-box .r-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.55); margin-bottom: 0.4rem; }
+  .result-box .r-amount { font-size: 1.65rem; font-weight: 800; color: white; line-height: 1; }
+  .result-box .r-sub { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
+
+  /* REC SUMMARY PANEL */
+  .rec-summary-title { font-size: 0.78rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.85rem; }
+  .rec-summary-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.4rem 0; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+  .rec-summary-row:last-child { border-bottom: none; }
+  .rs-label { color: var(--slate-soft); }
+  .rs-val { color: var(--ink); font-weight: 700; }
+  .rs-val.teal { color: var(--accent); }
+  .rs-val.good { color: #2d6a4f; }
+  .rs-val.warn { color: #b45309; }
+
+  /* COMPARISON TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; margin: 1rem 0; }
+  .compare-table th { padding: 0.55rem 0.85rem; text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--slate-soft); border-bottom: 2px solid var(--border); }
+  .compare-table th.teal-col { color: var(--accent); }
+  .compare-table td { padding: 0.65rem 0.85rem; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--slate-soft); vertical-align: middle; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 600; color: var(--ink); }
+  .compare-table td.teal { color: var(--accent); font-weight: 700; }
+  .compare-table td.good { color: #2d6a4f; font-weight: 600; }
+  .compare-table td.warn { color: #b45309; }
+
+  /* GUIDANCE BOX */
+  .guidance-box { border-left: 3px solid var(--accent); background: var(--accent-pale); border-radius: 0 10px 10px 0; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .guidance-box h4 { font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 0.35rem; }
+  .guidance-box p  { font-size: 0.83rem; color: var(--slate-soft); line-height: 1.6; }
+
+  /* ALERT / MATCH BOXES */
+  .alert-box { border-left: 3px solid #40916c; background: rgba(64,145,108,0.07); border-radius: 0 10px 10px 0; padding: 0.9rem 1.1rem; margin: 0.75rem 0; }
+  .alert-box.warning { border-left-color: #d97706; background: #fffbeb; }
+  .alert-box.danger  { border-left-color: #b91c1c; background: #fef2f2; }
+  .alert-box h4 { font-size: 0.83rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; }
+  .alert-box p  { font-size: 0.82rem; color: var(--slate-soft); line-height: 1.6; }
+
+  /* SUMMARY PANEL */
+  .summary-panel { background: var(--ink); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; }
+  .summary-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.84rem; }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row .s-label { color: rgba(255,255,255,0.5); }
+  .summary-row .s-val   { color: white; font-weight: 600; }
+  .summary-row .s-val.teal { color: var(--accent-light, #5cc3e8); }
+
+  /* BAR CHART (step 2 breakdown bars) */
+  .bar-chart { margin: 1.25rem 0; }
+  .bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+  .bar-label { width: 130px; font-size: 0.78rem; color: var(--slate-soft); flex-shrink: 0; text-align: right; }
+  .bar-track { flex: 1; height: 26px; background: rgba(0,0,0,0.05); border-radius: 5px; overflow: hidden; }
+  .bar-fill  { height: 100%; border-radius: 5px; display: flex; align-items: center; padding-left: 0.5rem; font-size: 0.72rem; font-weight: 700; color: white; min-width: 2px; transition: width 0.5s ease; }
+  .bar-fill.salary  { background: var(--ink); }
+  .bar-fill.pension { background: var(--accent); }
+  .bar-fill.tax     { background: #94a3b8; }
+  .bar-fill.ni      { background: #cbd5e1; color: var(--ink); }
+  .bar-value { width: 70px; font-size: 0.78rem; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+
+  /* PROJECTION CANVAS */
+  .projection-canvas-wrap { background: var(--ink); border-radius: 12px; padding: 1.5rem; margin: 1.25rem 0; position: relative; }
+  canvas#projectionChart  { width: 100% !important; height: 200px !important; }
+  .proj-legend { display: flex; gap: 1.25rem; margin-top: 0.85rem; flex-wrap: wrap; }
+  .proj-legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.73rem; color: rgba(255,255,255,0.6); }
+  .proj-legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ALLOWANCE METER */
+  .allowance-meter { margin: 1.25rem 0; }
+  .meter-track { height: 14px; background: rgba(0,0,0,0.07); border-radius: 7px; overflow: hidden; margin: 0.5rem 0; }
+  .meter-fill  { height: 100%; border-radius: 7px; transition: width 0.5s ease; }
+  .meter-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--slate-soft); }
+
 </style>
 </head>
 <body>
@@ -402,177 +570,41 @@
 
 <!-- STEP 1: YOUR PAY -->
   <div class="card active" id="step1">
-    <div class="card-title">Let's start with the basics</div>
-    <p class="card-subtitle">Just a few numbers from your payslip. Don't worry if you're not sure about everything — we'll guide you through it.</p>
+    <div class="card-title">Three numbers. That's all we need.</div>
+    <p class="card-subtitle">We'll show you exactly how much you could save — and the single change that makes the biggest difference.</p>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>What's your annual salary before tax?</label>
-        <div class="input-wrap">
-          <span class="input-prefix">£</span>
-          <input type="number" id="grossSalary" placeholder="e.g. 55000" min="0">
-        </div>
-      </div>
-      <div class="field-group">
-        <label>How much does your employer pay into your pension?</label>
-        <div class="input-wrap">
-          <input type="number" id="employerContrib" placeholder="e.g. 3" min="0" max="100" class="has-suffix no-prefix" oninput="toggleMatchFields()">
-          <span class="input-suffix">%</span>
-        </div>
-        <p class="hint">Check your payslip or ask HR. Many employers match what you pay in, up to a limit.</p>
-        <div style="margin-top:0.65rem;">
-          <label style="font-size:0.8rem; color:var(--slate); display:flex; align-items:center; gap:0.5rem; cursor:pointer; font-weight:400;">
-            <input type="checkbox" id="hasMatch" onchange="toggleMatchFields()" style="width:auto; padding:0; border:none; accent-color:var(--teal);"> My employer matches my contributions
-          </label>
-        </div>
-        <div id="matchFields" style="display:none; margin-top:0.75rem; padding:0.85rem; background:var(--stone-pale); border-radius:8px; border:1px solid rgba(0,0,0,0.07);">
-          <div style="font-size:0.78rem; font-weight:600; color:var(--navy); margin-bottom:0.6rem;">Matching arrangement</div>
-          <div class="two-col" style="gap:0.75rem; margin-bottom:0;">
-            <div class="field-group" style="margin-bottom:0;">
-              <label style="font-size:0.78rem;">They match up to</label>
-              <div class="input-wrap">
-                <input type="number" id="matchUpTo" placeholder="e.g. 5" min="0" max="20" class="has-suffix no-prefix" oninput="updateMatchPreview()" style="font-size:0.88rem;">
-                <span class="input-suffix">%</span>
-              </div>
-            </div>
-            <div class="field-group" style="margin-bottom:0;">
-              <label style="font-size:0.78rem;">If you contribute at least</label>
-              <div class="input-wrap">
-                <input type="number" id="matchThreshold" placeholder="e.g. 5" min="0" max="20" class="has-suffix no-prefix" oninput="updateMatchPreview()" style="font-size:0.88rem;">
-                <span class="input-suffix">%</span>
-              </div>
-            </div>
-          </div>
-          <div id="matchPreview" style="margin-top:0.65rem; font-size:0.78rem; color:var(--teal); font-weight:500; line-height:1.5;"></div>
-        </div>
+    <div class="field-group">
+      <label>Your annual salary before tax</label>
+      <div class="input-wrap">
+        <span class="input-prefix">£</span>
+        <input type="number" id="grossSalary" placeholder="e.g. 55000" min="0" autofocus>
       </div>
     </div>
 
-    <div class="two-col">
+    <div class="two-col" style="gap:1rem;">
       <div class="field-group">
-        <label>How much do you currently pay in?</label>
+        <label>You pay into your pension</label>
         <div class="input-wrap">
           <input type="number" id="employeeContrib" placeholder="e.g. 5" min="0" max="100" class="has-suffix no-prefix">
           <span class="input-suffix">%</span>
         </div>
       </div>
       <div class="field-group">
-        <label>What contribution level do you want to explore?</label>
-        <div class="radio-group" style="margin-bottom:0.6rem;">
-          <div class="radio-btn selected" id="mode_manual" onclick="setContribMode('manual')">I'll choose</div>
-          <div class="radio-btn" id="mode_optimise" onclick="setContribMode('optimise')" style="border-color:var(--teal);color:var(--teal);font-weight:600;">✦ Help me choose</div>
-        </div>
-        <div id="manualContribWrap">
-          <div class="input-wrap">
-            <input type="number" id="targetContrib" placeholder="e.g. 10" min="0" max="100" class="has-suffix no-prefix" oninput="syncManualTarget()">
-            <span class="input-suffix">%</span>
-          </div>
-          <p class="hint">Not sure? Try 5% to start. You can adjust this on the next screen.</p>
-        </div>
-        <div id="optimiseWrap" style="display:none;">
-          <p style="font-size:0.82rem;color:var(--slate);margin-bottom:0.75rem;line-height:1.5;">What matters most to you? Pick anything that applies and we'll suggest the right contribution level.</p>
-          <div class="field-group" style="margin-bottom:0.85rem;">
-            <label style="font-size:0.8rem;">Minimum monthly take-home you need <span style="font-weight:400;color:var(--slate-light);">(optional)</span></label>
-            <div class="input-wrap">
-              <span class="input-prefix">£</span>
-              <input type="number" id="minTakeHomePO" placeholder="e.g. 3500" min="0" class="has-suffix" oninput="renderGoals()" style="font-size:0.9rem;">
-              <span class="input-suffix">/mo</span>
-            </div>
-            <p class="hint" style="font-size:0.72rem;">Used to enable the &ldquo;Protect minimum take-home&rdquo; goal below.</p>
-          </div>
-          <div id="goalsList" style="display:flex;flex-direction:column;gap:0.5rem;"></div>
-          <div id="optimiseResult" style="display:none;margin-top:1rem;"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem 0; border-bottom:1px solid var(--border);">
+          <span style="font-size:0.85rem; color:var(--slate-soft);">Retirement age</span>
+          <span style="font-size:1rem; font-weight:800; color:var(--accent);" id="projRetirementAge">67</span>
         </div>
       </div>
-    </div>
-
-    <div class="field-group">
-      <label>Does your employer offer salary sacrifice?</label>
-      <div class="radio-group">
-        <div class="radio-btn selected" id="rb_ss" onclick="selectMethod('salary_sacrifice')">Yes</div>
-        <div class="radio-btn" id="rb_pc" onclick="selectMethod('personal')">No / I'm not sure</div>
-      </div>
-      <p class="hint" style="margin-top:0.5rem;">Salary sacrifice is more tax-efficient — you save income tax and NI. If unsure, check with your HR or payroll team.</p>
-    </div>
-
-    <div class="field-group">
-      <label>How much is in your pension pot right now? <span style="font-weight:400;color:var(--slate-light);">(optional)</span></label>
-      <div class="input-wrap">
-        <span class="input-prefix">£</span>
-        <input type="number" id="currentPot" placeholder="e.g. 25000" min="0">
-      </div>
-      <p class="hint">Check your pension app or last annual statement. Leave blank if you're not sure.</p>
-    </div>
-
-    <div class="field-group">
-      <label>How many years until you want to retire?</label>
-      <div class="range-wrap">
-        <input type="range" id="yearsToRetire" min="5" max="45" value="25" oninput="updateYearsLabel()">
-        <div class="range-labels">
-          <span>5 yrs</span>
-          <span id="yearsLabel" style="color: var(--teal); font-weight:600;">25 years</span>
-          <span>45 yrs</span>
+      <div class="field-group" style="margin-bottom:0;">
+        <label>Current pension pot <span style="font-weight:400; color:var(--slate-soft);">(optional)</span></label>
+        <div class="input-wrap">
+          <span class="input-prefix">£</span>
+          <input type="number" id="currentPot" placeholder="e.g. 25000" min="0" oninput="renderStep3();">
         </div>
+        <p class="hint">Leave blank to start from £0.</p>
       </div>
     </div>
 
-    <div class="btn-row">
-      <button class="btn-primary" onclick="goTo(2)">See my take-home impact →</button>
-    </div>
-  </div>
-
-  <!-- STEP 2: RECOMMENDATION -->
-  <div class="card" id="step2">
-    <div class="card-title">Here's what we think you should do</div>
-    <p class="card-subtitle">We've crunched the numbers. Here's the honest picture — how much you'd keep each month, and how much more goes into your pension. Slide the bar to try different amounts.</p>
-
-    <!-- DISCLAIMER -->
-    <div class="rec-disclaimer">
-      <span class="rec-disclaimer-icon">&#9432;</span>
-      <span>These figures are illustrative — based on standard UK tax rates for 2024/25. Your exact numbers may differ slightly. For big decisions, it's always worth a chat with a financial adviser.</span>
-    </div>
-
-    <!-- RECOMMENDATION SUMMARY -->
-    <div class="rec-summary" id="recSummary"></div>
-
-    <!-- LIVE ADJUSTER -->
-    <div class="rec-adjuster">
-      <div class="rec-adjuster-label">
-        <span>Try different amounts — see what happens to your pay</span>
-        <span id="adjPctDisplay" class="rec-pct-display">5%</span>
-      </div>
-      <div class="rec-slider-row">
-        <button class="rec-nudge" onclick="nudgeContrib(-1)">&#8722;</button>
-        <input type="range" id="adjContribPct" min="0" max="30" step="1" value="5" oninput="renderStep2()">
-        <button class="rec-nudge" onclick="nudgeContrib(1)">+</button>
-      </div>
-      <div class="rec-slider-hints">
-        <span>0%</span>
-        <span id="adjSalaryDisplay" style="color:var(--teal); font-weight:600;"></span>
-        <span>30%</span>
-      </div>
-    </div>
-
-    <!-- LIVE IMPACT GRID -->
-    <div class="results-grid" id="takeHomeGrid"></div>
-
-    <hr>
-
-    <div class="bar-chart" id="barChart"></div>
-
-    <div id="takeHomeGuidance"></div>
-
-    <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(1)">&#8592; Back</button>
-      <button class="btn-primary" onclick="applyRecommendation()">This looks good — show me the big picture &#8594;</button>
-    </div>
-  </div>
-
-
-  <!-- STEP 4: PROJECTION -->
-  <div class="card" id="step3">
-    <div class="card-title">What could your pension be worth?</div>
-    <p class="card-subtitle">This is the exciting part. Small changes now can make a huge difference by retirement. Here's what the numbers look like over time.</p>
 
     <div class="two-col" style="margin-bottom:1rem;">
       <div class="field-group">
@@ -611,6 +643,117 @@
     <div class="btn-row">
       <button class="btn-secondary" onclick="goTo(3)">← Back</button>
       <button class="btn-primary" onclick="goTo(5)">Check my allowance →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: RECOMMENDATION -->
+  <div class="card" id="step2">
+    <div class="card-title">Here's your number.</div>
+    <p class="card-subtitle">This is exactly what salary sacrifice does to your pay. Slide to explore different contribution levels.</p>
+
+    <!-- DISCLAIMER -->
+    <div class="rec-disclaimer">
+      <span class="rec-disclaimer-icon">ℹ</span>
+      <span>These figures are illustrative — based on standard UK tax rates for 2024/25. Your exact numbers may differ slightly.</span>
+    </div>
+
+    <!-- OUR SUGGESTION — big centred number with nudge buttons -->
+    <div id="recSummary"></div>
+
+    <!-- LIVE ADJUSTER -->
+    <div class="rec-adjuster">
+      <div class="rec-adjuster-label">
+        <span>Try different amounts — see what happens to your pay</span>
+        <span id="adjPctDisplay" class="rec-pct-display">5%</span>
+      </div>
+      <div class="rec-slider-row">
+        <button class="rec-nudge" onclick="nudgeContrib(-1)">−</button>
+        <input type="range" id="adjContribPct" min="0" max="30" step="1" value="5" oninput="renderStep2()">
+        <button class="rec-nudge" onclick="nudgeContrib(1)">+</button>
+      </div>
+      <div class="rec-slider-hints">
+        <span>0%</span>
+        <span id="adjSalaryDisplay" style="color:var(--accent); font-weight:600;"></span>
+        <span>30%</span>
+      </div>
+    </div>
+
+    <!-- LIVE IMPACT GRID -->
+    <div id="takeHomeGrid"></div>
+
+    <hr>
+
+    <div class="bar-chart" id="barChart"></div>
+
+    <div id="takeHomeGuidance"></div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(1)">← Back</button>
+      <button class="btn-primary" onclick="applyRecommendation()">This looks good — show me the big picture →</button>
+    </div>
+  </div>
+
+
+  <!-- STEP 3: PROJECTION -->
+  <div class="card" id="step3">
+    <div class="card-title">What this looks like over time</div>
+    <p class="card-subtitle">How your pension pot grows between now and retirement at the contribution level you've chosen.</p>
+
+    <div class="two-col" style="margin-bottom:1rem;">
+      <div class="field-group">
+        <label>Assumed annual growth rate</label>
+        <div class="input-wrap">
+          <input type="number" id="growthRate" value="5" min="1" max="12" class="has-suffix no-prefix" oninput="renderStep3()">
+          <span class="input-suffix">%</span>
+        </div>
+        <p class="hint">Typical range 4–7% for a balanced fund.</p>
+      </div>
+      <div class="field-group">
+        <label>Assumed annual salary growth</label>
+        <div class="input-wrap">
+          <input type="number" id="salaryGrowth" value="2" min="0" max="10" class="has-suffix no-prefix" oninput="renderStep3()">
+          <span class="input-suffix">%</span>
+        </div>
+        <p class="hint">Used to inflate contributions over time.</p>
+      </div>
+    </div>
+
+    <!-- Current vs Optimised paths — app style -->
+    <div id="projPathComparison" style="background:var(--ink); border-radius:14px; padding:1.5rem; margin-bottom:1.25rem; text-align:center; display:none;">
+      <div style="font-size:0.72rem; font-weight:700; letter-spacing:0.12em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:1rem;">Final pot at retirement age <span id="projRetirementAge">67</span></div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:1.5rem;">
+        <div>
+          <div style="font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:0.3rem;">Current path</div>
+          <div id="projCurrentPot" style="font-size:1.8rem; font-weight:800; color:rgba(255,255,255,0.5);">—</div>
+        </div>
+        <div style="font-size:1.5rem; color:rgba(255,255,255,0.3);">→</div>
+        <div>
+          <div style="font-size:0.72rem; color:var(--accent); margin-bottom:0.3rem;">Optimised path</div>
+          <div id="projOptimisedPot" style="font-size:2rem; font-weight:800; color:var(--accent);">—</div>
+        </div>
+      </div>
+      <div id="projExtra" style="margin-top:0.85rem; font-size:0.88rem; font-weight:700; color:#ffdb00;"></div>
+      <div style="margin-top:0.4rem; font-size:0.72rem; color:rgba(255,255,255,0.3);">Assumes <span id="projGrowthNote">5%</span> annual growth, <span id="projSalaryGrowthNote">2%</span> salary growth</div>
+    </div>
+
+    <div class="projection-canvas-wrap">
+      <canvas id="projectionChart"></canvas>
+      <div class="proj-legend">
+        <div class="proj-legend-item"><div class="proj-legend-dot" style="background:var(--accent)"></div> Optimised contribution</div>
+        <div class="proj-legend-item"><div class="proj-legend-dot" style="background:rgba(255,255,255,0.3)"></div> Current contribution</div>
+      </div>
+    </div>
+
+    <div class="results-grid" id="projectionResults"></div>
+
+    <div class="guidance-box" style="margin-top:1rem;">
+      <h4>A word of honesty</h4>
+      <p>These projections are illustrative only. Actual returns will vary. They do not account for charges, inflation, or changes in contribution rates. A financial adviser can model personalised scenarios.</p>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(2)">← Back</button>
+      <button class="btn-primary" onclick="goTo(4)">Check my allowance →</button>
     </div>
   </div>
 
@@ -713,10 +856,28 @@
   const fmtD = n => '£' + n.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const pct = n => Math.round(n) + '%';
 
-  function updateYearsLabel() {
-    const v = document.getElementById('yearsToRetire').value;
-    document.getElementById('yearsLabel').textContent = v + ' year' + (v == 1 ? '' : 's');
+  function updateRetirementLabel() {
+    const age = parseInt(document.getElementById('retirementAge').value) || 67;
+    document.getElementById('retirementAgeLabel').textContent = age;
+    const years = Math.max(1, age - 35);
+    const lbl = document.getElementById('yearsLabel');
+    if (lbl) lbl.textContent = years + ' years to go';
+    if (typeof renderGoals === 'function') renderGoals();
   }
+
+  function updateContribLabel() {
+    const v = parseFloat(document.getElementById('employeeContrib').value) || 0;
+    document.getElementById('employeeContribLabel').textContent = v + '%';
+    if (typeof renderGoals === 'function') renderGoals();
+  }
+
+  function updateEmpContribLabel() {
+    const v = parseFloat(document.getElementById('employerContrib').value) || 0;
+    document.getElementById('employerContribLabel').textContent = v + '%';
+  }
+
+  // Keep alias for any legacy calls
+  function updateYearsLabel() { updateRetirementLabel(); }
 
   function selectMethod(m) {
     state.method = m;
@@ -997,7 +1158,7 @@
     const curPct = parseFloat(document.getElementById('employeeContrib').value) || 0;
     const tgtPct = parseFloat(document.getElementById('targetContrib').value) || 0;
     const currentPot = parseFloat(document.getElementById('currentPot').value) || 0;
-    const years = parseInt(document.getElementById('yearsToRetire').value) || 25;
+    const years = Math.max(1, (parseInt(document.getElementById('retirementAge').value) || 67) - 35);
     const growth = (parseFloat(document.getElementById('growthRate').value) || 5) / 100;
     const salGrowth = (parseFloat(document.getElementById('salaryGrowth').value) || 2) / 100;
 
@@ -1167,7 +1328,7 @@
     const tgtPension = salary * tgtPct / 100;
     const curCalc = calcTakeHome(salary, curPension);
     const tgtCalc = calcTakeHome(salary, tgtPension);
-    const years = parseInt(document.getElementById('yearsToRetire').value) || 25;
+    const years = Math.max(1, (parseInt(document.getElementById('retirementAge').value) || 67) - 35);
 
     document.getElementById('finalSummary').innerHTML = `
       <div class="summary-panel-title">Your optimised pension plan</div>
@@ -1219,32 +1380,56 @@
   const GOALS = [
     {
       id: 'avoid_higher',
-      title: 'Avoid higher rate tax',
-      desc: 'Keep income below £50,270 so you stay in the basic rate band.',
+      icon: '📉',
+      title: 'Avoid Higher Rate Tax',
+      threshold: '£50,270',
+      desc: 'Stay in the 20% basic rate band',
       calc: (salary, empPct) => Math.max(0, salary - 50270),
     },
     {
       id: 'child_benefit',
+      icon: '👨‍👩‍👧',
       title: 'Keep Child Benefit',
-      desc: 'Keep adjusted net income below £60,000 to avoid the High Income Child Benefit Charge.',
+      threshold: '£60,000',
+      desc: 'Avoid the clawback charge',
       calc: (salary, empPct) => Math.max(0, salary - 60000),
     },
     {
+      id: 'avoid_60',
+      icon: '⚠️',
+      title: 'Avoid the 60% Trap',
+      threshold: '£100,000',
+      desc: 'Keep your personal allowance',
+      calc: (salary, empPct) => Math.max(0, salary - 100000),
+    },
+    {
       id: 'avoid_additional',
-      title: 'Avoid additional rate tax',
-      desc: 'Keep income below £125,140 to avoid the 45% rate and retain your personal allowance.',
+      icon: '🏔️',
+      title: 'Avoid Additional Rate',
+      threshold: '£125,140',
+      desc: 'Stay below the 45% tax band',
       calc: (salary, empPct) => Math.max(0, salary - 125140),
     },
     {
       id: 'maximise',
-      title: 'Maximise pension growth',
-      desc: 'Contribute up to the annual allowance (£60,000 or 100% of salary, whichever is lower).',
+      icon: '🚀',
+      title: 'Maximise Pension Growth',
+      threshold: '£60,000',
+      desc: 'Contribute up to the annual allowance',
       calc: (salary, empPct) => Math.max(0, Math.min(60000, salary) - salary * empPct / 100),
     },
   ];
 
   let selectedGoals = new Set();
-  let optimiseMode = false;
+  let optimiseMode = true; // default to Help me choose
+
+  function togglePotField() {
+    var wrap = document.getElementById('potFieldWrap');
+    var icon = document.getElementById('potToggleIcon');
+    var open = wrap.style.display === 'none';
+    wrap.style.display = open ? 'block' : 'none';
+    icon.textContent = open ? '－' : '＋';
+  }
 
   function setContribMode(mode) {
     optimiseMode = mode === 'optimise';
@@ -1260,6 +1445,7 @@
     const empPct = parseFloat(document.getElementById('employerContrib').value) || 0;
     const minTH = parseFloat(document.getElementById('minTakeHomePO').value) || 0;
     const list = document.getElementById('goalsList');
+    if (!list) return;
 
     list.innerHTML = GOALS.map(function(g) {
       const sel = selectedGoals.has(g.id);
@@ -1453,7 +1639,24 @@
     if (['grossSalary', 'employerContrib'].includes(e.target.id) && optimiseMode) renderGoals();
   });
 
-  updateYearsLabel();
+  selectMethod('salary_sacrifice');
+
+  function toggleSalaryMethod() {
+    var current = window._ssMethod || 'salary_sacrifice';
+    var next = current === 'salary_sacrifice' ? 'personal' : 'salary_sacrifice';
+    window._ssMethod = next;
+    selectMethod(next);
+    var wrap = document.getElementById('ssToggleWrap');
+    if (wrap) wrap.innerHTML = next === 'personal'
+      ? '<span style="color:var(--accent);cursor:pointer;font-weight:600;" onclick="toggleSalaryMethod()">Switch back to salary sacrifice</span>'
+      : '<span style="color:var(--accent);cursor:pointer;font-weight:600;" onclick="toggleSalaryMethod()">My employer doesn’t offer it</span>';
+    renderStep2();
+  }
+
+  updateRetirementLabel();
+  updateContribLabel();
+  updateEmpContribLabel();
+  renderGoals(); // show goals immediately on load
 
   // ── MYPAYPICTURE CHAT ─────────────────────────────────────────────────────
   const WORKER_URL = 'https://mypaypicture-api.proud-truth-9c88.workers.dev';
@@ -1618,7 +1821,7 @@
       var curPct = parseFloat(document.getElementById('employeeContrib').value) || 0;
       var adjSlider = document.getElementById('adjContribPct');
       var adjPct = adjSlider ? parseFloat(adjSlider.value) : (parseFloat(document.getElementById('targetContrib').value) || 0);
-      var years = parseInt(document.getElementById('yearsToRetire').value) || 25;
+      var years = Math.max(1, (parseInt(document.getElementById('retirementAge').value) || 67) - 35);
       var isSS = state && state.method !== 'personal';
       var method = isSS ? 'Salary Sacrifice' : 'Personal Contribution';
 

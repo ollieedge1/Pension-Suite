@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyPayPicture — Animation Templates</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #1a1a2e;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Each animation is 1080x1080 scaled to 540x540 for preview */
+  .scene {
+    width: 540px;
+    height: 540px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .scene-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+    margin-top: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .replay-btn {
+    display: block;
+    margin: 0.5rem auto 0;
+    padding: 0.4rem 1.2rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .replay-btn:hover { border-color: #ffdb00; color: #ffdb00; }
+
+  /* ── SCENE 1: COUNTUP SAVINGS ─────────────────────────────────────── */
+  #scene1 {
+    background: #314855;
+  }
+
+  #scene1 .bg-glow {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(92,195,232,0.15) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    animation: s1-glow 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes s1-glow {
+    from { opacity: 0.5; transform: scale(1); }
+    to   { opacity: 1;   transform: scale(1.15); }
+  }
+
+  #scene1 .content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 3rem;
+  }
+
+  #scene1 .eyebrow {
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #5cc3e8; margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  #scene1 .label {
+    font-size: 1.1rem; font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.5s forwards;
+    text-align: center;
+  }
+
+  #scene1 .amount {
+    font-size: 6rem; font-weight: 800;
+    color: #ffdb00;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 0.7s forwards;
+  }
+
+  #scene1 .per-year {
+    font-size: 1rem; font-weight: 600;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.4rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 1.8s forwards;
+  }
+
+  #scene1 .divider {
+    width: 60px; height: 3px;
+    background: #5cc3e8;
+    border-radius: 2px;
+    margin: 1.5rem 0;
+    opacity: 0;
+    animation: expandWidth 0.6s ease 2.2s forwards;
+    transform-origin: left;
+  }
+
+  @keyframes expandWidth {
+    from { opacity: 1; width: 0; }
+    to   { opacity: 1; width: 60px; }
+  }
+
+  #scene1 .sub {
+    font-size: 0.9rem; font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    text-align: center; line-height: 1.6;
+    max-width: 300px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 2.4s forwards;
+  }
+
+  #scene1 .sub strong { color: white; }
+
+  #scene1 .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.8rem; font-weight: 800;
+    color: rgba(255,255,255,0.3);
+  }
+  #scene1 .logo em { font-style: italic; color: #ffdb00; opacity: 0.6; }
+
+  /* ── SCENE 2: BAR COMPARISON ──────────────────────────────────────── */
+  #scene2 {
+    background: #1e2e38;
+  }
+
+  #scene2 .bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(92,195,232,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(92,195,232,0.04) 1px, transparent 1px);
+    background-size: 54px 54px;
+  }
+
+  #scene2 .content {
+    position: absolute; inset: 0;
+    padding: 2.5rem;
+    display: flex; flex-direction: column;
+  }
+
+  #scene2 .title {
+    font-size: 1.15rem; font-weight: 800;
+    color: white; margin-bottom: 0.3rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.2s forwards;
+  }
+
+  #scene2 .subtitle {
+    font-size: 0.82rem; color: rgba(255,255,255,0.4);
+    margin-bottom: 2rem; font-weight: 600;
+    opacity: 0; animation: fadeUp 0.5s ease 0.4s forwards;
+  }
+
+  #scene2 .bars {
+    flex: 1; display: flex;
+    gap: 2rem; align-items: flex-end;
+    padding-bottom: 1rem;
+  }
+
+  #scene2 .bar-group {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; gap: 0.75rem;
+  }
+
+  #scene2 .bar-val {
+    font-size: 1.6rem; font-weight: 800;
+    opacity: 0;
+  }
+
+  #scene2 .bar-group:nth-child(1) .bar-val {
+    color: rgba(255,255,255,0.5);
+    animation: fadeUp 0.4s ease 0.8s forwards;
+  }
+  #scene2 .bar-group:nth-child(2) .bar-val {
+    color: #ffdb00;
+    animation: fadeUp 0.4s ease 1.8s forwards;
+  }
+
+  #scene2 .bar-track {
+    width: 100%; background: rgba(255,255,255,0.06);
+    border-radius: 12px; overflow: hidden;
+    height: 200px; display: flex; align-items: flex-end;
+    position: relative;
+  }
+
+  #scene2 .bar-fill {
+    width: 100%; border-radius: 12px;
+    position: absolute; bottom: 0;
+  }
+
+  #scene2 .bar-group:nth-child(1) .bar-fill {
+    background: rgba(255,255,255,0.15);
+    animation: barRise1 1s cubic-bezier(0.16,1,0.3,1) 0.6s both;
+  }
+  #scene2 .bar-group:nth-child(2) .bar-fill {
+    background: linear-gradient(180deg, #ffdb00 0%, #e0c000 100%);
+    animation: barRise2 1.2s cubic-bezier(0.16,1,0.3,1) 1.4s both;
+    box-shadow: 0 0 40px rgba(255,219,0,0.3);
+  }
+
+  @keyframes barRise1 { from { height: 0; } to { height: 55%; } }
+  @keyframes barRise2 { from { height: 0; } to { height: 85%; } }
+
+  #scene2 .bar-label {
+    font-size: 0.78rem; font-weight: 700;
+    text-align: center; line-height: 1.4;
+    opacity: 0;
+  }
+  #scene2 .bar-group:nth-child(1) .bar-label {
+    color: rgba(255,255,255,0.4);
+    animation: fadeUp 0.4s ease 0.8s forwards;
+  }
+  #scene2 .bar-group:nth-child(2) .bar-label {
+    color: rgba(255,255,255,0.7);
+    animation: fadeUp 0.4s ease 1.8s forwards;
+  }
+
+  #scene2 .saving-badge {
+    position: absolute; top: 2.5rem; right: 2.5rem;
+    background: #ffdb00; color: #314855;
+    border-radius: 100px; padding: 0.5rem 1rem;
+    font-size: 0.8rem; font-weight: 800;
+    opacity: 0; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 2.8s forwards;
+    white-space: nowrap;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  #scene2 .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.8rem; font-weight: 800;
+    color: rgba(255,255,255,0.25);
+  }
+  #scene2 .logo em { font-style: italic; color: #ffdb00; opacity: 0.5; }
+
+  /* ── SCENE 3: COMPOUND GROWTH ─────────────────────────────────────── */
+  #scene3 {
+    background: #0d1f2d;
+  }
+
+  #scene3 .content {
+    position: absolute; inset: 0;
+    padding: 2.5rem;
+    display: flex; flex-direction: column;
+  }
+
+  #scene3 .title {
+    font-size: 1.1rem; font-weight: 800; color: white;
+    margin-bottom: 0.25rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.2s forwards;
+  }
+  #scene3 .subtitle {
+    font-size: 0.8rem; color: rgba(255,255,255,0.4);
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.4s forwards;
+  }
+
+  #scene3 canvas {
+    flex: 1; opacity: 0;
+    animation: fadeIn 0.5s ease 0.6s forwards;
+  }
+
+  #scene3 .legend {
+    display: flex; gap: 1.5rem; margin-top: 1rem;
+    opacity: 0; animation: fadeUp 0.5s ease 3s forwards;
+  }
+  #scene3 .legend-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.5);
+  }
+  #scene3 .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  #scene3 .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.8rem; font-weight: 800;
+    color: rgba(255,255,255,0.2);
+  }
+  #scene3 .logo em { font-style: italic; color: #ffdb00; opacity: 0.4; }
+
+  /* ── SCENE 4: SALARY SLIP ────────────────────────────────────────── */
+  #scene4 {
+    background: #314855;
+  }
+
+  #scene4 .content {
+    position: absolute; inset: 0;
+    padding: 2.5rem;
+    display: flex; flex-direction: column;
+  }
+
+  #scene4 .title {
+    font-size: 1.1rem; font-weight: 800; color: white; margin-bottom: 0.25rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.2s forwards;
+  }
+  #scene4 .subtitle {
+    font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.5s ease 0.4s forwards;
+  }
+
+  #scene4 .slip {
+    background: rgba(255,255,255,0.06); border-radius: 16px;
+    padding: 1.5rem; flex: 1;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+
+  #scene4 .slip-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  #scene4 .slip-row:last-child { border-bottom: none; }
+
+  #scene4 .slip-label {
+    font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.45);
+  }
+
+  #scene4 .slip-before {
+    font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.35);
+    text-decoration: line-through; margin-right: 0.75rem;
+  }
+
+  #scene4 .slip-after {
+    font-size: 1rem; font-weight: 800;
+  }
+
+  #scene4 .slip-row:nth-child(1) { opacity: 0; animation: fadeUp 0.4s ease 0.8s forwards; }
+  #scene4 .slip-row:nth-child(2) { opacity: 0; animation: fadeUp 0.4s ease 1.1s forwards; }
+  #scene4 .slip-row:nth-child(3) { opacity: 0; animation: fadeUp 0.4s ease 1.4s forwards; }
+  #scene4 .slip-row:nth-child(4) { opacity: 0; animation: fadeUp 0.4s ease 1.7s forwards; }
+  #scene4 .slip-row.highlight    { opacity: 0; animation: fadeUp 0.4s ease 2.1s forwards; background: rgba(255,219,0,0.08); border-radius: 8px; padding: 0.6rem 0.5rem; margin: 0 -0.5rem; }
+
+  #scene4 .slip-row.highlight .slip-label { color: rgba(255,255,255,0.7); }
+
+  #scene4 .tag {
+    display: inline-block; padding: 0.15rem 0.5rem;
+    border-radius: 100px; font-size: 0.65rem; font-weight: 800;
+    margin-left: 0.4rem;
+  }
+  .tag.up   { background: rgba(92,195,232,0.2); color: #5cc3e8; }
+  .tag.down { background: rgba(255,219,0,0.15); color: #ffdb00; }
+  .tag.same { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+
+  #scene4 .logo {
+    position: absolute; bottom: 1.5rem; right: 1.75rem;
+    font-size: 0.8rem; font-weight: 800;
+    color: rgba(255,255,255,0.25);
+  }
+  #scene4 .logo em { font-style: italic; color: #ffdb00; opacity: 0.5; }
+
+  /* ── SHARED ───────────────────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<h1>MyPayPicture — Animation Templates</h1>
+
+<!-- ── ANIMATION 1: COUNTUP ──────────────────────────────────────────── -->
+<div>
+  <div class="scene" id="scene1">
+    <div class="bg-glow"></div>
+    <div class="content">
+      <div class="eyebrow">Salary Sacrifice</div>
+      <div class="label">On a £65,000 salary, you could save</div>
+      <div class="amount" id="countup">£0</div>
+      <div class="per-year">every single year</div>
+      <div class="divider"></div>
+      <div class="sub">Just by increasing your pension contributions via <strong>salary sacrifice</strong></div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 1 — Countup savings</div>
+  <button class="replay-btn" onclick="replayScene('scene1', initScene1)">↺ Replay</button>
+</div>
+
+<!-- ── ANIMATION 2: BAR COMPARISON ──────────────────────────────────── -->
+<div>
+  <div class="scene" id="scene2">
+    <div class="bg-grid"></div>
+    <div class="content">
+      <div class="title">What salary sacrifice actually does</div>
+      <div class="subtitle">Annual take-home on a £65,000 salary</div>
+      <div class="bars">
+        <div class="bar-group">
+          <div class="bar-val">£38,200</div>
+          <div class="bar-track">
+            <div class="bar-fill"></div>
+          </div>
+          <div class="bar-label">Without<br>salary sacrifice</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">£39,450</div>
+          <div class="bar-track">
+            <div class="bar-fill"></div>
+          </div>
+          <div class="bar-label">With 5%<br>salary sacrifice</div>
+        </div>
+      </div>
+    </div>
+    <div class="saving-badge">+£1,250 take-home ✓</div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 2 — Bar comparison</div>
+  <button class="replay-btn" onclick="replayScene('scene2', null)">↺ Replay</button>
+</div>
+
+<!-- ── ANIMATION 3: GROWTH CHART ─────────────────────────────────────── -->
+<div>
+  <div class="scene" id="scene3">
+    <div class="content">
+      <div class="title">Small change. Huge difference.</div>
+      <div class="subtitle">Pension pot growth over 25 years · 6% annual return assumed</div>
+      <canvas id="growthChart" width="490" height="330"></canvas>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:rgba(255,255,255,0.3);"></div>
+          Current contributions (5%)
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#ffdb00;"></div>
+          Increased contributions (8%)
+        </div>
+      </div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 3 — Compound growth</div>
+  <button class="replay-btn" onclick="replayScene('scene3', initScene3)">↺ Replay</button>
+</div>
+
+<!-- ── ANIMATION 4: SALARY SLIP ──────────────────────────────────────── -->
+<div>
+  <div class="scene" id="scene4">
+    <div class="content">
+      <div class="title">Your payslip before vs after</div>
+      <div class="subtitle">Salary sacrifice at 8% on £65,000 · 2024/25 rates</div>
+      <div class="slip">
+        <div class="slip-row">
+          <div class="slip-label">Gross salary</div>
+          <div style="display:flex;align-items:center;">
+            <span class="slip-before">£65,000</span>
+            <span class="slip-after" style="color:rgba(255,255,255,0.6);">£59,800 <span class="tag same">sacrificed</span></span>
+          </div>
+        </div>
+        <div class="slip-row">
+          <div class="slip-label">Income tax</div>
+          <div style="display:flex;align-items:center;">
+            <span class="slip-before">£13,432</span>
+            <span class="slip-after" style="color:#5cc3e8;">£11,512 <span class="tag down">↓ £1,920</span></span>
+          </div>
+        </div>
+        <div class="slip-row">
+          <div class="slip-label">National Insurance</div>
+          <div style="display:flex;align-items:center;">
+            <span class="slip-before">£4,284</span>
+            <span class="slip-after" style="color:#5cc3e8;">£3,756 <span class="tag down">↓ £528</span></span>
+          </div>
+        </div>
+        <div class="slip-row">
+          <div class="slip-label">Pension contribution</div>
+          <div style="display:flex;align-items:center;">
+            <span class="slip-before">£0</span>
+            <span class="slip-after" style="color:#ffdb00;">£5,200 <span class="tag up">↑ yours</span></span>
+          </div>
+        </div>
+        <div class="slip-row highlight">
+          <div class="slip-label">Monthly take-home</div>
+          <div style="display:flex;align-items:center;">
+            <span class="slip-before">£3,941</span>
+            <span class="slip-after" style="color:#ffdb00;font-size:1.2rem;">£3,961 <span class="tag up">≈ same</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="logo">MyPay<em>Picture</em></div>
+  </div>
+  <div class="scene-label">Animation 4 — Salary slip before/after</div>
+  <button class="replay-btn" onclick="replayScene('scene4', null)">↺ Replay</button>
+</div>
+
+<script>
+  // ── COUNTUP ────────────────────────────────────────────────────────────────
+  function initScene1() {
+    const el = document.getElementById('countup');
+    const target = 2448;
+    const duration = 1800;
+    const start = performance.now();
+    el.style.opacity = '0';
+
+    // Wait for the element's own animation to show it
+    setTimeout(() => {
+      const step = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const val = Math.round(ease * target);
+        el.textContent = '£' + val.toLocaleString('en-GB');
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, 700);
+  }
+
+  // ── GROWTH CHART ───────────────────────────────────────────────────────────
+  function initScene3() {
+    var canvas = document.getElementById('growthChart');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height;
+    var years = 25, salary = 65000, rate = 0.06;
+    var pad = { top: 30, right: 70, bottom: 40, left: 60 };
+
+    function calcPot(pct, yrs) {
+      var annual = salary * pct, pot = 0;
+      for (var y = 0; y < yrs; y++) pot = (pot + annual) * (1 + rate);
+      return pot;
+    }
+
+    var line1 = [], line2 = [];
+    for (var i = 0; i <= years; i++) {
+      line1.push(calcPot(0.05, i));
+      line2.push(calcPot(0.08, i));
+    }
+    var maxVal = line2[years] * 1.08;
+
+    function toX(i) { return pad.left + (i / years) * (W - pad.left - pad.right); }
+    function toY(v) { return H - pad.bottom - (v / maxVal) * (H - pad.top - pad.bottom); }
+
+    function drawGrid() {
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
+      for (var g = 0; g <= 4; g++) {
+        var gy = pad.top + (g / 4) * (H - pad.top - pad.bottom);
+        ctx.beginPath(); ctx.moveTo(pad.left, gy); ctx.lineTo(W - pad.right, gy); ctx.stroke();
+        var gval = maxVal * (1 - g / 4);
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.font = '11px "Nunito", sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText('£' + Math.round(gval / 1000) + 'k', pad.left - 8, gy + 4);
+      }
+      ctx.textAlign = 'center';
+      for (var t = 0; t <= 5; t++) {
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillText(t * 5 + 'yr', toX(t * 5), H - pad.bottom + 18);
+      }
+    }
+
+    function drawLine(data, strokeColor, fillColor, progress, dotRadius) {
+      var pts = Math.min(years, Math.floor(progress * (years + 1)));
+      if (pts < 1) return;
+
+      // Area
+      ctx.beginPath();
+      ctx.moveTo(toX(0), toY(data[0]));
+      for (var p = 1; p <= pts; p++) ctx.lineTo(toX(p), toY(data[p]));
+      ctx.lineTo(toX(pts), H - pad.bottom);
+      ctx.lineTo(toX(0), H - pad.bottom);
+      ctx.closePath();
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+
+      // Line
+      ctx.beginPath();
+      ctx.moveTo(toX(0), toY(data[0]));
+      for (var q = 1; q <= pts; q++) ctx.lineTo(toX(q), toY(data[q]));
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = dotRadius > 4 ? 3 : 2;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      if (dotRadius > 4) { ctx.shadowColor = strokeColor; ctx.shadowBlur = 10; }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Dot + label at end
+      if (pts === years) {
+        ctx.beginPath();
+        ctx.arc(toX(years), toY(data[years]), dotRadius, 0, Math.PI * 2);
+        ctx.fillStyle = strokeColor;
+        ctx.fill();
+        ctx.font = 'bold 13px "Nunito", sans-serif';
+        ctx.fillStyle = strokeColor;
+        ctx.textAlign = 'left';
+        ctx.fillText('£' + Math.round(data[years] / 1000) + 'k', toX(years) + dotRadius + 5, toY(data[years]) + 5);
+      }
+    }
+
+    var startTime = null, duration = 2800;
+    function animate(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - p, 3);
+      ctx.clearRect(0, 0, W, H);
+      drawGrid();
+      drawLine(line1, 'rgba(255,255,255,0.5)', 'rgba(255,255,255,0.05)', ease, 4);
+      drawLine(line2, '#ffdb00', 'rgba(255,219,0,0.1)', ease, 6);
+      if (p < 1) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
+
+  // ── REPLAY ─────────────────────────────────────────────────────────────────
+  function replayScene(id, initFn) {
+    var scene = document.getElementById(id);
+    // Force reflow by toggling a class
+    var els = scene.querySelectorAll('[style*="animation"], [class]');
+    scene.style.display = 'none';
+    scene.offsetHeight; // reflow
+    scene.style.display = '';
+    // Re-clone to restart CSS animations
+    var parent = scene.parentNode;
+    var next = scene.nextSibling;
+    var clone = scene.cloneNode(true);
+    parent.removeChild(scene);
+    parent.insertBefore(clone, next);
+    if (initFn) setTimeout(initFn, 50);
+  }
+
+  // Init on load
+  initScene1();
+  initScene3();
+</script>
+</body>
+</html>
