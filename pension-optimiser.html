@@ -1708,17 +1708,7 @@
   </div>
 </div>
 
-<footer style="background: var(--navy); border-top: 3px solid var(--teal); padding: 2rem 1.5rem;">
-  <div style="max-width: 900px; margin: 0 auto; display: flex; gap: 1.25rem; align-items: flex-start;">
-    <div style="font-size: 1.5rem; line-height:1; flex-shrink:0;">⚠️</div>
-    <div>
-      <div style="font-family: 'Nunito', sans-serif; color: var(--teal-light); font-size: 0.95rem; margin-bottom: 0.4rem;">Important — Not Financial or Tax Advice</div>
-      <p style="color: rgba(255,255,255,0.85); font-size: 0.82rem; line-height: 1.7; margin:0;">
-        This tool is for illustrative and educational purposes only. It does not constitute financial, tax, or legal advice. Calculations are estimates based on standard 2024/25 UK tax rates and may not reflect your individual circumstances. Tax rules are subject to change. Always verify your position with <a href="https://www.gov.uk/contact-hmrc" target="_blank" style="color:var(--yellow); text-decoration:underline;">HMRC</a> or a qualified financial adviser before making decisions.
-      </p>
-    </div>
-  </div>
-</footer>
+
 
 <script>
 
@@ -1739,13 +1729,15 @@
 
   function updateContribLabel() {
     const v = parseFloat(document.getElementById('employeeContrib').value) || 0;
-    document.getElementById('employeeContribLabel').textContent = v + '%';
+    var lbl = document.getElementById('employeeContribLabel');
+    if (lbl) lbl.textContent = v + '%';
     if (typeof renderGoals === 'function') renderGoals();
   }
 
   function updateEmpContribLabel() {
     const v = parseFloat(document.getElementById('employerContrib').value) || 0;
-    document.getElementById('employerContribLabel').textContent = v + '%';
+    var lbl = document.getElementById('employerContribLabel');
+    if (lbl) lbl.textContent = v + '%';
   }
 
   // Keep alias for any legacy calls
@@ -1879,16 +1871,21 @@
   // ── STEP 2 ─────────────────────────────────────────────────────────────────
 // ── EMPLOYER MATCH ─────────────────────────────────────────────────────────
   function toggleMatchFields() {
-    var hasMatch = document.getElementById('hasMatch').checked;
-    document.getElementById('matchFields').style.display = hasMatch ? 'block' : 'none';
+    var el = document.getElementById('hasMatch');
+    if (!el) return;
+    var hasMatch = el.checked;
+    var fields = document.getElementById('matchFields');
+    if (fields) fields.style.display = hasMatch ? 'block' : 'none';
     updateMatchPreview();
   }
 
   function getMatchInfo() {
     var hasMatch = document.getElementById('hasMatch') && document.getElementById('hasMatch').checked;
     if (!hasMatch) return null;
-    var matchUpTo = parseFloat(document.getElementById('matchUpTo').value) || 0;
-    var matchThreshold = parseFloat(document.getElementById('matchThreshold').value) || 0;
+    var matchUpToEl = document.getElementById('matchUpTo');
+    var matchThresholdEl = document.getElementById('matchThreshold');
+    var matchUpTo = matchUpToEl ? parseFloat(matchUpToEl.value) || 0 : 0;
+    var matchThreshold = matchThresholdEl ? parseFloat(matchThresholdEl.value) || 0 : 0;
     return { matchUpTo: matchUpTo, matchThreshold: matchThreshold };
   }
 
@@ -3213,5 +3210,13 @@ function onSalaryInput() {
   </div>
 </div>
 
+<!-- canonical footer -->
+<footer style="background:#314855; padding:2.5rem; border-top:3px solid #ffdb00; margin-top:2rem;">
+  <div style="max-width:920px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    <div style="font-family:'Nunito', sans-serif; font-size:1.3rem; color:white; font-weight:800;">MyPay<em style="font-style:italic; color:#ffdb00;">Picture</em></div>
+    <p style="color:rgba(255,255,255,0.3); font-size:0.78rem; max-width:520px; line-height:1.6; margin:0;">Illustrative scenarios only &mdash; not financial, tax or legal advice. Always consult a qualified adviser before making decisions. No data is stored. &copy; MyPayPicture 2025.</p>
+  </div>
+</footer>
+<!-- /canonical footer -->
 </body>
 </html>

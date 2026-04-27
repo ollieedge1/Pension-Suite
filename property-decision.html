@@ -163,6 +163,8 @@
   /* COMPARE TABLE */
   .compare-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; margin: 1rem 0; }
   .compare-table th { padding: 0.6rem 0.85rem; text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--slate-soft); border-bottom: 2px solid var(--border); font-weight: 700; }
+  .step-tab.skipped { opacity: 0.5; }
+  .step-tab.skipped::after { content: ' (skipped)'; font-size: 0.55rem; opacity: 0.7; }
   .compare-table th.c1 { color: var(--forest); }
   .compare-table th.c2 { color: #2a7a9a; }
   .compare-table th.c3 { color: var(--amber); }
@@ -397,6 +399,53 @@
   .btn-full { width: 100%; }
   /* ========== end canonical card system ========== */
 
+
+  /* Krug rebuild: quick tiles + winner hero */
+  .quick-tiles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 480px) {
+    .quick-tiles-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+  }
+  .quick-tile {
+    border-radius: 16px;
+    padding: 1.1rem 0.85rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.15s;
+  }
+  .quick-tile.winner {
+    box-shadow: 0 4px 20px rgba(13,148,136,0.25), 0 0 0 2px var(--accent);
+  }
+  .quick-tile-badge {
+    position: absolute; top: -8px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .quick-tile-label {
+    font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  .quick-tile-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
 </style>
 </head>
 <body>
@@ -439,118 +488,143 @@
 
   <!-- STEP 1: YOUR SITUATION -->
   <div class="card active" id="step1">
-    <div class="card-title">Your situation</div>
-    <p class="card-subtitle">Start with the basics. We'll use these across all three scenarios.</p>
+    <div class="card-title">Tell us the basics</div>
+    <p class="card-subtitle">Just four numbers. We'll use sensible UK averages for everything else — you can tweak them later.</p>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>How much deposit do you have?</label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="deposit" placeholder="e.g. 60000" min="0">
-        </div>
-        <p class="hint">This is the money you'd put into a property — or invest if you stay renting.</p>
-      </div>
-      <div class="field-group">
-        <label>Property price you're considering</label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="propPrice" placeholder="e.g. 300000" min="0" oninput="updateLTV()">
-        </div>
-        <p id="ltvHint" class="hint">We'll use this across all three scenarios.</p>
+    <div class="field-group">
+      <label>Property price you're considering</label>
+      <div class="input-wrap"><span class="input-prefix">£</span>
+        <input type="number" id="propPrice" placeholder="e.g. 300000" min="0" oninput="updateLTV()">
       </div>
     </div>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>Your annual salary</label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="income" placeholder="e.g. 55000" min="0">
-        </div>
-        <p class="hint">Used to estimate tax on rental income and affordability.</p>
+    <div class="field-group">
+      <label>Deposit you have ready</label>
+      <div class="input-wrap"><span class="input-prefix">£</span>
+        <input type="number" id="deposit" placeholder="e.g. 60000" min="0" oninput="updateDepMirror()">
       </div>
-      <div class="field-group">
-        <label>Is this your first home?</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" id="ftb_yes" onclick="selectFTB(true)">Yes</div>
-          <div class="radio-btn" id="ftb_no" onclick="selectFTB(false)">No</div>
+      <p id="ltvHint" class="hint">This is the cash you'd put into a property — or invest if you stay renting.</p>
+    </div>
+
+    <div class="field-group">
+      <label>Your annual salary</label>
+      <div class="input-wrap"><span class="input-prefix">£</span>
+        <input type="number" id="income" placeholder="e.g. 55000" min="0">
+      </div>
+      <p class="hint">Used to estimate tax on rental income.</p>
+    </div>
+
+    <div class="field-group">
+      <label>Is this your first home?</label>
+      <div class="radio-group">
+        <div class="radio-btn selected" id="ftb_yes" onclick="selectFTB(true)">Yes</div>
+        <div class="radio-btn" id="ftb_no" onclick="selectFTB(false)">No</div>
+      </div>
+      <p class="hint">First-time buyers pay less stamp duty.</p>
+    </div>
+
+    <!-- Hidden defaults: still used by the calc -->
+    <input type="hidden" id="growthRate" value="3">
+    <input type="hidden" id="mortRate" value="4.5">
+    <input type="hidden" id="mortTerm" value="25">
+    <input type="hidden" id="maintenanceCost" value="2400">
+    <input type="hidden" id="buyCosts" value="3500">
+    <input type="hidden" id="btlRate" value="5.5">
+    <input type="hidden" id="btlCosts" value="2400">
+    <input type="hidden" id="rentIncrease" value="3">
+    <input type="hidden" id="investReturn" value="6">
+    <!-- Mirror inputs that show up when the user opens "Adjust assumptions" -->
+
+    <!-- Adjust assumptions toggle -->
+    <div class="toggle-row" onclick="toggleAdvanced()" style="border-top:1px solid var(--border); margin-top:0.5rem;">
+      <div class="toggle-row-icon">&#9881;&#65039;</div>
+      <div class="toggle-row-label">Adjust assumptions <span style="font-weight:400; color:var(--slate-soft); font-size:0.78rem;">(rates, growth, fees)</span></div>
+      <div class="toggle-pill" id="advancedPill"><div class="toggle-pill-dot"></div></div>
+    </div>
+    <div id="advancedWrap" style="display:none; padding:1rem 0 0; border-top:1px solid var(--border); margin-top:1rem;">
+      <div class="two-col">
+        <div class="field-group">
+          <label>Property price growth</label>
+          <div class="input-wrap">
+            <input type="number" id="growthRateMirror" min="0" max="15" class="has-suffix no-prefix" value="3" step="0.5" oninput="syncMirror('growthRate', this.value)">
+            <span class="input-suffix">%/yr</span>
+          </div>
+          <p class="hint">UK average ~3%.</p>
         </div>
-        <p class="hint">First-time buyers pay less stamp duty.</p>
+        <div class="field-group">
+          <label>Mortgage rate</label>
+          <div class="input-wrap">
+            <input type="number" id="mortRateMirror" min="0" max="20" class="has-suffix no-prefix" step="0.1" value="4.5" oninput="syncMirror('mortRate', this.value)">
+            <span class="input-suffix">%</span>
+          </div>
+          <p class="hint">Today's typical: 4–5.5%.</p>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field-group">
+          <label>Mortgage term</label>
+          <div class="input-wrap">
+            <input type="number" id="mortTermMirror" min="5" max="40" class="has-suffix no-prefix" value="25" oninput="syncMirror('mortTerm', this.value)">
+            <span class="input-suffix">yrs</span>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Investment return</label>
+          <div class="input-wrap">
+            <input type="number" id="investReturnMirror" min="0" max="20" class="has-suffix no-prefix" value="6" step="0.5" oninput="syncMirror('investReturn', this.value)">
+            <span class="input-suffix">%/yr</span>
+          </div>
+          <p class="hint">If you invest your deposit instead.</p>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field-group">
+          <label>Yearly maintenance</label>
+          <div class="input-wrap"><span class="input-prefix">£</span>
+            <input type="number" id="maintenanceCostMirror" min="0" value="2400" oninput="syncMirror('maintenanceCost', this.value)">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Buying costs</label>
+          <div class="input-wrap"><span class="input-prefix">£</span>
+            <input type="number" id="buyCostsMirror" min="0" value="3500" oninput="syncMirror('buyCosts', this.value)">
+          </div>
+          <p class="hint">Solicitor, survey, etc.</p>
+        </div>
       </div>
     </div>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>How far ahead do you want to look?</label>
-        <div class="radio-group">
-          <div class="radio-btn" id="yr5"  onclick="setYears(5)">5 years</div>
-          <div class="radio-btn selected" id="yr10" onclick="setYears(10)">10 years</div>
-          <div class="radio-btn" id="yr20" onclick="setYears(20)">20 years</div>
-        </div>
-      </div>
-      <div class="field-group">
-        <label>Expected annual property price growth</label>
-        <div class="input-wrap">
-          <input type="number" id="growthRate" placeholder="e.g. 3" min="0" max="15" class="has-suffix no-prefix" value="3" step="0.5">
-          <span class="input-suffix">%</span>
-        </div>
-        <p class="hint">UK average is around 3% per year historically.</p>
-      </div>
-    </div>
+    <input type="hidden" id="yr5" value="">
+    <input type="hidden" id="yr10" value="">
+    <input type="hidden" id="yr20" value="">
 
-    <div class="btn-row">
-      <button class="btn-primary" onclick="goTo(2)">Next: buying to live in it &#8594;</button>
+    <div class="btn-row" style="margin-top:1.5rem;">
+      <button class="btn-primary btn-full" onclick="goTo(2)">See what owning would cost &rarr;</button>
     </div>
   </div>
 
-  <!-- STEP 2: BUY TO LIVE -->
   <div class="card" id="step2">
-    <div class="card-title">Buying to live in it</div>
-    <p class="card-subtitle">Your home. You own it, you live in it, you build equity over time.</p>
+    <div class="card-title">If you bought to live in</div>
+    <p class="card-subtitle">Here's what your monthly payment would look like, and how the mortgage shifts from interest to equity over time.</p>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>Mortgage interest rate</label>
-        <div class="input-wrap">
-          <input type="number" id="mortRate" placeholder="e.g. 4.5" min="0" max="20" class="has-suffix no-prefix" step="0.1" value="4.5">
-          <span class="input-suffix">%</span>
-        </div>
-        <p class="hint">Check MoneySupermarket or Habito for today's rates. Typical: 4–5.5%.</p>
-      </div>
-      <div class="field-group">
-        <label>Mortgage term</label>
-        <div class="input-wrap">
-          <input type="number" id="mortTerm" placeholder="e.g. 25" min="5" max="40" class="has-suffix no-prefix" value="25">
-          <span class="input-suffix">yrs</span>
-        </div>
-        <p class="hint">Longer term = lower monthly payments but more interest overall.</p>
-      </div>
+    <!-- Live preview of monthly mortgage cost -->
+    <div id="step2Preview" style="background:var(--accent-pale); border-radius:14px; padding:1.5rem; text-align:center; margin-bottom:1.25rem;">
+      <div style="font-size:0.72rem; font-weight:700; color:var(--slate-soft); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Monthly mortgage payment</div>
+      <div style="font-size:2.4rem; font-weight:800; color:var(--accent); letter-spacing:-0.02em;" id="step2MonthlyVal">&pound;0</div>
+      <div style="font-size:0.85rem; color:var(--slate-soft); margin-top:0.4rem;" id="step2LtvVal">Loan-to-value: 0%</div>
     </div>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>Yearly maintenance &amp; insurance</label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="maintenanceCost" placeholder="e.g. 2400" min="0" value="2400">
-        </div>
-        <p class="hint">Budget roughly 0.5–1% of the property value per year.</p>
-      </div>
-      <div class="field-group">
-        <label>Buying costs <span style="font-weight:400;color:var(--slate-soft);">(solicitor, survey etc)</span></label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="buyCosts" placeholder="e.g. 3500" min="0" value="3500">
-        </div>
-        <p class="hint">Typically £2,500–£5,000.</p>
-      </div>
+    <!-- MORTGAGE BREAKDOWN PANEL — collapsible -->
+    <div class="toggle-row" onclick="toggleMortBreakdown()">
+      <div class="toggle-row-icon">&#128202;</div>
+      <div class="toggle-row-label">See how payments split between interest and equity</div>
+      <div class="toggle-pill" id="mortBreakdownPill"><div class="toggle-pill-dot"></div></div>
     </div>
 
-
-    <!-- MORTGAGE BREAKDOWN PANEL -->
-    <div class="mort-breakdown" id="mortBreakdown" style="display:none;">
-      <div class="mort-breakdown-title">&#128200; How your payments split — equity vs interest</div>
-
+    <div class="mort-breakdown" id="mortBreakdown" style="display:none; margin-top:1rem;">
       <div class="mort-slider-wrap">
         <div class="mort-slider-label">
-          <span>Drag to see any year of your mortgage</span>
-          <span class="mort-year-display">Year <span id="mortYearVal">1</span></span>
+          <span style="font-size:0.85rem; font-weight:700; color:var(--ink);">Year <span id="mortYearVal">1</span> of your mortgage</span>
         </div>
         <input type="range" id="mortYearSlider" min="1" max="25" value="1" oninput="updateMortBreakdown()">
         <div class="mort-slider-hints">
@@ -565,35 +639,35 @@
           <div class="mort-split-interest" id="mortInterestBar" style="width:100%"></div>
         </div>
         <div class="mort-split-legend">
-          <div class="mort-legend-item"><div class="mort-legend-dot" style="background:var(--accent, #2d6a4f);"></div>Going to equity</div>
-          <div class="mort-legend-item"><div class="mort-legend-dot" style="background:rgba(255,255,255,0.25);"></div>Going to interest</div>
+          <div class="mort-legend-item"><div class="mort-legend-dot" style="background:var(--accent);"></div>To equity</div>
+          <div class="mort-legend-item"><div class="mort-legend-dot" style="background:rgba(0,0,0,0.2);"></div>To interest</div>
         </div>
       </div>
 
       <div class="mort-stats-grid">
         <div class="mort-stat">
           <div class="mort-stat-label">This year's equity</div>
-          <div class="mort-stat-val equity" id="statYearEquity">—</div>
+          <div class="mort-stat-val equity" id="statYearEquity">&mdash;</div>
         </div>
         <div class="mort-stat">
           <div class="mort-stat-label">This year's interest</div>
-          <div class="mort-stat-val interest" id="statYearInterest">—</div>
+          <div class="mort-stat-val interest" id="statYearInterest">&mdash;</div>
         </div>
         <div class="mort-stat">
           <div class="mort-stat-label">Balance remaining</div>
-          <div class="mort-stat-val" id="statBalance">—</div>
+          <div class="mort-stat-val" id="statBalance">&mdash;</div>
         </div>
         <div class="mort-stat">
           <div class="mort-stat-label">Equity built so far</div>
-          <div class="mort-stat-val equity" id="statTotalEquity">—</div>
+          <div class="mort-stat-val equity" id="statTotalEquity">&mdash;</div>
         </div>
         <div class="mort-stat">
           <div class="mort-stat-label">Interest paid so far</div>
-          <div class="mort-stat-val interest" id="statTotalInterest">—</div>
+          <div class="mort-stat-val interest" id="statTotalInterest">&mdash;</div>
         </div>
         <div class="mort-stat">
           <div class="mort-stat-label">Total cost so far</div>
-          <div class="mort-stat-val total" id="statTotalCost">—</div>
+          <div class="mort-stat-val total" id="statTotalCost">&mdash;</div>
         </div>
       </div>
 
@@ -605,12 +679,7 @@
         <table>
           <thead>
             <tr>
-              <th>Year</th>
-              <th>Annual payment</th>
-              <th>To equity</th>
-              <th>To interest</th>
-              <th>Balance</th>
-              <th>Equity %</th>
+              <th>Year</th><th>Annual payment</th><th>To equity</th><th>To interest</th><th>Balance</th><th>Equity %</th>
             </tr>
           </thead>
           <tbody id="mortScheduleBody"></tbody>
@@ -618,153 +687,191 @@
       </div>
     </div>
 
-    <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(1)">&#8592; Back</button>
-      <button class="btn-primary" onclick="goTo(3)">Next: buying to let &#8594;</button>
+    <div class="btn-row" style="margin-top:1.5rem;">
+      <button class="btn-secondary" onclick="goTo(1)">&larr; Back</button>
+      <button class="btn-primary" onclick="goTo(3)">Next: buy-to-let &rarr;</button>
     </div>
   </div>
 
-  <!-- STEP 3: BUY TO LET -->
   <div class="card" id="step3">
     <div class="card-title">Buying to rent out</div>
-    <p class="card-subtitle">You own it, tenants pay rent. We model the income, tax and net return — personally and via a limited company.</p>
+    <p class="card-subtitle">If you bought this place as an investment, what would tenants pay you in rent?</p>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>Expected monthly rental income</label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="rentalIncome" placeholder="e.g. 1400" min="0">
-        </div>
-        <p class="hint">The gross rent tenants would pay each month.</p>
+    <div class="field-group">
+      <label>Expected monthly rental income</label>
+      <div class="input-wrap"><span class="input-prefix">£</span>
+        <input type="number" id="rentalIncome" placeholder="e.g. 1400" min="0">
       </div>
-      <div class="field-group">
-        <label>Buy-to-let mortgage rate</label>
-        <div class="input-wrap">
-          <input type="number" id="btlRate" placeholder="e.g. 5.5" min="0" max="20" class="has-suffix no-prefix" step="0.1" value="5.5">
-          <span class="input-suffix">%</span>
-        </div>
-        <p class="hint">BTL mortgages are typically interest-only and 1–2% above residential rates.</p>
-      </div>
+      <p class="hint">The gross rent tenants would pay each month for this property.</p>
     </div>
 
-    <div class="two-col">
-      <div class="field-group">
-        <label>Annual management &amp; maintenance costs</label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="btlCosts" placeholder="e.g. 2400" min="0" value="2400">
-        </div>
-        <p class="hint">Letting agent (~10% of rent), repairs, insurance, voids.</p>
+    <div class="field-group">
+      <label>How would you own it?</label>
+      <div class="radio-group">
+        <div class="radio-btn selected" id="own_personal" onclick="selectOwnership('personal')">Personally</div>
+        <div class="radio-btn" id="own_ltd" onclick="selectOwnership('ltd')">Ltd company</div>
       </div>
-      <div class="field-group">
-        <label>How do you want to own it?</label>
-        <div class="radio-group">
-          <div class="radio-btn selected" id="own_personal" onclick="selectOwnership('personal')">Personally</div>
-          <div class="radio-btn" id="own_ltd" onclick="selectOwnership('ltd')">Ltd company</div>
-        </div>
-        <p class="hint" id="ownershipHint">Personal: simpler, but mortgage interest relief restricted to 20% (Section 24).</p>
-      </div>
+      <p class="hint" id="ownershipHint">Personally is simpler. Limited company is best for higher-rate taxpayers building a portfolio.</p>
     </div>
 
     <div id="ltdInfoBox" style="display:none;">
       <div class="alert-box info">
         <h4>&#127962; Limited company (SPV)</h4>
-        <p>Mortgage interest is fully deductible against rental income — no Section 24 restriction. Corporation tax applies at 25% on profit. Stamp duty has an extra 3% surcharge. Best suited to higher-rate taxpayers building a portfolio. You'll need a specialist BTL mortgage and accountant.</p>
+        <p>Mortgage interest is fully deductible. Corporation tax 25% on profit. Stamp duty has +3% surcharge. You'll need a specialist BTL mortgage and accountant.</p>
       </div>
     </div>
 
-    <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(2)">&#8592; Back</button>
-      <button class="btn-primary" onclick="goTo(4)">Next: staying renting &#8594;</button>
+    <div class="btn-row" style="margin-top:1.5rem;">
+      <button class="btn-secondary" onclick="goTo(2)">&larr; Back</button>
+      <button class="btn-primary" onclick="goTo(4)">Next: stay renting &rarr;</button>
+    </div>
+
+    <div style="text-align:center; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);">
+      <button onclick="skipBuyToLet()" style="background:none; border:none; color:var(--slate-soft); font-family:'Nunito',sans-serif; font-size:0.85rem; font-weight:600; cursor:pointer; padding:0.5rem 1rem; text-decoration:underline;">Not considering buy-to-let &mdash; skip this step</button>
     </div>
   </div>
 
-  <!-- STEP 4: STAY RENTING -->
   <div class="card" id="step4">
-    <div class="card-title">Staying in rental</div>
-    <p class="card-subtitle">What if you didn't buy at all? Your deposit stays invested. Here's what that could look like.</p>
-
-    <div class="two-col">
-      <div class="field-group">
-        <label>What would you pay in rent per month?</label>
-        <div class="input-wrap"><span class="input-prefix">£</span>
-          <input type="number" id="monthlyRent" placeholder="e.g. 1400" min="0">
-        </div>
-        <p class="hint">For a similar property to the one you'd buy.</p>
-      </div>
-      <div class="field-group">
-        <label>Expected annual rent increase</label>
-        <div class="input-wrap">
-          <input type="number" id="rentIncrease" placeholder="e.g. 3" min="0" max="15" class="has-suffix no-prefix" value="3" step="0.5">
-          <span class="input-suffix">%</span>
-        </div>
-        <p class="hint">Rents have risen fast recently. 3% is a cautious assumption.</p>
-      </div>
-    </div>
+    <div class="card-title">If you stayed renting</div>
+    <p class="card-subtitle">Your deposit stays liquid, and you can invest it. Here's what we need to know.</p>
 
     <div class="field-group">
-      <label>If you invested your deposit, what return would you expect?</label>
-      <div class="input-wrap">
-        <input type="number" id="investReturn" placeholder="e.g. 6" min="0" max="20" class="has-suffix no-prefix" value="6" step="0.5">
-        <span class="input-suffix">%</span>
+      <label>Monthly rent for a similar property</label>
+      <div class="input-wrap"><span class="input-prefix">£</span>
+        <input type="number" id="monthlyRent" placeholder="e.g. 1400" min="0">
       </div>
-      <p class="hint">Stocks have averaged ~7–10%/yr historically. 6% is a realistic after-tax estimate.</p>
+      <p class="hint">What you'd pay to rent something equivalent to the place you'd buy.</p>
     </div>
 
-    <div class="guidance-box">
-      <h4>What happens to your deposit if you keep renting?</h4>
-      <p>Instead of going into a property, your deposit stays liquid and can be invested. The question is whether that grows faster than the equity you'd build by buying. We show you both sides so you can compare fairly.</p>
+    <input type="hidden" id="rentIncrease" value="3">
+
+    <!-- Existing investments toggle (already added) -->
+    <div class="toggle-row" onclick="toggleStartingInvestments()">
+      <div class="toggle-row-icon">&#128176;</div>
+      <div class="toggle-row-label">I already have other investments</div>
+      <div class="toggle-pill" id="startInvestPill"><div class="toggle-pill-dot"></div></div>
+    </div>
+    <div id="startInvestWrap" style="display:none; padding:0.75rem 0 1rem 0;">
+      <div class="field-group" style="margin-bottom:0.5rem;">
+        <label>Starting amount already invested (in addition to your deposit)</label>
+        <div class="input-wrap">
+          <span class="input-prefix">&pound;</span>
+          <input type="number" id="existingInvestments" placeholder="e.g. 10,000" min="0" value="0" oninput="if(typeof renderStep5==='function')renderStep5()">
+        </div>
+        <p class="hint" style="margin-top:0.5rem; padding:0.65rem 0.85rem; background:rgba(13,148,136,0.07); border-radius:8px; color:var(--accent); font-weight:600;">
+          &#9432; Your <strong id="depMirror">deposit</strong> is already included separately. This is just for any extra investments you already hold.
+        </p>
+      </div>
     </div>
 
-    <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(3)">&#8592; Back</button>
-      <button class="btn-primary" onclick="goTo(5)">Show me my picture &#8594;</button>
+    <div class="btn-row" style="margin-top:1.5rem;">
+      <button class="btn-secondary" onclick="goTo(3)">&larr; Back</button>
+      <button class="btn-primary" onclick="goTo(5)">Show me my answer &rarr;</button>
     </div>
   </div>
 
-  <!-- STEP 5: YOUR PICTURE -->
   <div class="card" id="step5">
-    <div class="card-title">Your property decision picture</div>
-    <p class="card-subtitle">Three options, one clear view. Here's what your deposit does in each scenario.</p>
+    <div class="card-title">Your answer</div>
+    <p class="card-subtitle">Based on the numbers you've given us:</p>
 
-    <div id="resultsContent"></div>
-
-    <div class="guidance-box" style="margin-top:1.5rem;">
-      <h4>Beyond the numbers</h4>
-      <ul>
-        <li><strong>Buy to live</strong> — stability, no landlord, yours to decorate. But illiquid and expensive to exit.</li>
-        <li><strong>Buy to let</strong> — rental income and capital growth, but you're a landlord. Voids, repairs, tenants, tax returns.</li>
-        <li><strong>Stay renting</strong> — maximum flexibility, no maintenance headaches. But rent rises, no equity, and you're at the landlord's mercy.</li>
-        <li><strong>Limited company BTL</strong> — best for higher-rate taxpayers building a portfolio. Needs specialist advice before setting up.</li>
-        <li><strong>These are projections, not guarantees</strong> — property markets, stock markets and interest rates all move. The best decision depends on your life, not just the maths.</li>
-      </ul>
+    <!-- WINNER HERO -->
+    <div id="winnerHero" style="background:var(--accent-pale); border-radius:18px; padding:1.75rem 1.25rem; text-align:center; margin-bottom:1.25rem;">
+      <div style="font-size:0.7rem; font-weight:700; color:var(--slate-soft); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.85rem;">Best financial return</div>
+      <div id="winnerLabel" style="font-size:1.6rem; font-weight:800; color:var(--ink); margin-bottom:0.6rem;">&mdash;</div>
+      <div id="winnerSubtext" style="font-size:0.95rem; color:var(--slate-soft); line-height:1.5;">&mdash;</div>
     </div>
 
-    <div class="pdf-inline-cta visible" id="pdfInlineCta">
+    <!-- Year adjustment slider -->
+    <div class="slider-field" style="margin-bottom:1.5rem;">
+      <div class="slider-field-row">
+        <label style="margin:0;">Project over</label>
+        <div class="slider-val" id="yearLabel">10 years</div>
+      </div>
+      <input type="range" id="projectionYears" min="3" max="30" value="10" step="1" oninput="updateYearLabel()">
+      <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--slate-soft); margin-top:0.35rem;">
+        <span>3 yrs</span>
+        <span>30 yrs</span>
+      </div>
+    </div>
+
+    <!-- Quick comparison tiles -->
+    <div id="quickTiles"></div>
+
+    <!-- Rest of detailed results, hidden by default -->
+    <div id="resultsContent"></div>
+  </div>
+
+  <!-- Wealth growth chart card -->
+  <div class="card" id="wealthChartCard">
+    <div class="card-head">
+      <div class="card-head-icon">&#128200;</div>
+      <div class="card-head-title">Wealth Over Time</div>
+    </div>
+    <p class="card-subtitle" style="margin-bottom:1rem;">How your wealth grows in each scenario.</p>
+    <canvas id="wealthChart" style="width:100%; height:220px; display:block;"></canvas>
+    <div style="margin-top:1rem; display:flex; gap:1.25rem; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.78rem; color:var(--slate-soft); font-weight:600;"><div style="width:10px; height:10px; border-radius:50%; background:#16a34a;"></div> Buy to live</div>
+      <div id="btlLegendItem" style="display:flex; align-items:center; gap:0.4rem; font-size:0.78rem; color:var(--slate-soft); font-weight:600;"><div style="width:10px; height:10px; border-radius:50%; background:#0284c7;"></div> Buy to let</div>
+      <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.78rem; color:var(--slate-soft); font-weight:600;"><div style="width:10px; height:10px; border-radius:50%; background:#314855;"></div> Stay renting</div>
+    </div>
+  </div>
+
+  <!-- Drill-down: full breakdown (collapsed by default) -->
+  <div class="card" id="breakdownCard">
+    <div class="snapshots-head" onclick="toggleBreakdown()" style="display:flex; align-items:center; gap:0.6rem; cursor:pointer; user-select:none;">
+      <div class="card-head-icon">&#128202;</div>
+      <div class="card-head-title" style="flex:1;">See the full breakdown</div>
+      <div id="breakdownChevron" style="color:var(--slate-soft); font-size:1.4rem; line-height:1; transition:transform 0.2s;">&rsaquo;</div>
+    </div>
+    <div id="breakdownContent" style="display:none; margin-top:1rem;"></div>
+  </div>
+
+  <!-- Drill-down: lifestyle factors (collapsed by default) -->
+  <div class="card" id="lifestyleCard">
+    <div class="snapshots-head" onclick="toggleLifestyle()" style="display:flex; align-items:center; gap:0.6rem; cursor:pointer; user-select:none;">
+      <div class="card-head-icon">&#129488;</div>
+      <div class="card-head-title" style="flex:1;">Lifestyle factors</div>
+      <div id="lifestyleChevron" style="color:var(--slate-soft); font-size:1.4rem; line-height:1; transition:transform 0.2s;">&rsaquo;</div>
+    </div>
+    <div id="lifestyleContent" style="display:none; margin-top:1rem;">
+      <ul style="font-size:0.88rem; line-height:1.7; color:var(--slate); padding-left:1.25rem; margin:0;">
+        <li><strong>Buy to live</strong> &mdash; stability, no landlord, yours to decorate. But illiquid and expensive to exit.</li>
+        <li><strong>Buy to let</strong> &mdash; rental income and capital growth, but you're a landlord. Voids, repairs, tenants, tax returns.</li>
+        <li><strong>Stay renting</strong> &mdash; maximum flexibility, no maintenance headaches. But rent rises, no equity, and you're at the landlord's mercy.</li>
+        <li><strong>Limited company BTL</strong> &mdash; best for higher-rate taxpayers building a portfolio. Needs specialist advice before setting up.</li>
+        <li><strong>These are projections, not guarantees</strong> &mdash; markets and interest rates move. The best decision depends on your life, not just the maths.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PDF + Adviser CTAs -->
+  <div class="card" id="ctaCard">
+    <div class="pdf-inline-cta visible" id="pdfInlineCta" style="margin:0;">
       <div class="pdf-inline-inner">
         <div class="pdf-inline-text">
           <strong>&#128196; Download your personalised PDF report</strong>
-          <span>All three scenarios side by side — clear enough to share with a mortgage adviser.</span>
+          <span>All scenarios side by side &mdash; clear enough to share with a mortgage adviser.</span>
         </div>
         <div class="pdf-inline-right">
           <div class="pdf-inline-price" id="pdfInlinePrice">&#163;4.99</div>
-          <a class="pdf-inline-btn" id="pdfInlineBuyBtn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &#8594;</a>
-          <button class="pdf-inline-btn paid" id="pdfInlineDlBtn" style="display:none;" onclick="generateReport()">&#8595; Download PDF</button>
+          <a class="pdf-inline-btn" id="pdfInlineBuyBtn" href="https://buy.stripe.com/4gM8wP2IV4l0gPn9D353O00" target="_blank">Buy report &rarr;</a>
+          <button class="pdf-inline-btn paid" id="pdfInlineDlBtn" style="display:none;" onclick="generateReport()">&darr; Download PDF</button>
         </div>
       </div>
     </div>
 
-    <div class="adviser-cta">
+    <div class="adviser-cta" style="margin-top:1rem;">
       <div class="adviser-cta-inner">
         <div class="adviser-cta-text">
-          <strong>Want expert guidance on this decision?</strong>
+          <strong>Want expert guidance?</strong>
           <span>A mortgage broker or financial adviser can review your full situation.</span>
         </div>
-        <a class="adviser-cta-btn" href="https://tally.so/r/xX2YP5" target="_blank">Get advice &#8594;</a>
+        <a class="adviser-cta-btn" href="https://tally.so/r/xX2YP5" target="_blank">Get advice &rarr;</a>
       </div>
     </div>
 
-    <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(4)">&#8592; Back</button>
+    <div class="btn-row" style="margin-top:1rem;">
+      <button class="btn-secondary" onclick="goTo(4)">&larr; Back</button>
     </div>
   </div>
 </div>
@@ -798,12 +905,7 @@
   </div>
 </div>
 
-<footer style="background:var(--ink); border-top:3px solid var(--yellow); padding:2rem 1.5rem; margin-top:1rem;">
-  <div style="max-width:900px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-    <div style="font-family:'Nunito',sans-serif; font-weight:800; color:white; font-size:1.1rem;">MyPay<em style="font-style:italic;color:var(--yellow);">Picture</em></div>
-    <p style="color:rgba(255,255,255,0.3); font-size:0.78rem; max-width:520px; line-height:1.6; margin:0;">Illustrative scenarios only &mdash; not financial, mortgage or legal advice. Always speak to a qualified adviser before making property decisions. No data stored. &nbsp;&middot;&nbsp; <a href="about.html" style="color:rgba(255,255,255,0.35);text-decoration:none;">About</a> &nbsp;&middot;&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,0.35);text-decoration:none;">Privacy</a> &nbsp;&middot;&nbsp; <span style="color:rgba(255,255,255,0.35);">hello&#64;mypaypicture&#46;com</span></p>
-  </div>
-</footer>
+
 
 <script>
   // ── MORTGAGE BREAKDOWN ────────────────────────────────────────────────────
@@ -941,8 +1043,15 @@
 
   // ── STATE ─────────────────────────────────────────────────────────────────
   var isFTB=true, ownershipType='personal', projYears=10;
-  var fmt=function(n){return '\u00a3'+Math.round(Math.abs(n)).toLocaleString('en-GB');};
-  var fmtK=function(n){return n>=1000000?'\u00a3'+(n/1000000).toFixed(1)+'m':n>=1000?'\u00a3'+Math.round(n/1000)+'k':'\u00a3'+Math.round(n);};
+  var fmt=function(n){var s='\u00a3'+Math.round(Math.abs(n)).toLocaleString('en-GB');return n<0?'\u2212'+s:s;};
+  var fmtK=function(n){
+    var neg = n < 0;
+    var a = Math.abs(n);
+    var s = a >= 1000000 ? '\u00a3' + (a/1000000).toFixed(1) + 'm'
+          : a >= 1000   ? '\u00a3' + Math.round(a/1000) + 'k'
+          :               '\u00a3' + Math.round(a);
+    return neg ? '\u2212' + s : s;
+  };
 
   // ── INPUTS ────────────────────────────────────────────────────────────────
   function selectFTB(v){
@@ -953,8 +1062,201 @@
 
   function setYears(y){
     projYears=y;
-    [5,10,20].forEach(function(yr){document.getElementById('yr'+yr).classList.toggle('selected',yr===y);});
+    [5,10,20].forEach(function(yr){
+      var el = document.getElementById('yr'+yr);
+      if (el && el.classList) el.classList.toggle('selected',yr===y);
+    });
   }
+
+  function toggleAdvanced() {
+    var wrap = document.getElementById('advancedWrap');
+    var pill = document.getElementById('advancedPill');
+    if (!wrap || !pill) return;
+    var open = wrap.style.display === 'none';
+    wrap.style.display = open ? 'block' : 'none';
+    pill.classList.toggle('on', open);
+  }
+
+  function syncMirror(targetId, value) {
+    var target = document.getElementById(targetId);
+    if (target) target.value = value;
+  }
+
+  function toggleMortBreakdown() {
+    var wrap = document.getElementById('mortBreakdown');
+    var pill = document.getElementById('mortBreakdownPill');
+    if (!wrap || !pill) return;
+    var open = wrap.style.display === 'none';
+    wrap.style.display = open ? 'block' : 'none';
+    pill.classList.toggle('on', open);
+    if (open) renderMortBreakdown();
+  }
+
+  function updateStep2Preview() {
+    var price = parseFloat(document.getElementById('propPrice')?.value) || 0;
+    var dep = parseFloat(document.getElementById('deposit')?.value) || 0;
+    var rate = (parseFloat(document.getElementById('mortRate')?.value) || 4.5) / 100;
+    var term = parseFloat(document.getElementById('mortTerm')?.value) || 25;
+    var loan = Math.max(0, price - dep);
+    var ltv = price > 0 ? (loan / price * 100) : 0;
+    var monthly = monthlyMortgage(loan, rate, term);
+    var monthlyEl = document.getElementById('step2MonthlyVal');
+    var ltvEl = document.getElementById('step2LtvVal');
+    if (monthlyEl) monthlyEl.textContent = '\u00a3' + Math.round(monthly).toLocaleString('en-GB');
+    if (ltvEl) ltvEl.textContent = 'Loan-to-value: ' + ltv.toFixed(0) + '% on \u00a3' + Math.round(loan).toLocaleString('en-GB');
+  }
+
+  // Track if user skipped Buy-to-Let (so step 5 can de-emphasise that column)
+  var btlSkipped = false;
+
+  function skipBuyToLet() {
+    btlSkipped = true;
+    // Set rental income to 0 so calculations are neutral but don't crash
+    var rentalEl = document.getElementById('rentalIncome');
+    if (rentalEl && !rentalEl.value) rentalEl.value = 0;
+    // Mark the Buy to Let tab as completed but skipped
+    var tab = document.getElementById('tab3');
+    if (tab) tab.classList.add('completed', 'skipped');
+    goTo(4);
+  }
+
+  function includeBuyToLet() {
+    btlSkipped = false;
+    var tab = document.getElementById('tab3');
+    if (tab) tab.classList.remove('skipped');
+    goTo(3);
+  }
+
+  function updateYearLabel() {
+    var slider = document.getElementById('projectionYears');
+    var label = document.getElementById('yearLabel');
+    if (!slider) return;
+    var v = parseInt(slider.value);
+    if (label) label.textContent = v + ' years';
+    // Update slider fill gradient
+    var pct = ((v - 3) / 27) * 100;
+    slider.style.background = 'linear-gradient(to right, #0d9488 0%, #0d9488 ' + pct + '%, rgba(0,0,0,0.06) ' + pct + '%, rgba(0,0,0,0.06) 100%)';
+    if (typeof renderStep5 === 'function') renderStep5();
+  }
+
+  function drawWealthChart() {
+    var canvas = document.getElementById('wealthChart');
+    if (!canvas) return;
+    var d = calcAll();
+    var yrs = d.yrs;
+
+    var ctx = canvas.getContext('2d');
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = canvas.offsetWidth * dpr;
+    canvas.height = 220 * dpr;
+    ctx.scale(dpr, dpr);
+    var W = canvas.offsetWidth || 700, H = 220;
+    ctx.clearRect(0, 0, W, H);
+
+    // Generate year-by-year wealth for each scenario
+    var livePts = [], btlPts = [], rentPts = [];
+    var growth = (parseFloat(document.getElementById('priceGrowth').value)||3)/100;
+    var mortRate = (parseFloat(document.getElementById('mortRate').value)||4.5)/100;
+    var mortTerm = parseFloat(document.getElementById('mortTerm').value)||25;
+    var dep = d.dep, loan = d.loan, mo = d.mo, btlMo = d.btlMo;
+    var rmLive = mortRate/12, nLive = mortTerm*12;
+    var investRet = (parseFloat(document.getElementById('investReturn').value)||6)/100;
+    var rentRise = (parseFloat(document.getElementById('rentIncrease').value)||3)/100;
+    var monthRent = d.monthRent;
+    var price = d.price;
+
+    var existingInvest = parseFloat(document.getElementById('existingInvestments')?.value) || 0;
+    var existingActive = document.getElementById('startInvestWrap')?.style.display !== 'none';
+
+    // Compute monthly savings rate for renting
+    var monthlySavingVsLive = (d.annualOwning/12) - monthRent;
+
+    for (var y = 0; y <= yrs; y++) {
+      // Buy to live
+      var pVal = price * Math.pow(1+growth, y);
+      var paid = Math.min(nLive, y*12);
+      var rem = paid < nLive ? mo*(1-Math.pow(1+rmLive,-(nLive-paid)))/rmLive : 0;
+      livePts.push(pVal - rem);
+
+      // Buy to let
+      var btlEq = pVal - loan;
+      var rentalProfit = d.annualProfit * y;
+      btlPts.push(btlEq + rentalProfit);
+
+      // Stay renting
+      var depGrown = dep * Math.pow(1+investRet, y);
+      var existingGrown = existingActive ? existingInvest * Math.pow(1+investRet, y) : 0;
+      var extraInv = 0;
+      if (monthlySavingVsLive > 0 && y > 0) {
+        var rm = investRet/12, nm = y*12;
+        extraInv = monthlySavingVsLive * (Math.pow(1+rm, nm)-1) / rm;
+      }
+      rentPts.push(depGrown + existingGrown + extraInv);
+    }
+
+    var allVals = livePts.concat(btlPts).concat(rentPts);
+    var maxVal = Math.max.apply(null, allVals) * 1.1;
+    var minVal = Math.min.apply(null, allVals);
+    if (minVal > 0) minVal = 0;
+    var pad = { t: 20, r: 20, b: 32, l: 56 };
+    var cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+    var range = maxVal - minVal;
+
+    var xPos = function(i) { return pad.l + (i / yrs) * cW; };
+    var yPos = function(v) { return pad.t + cH - ((v - minVal) / range) * cH; };
+
+    // Grid + Y labels
+    ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+    ctx.lineWidth = 1;
+    for (var g = 0; g <= 4; g++) {
+      var yl = pad.t + (g / 4) * cH;
+      ctx.beginPath();
+      ctx.setLineDash([3, 3]);
+      ctx.moveTo(pad.l, yl);
+      ctx.lineTo(pad.l + cW, yl);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      var val = maxVal - (g / 4) * range;
+      ctx.fillStyle = 'rgba(0,0,0,0.4)';
+      ctx.font = '10px "Nunito", sans-serif';
+      ctx.textAlign = 'right';
+      var lbl = val >= 1000000 ? (val/1000000).toFixed(1)+'M' : val >= 1000 ? Math.round(val/1000)+'k' : val < -1000 ? Math.round(val/1000)+'k' : Math.round(val);
+      ctx.fillText('£'+lbl, pad.l - 6, yl + 4);
+    }
+
+    // X labels
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.font = '9px "Nunito", sans-serif';
+    ctx.textAlign = 'center';
+    var marks = [0];
+    var step = Math.max(1, Math.floor(yrs/5));
+    for (var m = step; m < yrs; m += step) marks.push(m);
+    marks.push(yrs);
+    marks.forEach(function(i) {
+      ctx.fillText(i === 0 ? 'Now' : 'Yr ' + i, xPos(i), H - pad.b + 16);
+    });
+
+    // Plot a line series
+    function plotLine(pts, colour, dashed) {
+      ctx.beginPath();
+      ctx.strokeStyle = colour;
+      ctx.lineWidth = 2.5;
+      if (dashed) ctx.setLineDash([5, 4]); else ctx.setLineDash([]);
+      pts.forEach(function(v, i) {
+        if (i === 0) ctx.moveTo(xPos(i), yPos(v));
+        else ctx.lineTo(xPos(i), yPos(v));
+      });
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Plot lines (rent first as background, then BTL, then live on top)
+    plotLine(rentPts, '#314855', false);
+    if (!btlSkipped) plotLine(btlPts,  '#0284c7', false);
+    plotLine(livePts, '#16a34a', false);
+  }
+
+  function setYears_PropDecision_Original_Stub(){}
 
   function updateLTV(){
     var price=parseFloat(document.getElementById('propPrice').value)||0;
@@ -1005,6 +1307,29 @@
   }
 
   // ── MAIN CALCULATIONS ─────────────────────────────────────────────────────
+  function toggleStartingInvestments() {
+    var wrap = document.getElementById('startInvestWrap');
+    var pill = document.getElementById('startInvestPill');
+    if (!wrap || !pill) return;
+    var open = wrap.style.display === 'none';
+    wrap.style.display = open ? 'block' : 'none';
+    pill.classList.toggle('on', open);
+    if (open) updateDepMirror();
+    if (typeof renderStep5 === 'function') renderStep5();
+  }
+
+  function updateDepMirror() {
+    var depEl = document.getElementById('deposit');
+    var mirror = document.getElementById('depMirror');
+    if (!depEl || !mirror) return;
+    var dep = parseFloat(depEl.value) || 0;
+    if (dep > 0) {
+      mirror.textContent = '\u00a3' + Math.round(dep).toLocaleString('en-GB') + ' deposit';
+    } else {
+      mirror.textContent = 'deposit';
+    }
+  }
+
   function calcAll(){
     var dep       = parseFloat(document.getElementById('deposit').value)||0;
     var price     = parseFloat(document.getElementById('propPrice').value)||0;
@@ -1020,7 +1345,9 @@
     var monthRent = parseFloat(document.getElementById('monthlyRent').value)||0;
     var rentRise  = (parseFloat(document.getElementById('rentIncrease').value)||3)/100;
     var investRet = (parseFloat(document.getElementById('investReturn').value)||6)/100;
-    var yrs       = projYears;
+    // Use slider value on step 5 if present, otherwise step 1's projYears
+    var sliderYears = parseInt(document.getElementById('projectionYears')?.value);
+    var yrs       = sliderYears && !isNaN(sliderYears) ? sliderYears : projYears;
     var mRate     = marginalRate(income);
 
     var loan = price - dep;
@@ -1038,7 +1365,9 @@
     var remLoan = paid<n ? mo*(1-Math.pow(1+r,-(n-paid)))/r : 0;
     var equity = propVal - remLoan;
     var totalSpentLive = upfrontLive + annualOwning*yrs;
-    var liveNetPos = equity - loan; // equity gained vs starting loan
+    // Net wealth = current equity (final asset). All costs already paid out of cash flow.
+    // For comparison purposes, this is what you OWN at the end.
+    var liveNetPos = equity;
 
     // ── SCENARIO B: BUY TO LET ────────────────────────────────────────────
     var btlMo = loan * btlRate / 12; // interest only
@@ -1062,7 +1391,8 @@
     var totalRentalNet = annualProfit * yrs;
     var btlPropVal = propVal; // same capital growth
     var btlEquity = btlPropVal - loan; // IO: still owe full loan
-    var btlNetPos = btlEquity + totalRentalNet - (upfrontBTL - dep); // net gain on deposit
+    // Net wealth: final equity + cumulative rental profit (rental profit is cash banked, builds wealth)
+    var btlNetPos = btlEquity + totalRentalNet;
     var grossYield = price>0 ? (annualRental/price)*100 : 0;
     var netYield   = price>0 ? ((annualRental-annualInterest-btlCosts)/price)*100 : 0;
 
@@ -1070,6 +1400,10 @@
     var totalRentPaid = 0;
     for(var i=0;i<yrs;i++) totalRentPaid += monthRent*12*Math.pow(1+rentRise,i);
     var investedDep = dep * Math.pow(1+investRet,yrs);
+    // Existing investments grow alongside the deposit
+    var existingInvest = parseFloat(document.getElementById('existingInvestments')?.value) || 0;
+    var existingInvestStartActive = document.getElementById('startInvestWrap')?.style.display !== 'none';
+    var existingGrown = existingInvestStartActive ? existingInvest * Math.pow(1+investRet,yrs) : 0;
     // Also invest monthly savings vs owning
     var monthlySavingVsLive = (annualOwning/12) - monthRent;
     var extraInvested = 0;
@@ -1077,7 +1411,8 @@
       var rm=investRet/12,nm=yrs*12;
       extraInvested = monthlySavingVsLive*(Math.pow(1+rm,nm)-1)/rm;
     }
-    var rentNetPos = investedDep + extraInvested - totalRentPaid;
+    // Net wealth: final invested portfolio value (rent already paid out of monthly cash flow)
+    var rentNetPos = investedDep + extraInvested + existingGrown;
 
     return {
       dep,price,loan,yrs,mRate,
@@ -1086,6 +1421,7 @@
       propVal,remLoan,equity,annualOwning,totalSpentLive,liveNetPos,
       annualRental,annualProfit,annualTax,totalRentalNet,btlEquity,btlNetPos,grossYield,netYield,
       investedDep,extraInvested,totalRentPaid,rentNetPos,
+      existingInvest,existingGrown,existingInvestStartActive,
       monthRent,rental,ownershipType,
     };
   }
@@ -1095,21 +1431,67 @@
     var d = calcAll();
     var yrs = d.yrs;
 
-    // Winner
+    // Winner — exclude Buy-to-Let if user skipped it
     var scores = [
       {key:'live', val:d.liveNetPos,  label:'Buy to live'},
-      {key:'btl',  val:d.btlNetPos,   label:'Buy to let'},
       {key:'rent', val:d.rentNetPos,  label:'Stay renting'},
     ];
+    if (!btlSkipped) scores.push({key:'btl',  val:d.btlNetPos,   label:'Buy to let'});
     scores.sort(function(a,b){return b.val-a.val;});
     var winner = scores[0].key;
 
-    // Result boxes
+    // ── WINNER HERO ─────────────────────────────────────────────────────
+    var winnerLabels = {
+      live: 'Buying to live in',
+      btl:  'Buying to let',
+      rent: 'Staying renting'
+    };
+    var winnerVal = scores[0].val;
+    var runnerUp = scores[1] ? scores[1].val : 0;
+    var diff = winnerVal - runnerUp;
+    var heroLabel = document.getElementById('winnerLabel');
+    var heroSub = document.getElementById('winnerSubtext');
+    if (heroLabel) heroLabel.textContent = winnerLabels[winner];
+    if (heroSub) heroSub.innerHTML = '<strong style="color:var(--accent); font-size:1.4rem; display:block; margin-bottom:0.25rem;">'+fmtK(winnerVal)+'</strong>at year '+yrs+'&nbsp;&middot;&nbsp;'+fmtK(diff)+' more than '+winnerLabels[scores[1] ? scores[1].key : 'live'].toLowerCase();
+
+    // ── QUICK COMPARISON TILES ──────────────────────────────────────────
+    function tileFor(key, label, color, bg, val) {
+      var isWinner = key === winner;
+      var skipped = key === 'btl' && btlSkipped;
+      if (skipped) {
+        return '<div class="quick-tile" onclick="includeBuyToLet()" style="cursor:pointer; background:rgba(0,0,0,0.04); color:var(--slate-soft);">'
+          + '<div class="quick-tile-label">'+label+'</div>'
+          + '<div class="quick-tile-val" style="font-size:0.95rem; color:var(--slate-soft);">Skipped &mdash; tap to include</div>'
+          + '</div>';
+      }
+      return '<div class="quick-tile'+(isWinner?' winner':'')+'" style="background:'+bg+'; color:'+color+';">'
+        + (isWinner?'<div class="quick-tile-badge">&#11088; Best</div>':'')
+        + '<div class="quick-tile-label" style="color:'+color+'; opacity:0.8;">'+label+'</div>'
+        + '<div class="quick-tile-val">'+fmtK(val)+'</div>'
+        + '</div>';
+    }
+    var tilesHtml = '<div class="quick-tiles-grid">'
+      + tileFor('live', 'Buy to live',  '#fff', 'linear-gradient(135deg, #166534, #16a34a)', d.liveNetPos)
+      + tileFor('btl',  'Buy to let',   '#fff', 'linear-gradient(135deg, #075985, #0284c7)', d.btlNetPos)
+      + tileFor('rent', 'Stay renting', '#fff', 'linear-gradient(135deg, #1e293b, #314855)', d.rentNetPos)
+      + '</div>';
+    var quickEl = document.getElementById('quickTiles');
+    if (quickEl) quickEl.innerHTML = tilesHtml;
+
+    // Hide BTL legend item in chart when skipped
+    var btlLegend = document.getElementById('btlLegendItem');
+    if (btlLegend) btlLegend.style.display = btlSkipped ? 'none' : 'flex';
+
+    // Result boxes — all show "net wealth gain over your deposit" so they're comparable
+    var btlBox = btlSkipped
+      ? '<div class="result-box" style="background:rgba(0,0,0,0.04); color:var(--slate-soft); cursor:pointer;" onclick="includeBuyToLet()"><div class="r-label" style="color:var(--slate-soft);">Buy to let — skipped</div><div class="r-amount" style="color:var(--slate-soft); font-size:1rem; line-height:1.4; padding-top:0.5rem;">Tap to include</div><div class="r-sub" style="color:var(--slate-soft);">add this scenario back</div></div>'
+      : '<div class="result-box sky"><div class="r-label">Buy to let — wealth at year '+yrs+'</div><div class="r-amount">'+fmtK(d.btlNetPos)+'</div><div class="r-sub">equity + cumulative rental profit</div></div>';
+
     var boxes =
       '<div class="results-grid">' +
-        '<div class="result-box forest"><div class="r-label">Buy to live — equity in '+yrs+'yrs</div><div class="r-amount">'+fmtK(d.equity)+'</div><div class="r-sub">property value minus remaining mortgage</div></div>' +
-        '<div class="result-box sky"><div class="r-label">Buy to let — net gain in '+yrs+'yrs</div><div class="r-amount">'+(d.btlNetPos>=0?'+':'')+fmtK(d.btlNetPos)+'</div><div class="r-sub">equity + rental profit after tax</div></div>' +
-        '<div class="result-box highlight"><div class="r-label">Stay renting — invested deposit in '+yrs+'yrs</div><div class="r-amount">'+fmtK(d.investedDep+d.extraInvested)+'</div><div class="r-sub">minus total rent paid: '+fmtK(d.totalRentPaid)+'</div></div>' +
+        '<div class="result-box forest"><div class="r-label">Buy to live — wealth at year '+yrs+'</div><div class="r-amount">'+fmtK(d.liveNetPos)+'</div><div class="r-sub">your equity in the property</div></div>' +
+        btlBox +
+        '<div class="result-box highlight"><div class="r-label">Stay renting — wealth at year '+yrs+'</div><div class="r-amount">'+fmtK(d.rentNetPos)+'</div><div class="r-sub">invested portfolio value</div></div>' +
       '</div>';
 
     // Scenario cards
@@ -1128,7 +1510,8 @@
         '<div class="sc-metric"><span class="sc-metric-label">Your equity</span><span class="sc-metric-val green">'+fmt(d.equity)+'</span></div>' +
       '</div>' +
 
-      // BTL
+      // BTL (skipped if user opted out)
+      (btlSkipped ? '' :
       '<div class="scenario-card'+(winner==='btl'?' best':'')+'">' +
         '<div class="sc-icon">&#127968;&#128176;</div>' +
         '<div class="sc-title">Buy to let '+(d.ownershipType==='ltd'?'(Ltd co)':'(personally)')+'</div>' +
@@ -1138,7 +1521,7 @@
         '<div class="sc-metric"><span class="sc-metric-label">Gross yield</span><span class="sc-metric-val '+(d.grossYield>=5?'green':'red')+'">'+d.grossYield.toFixed(1)+'%</span></div>' +
         '<div class="sc-metric"><span class="sc-metric-label">Annual profit after tax</span><span class="sc-metric-val '+(d.annualProfit>=0?'green':'red')+'">'+fmt(d.annualProfit)+'/yr</span></div>' +
         '<div class="sc-metric"><span class="sc-metric-label">Net position in '+yrs+'yrs</span><span class="sc-metric-val '+(d.btlNetPos>=0?'green':'red')+'">'+(d.btlNetPos>=0?'+':'')+fmt(d.btlNetPos)+'</span></div>' +
-      '</div>' +
+      '</div>') +
 
       // RENT
       '<div class="scenario-card'+(winner==='rent'?' best':'')+'">' +
@@ -1148,6 +1531,7 @@
         '<div class="sc-metric"><span class="sc-metric-label">Monthly rent (now)</span><span class="sc-metric-val">'+fmt(d.monthRent)+'/mo</span></div>' +
         '<div class="sc-metric"><span class="sc-metric-label">Total rent over '+yrs+'yrs</span><span class="sc-metric-val red">'+fmt(d.totalRentPaid)+'</span></div>' +
         '<div class="sc-metric"><span class="sc-metric-label">Deposit invested</span><span class="sc-metric-val green">'+fmt(d.investedDep)+'</span></div>' +
+        (d.existingInvestStartActive && d.existingInvest > 0 ? '<div class="sc-metric"><span class="sc-metric-label">Other investments grown</span><span class="sc-metric-val green">'+fmt(d.existingGrown)+'</span></div>' : '') +
         '<div class="sc-metric"><span class="sc-metric-label">Extra savings invested</span><span class="sc-metric-val green">'+fmt(d.extraInvested)+'</span></div>' +
         '<div class="sc-metric"><span class="sc-metric-label">Net position in '+yrs+'yrs</span><span class="sc-metric-val '+(d.rentNetPos>=0?'green':'red')+'">'+(d.rentNetPos>=0?'+':'')+fmt(d.rentNetPos)+'</span></div>' +
       '</div>' +
@@ -1188,8 +1572,29 @@
         '</div>';
     }
 
-    document.getElementById('resultsContent').innerHTML = boxes + cards + table + afford;
+    document.getElementById('resultsContent').innerHTML = '';
+    var breakdownEl = document.getElementById('breakdownContent');
+    if (breakdownEl) breakdownEl.innerHTML = boxes + cards + table + afford;
+    if (typeof drawWealthChart === 'function') drawWealthChart();
     gaEvent('tool_completed',{tool:'MyPropertyDecision'});
+  }
+
+  function toggleBreakdown() {
+    var content = document.getElementById('breakdownContent');
+    var chev = document.getElementById('breakdownChevron');
+    if (!content || !chev) return;
+    var open = content.style.display === 'none';
+    content.style.display = open ? 'block' : 'none';
+    chev.style.transform = open ? 'rotate(90deg)' : 'rotate(0deg)';
+  }
+
+  function toggleLifestyle() {
+    var content = document.getElementById('lifestyleContent');
+    var chev = document.getElementById('lifestyleChevron');
+    if (!content || !chev) return;
+    var open = content.style.display === 'none';
+    content.style.display = open ? 'block' : 'none';
+    chev.style.transform = open ? 'rotate(90deg)' : 'rotate(0deg)';
   }
 
   // ── NAVIGATION ────────────────────────────────────────────────────────────
@@ -1201,8 +1606,27 @@
       if(i<step)tab.classList.add('completed');
       else if(i>step)tab.classList.remove('completed');
     }
-    if(step===2)renderMortBreakdown();
-    if(step===5)renderStep5();
+    // Wealth chart card and step 5 drill-downs sit with step 5
+    var step5Cards = ['wealthChartCard', 'breakdownCard', 'lifestyleCard', 'ctaCard'];
+    step5Cards.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.toggle('active', step === 5);
+    });
+    if(step===2){
+      updateStep2Preview();
+      renderMortBreakdown();
+    }
+    if(step===5){
+      // Sync slider to step 1's projYears choice on first arrival
+      var slider = document.getElementById('projectionYears');
+      if (slider && slider.dataset.synced !== 'true') {
+        slider.value = projYears;
+        slider.dataset.synced = 'true';
+        if (typeof updateYearLabel === 'function') updateYearLabel();
+      } else {
+        renderStep5();
+      }
+    }
     if(step>1)trackStart();
     window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -1344,5 +1768,13 @@
     });
   }
 </script>
+<!-- canonical footer -->
+<footer style="background:#314855; padding:2.5rem; border-top:3px solid #ffdb00; margin-top:2rem;">
+  <div style="max-width:920px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    <div style="font-family:'Nunito', sans-serif; font-size:1.3rem; color:white; font-weight:800;">MyPay<em style="font-style:italic; color:#ffdb00;">Picture</em></div>
+    <p style="color:rgba(255,255,255,0.3); font-size:0.78rem; max-width:520px; line-height:1.6; margin:0;">Illustrative scenarios only &mdash; not financial, tax or legal advice. Always consult a qualified adviser before making decisions. No data is stored. &copy; MyPayPicture 2025.</p>
+  </div>
+</footer>
+<!-- /canonical footer -->
 </body>
 </html>
